@@ -2,7 +2,7 @@
 
 # 📈 Noise Schedule
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=24&duration=3000&pause=1000&color=818CF8&center=true&vCenter=true&width=500&lines=Designing+β_t;Linear%2C+Cosine%2C+and+Beyond" alt="Typing SVG" />
+<img src="https://github.com/Gaurav14cs17/Diffusion-Language-Model/blob/main/00_Diffusion_Theory/05%20Noise%20Schedule/noise_schedule.svg" alt="Typing SVG" />
 
 [← Forward Process](../04%20Forward%20Process/) · **Page 5 of 10** · [Next: Marginal Distributions →](../06%20Marginal%20Distributions/)
 
