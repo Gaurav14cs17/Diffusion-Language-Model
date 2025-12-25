@@ -14,6 +14,10 @@
 
 The **marginal distribution** $q(x_t \mid x_0)$ lets us sample noisy data at **any timestep directly** — no need to simulate the entire forward chain!
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/06%20Marginal%20Distributions/marginal_distributions.svg" alt="Marginal Distributions Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: Main Result

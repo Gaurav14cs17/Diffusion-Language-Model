@@ -14,6 +14,10 @@
 
 Once trained, we need to **sample** from the diffusion model. This chapter covers DDPM, DDIM, and advanced solvers.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/10%20Sampling/sampling_algorithms.svg" alt="Sampling Algorithms Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: DDPM Sampling

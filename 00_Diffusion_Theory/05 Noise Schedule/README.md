@@ -14,6 +14,10 @@
 
 The **noise schedule** $\{\beta_t\}_{t=1}^{T}$ controls how quickly noise is added. Different schedules lead to different training dynamics and sample quality.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/05%20Noise%20Schedule/noise_schedule.svg" alt="Noise Schedule Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: Linear Schedule (DDPM)

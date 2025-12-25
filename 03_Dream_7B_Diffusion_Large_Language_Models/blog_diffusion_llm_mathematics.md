@@ -18,7 +18,9 @@
 
 ## 1. Introduction: Why Diffusion for Language?
 
-![Overview Architecture](./svg_diagrams/01_overview_architecture.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/01_overview_architecture.svg" alt="Overview Architecture" width="100%">
+</p>
 
 The field of large language models (LLMs) has been dominated by **autoregressive models** like GPT, LLaMA, and Claude. These models generate text one token at a time, left-to-right, using the factorization:
 
@@ -60,7 +62,9 @@ This is formalized as a **Markov chain** over discrete states, which we'll explo
 
 ## 2. The Forward Diffusion Process
 
-![Forward Diffusion Process](./svg_diagrams/02_forward_diffusion_process.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/02_forward_diffusion_process.svg" alt="Forward Diffusion Process" width="100%">
+</p>
 
 The forward diffusion process defines how we **corrupt** clean data $x_0$ into progressively noisier versions $x_1, x_2, \ldots, x_T$, until we reach a fully masked sequence $x_T$.
 
@@ -142,7 +146,9 @@ The choice of $\beta_t$ (or equivalently $\alpha_t$) significantly impacts train
 
 ## 3. The Reverse Denoising Process
 
-![Reverse Denoising Process](./svg_diagrams/03_reverse_denoising_process.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/03_reverse_denoising_process.svg" alt="Reverse Denoising Process" width="100%">
+</p>
 
 The reverse process is where the magic happens: we learn to **undo** the corruption, generating text from noise.
 
@@ -215,7 +221,9 @@ $$p_\theta(x_{t-1} \mid x_t) = \sum_{x_0} q(x_{t-1} \mid x_t, x_0) \cdot p_\thet
 
 ## 4. Training Objective: ELBO Derivation
 
-![ELBO Training Objective](./svg_diagrams/04_elbo_training_objective.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/04_elbo_training_objective.svg" alt="ELBO Training Objective" width="100%">
+</p>
 
 The training objective is derived from the **Evidence Lower Bound (ELBO)**, a fundamental concept in variational inference.
 
@@ -300,7 +308,9 @@ In practice, we use Monte Carlo estimation with $t \sim \text{Uniform}(0, 1)$.
 
 ## 5. Score Matching and Loss Functions
 
-![Score Matching Loss](./svg_diagrams/05_score_matching_loss.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/05_score_matching_loss.svg" alt="Score Matching Loss" width="100%">
+</p>
 
 ### 5.1 What is the Score Function?
 
@@ -378,7 +388,9 @@ repeat until convergence:
 
 ## 6. Sampling and Generation
 
-![Sampling Generation](./svg_diagrams/06_sampling_generation.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/06_sampling_generation.svg" alt="Sampling Generation" width="100%">
+</p>
 
 Now for the exciting part: **generating text** from a trained model!
 

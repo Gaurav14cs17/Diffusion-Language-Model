@@ -14,6 +14,10 @@
 
 Diffusion models rely on **three key assumptions** that make them mathematically tractable while remaining expressive.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/02%20Probability%20Assumptions/probability_assumptions.svg" alt="Probability Assumptions Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: The Markov Assumption

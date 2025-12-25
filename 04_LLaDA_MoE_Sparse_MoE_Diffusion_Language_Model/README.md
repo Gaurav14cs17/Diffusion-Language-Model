@@ -28,7 +28,9 @@
 
 ---
 
-![Overview](./images/01_Overview_LLaDA_MoE.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/01_Overview_LLaDA_MoE.svg" alt="Overview" width="100%">
+</p>
 
 ---
 
@@ -85,7 +87,9 @@ Example:
 
 ## 03. Architecture
 
-![Architecture](./images/02_Architecture_MoE.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/02_Architecture_MoE.svg" alt="Architecture" width="100%">
+</p>
 
 ### 03.1 Model Specifications
 
@@ -124,7 +128,9 @@ Example:
 
 ## 04. Mathematical Foundations
 
-![Mathematical Foundations](./images/06_Mathematical_Foundations.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/06_Mathematical_Foundations.svg" alt="Mathematical Foundations" width="100%">
+</p>
 
 ### 04.1 Notation Table
 
@@ -404,7 +410,9 @@ Step 7: Apply 1/t weight and backpropagate
 
 ## 10. ELBO Derivation and Theoretical Proofs
 
-![ELBO Derivation](./images/07_ELBO_Derivation_Proof.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/07_ELBO_Derivation_Proof.svg" alt="ELBO Derivation" width="100%">
+</p>
 
 ### 10.1 Goal
 
@@ -457,7 +465,9 @@ $$\log \mathbb{E}[X] \geq \mathbb{E}[\log X]$$
 
 ## 11. Inference Algorithm and Generation
 
-![Inference Algorithm](./images/08_Inference_Algorithm.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/08_Inference_Algorithm.svg" alt="Inference Algorithm" width="100%">
+</p>
 
 ### 11.1 Sampling Algorithm
 
@@ -530,7 +540,9 @@ RETURN: y = final generated response
 
 ## 12. Training Pipeline
 
-![Training Pipeline](./images/04_Training_Pipeline.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/04_Training_Pipeline.svg" alt="Training Pipeline" width="100%">
+</p>
 
 ### 12.1 Overview
 
@@ -606,7 +618,9 @@ For 1% of steps:
 
 ## 13. Results and Benchmarks
 
-![Results](./images/05_Results_Benchmarks.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model/images/05_Results_Benchmarks.svg" alt="Results" width="100%">
+</p>
 
 ### 13.1 Key Finding
 

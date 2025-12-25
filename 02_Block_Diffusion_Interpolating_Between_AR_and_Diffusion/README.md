@@ -7,7 +7,9 @@
 
 ---
 
-![Overview](./images/01_Overview_Block_Diffusion.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion/images/01_Overview_Block_Diffusion.svg" alt="Overview" width="100%">
+</p>
 
 ## Introduction
 
@@ -32,7 +34,9 @@ Despite recent advances, diffusion models still lag behind autoregressive models
 
 ## The Solution: Block Diffusion
 
-![Mathematical Foundations](./images/02_Mathematical_Foundations.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion/images/02_Mathematical_Foundations.svg" alt="Mathematical Foundations" width="100%">
+</p>
 
 ### Core Idea
 
@@ -62,7 +66,9 @@ This elegant parameterization allows us to trade off between quality and paralle
 
 ## How It Works: Training and Sampling
 
-![Training and Sampling Algorithms](./images/03_Training_Sampling_Algorithms.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion/images/03_Training_Sampling_Algorithms.svg" alt="Training and Sampling Algorithms" width="100%">
+</p>
 
 ### Training Algorithm
 
@@ -101,7 +107,9 @@ The architecture uses a **block-causal attention mask** where tokens in block b 
 
 ## The Gradient Variance Problem
 
-![Gradient Variance and Noise Schedules](./images/04_Gradient_Variance_Noise_Schedules.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion/images/04_Gradient_Variance_Noise_Schedules.svg" alt="Gradient Variance and Noise Schedules" width="100%">
+</p>
 
 ### A Surprising Discovery
 
@@ -165,7 +173,9 @@ With the tuned schedule, L' = 1 Block Diffusion **exactly matches** autoregressi
 
 ## Architecture Deep Dive
 
-![Architecture Flow Diagram](./images/05_Architecture_Flow_Diagram.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion/images/05_Architecture_Flow_Diagram.svg" alt="Architecture Flow Diagram" width="100%">
+</p>
 
 ### Model Signature
 
@@ -198,7 +208,9 @@ t=0.0:  [the][cat][is][happy]       (block complete!)
 
 ## Experimental Results
 
-![Results and Experiments](./images/06_Results_Experiments.svg)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion/images/06_Results_Experiments.svg" alt="Results and Experiments" width="100%">
+</p>
 
 ### Main Results
 

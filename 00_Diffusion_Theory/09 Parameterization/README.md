@@ -14,6 +14,10 @@
 
 There are **three equivalent ways** to parameterize what the diffusion model predicts. Each has different numerical properties!
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/09%20Parameterization/parameterization.svg" alt="Parameterization Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: The Three Predictions

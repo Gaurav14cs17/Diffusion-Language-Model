@@ -14,6 +14,10 @@
 
 The **reverse process** learns to undo the forward diffusion — gradually denoising pure noise back into data samples!
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/07%20Reverse%20Process/reverse_process.svg" alt="Reverse Process Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: The Challenge

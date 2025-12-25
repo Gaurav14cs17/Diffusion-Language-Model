@@ -14,6 +14,10 @@
 
 We derive the training loss, starting from the **Evidence Lower Bound (ELBO)** and simplifying to the surprisingly simple **MSE noise prediction** loss!
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/08%20Training%20Objective/training_objective.svg" alt="Training Objective Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: Starting Point — The ELBO

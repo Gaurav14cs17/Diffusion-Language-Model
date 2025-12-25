@@ -14,6 +14,10 @@
 
 The forward process **gradually adds noise** to data over $T$ timesteps, transforming any data distribution into pure Gaussian noise.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/04%20Forward%20Process/forward_process.svg" alt="Forward Process Diagram" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: Single-Step Transition

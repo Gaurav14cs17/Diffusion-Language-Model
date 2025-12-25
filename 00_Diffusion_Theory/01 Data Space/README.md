@@ -14,6 +14,14 @@
 
 The **data space** $\mathcal{X} \subseteq \mathbb{R}^d$ is the domain where real-world data exists. Understanding this space is foundational to understanding diffusion models.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/01%20Data%20Space/data_space.svg" alt="Data Space Diagram" width="100%">
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/01%20Data%20Space/data_space_theory.svg" alt="Data Space Theory" width="100%">
+</p>
+
 ---
 
 ## 📐 Step 1: Formal Definition
