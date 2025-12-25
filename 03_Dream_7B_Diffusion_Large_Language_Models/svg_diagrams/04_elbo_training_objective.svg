@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 4000" width="2200" height="4000">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2B6CB0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4299E1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="proofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#EBF8FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E6F2FF;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2B6CB0"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="4000" fill="#FAFBFC"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" stroke="#1A365D" stroke-width="3"/>
+  <text x="1100" y="110" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Training Objective: ELBO Derivation
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="22" fill="#BEE3F8" text-anchor="middle">
+    Evidence Lower Bound for Diffusion Language Models
+  </text>
+
+  <!-- Section 1: Problem Setup -->
+  <rect x="50" y="200" width="2100" height="380" rx="12" fill="#EBF8FF" stroke="#3182CE" stroke-width="3"/>
+  <rect x="50" y="200" width="2100" height="60" rx="12" fill="#3182CE"/>
+  <text x="1100" y="242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. PROBLEM SETUP: MAXIMIZING DATA LIKELIHOOD
+  </text>
+
+  <text x="100" y="310" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000">
+    Goal: Find θ that maximizes the log-likelihood of observed data
+  </text>
+  
+  <rect x="100" y="350" width="980" height="200" rx="10" fill="#FFFFFF" stroke="#2B6CB0" stroke-width="3"/>
+  <text x="590" y="395" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Maximum Likelihood Objective
+  </text>
+  <text x="140" y="450" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#000000">
+    max_θ  E_{x₀ ~ p_data}[log p_θ(x₀)]
+  </text>
+  <text x="140" y="505" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    Want to maximize probability of real data x₀
+  </text>
+  <text x="140" y="540" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    under our model p_θ
+  </text>
+
+  <rect x="1120" y="350" width="980" height="200" rx="10" fill="#FFFFFF" stroke="#2B6CB0" stroke-width="3"/>
+  <text x="1610" y="395" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    The Problem
+  </text>
+  <text x="1160" y="450" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    p_θ(x₀) = ∫ p_θ(x₀:T) dx₁:T
+  </text>
+  <text x="1160" y="505" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Requires integrating over all latent paths
+  </text>
+  <text x="1160" y="540" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    • Intractable for high-dimensional data
+  </text>
+
+  <!-- Section 2: ELBO Derivation -->
+  <rect x="50" y="620" width="2100" height="800" rx="12" fill="#F0FFF4" stroke="#38A169" stroke-width="3"/>
+  <rect x="50" y="620" width="2100" height="60" rx="12" fill="#38A169"/>
+  <text x="1100" y="662" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. ELBO DERIVATION — COMPLETE PROOF
+  </text>
+
+  <rect x="100" y="710" width="2000" height="680" rx="10" fill="url(#proofGrad)" stroke="#276749" stroke-width="3"/>
+  
+  <text x="140" y="760" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Theorem: Evidence Lower Bound (ELBO)
+  </text>
+  
+  <text x="140" y="810" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 1: Introduce variational distribution q(x₁:T | x₀)
+  </text>
+  <text x="180" y="855" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    log p_θ(x₀) = log ∫ p_θ(x₀:T) dx₁:T = log ∫ p_θ(x₀:T) · [q(x₁:T|x₀)/q(x₁:T|x₀)] dx₁:T
+  </text>
+  
+  <text x="140" y="910" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 2: Apply Jensen's inequality (log is concave)
+  </text>
+  <text x="180" y="955" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    log p_θ(x₀) = log E_{q}[p_θ(x₀:T) / q(x₁:T|x₀)]
+  </text>
+  <text x="180" y="995" font-family="Courier New, monospace" font-size="20" fill="#000000">
+               ≥ E_{q}[log (p_θ(x₀:T) / q(x₁:T|x₀))]     ← Jensen's inequality
+  </text>
+  
+  <text x="140" y="1050" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 3: Expand the expectation
+  </text>
+  <text x="180" y="1095" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    = E_{q}[log p_θ(x₀:T)] - E_{q}[log q(x₁:T|x₀)]
+  </text>
+  <text x="180" y="1135" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    = E_{q}[log p_θ(x₀:T) - log q(x₁:T|x₀)]
+  </text>
+  
+  <text x="140" y="1190" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 4: Factor the joint distributions
+  </text>
+  <text x="180" y="1235" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    p_θ(x₀:T) = p(xT) · ∏_{t=1}^{T} p_θ(xₜ₋₁|xₜ)     — reverse process
+  </text>
+  <text x="180" y="1275" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    q(x₁:T|x₀) = ∏_{t=1}^{T} q(xₜ|xₜ₋₁)              — forward process
+  </text>
+  
+  <rect x="160" y="1310" width="1900" height="60" rx="8" fill="#C6F6D5" stroke="#276749" stroke-width="2"/>
+  <text x="1100" y="1350" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    ELBO = E_{q}[log p(xT) + ∑_{t=1}^{T} log p_θ(xₜ₋₁|xₜ) - ∑_{t=1}^{T} log q(xₜ|xₜ₋₁)]
+  </text>
+
+  <!-- Section 3: ELBO Decomposition -->
+  <rect x="50" y="1460" width="2100" height="700" rx="12" fill="#FEF3C7" stroke="#D97706" stroke-width="3"/>
+  <rect x="50" y="1460" width="2100" height="60" rx="12" fill="#D97706"/>
+  <text x="1100" y="1502" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. ELBO DECOMPOSITION INTO KL DIVERGENCES
+  </text>
+
+  <rect x="100" y="1550" width="2000" height="580" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="3"/>
+  
+  <text x="140" y="1600" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Standard ELBO Decomposition (3 Terms)
+  </text>
+  
+  <rect x="160" y="1630" width="1900" height="100" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+  <text x="1100" y="1680" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    -ELBO = L_T + ∑_{t=2}^{T} L_{t-1} + L_0
+  </text>
+  <text x="1100" y="1715" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a" text-anchor="middle">
+    Each term has a specific interpretation
+  </text>
+
+  <!-- Term explanations -->
+  <rect x="160" y="1750" width="580" height="180" rx="8" fill="#EBF8FF" stroke="#3182CE" stroke-width="2"/>
+  <text x="450" y="1790" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_T: Prior Loss
+  </text>
+  <text x="190" y="1830" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    L_T = KL(q(xT|x₀) ∥ p(xT))
+  </text>
+  <text x="190" y="1870" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Matches final noise to prior
+  </text>
+  <text x="190" y="1905" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    • For masks: q(xT)≈all [M], so L_T≈0
+  </text>
+
+  <rect x="770" y="1750" width="660" height="180" rx="8" fill="#F0FFF4" stroke="#38A169" stroke-width="2"/>
+  <text x="1100" y="1790" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_{t-1}: Denoising Losses
+  </text>
+  <text x="800" y="1830" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    L_{t-1} = E_q[KL(q(xₜ₋₁|xₜ,x₀) ∥ p_θ(xₜ₋₁|xₜ))]
+  </text>
+  <text x="800" y="1870" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Match learned reverse to true posterior
+  </text>
+  <text x="800" y="1905" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    • Main training signal
+  </text>
+
+  <rect x="1460" y="1750" width="590" height="180" rx="8" fill="#FAF5FF" stroke="#805AD5" stroke-width="2"/>
+  <text x="1755" y="1790" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_0: Reconstruction Loss
+  </text>
+  <text x="1490" y="1830" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    L_0 = -E_q[log p_θ(x₀|x₁)]
+  </text>
+  <text x="1490" y="1870" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Final reconstruction
+  </text>
+  <text x="1490" y="1905" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    • Log-likelihood of clean data
+  </text>
+
+  <text x="140" y="1980" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000">
+    Key Insight: For discrete diffusion, KL simplifies to cross-entropy:
+  </text>
+  <rect x="160" y="2010" width="1900" height="80" rx="8" fill="#E6FFFA" stroke="#319795" stroke-width="2"/>
+  <text x="1100" y="2060" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    KL(q ∥ p_θ) = -∑_x q(x) log p_θ(x) + const = -E_q[log p_θ(x)] + H(q)
+  </text>
+
+  <!-- Section 4: Simplified Loss for MDLM -->
+  <rect x="50" y="2200" width="2100" height="700" rx="12" fill="#FAF5FF" stroke="#805AD5" stroke-width="3"/>
+  <rect x="50" y="2200" width="2100" height="60" rx="12" fill="#805AD5"/>
+  <text x="1100" y="2242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. SIMPLIFIED LOSS FOR MASKED DIFFUSION (MDLM)
+  </text>
+
+  <rect x="100" y="2290" width="2000" height="580" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="3"/>
+  
+  <text x="140" y="2340" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Theorem: MDLM Training Objective
+  </text>
+  
+  <text x="140" y="2395" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    For masked (absorbing-state) diffusion, the ELBO simplifies to:
+  </text>
+  
+  <rect x="160" y="2420" width="1900" height="100" rx="8" fill="#E9D5FF" stroke="#805AD5" stroke-width="2"/>
+  <text x="1100" y="2480" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_MDLM = E_{t~U(0,1), x₀~p_data, xₜ~q(·|x₀)}[ -∑_{i: xₜⁱ=[M]} log p_θ(x₀ⁱ | xₜ) ]
+  </text>
+  
+  <text x="140" y="2565" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Interpretation:
+  </text>
+  
+  <text x="180" y="2610" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    1. Sample random time t uniformly from [0, 1]
+  </text>
+  <text x="180" y="2650" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    2. Sample clean data x₀ from training set
+  </text>
+  <text x="180" y="2690" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    3. Corrupt x₀ to get xₜ by masking ~(1-αₜ) fraction of tokens
+  </text>
+  <text x="180" y="2730" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    4. Train to predict masked tokens: minimize cross-entropy on [MASK] positions only
+  </text>
+  
+  <rect x="160" y="2770" width="1900" height="70" rx="8" fill="#C6F6D5" stroke="#276749" stroke-width="2"/>
+  <text x="1100" y="2815" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    This is similar to BERT's MLM objective, but with time-dependent masking rate!
+  </text>
+
+  <!-- Section 5: Continuous Time ELBO -->
+  <rect x="50" y="2940" width="2100" height="540" rx="12" fill="#FFF5F7" stroke="#D53F8C" stroke-width="3"/>
+  <rect x="50" y="2940" width="2100" height="60" rx="12" fill="#D53F8C"/>
+  <text x="1100" y="2982" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. CONTINUOUS-TIME ELBO FORMULATION
+  </text>
+
+  <rect x="100" y="3030" width="980" height="420" rx="10" fill="#FFFFFF" stroke="#B83280" stroke-width="3"/>
+  <text x="590" y="3075" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Continuous-Time Limit
+  </text>
+  
+  <text x="140" y="3125" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    As T → ∞, discrete ELBO becomes integral:
+  </text>
+  <text x="160" y="3170" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    L = ∫₀¹ E_{x₀,xₜ}[ -λ(t) · log p_θ(x₀ | xₜ) ] dt
+  </text>
+  
+  <text x="140" y="3225" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    Where λ(t) is the weighting function:
+  </text>
+  <text x="160" y="3270" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    λ(t) = d/dt (1 - αₜ) = -α'ₜ
+  </text>
+  
+  <text x="140" y="3325" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    In practice, use Monte Carlo estimate:
+  </text>
+  <text x="160" y="3370" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    L̂ = -log p_θ(x₀ | xₜ)  for t ~ U(0,1)
+  </text>
+  <text x="160" y="3410" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    (importance sampling with uniform t)
+  </text>
+
+  <rect x="1120" y="3030" width="980" height="420" rx="10" fill="#FFFFFF" stroke="#B83280" stroke-width="3"/>
+  <text x="1610" y="3075" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Time Weighting Schedules
+  </text>
+  
+  <text x="1160" y="3125" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2B6CB0">
+    Uniform weighting (default):
+  </text>
+  <text x="1180" y="3165" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    λ(t) = 1  →  t ~ Uniform(0, 1)
+  </text>
+  
+  <text x="1160" y="3215" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#C53030">
+    ELBO-optimal weighting:
+  </text>
+  <text x="1180" y="3255" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    λ(t) ∝ (1 - αₜ)  (more weight on masked)
+  </text>
+  
+  <text x="1160" y="3305" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#38A169">
+    Dream/MDLM weighting:
+  </text>
+  <text x="1180" y="3345" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    Typically uniform, with αₜ = 1 - t
+  </text>
+  
+  <text x="1160" y="3395" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    Different weightings trade off
+  </text>
+  <text x="1160" y="3430" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    likelihood vs sample quality
+  </text>
+
+  <!-- Section 6: Summary -->
+  <rect x="50" y="3520" width="2100" height="440" rx="12" fill="#EDF2F7" stroke="#4A5568" stroke-width="3"/>
+  <rect x="50" y="3520" width="2100" height="60" rx="12" fill="#4A5568"/>
+  <text x="1100" y="3562" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    6. TRAINING ALGORITHM SUMMARY
+  </text>
+
+  <rect x="100" y="3610" width="2000" height="320" rx="10" fill="#FFFFFF" stroke="#2D3748" stroke-width="3"/>
+  
+  <text x="1100" y="3655" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Algorithm: Training Diffusion LLM
+  </text>
+  
+  <text x="160" y="3705" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#2B6CB0">
+    repeat until convergence:
+  </text>
+  <text x="200" y="3750" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    1. Sample x₀ ~ training_data
+  </text>
+  <text x="200" y="3790" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    2. Sample t ~ Uniform(0, 1)
+  </text>
+  <text x="200" y="3830" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    3. Compute αₜ = 1 - t (or use noise schedule)
+  </text>
+  <text x="200" y="3870" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    4. Create xₜ by masking each token independently with prob (1-αₜ)
+  </text>
+  <text x="200" y="3910" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    5. Compute loss: L = -∑_{i: xₜⁱ=[M]} log p_θ(x₀ⁱ | xₜ, t)
+  </text>
+  <text x="200" y="3950" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    6. Update θ ← θ - η∇_θL
+  </text>
+
+</svg>
+

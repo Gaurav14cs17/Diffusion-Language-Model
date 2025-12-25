@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2600" width="2200" height="2600">
+  <defs>
+    <linearGradient id="inferHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2e7d32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#66bb6a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="inferShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2600" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#inferHeader)" filter="url(#inferShadow)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle">
+    Inference Algorithm &amp; Generation Process
+  </text>
+  
+  <!-- Section 1: Algorithm Overview -->
+  <rect x="50" y="180" width="2100" height="700" rx="12" fill="#e8f5e9" stroke="#43a047" stroke-width="3" filter="url(#inferShadow)"/>
+  <rect x="50" y="180" width="2100" height="50" rx="12" fill="#43a047"/>
+  <text x="90" y="215" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📋 Algorithm: Masked Diffusion Sampling
+  </text>
+  
+  <!-- Algorithm Box -->
+  <rect x="90" y="260" width="1000" height="590" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="3"/>
+  <text x="590" y="305" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#1b5e20" text-anchor="middle">
+    ALGORITHM: Generate(x, T, L)
+  </text>
+  
+  <text x="120" y="350" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">Input:</text>
+  <text x="120" y="380" font-family="Courier New, monospace" font-size="16" fill="#000000">  x = prompt tokens (conditioning)</text>
+  <text x="120" y="405" font-family="Courier New, monospace" font-size="16" fill="#000000">  T = number of denoising steps</text>
+  <text x="120" y="430" font-family="Courier New, monospace" font-size="16" fill="#000000">  L = response length to generate</text>
+  
+  <text x="120" y="470" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">Initialize:</text>
+  <text x="120" y="500" font-family="Courier New, monospace" font-size="16" fill="#000000">  y = [M, M, ..., M]  # L mask tokens</text>
+  
+  <text x="120" y="540" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">For t = T, T-1, ..., 1:</text>
+  <text x="140" y="575" font-family="Courier New, monospace" font-size="16" fill="#000000">1. p = p_θ(· | x, y)  # predict all tokens</text>
+  <text x="140" y="605" font-family="Courier New, monospace" font-size="16" fill="#000000">2. For each masked position i:</text>
+  <text x="170" y="635" font-family="Courier New, monospace" font-size="16" fill="#000000">  ŷⁱ ~ Categorical(pⁱ) # sample</text>
+  <text x="140" y="665" font-family="Courier New, monospace" font-size="16" fill="#000000">3. n_unmask = floor(L × (1/t - 1/(t+1)))</text>
+  <text x="140" y="695" font-family="Courier New, monospace" font-size="16" fill="#000000">4. Select top n_unmask by confidence</text>
+  <text x="140" y="725" font-family="Courier New, monospace" font-size="16" fill="#000000">5. Unmask selected, keep rest masked</text>
+  
+  <text x="120" y="770" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">Return:</text>
+  <text x="120" y="800" font-family="Courier New, monospace" font-size="16" fill="#000000">  y = final generated response</text>
+  
+  <!-- Visual Flow Diagram -->
+  <text x="1150" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Visual Generation Flow:</text>
+  
+  <!-- Step t=T -->
+  <rect x="1150" y="310" width="450" height="80" rx="8" fill="#a5d6a7" stroke="#388e3c" stroke-width="2"/>
+  <text x="1375" y="340" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">t = T (Start)</text>
+  <text x="1375" y="370" font-family="Courier New, monospace" font-size="16" fill="#1b5e20" text-anchor="middle">[M][M][M][M][M][M][M][M]</text>
+  
+  <line x1="1375" y1="390" x2="1375" y2="430" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Step t=T-1 -->
+  <rect x="1150" y="440" width="450" height="80" rx="8" fill="#81c784" stroke="#388e3c" stroke-width="2"/>
+  <text x="1375" y="470" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">t = T-1</text>
+  <text x="1375" y="500" font-family="Courier New, monospace" font-size="16" fill="#1b5e20" text-anchor="middle">[The][M][M][M][M][M][M][M]</text>
+  
+  <line x1="1375" y1="520" x2="1375" y2="560" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Step t=T/2 -->
+  <rect x="1150" y="570" width="450" height="80" rx="8" fill="#66bb6a" stroke="#388e3c" stroke-width="2"/>
+  <text x="1375" y="600" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">t = T/2</text>
+  <text x="1375" y="630" font-family="Courier New, monospace" font-size="16" fill="#1b5e20" text-anchor="middle">[The][cat][M][on][M][M][mat][M]</text>
+  
+  <line x1="1375" y1="650" x2="1375" y2="690" stroke="#2e7d32" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Step t=1 -->
+  <rect x="1150" y="700" width="450" height="80" rx="8" fill="#4caf50" stroke="#388e3c" stroke-width="2"/>
+  <text x="1375" y="730" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">t = 1 (Final)</text>
+  <text x="1375" y="760" font-family="Courier New, monospace" font-size="16" fill="white" text-anchor="middle">[The][cat][sat][on][the][cozy][mat][.]</text>
+  
+  <text x="1640" y="350" font-family="Arial, sans-serif" font-size="16" fill="#000000">100% masked</text>
+  <text x="1640" y="480" font-family="Arial, sans-serif" font-size="16" fill="#000000">~12% unmasked</text>
+  <text x="1640" y="610" font-family="Arial, sans-serif" font-size="16" fill="#000000">~50% unmasked</text>
+  <text x="1640" y="740" font-family="Arial, sans-serif" font-size="16" fill="#000000">100% unmasked</text>
+  
+  <!-- Section 2: MoE During Inference -->
+  <rect x="50" y="920" width="2100" height="380" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#inferShadow)"/>
+  <rect x="50" y="920" width="2100" height="50" rx="12" fill="#1976d2"/>
+  <text x="90" y="955" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    🔀 MoE Routing During Inference
+  </text>
+  
+  <text x="90" y="1020" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Per-Token Expert Selection:</text>
+  
+  <!-- Token Processing Flow -->
+  <rect x="90" y="1050" width="200" height="100" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="190" y="1090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Hidden State</text>
+  <text x="190" y="1120" font-family="Courier New, monospace" font-size="16" fill="#000000" text-anchor="middle">h_t ∈ ℝ²⁰⁴⁸</text>
+  
+  <line x1="290" y1="1100" x2="340" y2="1100" stroke="#1976d2" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <rect x="350" y="1050" width="200" height="100" rx="10" fill="#90caf9" stroke="#1565c0" stroke-width="2"/>
+  <text x="450" y="1090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Router</text>
+  <text x="450" y="1120" font-family="Courier New, monospace" font-size="16" fill="#000000" text-anchor="middle">Linear → ℝ⁶⁴</text>
+  
+  <line x1="550" y1="1100" x2="600" y2="1100" stroke="#1976d2" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <rect x="610" y="1050" width="200" height="100" rx="10" fill="#64b5f6" stroke="#1565c0" stroke-width="2"/>
+  <text x="710" y="1090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Top-8 Select</text>
+  <text x="710" y="1120" font-family="Courier New, monospace" font-size="16" fill="#000000" text-anchor="middle">k=8 experts</text>
+  
+  <line x1="810" y1="1100" x2="860" y2="1100" stroke="#1976d2" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <rect x="870" y="1050" width="280" height="100" rx="10" fill="#42a5f5" stroke="#1565c0" stroke-width="2"/>
+  <text x="1010" y="1090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Weighted Sum</text>
+  <text x="1010" y="1120" font-family="Courier New, monospace" font-size="16" fill="white" text-anchor="middle">Σ p_i · E_i(h_t)</text>
+  
+  <!-- Expert Stats -->
+  <rect x="1200" y="1050" width="910" height="220" rx="10" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
+  <text x="1240" y="1090" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Inference Statistics:</text>
+  
+  <text x="1240" y="1130" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Total Experts: 64</text>
+  <text x="1240" y="1160" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Activated per token: 8</text>
+  <text x="1240" y="1190" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Total Parameters: 7B</text>
+  <text x="1240" y="1220" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Active Parameters: 1.4B (20%)</text>
+  
+  <text x="1650" y="1130" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Expert Dimension: 1024</text>
+  <text x="1650" y="1160" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Hidden Dimension: 2048</text>
+  <text x="1650" y="1190" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Attention Heads: 16</text>
+  <text x="1650" y="1220" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Layers: 16</text>
+  
+  <!-- Section 3: Remasking Strategy -->
+  <rect x="50" y="1340" width="2100" height="420" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#inferShadow)"/>
+  <rect x="50" y="1340" width="2100" height="50" rx="12" fill="#f57c00"/>
+  <text x="90" y="1375" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    🎯 Remasking Strategy: Confidence-Based Token Selection
+  </text>
+  
+  <text x="90" y="1440" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">At each step, determine which tokens to unmask:</text>
+  
+  <rect x="90" y="1465" width="600" height="110" rx="10" fill="#ffe0b2" stroke="#ef6c00" stroke-width="2"/>
+  <text x="390" y="1505" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Step 1: Compute Unmask Count</text>
+  <text x="390" y="1545" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">n = ⌊L × (1/t - 1/(t+1))⌋</text>
+  
+  <rect x="720" y="1465" width="600" height="110" rx="10" fill="#ffcc80" stroke="#ef6c00" stroke-width="2"/>
+  <text x="1020" y="1505" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Step 2: Rank by Confidence</text>
+  <text x="1020" y="1545" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">conf_i = max_k p_θ(k | x, y_t)</text>
+  
+  <rect x="1350" y="1465" width="760" height="110" rx="10" fill="#ffb74d" stroke="#ef6c00" stroke-width="2"/>
+  <text x="1730" y="1505" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Step 3: Select Top-n</text>
+  <text x="1730" y="1545" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Unmask n positions with highest confidence</text>
+  
+  <text x="90" y="1620" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Example (T=10 steps, L=100 tokens):</text>
+  
+  <rect x="90" y="1645" width="2020" height="90" rx="10" fill="#fff8e1" stroke="#ffa000" stroke-width="2"/>
+  <text x="130" y="1685" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    t=10: n=10 (10% unmask) → t=9: n=11 (11% more) → t=8: n=12 → ... → t=1: n=100 (final 10 tokens)
+  </text>
+  <text x="130" y="1715" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    Each step unmasks progressively more tokens, prioritizing high-confidence predictions first (easy tokens before hard)
+  </text>
+  
+  <!-- Section 4: Comparison with AR -->
+  <rect x="50" y="1800" width="2100" height="380" rx="12" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" filter="url(#inferShadow)"/>
+  <rect x="50" y="1800" width="2100" height="50" rx="12" fill="#7b1fa2"/>
+  <text x="90" y="1835" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    ⚡ Comparison: Diffusion vs. Autoregressive Inference
+  </text>
+  
+  <rect x="90" y="1880" width="980" height="270" rx="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="580" y="1920" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Autoregressive (AR) Model</text>
+  <text x="130" y="1960" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Generate tokens left-to-right, one at a time</text>
+  <text x="130" y="1995" font-family="Arial, sans-serif" font-size="18" fill="#000000">• L forward passes for L tokens</text>
+  <text x="130" y="2030" font-family="Arial, sans-serif" font-size="18" fill="#000000">• KV-cache enables incremental computation</text>
+  <text x="130" y="2065" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Pros: Fast per-token, well-optimized</text>
+  <text x="130" y="2100" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Cons: No revision, sequential only</text>
+  <text x="130" y="2135" font-family="Courier New, monospace" font-size="16" fill="#7b1fa2">[The] → [The][cat] → [The][cat][sat] → ...</text>
+  
+  <rect x="1110" y="1880" width="1000" height="270" rx="10" fill="#ce93d8" stroke="#9c27b0" stroke-width="2"/>
+  <text x="1610" y="1920" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Masked Diffusion Model (LLaDA-MoE)</text>
+  <text x="1150" y="1960" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Generate all tokens in parallel, iteratively refine</text>
+  <text x="1150" y="1995" font-family="Arial, sans-serif" font-size="18" fill="#000000">• T forward passes (T &lt;&lt; L typically)</text>
+  <text x="1150" y="2030" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Bidirectional attention for global context</text>
+  <text x="1150" y="2065" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Pros: Parallel decoding, can revise tokens</text>
+  <text x="1150" y="2100" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Cons: More compute per step, newer paradigm</text>
+  <text x="1150" y="2135" font-family="Courier New, monospace" font-size="16" fill="#7b1fa2">[MMMMMM] → [The][MMM][sat] → [The][cat][sat]</text>
+  
+  <!-- Section 5: Practical Tips -->
+  <rect x="50" y="2220" width="2100" height="340" rx="12" fill="#eceff1" stroke="#546e7a" stroke-width="3" filter="url(#inferShadow)"/>
+  <rect x="50" y="2220" width="2100" height="50" rx="12" fill="#546e7a"/>
+  <text x="90" y="2255" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    💡 Practical Inference Considerations
+  </text>
+  
+  <rect x="90" y="2295" width="650" height="240" rx="10" fill="#cfd8dc" stroke="#37474f" stroke-width="2"/>
+  <text x="415" y="2330" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Step Count (T)</text>
+  <text x="130" y="2370" font-family="Arial, sans-serif" font-size="16" fill="#000000">• More steps = higher quality</text>
+  <text x="130" y="2400" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Typical range: 16-128 steps</text>
+  <text x="130" y="2430" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Trade-off: quality vs speed</text>
+  <text x="130" y="2460" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Recommended: 32-64 for</text>
+  <text x="130" y="2490" font-family="Arial, sans-serif" font-size="16" fill="#000000">  good balance</text>
+  
+  <rect x="780" y="2295" width="650" height="240" rx="10" fill="#cfd8dc" stroke="#37474f" stroke-width="2"/>
+  <text x="1105" y="2330" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Temperature</text>
+  <text x="820" y="2370" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Controls sampling diversity</text>
+  <text x="820" y="2400" font-family="Arial, sans-serif" font-size="16" fill="#000000">• τ &lt; 1: more deterministic</text>
+  <text x="820" y="2430" font-family="Arial, sans-serif" font-size="16" fill="#000000">• τ &gt; 1: more random</text>
+  <text x="820" y="2460" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Typical: 0.7-1.0 for chat</text>
+  <text x="820" y="2490" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Code: lower (0.2-0.5)</text>
+  
+  <rect x="1470" y="2295" width="640" height="240" rx="10" fill="#cfd8dc" stroke="#37474f" stroke-width="2"/>
+  <text x="1790" y="2330" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Batch Processing</text>
+  <text x="1510" y="2370" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Bidirectional attention</text>
+  <text x="1510" y="2400" font-family="Arial, sans-serif" font-size="16" fill="#000000">  enables parallel batching</text>
+  <text x="1510" y="2430" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Better GPU utilization</text>
+  <text x="1510" y="2460" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Can batch diverse prompts</text>
+  <text x="1510" y="2490" font-family="Arial, sans-serif" font-size="16" fill="#000000">• No KV-cache limitations</text>
+</svg>
+
+

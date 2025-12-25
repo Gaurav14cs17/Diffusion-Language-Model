@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" width="2200" height="2200">
+  <defs>
+    <linearGradient id="nsHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#744210;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#975A16;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowNS" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="2200" height="2200" fill="#FAFAFA"/>
+  
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#nsHeader)" filter="url(#shadowNS)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Noise Schedule</text>
+  
+  <rect x="50" y="180" width="2100" height="450" rx="12" fill="#FFFFFF" stroke="#975A16" stroke-width="3" filter="url(#shadowNS)"/>
+  <text x="90" y="240" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Visual: Schedule Comparison (alpha_bar vs Time)</text>
+  
+  <rect x="150" y="280" width="1900" height="320" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+  
+  <line x1="200" y1="280" x2="200" y2="600" stroke="#333" stroke-width="2"/>
+  <text x="160" y="300" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000">1.0</text>
+  <text x="160" y="440" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000">0.5</text>
+  <text x="160" y="590" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000">0.0</text>
+  <text x="80" y="440" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" transform="rotate(-90, 80, 440)">alpha_bar_t</text>
+  
+  <line x1="200" y1="580" x2="2000" y2="580" stroke="#333" stroke-width="2"/>
+  <text x="200" y="620" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000">0</text>
+  <text x="1100" y="620" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000">T/2</text>
+  <text x="1980" y="620" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000">T</text>
+  <text x="1100" y="650" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000" text-anchor="middle">Timestep t</text>
+  
+  <path d="M 200 300 Q 500 350 900 480 Q 1300 550 1950 575" stroke="#D97706" stroke-width="4" fill="none"/>
+  <circle cx="500" cy="350" r="8" fill="#D97706"/>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#D97706">Linear (fast decay)</text>
+  
+  <path d="M 200 300 Q 500 310 800 350 Q 1100 450 1400 530 Q 1700 565 1950 575" stroke="#059669" stroke-width="4" fill="none"/>
+  <circle cx="1100" cy="450" r="8" fill="#059669"/>
+  <text x="1200" y="420" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#059669">Cosine (gradual)</text>
+  
+  <rect x="50" y="670" width="1020" height="350" rx="12" fill="#FFFBEB" stroke="#D97706" stroke-width="3" filter="url(#shadowNS)"/>
+  <text x="90" y="730" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Linear Schedule (DDPM)</text>
+  
+  <rect x="90" y="770" width="940" height="60" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+  <text x="560" y="810" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000" text-anchor="middle">Bt = B_min + (B_max - B_min) * t/T</text>
+  
+  <text x="110" y="880" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Standard: B_min = 0.0001, B_max = 0.02</text>
+  <text x="110" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">T = 1000 steps</text>
+  <text x="110" y="960" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">at = 1 - Bt</text>
+  <text x="110" y="1000" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#D97706">Warning: Destroys info quickly</text>
+  
+  <rect x="1130" y="670" width="1020" height="350" rx="12" fill="#ECFDF5" stroke="#059669" stroke-width="3" filter="url(#shadowNS)"/>
+  <text x="1170" y="730" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Cosine Schedule (Improved)</text>
+  
+  <rect x="1170" y="770" width="940" height="60" rx="8" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="1640" y="810" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000" text-anchor="middle">alpha_bar_t = cos^2((t/T + s)/(1+s) * pi/2)</text>
+  
+  <text x="1190" y="880" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">s = 0.008 (small offset)</text>
+  <text x="1190" y="920" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Bt derived from alpha_bar</text>
+  <text x="1190" y="960" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#059669">Better: Gradual noise addition</text>
+  <text x="1190" y="1000" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#059669">Improved sample quality</text>
+  
+  <rect x="50" y="1060" width="2100" height="300" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="3" filter="url(#shadowNS)"/>
+  <text x="90" y="1120" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Key Derived Quantities</text>
+  
+  <rect x="100" y="1160" width="480" height="170" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="340" y="1210" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">at = 1 - Bt</text>
+  <text x="140" y="1260" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000">Signal retention per step</text>
+  <text x="140" y="1300" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#666">Close to 1 (e.g., 0.99)</text>
+  
+  <rect x="620" y="1160" width="480" height="170" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="860" y="1210" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">alpha_bar_t</text>
+  <text x="660" y="1260" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000">Cumulative: Product of at</text>
+  <text x="660" y="1300" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#666">1 at t=0, near 0 at t=T</text>
+  
+  <rect x="1140" y="1160" width="480" height="170" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="1380" y="1210" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">SNR(t)</text>
+  <text x="1180" y="1260" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000">= alpha_bar / (1 - alpha_bar)</text>
+  <text x="1180" y="1300" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#666">Signal-to-Noise Ratio</text>
+  
+  <rect x="1660" y="1160" width="440" height="170" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="1880" y="1210" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">log SNR</text>
+  <text x="1700" y="1260" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000">Continuous formulation</text>
+  <text x="1700" y="1300" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#666">Decreasing in t</text>
+  
+  <rect x="50" y="1400" width="2100" height="250" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" filter="url(#shadowNS)"/>
+  <text x="90" y="1460" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">The Critical Marginal Formula</text>
+  
+  <rect x="200" y="1500" width="1800" height="80" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="1555" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000" text-anchor="middle">xt = sqrt(alpha_bar_t) * x0 + sqrt(1 - alpha_bar_t) * E</text>
+  
+  <text x="90" y="1630" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E7D32">This is why the noise schedule matters - it controls how xt interpolates between data and noise!</text>
+  
+  <rect x="50" y="1690" width="2100" height="200" rx="12" fill="#FFF3E0" stroke="#FF8F00" stroke-width="3" filter="url(#shadowNS)"/>
+  <text x="90" y="1750" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Which Schedule to Use?</text>
+  
+  <rect x="100" y="1790" width="650" height="80" rx="10" fill="#FFE0B2" stroke="#D97706" stroke-width="2"/>
+  <text x="425" y="1840" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000" text-anchor="middle">Linear: Quick experiments</text>
+  
+  <rect x="780" y="1790" width="650" height="80" rx="10" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+  <text x="1105" y="1840" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000" text-anchor="middle">Cosine: Production models</text>
+  
+  <rect x="1460" y="1790" width="650" height="80" rx="10" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="1785" y="1840" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000" text-anchor="middle">Learned: SOTA research</text>
+  
+  <rect x="50" y="1930" width="2100" height="80" rx="10" fill="#744210" filter="url(#shadowNS)"/>
+  <text x="1100" y="1985" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Diffusion Theory - Noise Schedule | Controlling the Diffusion Dynamics</text>
+</svg>

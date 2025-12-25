@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2400" width="2200" height="2400">
+  <defs>
+    <linearGradient id="archHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#42a5f5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blockGradA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4caf50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2e7d32;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blockGradB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#66bb6a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#43a047;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blockGradC" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#81c784;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#66bb6a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="transformerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7e57c2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5e35b1;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565c0"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2e7d32"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#5e35b1"/>
+    </marker>
+    <filter id="shadow5" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2400" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#archHeaderGrad)" filter="url(#shadow5)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Block Diffusion Architecture &amp; Generation Flow
+  </text>
+  
+  <!-- Part 1: Model Architecture -->
+  <rect x="50" y="180" width="2100" height="650" rx="12" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="3" filter="url(#shadow5)"/>
+  <rect x="50" y="180" width="2100" height="55" rx="12" fill="#5c6bc0"/>
+  <text x="90" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    🏗️ Model Architecture: Transformer with Block-Causal Attention
+  </text>
+  
+  <!-- Input sequence -->
+  <text x="90" y="290" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Input Sequence (L tokens divided into B blocks):</text>
+  
+  <!-- Blocks visualization -->
+  <rect x="90" y="320" width="200" height="80" rx="10" fill="url(#blockGradA)" filter="url(#shadow5)"/>
+  <text x="190" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Block 1</text>
+  <text x="190" y="380" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">(L' tokens)</text>
+  
+  <rect x="320" y="320" width="200" height="80" rx="10" fill="url(#blockGradB)" filter="url(#shadow5)"/>
+  <text x="420" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Block 2</text>
+  <text x="420" y="380" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">(L' tokens)</text>
+  
+  <rect x="550" y="320" width="200" height="80" rx="10" fill="url(#blockGradC)" filter="url(#shadow5)"/>
+  <text x="650" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Block 3</text>
+  <text x="650" y="380" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">(L' tokens)</text>
+  
+  <text x="780" y="370" font-family="Arial, sans-serif" font-size="32" fill="#000000">...</text>
+  
+  <rect x="840" y="320" width="200" height="80" rx="10" fill="#a5d6a7" stroke="#2e7d32" stroke-width="2" filter="url(#shadow5)"/>
+  <text x="940" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">Block B</text>
+  <text x="940" y="380" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">(L' tokens)</text>
+  
+  <!-- Arrow to Transformer -->
+  <line x1="520" y1="420" x2="520" y2="470" stroke="#5c6bc0" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Transformer Block -->
+  <rect x="90" y="480" width="1050" height="320" rx="12" fill="url(#transformerGrad)" filter="url(#shadow5)"/>
+  <text x="615" y="530" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+    Transformer with Block-Causal Attention
+  </text>
+  
+  <!-- Inside transformer -->
+  <rect x="120" y="560" width="300" height="200" rx="8" fill="#ede7f6" stroke="#7e57c2" stroke-width="2"/>
+  <text x="270" y="600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Self-Attention</text>
+  <text x="270" y="640" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Block b attends to</text>
+  <text x="270" y="670" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">blocks 1, 2, ..., b</text>
+  <text x="270" y="710" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#5e35b1" text-anchor="middle">(Block-Causal Mask)</text>
+  
+  <rect x="460" y="560" width="300" height="200" rx="8" fill="#ede7f6" stroke="#7e57c2" stroke-width="2"/>
+  <text x="610" y="600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Feed-Forward</text>
+  <text x="610" y="640" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">MLP layers</text>
+  <text x="610" y="680" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">per position</text>
+  
+  <rect x="800" y="560" width="300" height="200" rx="8" fill="#ede7f6" stroke="#7e57c2" stroke-width="2"/>
+  <text x="950" y="600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Outputs</text>
+  <text x="950" y="640" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">x^b_logits (predictions)</text>
+  <text x="950" y="680" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">K_b, V_b (cache)</text>
+  <text x="950" y="720" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#5e35b1" text-anchor="middle">for each block b</text>
+  
+  <!-- KV Cache visualization -->
+  <rect x="1200" y="320" width="900" height="480" rx="12" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="1650" y="360" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">KV Cache Architecture</text>
+  
+  <!-- KV boxes -->
+  <rect x="1240" y="400" width="180" height="70" rx="8" fill="#ffe0b2" stroke="#f57c00" stroke-width="2"/>
+  <text x="1330" y="445" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">K₁, V₁</text>
+  
+  <rect x="1450" y="400" width="180" height="70" rx="8" fill="#ffe0b2" stroke="#f57c00" stroke-width="2"/>
+  <text x="1540" y="445" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">K₂, V₂</text>
+  
+  <rect x="1660" y="400" width="180" height="70" rx="8" fill="#ffe0b2" stroke="#f57c00" stroke-width="2"/>
+  <text x="1750" y="445" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">K₃, V₃</text>
+  
+  <rect x="1870" y="400" width="180" height="70" rx="8" fill="#ffcc80" stroke="#f57c00" stroke-width="2"/>
+  <text x="1960" y="445" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">...</text>
+  
+  <!-- Explanation -->
+  <text x="1240" y="520" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Key Benefits:</text>
+  <text x="1260" y="560" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Reuse computation from previous blocks</text>
+  <text x="1260" y="595" font-family="Arial, sans-serif" font-size="18" fill="#000000">• No need to recompute for context</text>
+  <text x="1260" y="630" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Similar to AR model caching</text>
+  <text x="1260" y="665" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Enables efficient sampling</text>
+  
+  <rect x="1240" y="700" width="820" height="70" rx="8" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1650" y="745" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    x^b_θ(x^b_t, K₁:b-1, V₁:b-1) → x^b_logits, K_b, V_b
+  </text>
+  
+  <!-- Part 2: Generation Process Flow -->
+  <rect x="50" y="870" width="2100" height="750" rx="12" fill="#e0f7fa" stroke="#00acc1" stroke-width="3" filter="url(#shadow5)"/>
+  <rect x="50" y="870" width="2100" height="55" rx="12" fill="#00acc1"/>
+  <text x="90" y="910" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    🔄 Generation Process: Block-by-Block with Within-Block Diffusion
+  </text>
+  
+  <!-- Step 1: Initialize -->
+  <rect x="90" y="960" width="380" height="150" rx="10" fill="#b2ebf2" stroke="#0097a7" stroke-width="2"/>
+  <text x="280" y="1000" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Step 0: Initialize</text>
+  <rect x="120" y="1025" width="60" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="150" y="1052" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="190" y="1025" width="60" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="220" y="1052" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="260" y="1025" width="60" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="290" y="1052" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="330" y="1025" width="60" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="360" y="1052" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <text x="280" y="1095" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">All blocks masked</text>
+  
+  <!-- Arrow -->
+  <line x1="470" y1="1035" x2="520" y2="1035" stroke="#00acc1" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Step 2: Sample Block 1 -->
+  <rect x="530" y="960" width="450" height="150" rx="10" fill="#b2ebf2" stroke="#0097a7" stroke-width="2"/>
+  <text x="755" y="1000" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Step 1: Sample Block 1</text>
+  <text x="755" y="1025" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">(Diffusion denoising)</text>
+  
+  <!-- Diffusion steps visualization -->
+  <rect x="560" y="1045" width="50" height="35" rx="5" fill="#9e9e9e"/>
+  <text x="585" y="1068" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">M</text>
+  <text x="620" y="1068" font-family="Arial, sans-serif" font-size="16" fill="#000000">→</text>
+  <rect x="640" y="1045" width="50" height="35" rx="5" fill="#ffcc80"/>
+  <text x="665" y="1068" font-family="Arial, sans-serif" font-size="12" fill="#000" text-anchor="middle">~</text>
+  <text x="700" y="1068" font-family="Arial, sans-serif" font-size="16" fill="#000000">→</text>
+  <rect x="720" y="1045" width="50" height="35" rx="5" fill="#ffa726"/>
+  <text x="745" y="1068" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">~</text>
+  <text x="780" y="1068" font-family="Arial, sans-serif" font-size="16" fill="#000000">→</text>
+  <rect x="800" y="1045" width="50" height="35" rx="5" fill="#4caf50"/>
+  <text x="825" y="1068" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">T₁</text>
+  <rect x="860" y="1045" width="50" height="35" rx="5" fill="#4caf50"/>
+  <text x="885" y="1068" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">T₂</text>
+  <rect x="920" y="1045" width="50" height="35" rx="5" fill="#4caf50"/>
+  <text x="945" y="1068" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">...</text>
+  
+  <text x="755" y="1100" font-family="Arial, sans-serif" font-size="14" fill="#006064" text-anchor="middle">Parallel tokens within block!</text>
+  
+  <!-- Arrow -->
+  <line x1="980" y1="1035" x2="1030" y2="1035" stroke="#00acc1" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Step 3: Sample Block 2 -->
+  <rect x="1040" y="960" width="500" height="150" rx="10" fill="#b2ebf2" stroke="#0097a7" stroke-width="2"/>
+  <text x="1290" y="1000" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Step 2: Sample Block 2</text>
+  <text x="1290" y="1025" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">(Conditioned on Block 1)</text>
+  
+  <rect x="1070" y="1050" width="80" height="35" rx="5" fill="#4caf50"/>
+  <text x="1110" y="1073" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Block 1</text>
+  <text x="1160" y="1073" font-family="Arial, sans-serif" font-size="16" fill="#000000">|</text>
+  <rect x="1175" y="1050" width="50" height="35" rx="5" fill="#9e9e9e"/>
+  <text x="1200" y="1073" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">M</text>
+  <text x="1235" y="1073" font-family="Arial, sans-serif" font-size="16" fill="#000000">→</text>
+  <rect x="1260" y="1050" width="50" height="35" rx="5" fill="#ffa726"/>
+  <text x="1285" y="1073" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">~</text>
+  <text x="1320" y="1073" font-family="Arial, sans-serif" font-size="16" fill="#000000">→</text>
+  <rect x="1345" y="1050" width="80" height="35" rx="5" fill="#66bb6a"/>
+  <text x="1385" y="1073" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Block 2</text>
+  
+  <text x="1290" y="1105" font-family="Arial, sans-serif" font-size="14" fill="#006064" text-anchor="middle">Uses KV cache from Block 1</text>
+  
+  <!-- Arrow -->
+  <line x1="1540" y1="1035" x2="1590" y2="1035" stroke="#00acc1" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Step 4: Continue -->
+  <rect x="1600" y="960" width="500" height="150" rx="10" fill="#b2ebf2" stroke="#0097a7" stroke-width="2"/>
+  <text x="1850" y="1000" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Step 3...B: Continue</text>
+  <text x="1850" y="1030" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">(Until sequence complete)</text>
+  
+  <rect x="1630" y="1055" width="60" height="35" rx="5" fill="#4caf50"/>
+  <text x="1660" y="1078" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">B1</text>
+  <rect x="1700" y="1055" width="60" height="35" rx="5" fill="#66bb6a"/>
+  <text x="1730" y="1078" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">B2</text>
+  <rect x="1770" y="1055" width="60" height="35" rx="5" fill="#81c784"/>
+  <text x="1800" y="1078" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">B3</text>
+  <rect x="1840" y="1055" width="60" height="35" rx="5" fill="#a5d6a7"/>
+  <text x="1870" y="1078" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">...</text>
+  <rect x="1910" y="1055" width="60" height="35" rx="5" fill="#c8e6c9"/>
+  <text x="1940" y="1078" font-family="Arial, sans-serif" font-size="11" fill="white" text-anchor="middle">B_n</text>
+  <text x="2000" y="1078" font-family="Arial, sans-serif" font-size="16" fill="#000000">...</text>
+  
+  <!-- Detailed Diffusion Within Block -->
+  <text x="90" y="1160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Diffusion Process Within Each Block (Parallel Token Denoising):</text>
+  
+  <rect x="90" y="1190" width="2020" height="400" rx="10" fill="#ffffff" stroke="#00acc1" stroke-width="2"/>
+  
+  <!-- Time axis -->
+  <line x1="150" y1="1550" x2="2050" y2="1550" stroke="#333" stroke-width="2"/>
+  <text x="150" y="1580" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t=1 (noisy)</text>
+  <text x="2000" y="1580" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t=0 (clean)</text>
+  
+  <!-- Diffusion steps -->
+  <!-- t=1.0 -->
+  <text x="200" y="1240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t = 1.0</text>
+  <rect x="180" y="1260" width="50" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="205" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="240" y="1260" width="50" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="265" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="300" y="1260" width="50" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="325" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="360" y="1260" width="50" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="385" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <text x="295" y="1330" font-family="Arial, sans-serif" font-size="16" fill="#666666" text-anchor="middle">All masked</text>
+  
+  <!-- Arrow -->
+  <line x1="430" y1="1280" x2="520" y2="1280" stroke="#00acc1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="475" y="1270" font-family="Arial, sans-serif" font-size="14" fill="#00acc1" text-anchor="middle">denoise</text>
+  
+  <!-- t=0.75 -->
+  <text x="570" y="1240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t = 0.75</text>
+  <rect x="550" y="1260" width="50" height="40" rx="5" fill="#ffcc80"/>
+  <text x="575" y="1287" font-family="Arial, sans-serif" font-size="14" fill="#000" text-anchor="middle">~</text>
+  <rect x="610" y="1260" width="50" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="635" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <rect x="670" y="1260" width="50" height="40" rx="5" fill="#ffcc80"/>
+  <text x="695" y="1287" font-family="Arial, sans-serif" font-size="14" fill="#000" text-anchor="middle">~</text>
+  <rect x="730" y="1260" width="50" height="40" rx="5" fill="#9e9e9e"/>
+  <text x="755" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">M</text>
+  <text x="665" y="1330" font-family="Arial, sans-serif" font-size="16" fill="#666666" text-anchor="middle">~25% revealed</text>
+  
+  <!-- Arrow -->
+  <line x1="800" y1="1280" x2="890" y2="1280" stroke="#00acc1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <!-- t=0.50 -->
+  <text x="940" y="1240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t = 0.50</text>
+  <rect x="920" y="1260" width="50" height="40" rx="5" fill="#ffa726"/>
+  <text x="945" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">the</text>
+  <rect x="980" y="1260" width="50" height="40" rx="5" fill="#ffcc80"/>
+  <text x="1005" y="1287" font-family="Arial, sans-serif" font-size="14" fill="#000" text-anchor="middle">~</text>
+  <rect x="1040" y="1260" width="50" height="40" rx="5" fill="#ffa726"/>
+  <text x="1065" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">is</text>
+  <rect x="1100" y="1260" width="50" height="40" rx="5" fill="#ffcc80"/>
+  <text x="1125" y="1287" font-family="Arial, sans-serif" font-size="14" fill="#000" text-anchor="middle">~</text>
+  <text x="1035" y="1330" font-family="Arial, sans-serif" font-size="16" fill="#666666" text-anchor="middle">~50% revealed</text>
+  
+  <!-- Arrow -->
+  <line x1="1170" y1="1280" x2="1260" y2="1280" stroke="#00acc1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <!-- t=0.25 -->
+  <text x="1310" y="1240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t = 0.25</text>
+  <rect x="1290" y="1260" width="50" height="40" rx="5" fill="#66bb6a"/>
+  <text x="1315" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">the</text>
+  <rect x="1350" y="1260" width="50" height="40" rx="5" fill="#66bb6a"/>
+  <text x="1375" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">cat</text>
+  <rect x="1410" y="1260" width="50" height="40" rx="5" fill="#66bb6a"/>
+  <text x="1435" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">is</text>
+  <rect x="1470" y="1260" width="50" height="40" rx="5" fill="#ffcc80"/>
+  <text x="1495" y="1287" font-family="Arial, sans-serif" font-size="14" fill="#000" text-anchor="middle">~</text>
+  <text x="1405" y="1330" font-family="Arial, sans-serif" font-size="16" fill="#666666" text-anchor="middle">~75% revealed</text>
+  
+  <!-- Arrow -->
+  <line x1="1540" y1="1280" x2="1630" y2="1280" stroke="#00acc1" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  
+  <!-- t=0.0 (final) -->
+  <text x="1700" y="1240" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">t = 0.0</text>
+  <rect x="1670" y="1260" width="60" height="40" rx="5" fill="#4caf50"/>
+  <text x="1700" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">the</text>
+  <rect x="1740" y="1260" width="60" height="40" rx="5" fill="#4caf50"/>
+  <text x="1770" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">cat</text>
+  <rect x="1810" y="1260" width="60" height="40" rx="5" fill="#4caf50"/>
+  <text x="1840" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">is</text>
+  <rect x="1880" y="1260" width="80" height="40" rx="5" fill="#4caf50"/>
+  <text x="1920" y="1287" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">happy</text>
+  <text x="1795" y="1330" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2e7d32" text-anchor="middle">Block complete!</text>
+  
+  <!-- Key insight box -->
+  <rect x="120" y="1370" width="1980" height="180" rx="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <text x="160" y="1410" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">🔑 Key Insight: Parallelism Within Blocks</text>
+  <text x="160" y="1455" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • All tokens within a block are denoised IN PARALLEL at each diffusion step
+  </text>
+  <text x="160" y="1495" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Unlike AR which processes tokens one-by-one, diffusion reveals multiple tokens simultaneously
+  </text>
+  <text x="160" y="1535" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Trade-off: Larger blocks = more parallelism, but slightly looser ELBO bound
+  </text>
+  
+  <!-- Part 3: Comparison Summary -->
+  <rect x="50" y="1660" width="2100" height="350" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadow5)"/>
+  <rect x="50" y="1660" width="2100" height="55" rx="12" fill="#f57c00"/>
+  <text x="90" y="1700" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    📊 Block Size Spectrum: From AR to Full Diffusion
+  </text>
+  
+  <!-- Spectrum bar -->
+  <rect x="90" y="1750" width="2020" height="80" rx="10" fill="#ffe0b2" stroke="#f57c00" stroke-width="2"/>
+  
+  <!-- Left: AR -->
+  <rect x="90" y="1750" width="200" height="80" rx="10" fill="#1565c0"/>
+  <text x="190" y="1800" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">L' = 1</text>
+  
+  <!-- Right: Full Diffusion -->
+  <rect x="1910" y="1750" width="200" height="80" rx="10" fill="#c2185b"/>
+  <text x="2010" y="1800" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">L' = L</text>
+  
+  <!-- Middle: Block Diffusion -->
+  <rect x="600" y="1750" width="900" height="80" rx="10" fill="#4caf50"/>
+  <text x="1050" y="1800" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">Block Diffusion (1 &lt; L' &lt; L)</text>
+  
+  <!-- Labels -->
+  <text x="190" y="1870" font-family="Arial, sans-serif" font-size="18" fill="#1565c0" text-anchor="middle">≡ Autoregressive</text>
+  <text x="190" y="1900" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Best quality</text>
+  <text x="190" y="1925" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">No parallelism</text>
+  
+  <text x="1050" y="1870" font-family="Arial, sans-serif" font-size="18" fill="#2e7d32" text-anchor="middle">Best of Both Worlds</text>
+  <text x="1050" y="1900" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">High quality + Parallel within blocks</text>
+  <text x="1050" y="1925" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">KV caching + Variable length</text>
+  
+  <text x="2010" y="1870" font-family="Arial, sans-serif" font-size="18" fill="#c2185b" text-anchor="middle">≡ Full Diffusion</text>
+  <text x="2010" y="1900" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Max parallelism</text>
+  <text x="2010" y="1925" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Fixed length only</text>
+  
+  <!-- Arrows showing spectrum -->
+  <line x1="300" y1="1790" x2="590" y2="1790" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="1510" y1="1790" x2="1900" y2="1790" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Footer -->
+  <rect x="50" y="2050" width="2100" height="310" rx="12" fill="#37474f" filter="url(#shadow5)"/>
+  <text x="1100" y="2100" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Summary: Block Diffusion Architecture Benefits
+  </text>
+  
+  <rect x="100" y="2130" width="480" height="100" rx="10" fill="#455a64"/>
+  <text x="340" y="2175" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#81d4fa" text-anchor="middle">🏗️ Single Neural Network</text>
+  <text x="340" y="2210" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">One transformer for all blocks</text>
+  
+  <rect x="620" y="2130" width="480" height="100" rx="10" fill="#455a64"/>
+  <text x="860" y="2175" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#a5d6a7" text-anchor="middle">⚡ KV Caching</text>
+  <text x="860" y="2210" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">Reuse computation like AR</text>
+  
+  <rect x="1140" y="2130" width="480" height="100" rx="10" fill="#455a64"/>
+  <text x="1380" y="2175" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ffe082" text-anchor="middle">📏 Variable Length</text>
+  <text x="1380" y="2210" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">Generate any sequence length</text>
+  
+  <rect x="1660" y="2130" width="480" height="100" rx="10" fill="#455a64"/>
+  <text x="1900" y="2175" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#ef9a9a" text-anchor="middle">🚀 Parallel Sampling</text>
+  <text x="1900" y="2210" font-family="Arial, sans-serif" font-size="18" fill="white" text-anchor="middle">Within-block parallelism</text>
+  
+  <text x="1100" y="2290" font-family="Arial, sans-serif" font-size="22" fill="#b0bec5" text-anchor="middle">
+    Block Diffusion = Autoregressive(Blocks) + Diffusion(Tokens within Block)
+  </text>
+  <text x="1100" y="2330" font-family="Arial, sans-serif" font-size="18" fill="#78909c" text-anchor="middle">
+    Paper: arXiv:2503.09573 | ICLR 2025 | Cornell Tech
+  </text>
+</svg>
+

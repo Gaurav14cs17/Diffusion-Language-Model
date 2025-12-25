@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" width="2200" height="2200">
+  <defs>
+    <linearGradient id="resHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#42a5f5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowRes" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2200" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#resHeader)" filter="url(#shadowRes)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Benchmark Results &amp; Performance Analysis
+  </text>
+  
+  <!-- Key Result Highlight -->
+  <rect x="50" y="180" width="2100" height="120" rx="12" fill="#e8f5e9" stroke="#4caf50" stroke-width="3" filter="url(#shadowRes)"/>
+  <text x="1100" y="230" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1b5e20" text-anchor="middle">
+    🏆 LLaDA-MoE beats 8B dense diffusion models with only 1.4B active parameters!
+  </text>
+  <text x="1100" y="275" font-family="Arial, sans-serif" font-size="24" fill="#000000" text-anchor="middle">
+    Matches Qwen2.5-3B-Instruct across diverse tasks with fewer active parameters
+  </text>
+  
+  <!-- Main Results Table -->
+  <rect x="50" y="340" width="2100" height="580" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadowRes)"/>
+  <text x="90" y="400" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    📊 Base Model Comparison (LLaDA-MoE-7B-A1B-Base vs Others)
+  </text>
+  
+  <!-- Table -->
+  <rect x="90" y="430" width="2020" height="460" rx="10" fill="#ffffff" stroke="#1565c0" stroke-width="2"/>
+  
+  <!-- Header row -->
+  <rect x="90" y="430" width="2020" height="50" fill="#bbdefb"/>
+  <text x="200" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Task</text>
+  <text x="450" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">LLaDA-MoE (1.4B active)</text>
+  <text x="700" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">LLaDA-8B (8B)</text>
+  <text x="950" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Dream-7B (7B)</text>
+  <text x="1200" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Qwen2.5-3B (3B)</text>
+  <text x="1450" y="462" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Winner</text>
+  
+  <!-- Category: General -->
+  <rect x="90" y="480" width="2020" height="30" fill="#e1f5fe"/>
+  <text x="100" y="502" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0277bd">GENERAL TASKS</text>
+  
+  <text x="200" y="540" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">MMLU</text>
+  <text x="450" y="540" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">64.59</text>
+  <text x="700" y="540" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">65.90</text>
+  <text x="950" y="540" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">69.50</text>
+  <text x="1200" y="540" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">67.98</text>
+  <text x="1450" y="540" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Dream</text>
+  
+  <text x="200" y="575" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">MMLU-Pro</text>
+  <text x="450" y="575" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">39.16</text>
+  <text x="700" y="575" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">41.80</text>
+  <text x="950" y="575" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">48.15</text>
+  <text x="1200" y="575" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">35.50</text>
+  <text x="1450" y="575" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Dream</text>
+  
+  <!-- Category: Reasoning -->
+  <rect x="90" y="600" width="2020" height="30" fill="#e1f5fe"/>
+  <text x="100" y="622" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0277bd">REASONING TASKS</text>
+  
+  <text x="200" y="660" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">BBH</text>
+  <text x="450" y="660" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">52.71</text>
+  <text x="700" y="660" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">49.80</text>
+  <text x="950" y="660" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">57.90</text>
+  <text x="1200" y="660" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">56.50</text>
+  <text x="1450" y="660" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Dream</text>
+  
+  <text x="200" y="695" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">KorBench</text>
+  <text x="450" y="695" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">31.20</text>
+  <text x="700" y="695" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">33.68</text>
+  <text x="950" y="695" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">37.44</text>
+  <text x="1200" y="695" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">27.44</text>
+  <text x="1450" y="695" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Dream</text>
+  
+  <!-- Category: Math -->
+  <rect x="90" y="720" width="2020" height="30" fill="#e1f5fe"/>
+  <text x="100" y="742" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0277bd">MATH TASKS</text>
+  
+  <text x="200" y="780" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">GSM8K</text>
+  <text x="450" y="780" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">66.41</text>
+  <text x="700" y="780" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">70.70</text>
+  <text x="950" y="780" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">77.79</text>
+  <text x="1200" y="780" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">78.17</text>
+  <text x="1450" y="780" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Qwen</text>
+  
+  <text x="200" y="815" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">MATH</text>
+  <text x="450" y="815" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2e7d32" text-anchor="middle">36.10</text>
+  <text x="700" y="815" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">27.30</text>
+  <text x="950" y="815" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">39.60</text>
+  <text x="1200" y="815" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">40.94</text>
+  <text x="1450" y="815" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Qwen</text>
+  
+  <!-- Category: Coding -->
+  <rect x="90" y="840" width="2020" height="30" fill="#e1f5fe"/>
+  <text x="100" y="862" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0277bd">CODING TASKS</text>
+  
+  <text x="200" y="900" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">HumanEval</text>
+  <text x="450" y="900" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">45.73</text>
+  <text x="700" y="900" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">33.50</text>
+  <text x="950" y="900" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" font-weight="bold" text-anchor="middle">57.90</text>
+  <text x="1200" y="900" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">57.93</text>
+  <text x="1450" y="900" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">Dream/Qwen</text>
+  
+  <!-- Highlight row -->
+  <rect x="90" y="925" width="2020" height="35" fill="#c8e6c9"/>
+  <text x="200" y="950" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">Average</text>
+  <text x="450" y="950" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32" text-anchor="middle">46.94</text>
+  <text x="700" y="950" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">43.53</text>
+  <text x="950" y="950" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">46.66</text>
+  <text x="1200" y="950" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">50.34</text>
+  <text x="1450" y="950" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#7b1fa2" text-anchor="middle">MoE beats LLaDA!</text>
+  
+  <!-- Efficiency Comparison -->
+  <rect x="50" y="960" width="2100" height="320" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadowRes)"/>
+  <text x="90" y="1020" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    ⚡ Efficiency Analysis: Compute vs Performance
+  </text>
+  
+  <!-- Efficiency bars -->
+  <text x="90" y="1080" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Active Parameters:</text>
+  
+  <!-- LLaDA-8B bar -->
+  <text x="90" y="1120" font-family="Arial, sans-serif" font-size="18" fill="#000000">LLaDA-8B:</text>
+  <rect x="250" y="1100" width="800" height="30" rx="5" fill="#c62828"/>
+  <text x="1070" y="1122" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000">8B params (100%)</text>
+  
+  <!-- Dream-7B bar -->
+  <text x="90" y="1165" font-family="Arial, sans-serif" font-size="18" fill="#000000">Dream-7B:</text>
+  <rect x="250" y="1145" width="700" height="30" rx="5" fill="#f57c00"/>
+  <text x="970" y="1167" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000">7B params (87.5%)</text>
+  
+  <!-- Qwen2.5-3B bar -->
+  <text x="90" y="1210" font-family="Arial, sans-serif" font-size="18" fill="#000000">Qwen2.5-3B:</text>
+  <rect x="250" y="1190" width="300" height="30" rx="5" fill="#1976d2"/>
+  <text x="570" y="1212" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000">3B params (37.5%)</text>
+  
+  <!-- LLaDA-MoE bar -->
+  <text x="90" y="1255" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32">LLaDA-MoE:</text>
+  <rect x="250" y="1235" width="140" height="30" rx="5" fill="#4caf50"/>
+  <text x="410" y="1257" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2e7d32">1.4B params (17.5%) ← MOST EFFICIENT!</text>
+  
+  <!-- Key insight -->
+  <rect x="1200" y="1070" width="900" height="180" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1650" y="1120" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">🔑 Key Insight</text>
+  <text x="1240" y="1165" font-family="Arial, sans-serif" font-size="20" fill="#000000">LLaDA-MoE uses 5.7x fewer FLOPs</text>
+  <text x="1240" y="1200" font-family="Arial, sans-serif" font-size="20" fill="#000000">than LLaDA-8B per forward pass,</text>
+  <text x="1240" y="1235" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1b5e20">yet achieves HIGHER avg score!</text>
+  
+  <!-- Instruct Model Results -->
+  <rect x="50" y="1320" width="2100" height="400" rx="12" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" filter="url(#shadowRes)"/>
+  <text x="90" y="1380" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    🎯 Instruct Model Results (LLaDA-MoE-7B-A1B-Instruct)
+  </text>
+  
+  <!-- Instruct comparison boxes -->
+  <rect x="90" y="1420" width="650" height="270" rx="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="415" y="1470" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">vs LLaDA-8B-Instruct</text>
+  <text x="130" y="1520" font-family="Arial, sans-serif" font-size="20" fill="#000000">MMLU-Pro: 52.4 vs 49.4 ✓</text>
+  <text x="130" y="1560" font-family="Arial, sans-serif" font-size="20" fill="#000000">KorBench: 37.0 vs 35.7 ✓</text>
+  <text x="130" y="1600" font-family="Arial, sans-serif" font-size="20" fill="#000000">HumanEval: 60.4 vs 55.5 ✓</text>
+  <text x="130" y="1640" font-family="Arial, sans-serif" font-size="20" fill="#000000">MBPP: 58.8 vs 44.6 ✓</text>
+  <text x="130" y="1680" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2e7d32">LLaDA-MoE wins with 1.4B!</text>
+  
+  <rect x="780" y="1420" width="650" height="270" rx="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="1105" y="1470" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">vs Dream-v0-Instruct-7B</text>
+  <text x="820" y="1520" font-family="Arial, sans-serif" font-size="20" fill="#000000">MMLU-Pro: 52.4 vs 43.3</text>
+  <text x="820" y="1560" font-family="Arial, sans-serif" font-size="20" fill="#000000">LiveCodeBench: 21.0 vs 13.3</text>
+  <text x="820" y="1600" font-family="Arial, sans-serif" font-size="20" fill="#000000">OlympiadBench: 11.0 vs 10.5</text>
+  <text x="820" y="1640" font-family="Arial, sans-serif" font-size="20" fill="#000000">BigCodeBench: 33.7 vs 32.6</text>
+  <text x="820" y="1680" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2e7d32">LLaDA-MoE competitive!</text>
+  
+  <rect x="1470" y="1420" width="640" height="270" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1790" y="1470" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">vs Qwen2.5-3B-Instruct</text>
+  <text x="1510" y="1520" font-family="Arial, sans-serif" font-size="20" fill="#000000">MMLU-Pro: 52.4 vs 44.1</text>
+  <text x="1510" y="1560" font-family="Arial, sans-serif" font-size="20" fill="#000000">HumanEval: 60.4 vs 61.6 ≈</text>
+  <text x="1510" y="1600" font-family="Arial, sans-serif" font-size="20" fill="#000000">MBPP: 58.8 vs 66.2</text>
+  <text x="1510" y="1640" font-family="Arial, sans-serif" font-size="20" fill="#000000">LiveCodeBench: 21.0 vs 30.4</text>
+  <text x="1510" y="1680" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Comparable performance!</text>
+  
+  <!-- Conclusion -->
+  <rect x="50" y="1760" width="2100" height="400" rx="12" fill="#37474f" filter="url(#shadowRes)"/>
+  <text x="1100" y="1820" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    🎓 Key Takeaways
+  </text>
+  
+  <rect x="100" y="1860" width="620" height="270" rx="10" fill="#455a64"/>
+  <text x="410" y="1910" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#81d4fa" text-anchor="middle">Efficiency</text>
+  <text x="140" y="1960" font-family="Arial, sans-serif" font-size="20" fill="white">• 1.4B active vs 8B total</text>
+  <text x="140" y="2000" font-family="Arial, sans-serif" font-size="20" fill="white">• 5.7x fewer FLOPs</text>
+  <text x="140" y="2040" font-family="Arial, sans-serif" font-size="20" fill="white">• MoE scales to diffusion</text>
+  <text x="140" y="2080" font-family="Arial, sans-serif" font-size="20" fill="white">• Inference-time savings</text>
+  <text x="140" y="2120" font-family="Arial, sans-serif" font-size="20" fill="white">• Memory efficient</text>
+  
+  <rect x="780" y="1860" width="620" height="270" rx="10" fill="#455a64"/>
+  <text x="1090" y="1910" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#a5d6a7" text-anchor="middle">Performance</text>
+  <text x="820" y="1960" font-family="Arial, sans-serif" font-size="20" fill="white">• Beats LLaDA-8B (dense)</text>
+  <text x="820" y="2000" font-family="Arial, sans-serif" font-size="20" fill="white">• Competitive with Dream-7B</text>
+  <text x="820" y="2040" font-family="Arial, sans-serif" font-size="20" fill="white">• Matches Qwen2.5-3B-Instruct</text>
+  <text x="820" y="2080" font-family="Arial, sans-serif" font-size="20" fill="white">• Strong across all tasks</text>
+  <text x="820" y="2120" font-family="Arial, sans-serif" font-size="20" fill="white">• SOTA among diff. LMs</text>
+  
+  <rect x="1460" y="1860" width="640" height="270" rx="10" fill="#455a64"/>
+  <text x="1780" y="1910" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffcc80" text-anchor="middle">Implications</text>
+  <text x="1500" y="1960" font-family="Arial, sans-serif" font-size="20" fill="white">• MoE viable for MDMs</text>
+  <text x="1500" y="2000" font-family="Arial, sans-serif" font-size="20" fill="white">• Opens scaling paths</text>
+  <text x="1500" y="2040" font-family="Arial, sans-serif" font-size="20" fill="white">• Efficient large models</text>
+  <text x="1500" y="2080" font-family="Arial, sans-serif" font-size="20" fill="white">• Practical deployment</text>
+  <text x="1500" y="2120" font-family="Arial, sans-serif" font-size="20" fill="white">• Future: larger MoE MDMs</text>
+</svg>
+
+

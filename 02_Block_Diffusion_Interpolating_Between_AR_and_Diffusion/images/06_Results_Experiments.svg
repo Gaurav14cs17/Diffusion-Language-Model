@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" width="2200" height="2200">
+  <defs>
+    <linearGradient id="resHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2e7d32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#43a047;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow6" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2200" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#resHeaderGrad)" filter="url(#shadow6)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Experimental Results &amp; Key Findings
+  </text>
+  
+  <!-- Section 1: Main Results Table -->
+  <rect x="50" y="180" width="2100" height="500" rx="12" fill="#e8f5e9" stroke="#4caf50" stroke-width="3" filter="url(#shadow6)"/>
+  <rect x="50" y="180" width="2100" height="55" rx="12" fill="#4caf50"/>
+  <text x="90" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    📊 Main Results: Language Modeling Perplexity (Lower is Better)
+  </text>
+  
+  <!-- Table -->
+  <rect x="90" y="260" width="2020" height="390" rx="10" fill="#ffffff" stroke="#2e7d32" stroke-width="2"/>
+  
+  <!-- Table Headers -->
+  <rect x="90" y="260" width="2020" height="50" fill="#c8e6c9"/>
+  <text x="250" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Model</text>
+  <text x="550" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Type</text>
+  <text x="800" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">LM1B PPL ↓</text>
+  <text x="1050" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">OWT PPL ↓</text>
+  <text x="1350" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Block Size</text>
+  <text x="1650" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Variable Length</text>
+  <text x="1950" y="295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">KV Cache</text>
+  
+  <!-- Row 1: Autoregressive -->
+  <rect x="90" y="310" width="2020" height="55" fill="#e3f2fd"/>
+  <text x="250" y="345" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">GPT-2 (AR baseline)</text>
+  <text x="550" y="345" font-family="Arial, sans-serif" font-size="20" fill="#1565c0" font-weight="bold" text-anchor="middle">Autoregressive</text>
+  <text x="800" y="345" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">22.88</text>
+  <text x="1050" y="345" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">24.04</text>
+  <text x="1350" y="345" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">1</text>
+  <text x="1650" y="345" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  <text x="1950" y="345" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  
+  <!-- Row 2: MDLM -->
+  <rect x="90" y="365" width="2020" height="55" fill="#fce4ec"/>
+  <text x="250" y="400" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">MDLM</text>
+  <text x="550" y="400" font-family="Arial, sans-serif" font-size="20" fill="#c2185b" font-weight="bold" text-anchor="middle">Diffusion</text>
+  <text x="800" y="400" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">31.73</text>
+  <text x="1050" y="400" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">28.54</text>
+  <text x="1350" y="400" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L (full)</text>
+  <text x="1650" y="400" font-family="Arial, sans-serif" font-size="20" fill="#c62828" font-weight="bold" text-anchor="middle">✗</text>
+  <text x="1950" y="400" font-family="Arial, sans-serif" font-size="20" fill="#c62828" font-weight="bold" text-anchor="middle">✗</text>
+  
+  <!-- Row 3: SEDD -->
+  <rect x="90" y="420" width="2020" height="55" fill="#fce4ec"/>
+  <text x="250" y="455" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">SEDD</text>
+  <text x="550" y="455" font-family="Arial, sans-serif" font-size="20" fill="#c2185b" font-weight="bold" text-anchor="middle">Diffusion</text>
+  <text x="800" y="455" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">32.10</text>
+  <text x="1050" y="455" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">28.69</text>
+  <text x="1350" y="455" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L (full)</text>
+  <text x="1650" y="455" font-family="Arial, sans-serif" font-size="20" fill="#c62828" font-weight="bold" text-anchor="middle">✗</text>
+  <text x="1950" y="455" font-family="Arial, sans-serif" font-size="20" fill="#c62828" font-weight="bold" text-anchor="middle">✗</text>
+  
+  <!-- Row 4: BD3-LM L'=4 -->
+  <rect x="90" y="475" width="2020" height="55" fill="#e8f5e9"/>
+  <text x="250" y="510" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">BD3-LM (L'=4)</text>
+  <text x="550" y="510" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32" font-weight="bold" text-anchor="middle">Block Diffusion</text>
+  <text x="800" y="510" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2e7d32" text-anchor="middle">27.52</text>
+  <text x="1050" y="510" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2e7d32" text-anchor="middle">26.12</text>
+  <text x="1350" y="510" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">4</text>
+  <text x="1650" y="510" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  <text x="1950" y="510" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  
+  <!-- Row 5: BD3-LM L'=16 -->
+  <rect x="90" y="530" width="2020" height="55" fill="#c8e6c9"/>
+  <text x="250" y="565" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">BD3-LM (L'=16)</text>
+  <text x="550" y="565" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32" font-weight="bold" text-anchor="middle">Block Diffusion</text>
+  <text x="800" y="565" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1b5e20" text-anchor="middle">28.84</text>
+  <text x="1050" y="565" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1b5e20" text-anchor="middle">26.87</text>
+  <text x="1350" y="565" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">16</text>
+  <text x="1650" y="565" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  <text x="1950" y="565" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  
+  <!-- Row 6: BD3-LM L'=1 (tuned) -->
+  <rect x="90" y="585" width="2020" height="55" fill="#a5d6a7"/>
+  <text x="250" y="620" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">BD3-LM (L'=1, tuned)</text>
+  <text x="550" y="620" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32" font-weight="bold" text-anchor="middle">Block Diffusion</text>
+  <text x="800" y="620" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1b5e20" text-anchor="middle">22.88</text>
+  <text x="1050" y="620" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1b5e20" text-anchor="middle">24.04</text>
+  <text x="1350" y="620" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">1</text>
+  <text x="1650" y="620" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  <text x="1950" y="620" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">✓</text>
+  
+  <!-- Highlight box -->
+  <rect x="130" y="640" width="1980" height="40" rx="5" fill="#ffecb3"/>
+  <text x="1120" y="668" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    🏆 BD3-LM achieves NEW STATE-OF-THE-ART among diffusion models! With L'=1 tuned schedule, matches AR exactly!
+  </text>
+  
+  <!-- Section 2: Key Findings -->
+  <rect x="50" y="720" width="2100" height="400" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadow6)"/>
+  <rect x="50" y="720" width="2100" height="55" rx="12" fill="#1976d2"/>
+  <text x="90" y="760" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    🔬 Key Experimental Findings
+  </text>
+  
+  <!-- Finding 1 -->
+  <rect x="90" y="800" width="980" height="140" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="130" y="845" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">1. Variance Explains the Gap</text>
+  <text x="130" y="885" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Linear schedule variance: 1.52 → PPL ≤25.56</text>
+  <text x="130" y="920" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Tuned schedule variance: 0.11 → PPL = 22.88</text>
+  
+  <!-- Finding 2 -->
+  <rect x="1110" y="800" width="1000" height="140" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="1150" y="845" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">2. Block Size Trade-offs</text>
+  <text x="1150" y="885" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Smaller L' → Better perplexity (tighter ELBO)</text>
+  <text x="1150" y="920" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Larger L' → More parallelism, faster generation</text>
+  
+  <!-- Finding 3 -->
+  <rect x="90" y="960" width="980" height="140" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="130" y="1005" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">3. Variable-Length Generation</text>
+  <text x="130" y="1045" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Can generate beyond training context length</text>
+  <text x="130" y="1080" font-family="Arial, sans-serif" font-size="20" fill="#000000">• First diffusion model to support this!</text>
+  
+  <!-- Finding 4 -->
+  <rect x="1110" y="960" width="1000" height="140" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1150" y="1005" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">4. Efficient Inference</text>
+  <text x="1150" y="1045" font-family="Arial, sans-serif" font-size="20" fill="#000000">• KV caching works like in AR models</text>
+  <text x="1150" y="1080" font-family="Arial, sans-serif" font-size="20" fill="#000000">• 10x fewer steps than Gaussian diffusion baselines</text>
+  
+  <!-- Section 3: Variance vs Perplexity Chart -->
+  <rect x="50" y="1160" width="1020" height="450" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadow6)"/>
+  <rect x="50" y="1160" width="1020" height="55" rx="12" fill="#f57c00"/>
+  <text x="560" y="1200" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+    Variance vs Test Perplexity Correlation
+  </text>
+  
+  <!-- Chart area -->
+  <rect x="90" y="1240" width="940" height="340" rx="10" fill="#ffffff" stroke="#f57c00" stroke-width="1"/>
+  
+  <!-- Axes -->
+  <line x1="150" y1="1520" x2="980" y2="1520" stroke="#333" stroke-width="2"/>
+  <line x1="150" y1="1520" x2="150" y2="1280" stroke="#333" stroke-width="2"/>
+  
+  <text x="565" y="1565" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">NELBO Variance</text>
+  <text x="100" y="1400" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" transform="rotate(-90, 100, 1400)" text-anchor="middle">Test PPL</text>
+  
+  <!-- Data points showing correlation -->
+  <circle cx="250" cy="1310" r="12" fill="#c62828"/>
+  <text x="250" y="1295" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">High var</text>
+  
+  <circle cx="400" cy="1380" r="12" fill="#f57c00"/>
+  <text x="400" y="1365" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">Med</text>
+  
+  <circle cx="600" cy="1440" r="12" fill="#ffc107"/>
+  
+  <circle cx="800" cy="1490" r="12" fill="#4caf50"/>
+  <text x="800" y="1475" font-family="Arial, sans-serif" font-size="14" fill="#000000" text-anchor="middle">Low var</text>
+  
+  <!-- Trend line -->
+  <line x1="220" y1="1300" x2="850" y2="1505" stroke="#1565c0" stroke-width="3" stroke-dasharray="5,5"/>
+  
+  <text x="700" y="1350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1565c0">
+    Lower Variance
+  </text>
+  <text x="700" y="1380" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1565c0">
+    = Better PPL!
+  </text>
+  
+  <!-- Section 4: Block Size Analysis -->
+  <rect x="1100" y="1160" width="1050" height="450" rx="12" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" filter="url(#shadow6)"/>
+  <rect x="1100" y="1160" width="1050" height="55" rx="12" fill="#7b1fa2"/>
+  <text x="1625" y="1200" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+    Optimal Clipped Schedules by Block Size
+  </text>
+  
+  <!-- Table for schedules -->
+  <rect x="1140" y="1240" width="970" height="340" rx="10" fill="#ffffff" stroke="#7b1fa2" stroke-width="1"/>
+  
+  <rect x="1140" y="1240" width="970" height="45" fill="#e1bee7"/>
+  <text x="1280" y="1270" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Block Size L'</text>
+  <text x="1480" y="1270" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Optimal [β, ω]</text>
+  <text x="1700" y="1270" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Variance</text>
+  <text x="1920" y="1270" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">PPL</text>
+  
+  <!-- Data rows -->
+  <text x="1280" y="1325" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 1</text>
+  <text x="1480" y="1325" font-family="Arial, sans-serif" font-size="20" fill="#7b1fa2" font-weight="bold" text-anchor="middle">Full masking</text>
+  <text x="1700" y="1325" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">0.11</text>
+  <text x="1920" y="1325" font-family="Arial, sans-serif" font-size="20" fill="#4caf50" font-weight="bold" text-anchor="middle">22.88</text>
+  
+  <line x1="1160" y1="1345" x2="2090" y2="1345" stroke="#e1bee7" stroke-width="1"/>
+  
+  <text x="1280" y="1385" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 4</text>
+  <text x="1480" y="1385" font-family="Arial, sans-serif" font-size="20" fill="#7b1fa2" font-weight="bold" text-anchor="middle">U[0.3, 0.8]</text>
+  <text x="1700" y="1385" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Low</text>
+  <text x="1920" y="1385" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">27.52</text>
+  
+  <line x1="1160" y1="1405" x2="2090" y2="1405" stroke="#e1bee7" stroke-width="1"/>
+  
+  <text x="1280" y="1445" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 16</text>
+  <text x="1480" y="1445" font-family="Arial, sans-serif" font-size="20" fill="#7b1fa2" font-weight="bold" text-anchor="middle">U[0.25, 0.75]</text>
+  <text x="1700" y="1445" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Low</text>
+  <text x="1920" y="1445" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">28.84</text>
+  
+  <line x1="1160" y1="1465" x2="2090" y2="1465" stroke="#e1bee7" stroke-width="1"/>
+  
+  <text x="1280" y="1505" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 128</text>
+  <text x="1480" y="1505" font-family="Arial, sans-serif" font-size="20" fill="#7b1fa2" font-weight="bold" text-anchor="middle">U[0.2, 0.7]</text>
+  <text x="1700" y="1505" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Low</text>
+  <text x="1920" y="1505" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">30.52</text>
+  
+  <rect x="1160" y="1540" width="930" height="35" rx="5" fill="#e8f5e9"/>
+  <text x="1625" y="1565" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2e7d32" text-anchor="middle">
+    Different block sizes need different optimal schedules!
+  </text>
+  
+  <!-- Section 5: Conclusion -->
+  <rect x="50" y="1650" width="2100" height="300" rx="12" fill="#e0f2f1" stroke="#00897b" stroke-width="3" filter="url(#shadow6)"/>
+  <rect x="50" y="1650" width="2100" height="55" rx="12" fill="#00897b"/>
+  <text x="90" y="1690" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    🎯 Conclusions &amp; Impact
+  </text>
+  
+  <rect x="90" y="1730" width="660" height="190" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="420" y="1775" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">State-of-the-Art</text>
+  <text x="130" y="1815" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Best perplexity among all</text>
+  <text x="130" y="1850" font-family="Arial, sans-serif" font-size="20" fill="#000000">  discrete diffusion models</text>
+  <text x="130" y="1890" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Closes gap to AR models</text>
+  
+  <rect x="790" y="1730" width="660" height="190" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1120" y="1775" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">New Capabilities</text>
+  <text x="830" y="1815" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Variable-length generation</text>
+  <text x="830" y="1850" font-family="Arial, sans-serif" font-size="20" fill="#000000">• KV caching support</text>
+  <text x="830" y="1890" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Parallel within-block sampling</text>
+  
+  <rect x="1490" y="1730" width="620" height="190" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1800" y="1775" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">Theoretical Insights</text>
+  <text x="1530" y="1815" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Gradient variance is key</text>
+  <text x="1530" y="1850" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Clipped schedules help</text>
+  <text x="1530" y="1890" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Data-driven optimization</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="1990" width="2100" height="170" rx="12" fill="#37474f" filter="url(#shadow6)"/>
+  <text x="1100" y="2040" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Block Diffusion: The Best of Both Worlds
+  </text>
+  <text x="1100" y="2090" font-family="Arial, sans-serif" font-size="24" fill="#b0bec5" text-anchor="middle">
+    Autoregressive Quality + Diffusion Parallelism + Variable Length + KV Caching
+  </text>
+  <text x="1100" y="2130" font-family="Arial, sans-serif" font-size="20" fill="#78909c" text-anchor="middle">
+    Paper: arXiv:2503.09573 | Code: github.com/kuleshov-group/bd3lms | ICLR 2025
+  </text>
+</svg>
+

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3400" width="2200" height="3400">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#276749;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38A169;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="proofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FFF4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E6FFFA;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#276749"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2B6CB0"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3400" fill="#FAFBFC"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" stroke="#22543D" stroke-width="3"/>
+  <text x="1100" y="110" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Reverse Denoising Process: Mathematical Details
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="22" fill="#C6F6D5" text-anchor="middle">
+    The Generation Process: p_θ(x₀ | xₜ)
+  </text>
+
+  <!-- Section 1: Overview -->
+  <rect x="50" y="200" width="2100" height="400" rx="12" fill="#F0FFF4" stroke="#38A169" stroke-width="3"/>
+  <rect x="50" y="200" width="2100" height="60" rx="12" fill="#38A169"/>
+  <text x="1100" y="242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. REVERSE PROCESS OVERVIEW
+  </text>
+
+  <text x="100" y="310" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000">
+    Goal: Learn to reverse the corruption process — recover x₀ from xₜ
+  </text>
+  
+  <rect x="100" y="350" width="980" height="220" rx="10" fill="#FFFFFF" stroke="#276749" stroke-width="3"/>
+  <text x="590" y="395" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    True Reverse Process (Intractable)
+  </text>
+  <text x="140" y="445" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    p(xₜ₋₁ | xₜ) = ∫ q(xₜ₋₁ | xₜ, x₀) p(x₀ | xₜ) dx₀
+  </text>
+  <text x="140" y="495" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Requires marginalizing over all possible x₀
+  </text>
+  <text x="140" y="535" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Intractable to compute directly
+  </text>
+  
+  <rect x="1120" y="350" width="980" height="220" rx="10" fill="#FFFFFF" stroke="#276749" stroke-width="3"/>
+  <text x="1610" y="395" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Learned Reverse Process
+  </text>
+  <text x="1160" y="445" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    p_θ(xₜ₋₁ | xₜ) ≈ p(xₜ₋₁ | xₜ)
+  </text>
+  <text x="1160" y="495" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Neural network approximates this
+  </text>
+  <text x="1160" y="535" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Trained to match forward posterior
+  </text>
+
+  <!-- Section 2: Posterior Distribution -->
+  <rect x="50" y="640" width="2100" height="620" rx="12" fill="#EBF8FF" stroke="#3182CE" stroke-width="3"/>
+  <rect x="50" y="640" width="2100" height="60" rx="12" fill="#3182CE"/>
+  <text x="1100" y="682" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. POSTERIOR DISTRIBUTION q(xₜ₋₁ | xₜ, x₀) — DERIVATION
+  </text>
+
+  <rect x="100" y="730" width="2000" height="500" rx="10" fill="url(#proofGrad)" stroke="#2B6CB0" stroke-width="3"/>
+  
+  <text x="140" y="780" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Key Insight: Given both xₜ and x₀, the posterior is TRACTABLE
+  </text>
+  
+  <text x="140" y="835" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#1a365d">
+    Derivation using Bayes' Rule:
+  </text>
+  
+  <rect x="160" y="860" width="1900" height="80" rx="8" fill="#FFFFFF" stroke="#4A5568" stroke-width="2"/>
+  <text x="1100" y="910" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(xₜ₋₁ | xₜ, x₀) = q(xₜ | xₜ₋₁, x₀) · q(xₜ₋₁ | x₀) / q(xₜ | x₀)
+  </text>
+  
+  <text x="140" y="985" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Step 1: Markov property simplification
+  </text>
+  <text x="180" y="1025" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    q(xₜ | xₜ₋₁, x₀) = q(xₜ | xₜ₋₁)   (xₜ depends only on xₜ₋₁, not x₀ directly)
+  </text>
+  
+  <text x="140" y="1080" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Step 2: Substitute known distributions
+  </text>
+  <text x="180" y="1120" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    q(xₜ | xₜ₋₁) = Cat(xₜ ; xₜ₋₁ · Qₜ)        — forward transition
+  </text>
+  <text x="180" y="1160" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    q(xₜ₋₁ | x₀) = Cat(xₜ₋₁ ; x₀ · Q̄ₜ₋₁)    — marginal at t-1
+  </text>
+  <text x="180" y="1200" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    q(xₜ | x₀) = Cat(xₜ ; x₀ · Q̄ₜ)          — marginal at t
+  </text>
+
+  <!-- Section 3: Posterior for Absorbing Diffusion -->
+  <rect x="50" y="1300" width="2100" height="580" rx="12" fill="#FEF3C7" stroke="#D97706" stroke-width="3"/>
+  <rect x="50" y="1300" width="2100" height="60" rx="12" fill="#D97706"/>
+  <text x="1100" y="1342" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. POSTERIOR FOR ABSORBING-STATE DIFFUSION
+  </text>
+
+  <rect x="100" y="1390" width="2000" height="460" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="3"/>
+  
+  <text x="140" y="1440" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    For masked diffusion, the posterior has a simple closed form:
+  </text>
+  
+  <text x="140" y="1495" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Case Analysis for q(xₜ₋₁ | xₜ, x₀):
+  </text>
+  
+  <!-- Case 1 -->
+  <rect x="160" y="1520" width="900" height="140" rx="8" fill="#C6F6D5" stroke="#276749" stroke-width="2"/>
+  <text x="610" y="1560" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    Case 1: xₜ is NOT [MASK] (xₜ = x₀)
+  </text>
+  <text x="200" y="1600" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    q(xₜ₋₁ | xₜ, x₀) = δ(xₜ₋₁, xₜ)
+  </text>
+  <text x="200" y="1640" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    Token hasn't been masked yet → must stay as original
+  </text>
+
+  <!-- Case 2 -->
+  <rect x="1100" y="1520" width="950" height="140" rx="8" fill="#FED7D7" stroke="#C53030" stroke-width="2"/>
+  <text x="1575" y="1560" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    Case 2: xₜ IS [MASK]
+  </text>
+  <text x="1140" y="1600" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    q(xₜ₋₁ | xₜ=[M], x₀) = θₜ · δ(xₜ₋₁, x₀) + (1-θₜ) · δ(xₜ₋₁, [M])
+  </text>
+  <text x="1140" y="1640" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    Either unmask to x₀ (prob θₜ) or stay masked
+  </text>
+
+  <text x="140" y="1710" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000">
+    Unmasking probability θₜ:
+  </text>
+  
+  <rect x="160" y="1740" width="1900" height="80" rx="8" fill="#EDF2F7" stroke="#4A5568" stroke-width="2"/>
+  <text x="1100" y="1790" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    θₜ = (αₜ₋₁ - αₜ) / (1 - αₜ) = βₜ · αₜ₋₁ / (1 - αₜ)
+  </text>
+
+  <!-- Section 4: Neural Network Parameterization -->
+  <rect x="50" y="1920" width="2100" height="560" rx="12" fill="#FAF5FF" stroke="#805AD5" stroke-width="3"/>
+  <rect x="50" y="1920" width="2100" height="60" rx="12" fill="#805AD5"/>
+  <text x="1100" y="1962" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. NEURAL NETWORK PARAMETERIZATION
+  </text>
+
+  <rect x="100" y="2010" width="980" height="440" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="3"/>
+  <text x="590" y="2055" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    x₀-Parameterization (Used in Dream)
+  </text>
+  
+  <text x="140" y="2105" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Network predicts clean data directly:
+  </text>
+  <text x="160" y="2150" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    x̂₀ = f_θ(xₜ, t)
+  </text>
+  
+  <text x="140" y="2205" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Output distribution:
+  </text>
+  <text x="160" y="2250" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    p_θ(x₀ⁱ | xₜ) = softmax(f_θ(xₜ, t))ⁱ
+  </text>
+  
+  <text x="140" y="2305" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Reverse transition:
+  </text>
+  <text x="160" y="2350" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    p_θ(xₜ₋₁ | xₜ) = ∑_{x₀} q(xₜ₋₁ | xₜ, x₀) · p_θ(x₀ | xₜ)
+  </text>
+  
+  <text x="160" y="2400" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    Uses predicted x̂₀ to compute posterior
+  </text>
+  <text x="160" y="2435" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    Similar to DDPM for images
+  </text>
+
+  <rect x="1120" y="2010" width="980" height="440" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="3"/>
+  <text x="1610" y="2055" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Transformer Architecture
+  </text>
+  
+  <text x="1160" y="2105" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Input processing:
+  </text>
+  <text x="1180" y="2150" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Token embeddings E(xₜ)
+  </text>
+  <text x="1180" y="2190" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Time embedding E(t) - sinusoidal
+  </text>
+  <text x="1180" y="2230" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Position embeddings
+  </text>
+  
+  <text x="1160" y="2285" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Key difference from AR models:
+  </text>
+  <text x="1180" y="2330" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • NO causal attention mask
+  </text>
+  <text x="1180" y="2370" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Full bidirectional attention
+  </text>
+  <text x="1180" y="2410" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • All tokens can attend to all others
+  </text>
+
+  <!-- Section 5: Complete Reverse Step -->
+  <rect x="50" y="2520" width="2100" height="520" rx="12" fill="#E6FFFA" stroke="#319795" stroke-width="3"/>
+  <rect x="50" y="2520" width="2100" height="60" rx="12" fill="#319795"/>
+  <text x="1100" y="2562" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. COMPLETE REVERSE STEP COMPUTATION
+  </text>
+
+  <rect x="100" y="2610" width="2000" height="400" rx="10" fill="#FFFFFF" stroke="#2C7A7B" stroke-width="3"/>
+  
+  <text x="140" y="2660" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Algorithm: One Reverse Step (t → t-1)
+  </text>
+  
+  <text x="160" y="2710" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2B6CB0">
+    Step 1: Predict x₀ from xₜ
+  </text>
+  <text x="200" y="2750" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    logits = f_θ(xₜ, t)  →  p_θ(x₀ | xₜ) = softmax(logits)
+  </text>
+  
+  <text x="160" y="2805" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2B6CB0">
+    Step 2: For each masked position i, compute p_θ(xₜ₋₁ⁱ | xₜ)
+  </text>
+  <text x="200" y="2845" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    If xₜⁱ ≠ [MASK]: xₜ₋₁ⁱ = xₜⁱ  (already unmasked, keep it)
+  </text>
+  <text x="200" y="2885" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    If xₜⁱ = [MASK]:  P(xₜ₋₁ⁱ = v) = θₜ · p_θ(x₀ⁱ = v | xₜ)   for v ≠ [MASK]
+  </text>
+  <text x="200" y="2925" font-family="Courier New, monospace" font-size="18" fill="#000000">
+                      P(xₜ₋₁ⁱ = [MASK]) = 1 - θₜ
+  </text>
+  
+  <text x="160" y="2975" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2B6CB0">
+    Step 3: Sample xₜ₋₁ from the computed distribution
+  </text>
+
+  <!-- Section 6: Continuous Time Formulation -->
+  <rect x="50" y="3080" width="2100" height="280" rx="12" fill="#FFF5F7" stroke="#D53F8C" stroke-width="3"/>
+  <rect x="50" y="3080" width="2100" height="60" rx="12" fill="#D53F8C"/>
+  <text x="1100" y="3122" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    6. CONTINUOUS TIME FORMULATION
+  </text>
+
+  <rect x="100" y="3170" width="980" height="160" rx="10" fill="#FFFFFF" stroke="#B83280" stroke-width="3"/>
+  <text x="590" y="3215" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Rate Matrix (for continuous t)
+  </text>
+  <text x="140" y="3260" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    dxₜ / dt = xₜ · Rₜ
+  </text>
+  <text x="140" y="3300" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    Rₜ is the rate matrix (derivative of transition)
+  </text>
+
+  <rect x="1120" y="3170" width="980" height="160" rx="10" fill="#FFFFFF" stroke="#B83280" stroke-width="3"/>
+  <text x="1610" y="3215" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Continuous Score Function
+  </text>
+  <text x="1160" y="3260" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    score_θ(xₜ, t) = ∇ log p_θ(xₜ | t)
+  </text>
+  <text x="1160" y="3300" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    Gradient of log-likelihood w.r.t. xₜ
+  </text>
+
+  <!-- Footer -->
+  <rect x="50" y="3350" width="2100" height="40" rx="8" fill="#2D3748"/>
+  <text x="1100" y="3378" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">
+    The reverse process learns to undo masking by predicting original tokens from context
+  </text>
+</svg>
+

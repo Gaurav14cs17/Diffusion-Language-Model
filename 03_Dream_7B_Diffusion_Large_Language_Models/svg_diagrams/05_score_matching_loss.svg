@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3800" width="2200" height="3800">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6B46C1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#805AD5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="proofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FAF5FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F3E8FF;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#6B46C1"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3800" fill="#FAFBFC"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" stroke="#44337A" stroke-width="3"/>
+  <text x="1100" y="110" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Score Matching &amp; Loss Functions
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="22" fill="#E9D5FF" text-anchor="middle">
+    From Continuous Score Matching to Discrete Cross-Entropy
+  </text>
+
+  <!-- Section 1: What is Score -->
+  <rect x="50" y="200" width="2100" height="480" rx="12" fill="#FAF5FF" stroke="#805AD5" stroke-width="3"/>
+  <rect x="50" y="200" width="2100" height="60" rx="12" fill="#805AD5"/>
+  <text x="1100" y="242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. WHAT IS THE SCORE FUNCTION?
+  </text>
+
+  <rect x="100" y="290" width="980" height="360" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="3"/>
+  <text x="590" y="335" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Continuous Domain (Images)
+  </text>
+  
+  <text x="140" y="385" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Definition:
+  </text>
+  <text x="160" y="430" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    s(x, t) = ∇_x log p(x | t)
+  </text>
+  
+  <text x="140" y="485" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Gradient of log-density w.r.t. data x
+  </text>
+  <text x="140" y="520" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Points toward higher probability regions
+  </text>
+  <text x="140" y="555" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Used in score-based diffusion models
+  </text>
+  
+  <text x="140" y="605" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#1a365d">
+    Key property:
+  </text>
+  <text x="160" y="640" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    s(x,t) = -ε/σₜ (for Gaussian noise ε)
+  </text>
+
+  <rect x="1120" y="290" width="980" height="360" rx="10" fill="#FFFFFF" stroke="#6B46C1" stroke-width="3"/>
+  <text x="1610" y="335" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Discrete Domain (Text)
+  </text>
+  
+  <text x="1160" y="385" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    The Problem:
+  </text>
+  <text x="1180" y="430" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • No gradients for discrete tokens!
+  </text>
+  <text x="1180" y="465" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Can't compute ∇_x for categorical x
+  </text>
+  
+  <text x="1160" y="520" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    The Solution (MDLM/Dream):
+  </text>
+  <text x="1180" y="565" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Directly predict token probabilities
+  </text>
+  <text x="1180" y="600" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Use cross-entropy loss instead
+  </text>
+  
+  <text x="1160" y="645" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    p_θ(x₀ | xₜ) = softmax(f_θ(xₜ, t))
+  </text>
+
+  <!-- Section 2: Discrete Score -->
+  <rect x="50" y="720" width="2100" height="580" rx="12" fill="#E6FFFA" stroke="#319795" stroke-width="3"/>
+  <rect x="50" y="720" width="2100" height="60" rx="12" fill="#319795"/>
+  <text x="1100" y="762" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. DISCRETE SCORE FUNCTION (CONCRETE SCORE)
+  </text>
+
+  <rect x="100" y="810" width="2000" height="460" rx="10" fill="url(#proofGrad)" stroke="#2C7A7B" stroke-width="3"/>
+  
+  <text x="140" y="860" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Definition: Discrete/Concrete Score for Categorical Data
+  </text>
+  
+  <text x="140" y="915" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    For absorbing-state diffusion, the "score" becomes a ratio:
+  </text>
+  
+  <rect x="160" y="945" width="1900" height="80" rx="8" fill="#FFFFFF" stroke="#4A5568" stroke-width="2"/>
+  <text x="1100" y="995" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    score(xₜ, t) = p(x₀ | xₜ) / p([M] | xₜ) = prediction ratio
+  </text>
+  
+  <text x="140" y="1075" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Interpretation:
+  </text>
+  <text x="180" y="1120" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • How much more likely is a real token v compared to [MASK]?
+  </text>
+  <text x="180" y="1160" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Higher score → more confident prediction
+  </text>
+  <text x="180" y="1200" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Unlike continuous score, this is a probability ratio, not a gradient
+  </text>
+  
+  <text x="140" y="1250" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    In practice, we work with log-scores (logits):
+  </text>
+  <text x="180" y="1235" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    
+  </text>
+
+  <!-- Section 3: Loss Function Derivation -->
+  <rect x="50" y="1340" width="2100" height="720" rx="12" fill="#FEF3C7" stroke="#D97706" stroke-width="3"/>
+  <rect x="50" y="1340" width="2100" height="60" rx="12" fill="#D97706"/>
+  <text x="1100" y="1382" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. CROSS-ENTROPY LOSS DERIVATION
+  </text>
+
+  <rect x="100" y="1430" width="2000" height="600" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="3"/>
+  
+  <text x="140" y="1480" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    From KL Divergence to Cross-Entropy
+  </text>
+  
+  <text x="140" y="1535" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 1: KL divergence for discrete distributions
+  </text>
+  <text x="180" y="1580" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    KL(q(xₜ₋₁|xₜ,x₀) ∥ p_θ(xₜ₋₁|xₜ)) = ∑_v q(v) log[q(v)/p_θ(v)]
+  </text>
+  
+  <text x="140" y="1640" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 2: Expand and separate
+  </text>
+  <text x="180" y="1685" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    = ∑_v q(v) log q(v) - ∑_v q(v) log p_θ(v)
+  </text>
+  <text x="180" y="1725" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    = -H(q) + H(q, p_θ)    ← entropy + cross-entropy
+  </text>
+  
+  <text x="140" y="1785" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 3: For optimization, entropy H(q) is constant w.r.t. θ
+  </text>
+  <text x="180" y="1830" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    ∇_θ KL = ∇_θ H(q, p_θ) = -∇_θ ∑_v q(v) log p_θ(v)
+  </text>
+  
+  <text x="140" y="1890" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Step 4: For masked diffusion with known x₀
+  </text>
+  <rect x="180" y="1920" width="1880" height="80" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+  <text x="1100" y="1970" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    L = -log p_θ(x₀ | xₜ) = Cross-Entropy(one-hot(x₀), p_θ(· | xₜ))
+  </text>
+
+  <!-- Section 4: Position-wise Loss -->
+  <rect x="50" y="2100" width="2100" height="560" rx="12" fill="#F0FFF4" stroke="#38A169" stroke-width="3"/>
+  <rect x="50" y="2100" width="2100" height="60" rx="12" fill="#38A169"/>
+  <text x="1100" y="2142" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. POSITION-WISE LOSS COMPUTATION
+  </text>
+
+  <rect x="100" y="2190" width="2000" height="440" rx="10" fill="#FFFFFF" stroke="#276749" stroke-width="3"/>
+  
+  <text x="140" y="2240" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Computing Loss Over Sequence Positions
+  </text>
+  
+  <text x="140" y="2295" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    For a sequence of length n:
+  </text>
+  
+  <rect x="160" y="2320" width="1900" height="100" rx="8" fill="#C6F6D5" stroke="#276749" stroke-width="2"/>
+  <text x="1100" y="2380" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    L = ∑_{i=1}^{n} 𝟙[xₜⁱ = [M]] · (- log p_θ(x₀ⁱ | xₜ, t))
+  </text>
+  
+  <text x="140" y="2470" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a365d">
+    Key insight: Only compute loss on MASKED positions
+  </text>
+  
+  <text x="180" y="2515" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • If xₜⁱ ≠ [MASK]: No loss (position already correct)
+  </text>
+  <text x="180" y="2555" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • If xₜⁱ = [MASK]: Compute cross-entropy between prediction and true x₀ⁱ
+  </text>
+  
+  <text x="140" y="2610" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Expected number of masked tokens:
+  </text>
+  <text x="180" y="2600" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    
+  </text>
+
+  <!-- Section 5: Weighting and Normalization -->
+  <rect x="50" y="2700" width="2100" height="540" rx="12" fill="#EBF8FF" stroke="#3182CE" stroke-width="3"/>
+  <rect x="50" y="2700" width="2100" height="60" rx="12" fill="#3182CE"/>
+  <text x="1100" y="2742" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. LOSS WEIGHTING STRATEGIES
+  </text>
+
+  <rect x="100" y="2790" width="650" height="420" rx="10" fill="#FFFFFF" stroke="#2B6CB0" stroke-width="3"/>
+  <text x="425" y="2835" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Uniform Weighting
+  </text>
+  
+  <text x="140" y="2885" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    L = E_t[-log p_θ(x₀|xₜ)]
+  </text>
+  <text x="140" y="2935" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Sample t ~ Uniform(0, 1)
+  </text>
+  <text x="140" y="2975" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • All timesteps equally weighted
+  </text>
+  <text x="140" y="3015" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Simple and effective
+  </text>
+  
+  <text x="140" y="3075" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#276749">
+    Pros:
+  </text>
+  <text x="160" y="3110" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Simple implementation
+  </text>
+  <text x="160" y="3145" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Stable training
+  </text>
+  
+  <text x="140" y="3185" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C53030">
+    Cons:
+  </text>
+  <text x="160" y="3190" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    
+  </text>
+
+  <rect x="780" y="2790" width="650" height="420" rx="10" fill="#FFFFFF" stroke="#2B6CB0" stroke-width="3"/>
+  <text x="1105" y="2835" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    SNR Weighting
+  </text>
+  
+  <text x="820" y="2885" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    L = E_t[w(t)·-log p_θ(x₀|xₜ)]
+  </text>
+  <text x="820" y="2935" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • w(t) = SNR(t) / SNR'(t)
+  </text>
+  <text x="820" y="2975" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • SNR = signal-to-noise ratio
+  </text>
+  <text x="820" y="3015" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • More weight to critical times
+  </text>
+  
+  <text x="820" y="3075" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#276749">
+    Pros:
+  </text>
+  <text x="840" y="3110" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Better ELBO
+  </text>
+  <text x="840" y="3145" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Theoretically motivated
+  </text>
+  
+  <text x="820" y="3185" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C53030">
+    Cons:
+  </text>
+  <text x="840" y="3190" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    
+  </text>
+
+  <rect x="1460" y="2790" width="590" height="420" rx="10" fill="#FFFFFF" stroke="#2B6CB0" stroke-width="3"/>
+  <text x="1755" y="2835" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Min-SNR Weighting
+  </text>
+  
+  <text x="1500" y="2885" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000">
+    w(t) = min(SNR(t), γ)
+  </text>
+  <text x="1500" y="2935" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Clips extreme weights
+  </text>
+  <text x="1500" y="2975" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • γ = 5 typically</text>
+  <text x="1500" y="3015" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Balances likelihood/quality
+  </text>
+  
+  <text x="1500" y="3075" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#276749">
+    Pros:
+  </text>
+  <text x="1520" y="3110" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Best of both worlds
+  </text>
+  <text x="1520" y="3145" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Stable + good samples
+  </text>
+  
+  <text x="1500" y="3185" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C53030">
+    Used in:
+  </text>
+  <text x="1520" y="3190" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    
+  </text>
+
+  <!-- Section 6: Complete Loss Formula -->
+  <rect x="50" y="3280" width="2100" height="480" rx="12" fill="#FFF5F7" stroke="#D53F8C" stroke-width="3"/>
+  <rect x="50" y="3280" width="2100" height="60" rx="12" fill="#D53F8C"/>
+  <text x="1100" y="3322" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    6. COMPLETE TRAINING LOSS FORMULA
+  </text>
+
+  <rect x="100" y="3370" width="2000" height="360" rx="10" fill="#FFFFFF" stroke="#B83280" stroke-width="3"/>
+  
+  <text x="1100" y="3420" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Final Training Objective for Dream/MDLM
+  </text>
+  
+  <rect x="160" y="3450" width="1880" height="120" rx="10" fill="#FFF5F7" stroke="#D53F8C" stroke-width="3"/>
+  <text x="1100" y="3500" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_θ = E_{x₀~p_data, t~U(0,1), xₜ~q(·|x₀,t)}
+  </text>
+  <text x="1100" y="3545" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    [ ∑_{i: xₜⁱ=[M]} -log softmax(f_θ(xₜ, t))_{x₀ⁱ} ]
+  </text>
+  
+  <text x="160" y="3620" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Where:
+  </text>
+  <text x="200" y="3660" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • x₀ = clean text from training data
+  </text>
+  <text x="200" y="3700" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • t = random time in [0, 1], xₜ = x₀ with (1-αₜ) fraction masked
+  </text>
+  <text x="200" y="3700" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    
+  </text>
+
+  <!-- Footer -->
+  <rect x="50" y="3750" width="2100" height="40" rx="8" fill="#2D3748"/>
+  <text x="1100" y="3778" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">
+    The loss is simply cross-entropy on masked positions — similar to BERT but with variable masking rate
+  </text>
+</svg>
+

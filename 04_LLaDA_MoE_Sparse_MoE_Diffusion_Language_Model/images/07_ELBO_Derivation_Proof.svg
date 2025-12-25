@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2800" width="2200" height="2800">
+  <defs>
+    <linearGradient id="proofHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#42a5f5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="proofShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2800" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#proofHeader)" filter="url(#proofShadow)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle">
+    ELBO Derivation &amp; Theoretical Foundations
+  </text>
+  
+  <!-- Section 1: ELBO Introduction -->
+  <rect x="50" y="180" width="2100" height="300" rx="12" fill="#e8f5e9" stroke="#43a047" stroke-width="3" filter="url(#proofShadow)"/>
+  <rect x="50" y="180" width="2100" height="50" rx="12" fill="#43a047"/>
+  <text x="90" y="215" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📚 Evidence Lower Bound (ELBO) for Masked Diffusion
+  </text>
+  
+  <text x="90" y="280" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Goal: Maximize the log-likelihood of the data distribution</text>
+  
+  <rect x="90" y="310" width="1000" height="70" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="590" y="355" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    max_θ  E_{y~p_data} [ log p_θ(y) ]
+  </text>
+  
+  <text x="1150" y="280" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Problem:</text>
+  <text x="1150" y="320" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Direct computation of log p_θ(y) is intractable</text>
+  <text x="1150" y="355" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Need to marginalize over all possible noisy sequences</text>
+  <text x="1150" y="390" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Solution: Derive a tractable lower bound (ELBO)</text>
+  
+  <text x="90" y="440" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    ELBO Property: log p_θ(y) ≥ ELBO(θ; y) → Maximizing ELBO increases likelihood
+  </text>
+  
+  <!-- Section 2: Diffusion Process Definition -->
+  <rect x="50" y="520" width="2100" height="340" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#proofShadow)"/>
+  <rect x="50" y="520" width="2100" height="50" rx="12" fill="#1976d2"/>
+  <text x="90" y="555" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Step 1: Define Forward &amp; Reverse Processes
+  </text>
+  
+  <text x="90" y="620" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Forward Process q(y_t | y):</text>
+  <rect x="90" y="645" width="950" height="90" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="565" y="690" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(yₜⁱ = M | yⁱ) = t     (mask with probability t)
+  </text>
+  <text x="565" y="720" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(yₜⁱ = yⁱ | yⁱ) = 1-t   (keep with probability 1-t)
+  </text>
+  
+  <text x="1100" y="620" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Reverse Process p_θ(y | y_t):</text>
+  <rect x="1100" y="645" width="1010" height="90" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="1605" y="690" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    p_θ(yⁱ | y_t) = Neural Network prediction
+  </text>
+  <text x="1605" y="720" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    (Transformer outputs token probabilities)
+  </text>
+  
+  <text x="90" y="780" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Key Insight:</text>
+  <text x="90" y="815" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    At t=1 (fully masked): y_1 = [M, M, ..., M] → all tokens masked
+  </text>
+  <text x="90" y="845" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    At t=0 (original):     y_0 = y = original clean sequence
+  </text>
+  
+  <!-- Section 3: ELBO Derivation -->
+  <rect x="50" y="900" width="2100" height="480" rx="12" fill="#fff8e1" stroke="#f57f17" stroke-width="3" filter="url(#proofShadow)"/>
+  <rect x="50" y="900" width="2100" height="50" rx="12" fill="#f57f17"/>
+  <text x="90" y="935" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Step 2: ELBO Derivation via Jensen's Inequality
+  </text>
+  
+  <text x="90" y="1000" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Start with marginal likelihood:</text>
+  <rect x="90" y="1020" width="800" height="60" rx="8" fill="#ffecb3" stroke="#ffa000" stroke-width="2"/>
+  <text x="490" y="1060" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    log p_θ(y) = log ∫ p_θ(y, y_t) dy_t
+  </text>
+  
+  <text x="950" y="1000" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Apply importance sampling:</text>
+  <rect x="950" y="1020" width="1160" height="60" rx="8" fill="#ffecb3" stroke="#ffa000" stroke-width="2"/>
+  <text x="1530" y="1060" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    = log ∫ q(y_t|y) · [p_θ(y, y_t) / q(y_t|y)] dy_t
+  </text>
+  
+  <text x="90" y="1130" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Apply Jensen's inequality (log E[X] ≥ E[log X]):</text>
+  <rect x="90" y="1150" width="2020" height="70" rx="8" fill="#ffe082" stroke="#ff8f00" stroke-width="3"/>
+  <text x="1100" y="1195" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    log p_θ(y) ≥ E_{y_t~q(y_t|y)} [ log p_θ(y | y_t) + log p_θ(y_t) - log q(y_t|y) ]
+  </text>
+  
+  <text x="90" y="1270" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Simplify to MDM objective (integrating over t):</text>
+  <rect x="90" y="1290" width="2020" height="70" rx="8" fill="#ffd54f" stroke="#ff6f00" stroke-width="3"/>
+  <text x="1100" y="1335" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    ELBO ≈ E_{t~U[0,1]} E_{y_t~q(y_t|t,y)} [ (1/t) Σᵢ 𝟙[yₜⁱ=M] log p_θ(yⁱ|y_t) ]
+  </text>
+  
+  <!-- Section 4: Why 1/t weighting -->
+  <rect x="50" y="1420" width="2100" height="340" rx="12" fill="#fce4ec" stroke="#c2185b" stroke-width="3" filter="url(#proofShadow)"/>
+  <rect x="50" y="1420" width="2100" height="50" rx="12" fill="#c2185b"/>
+  <text x="90" y="1455" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Step 3: Understanding the 1/t Importance Weight
+  </text>
+  
+  <text x="90" y="1520" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Why divide by t?</text>
+  
+  <rect x="90" y="1545" width="650" height="180" rx="10" fill="#f8bbd9" stroke="#ad1457" stroke-width="2"/>
+  <text x="415" y="1585" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Expected masked tokens:</text>
+  <text x="415" y="1625" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">E[|masked|] = t · L</text>
+  <text x="415" y="1665" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Higher t → more masks</text>
+  <text x="415" y="1700" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Lower t → fewer masks</text>
+  
+  <rect x="780" y="1545" width="650" height="180" rx="10" fill="#f8bbd9" stroke="#ad1457" stroke-width="2"/>
+  <text x="1105" y="1585" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Without 1/t (naive):</text>
+  <text x="1105" y="1625" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">High t contributes more loss terms</text>
+  <text x="1105" y="1660" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Biased toward noisy samples</text>
+  <text x="1105" y="1695" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Not a proper ELBO bound</text>
+  
+  <rect x="1470" y="1545" width="650" height="180" rx="10" fill="#f8bbd9" stroke="#ad1457" stroke-width="2"/>
+  <text x="1795" y="1585" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">With 1/t (correct):</text>
+  <text x="1795" y="1625" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Normalizes by expected # masks</text>
+  <text x="1795" y="1660" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Each timestep weighted equally</text>
+  <text x="1795" y="1695" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Gives valid ELBO bound</text>
+  
+  <!-- Section 5: MoE Theoretical Justification -->
+  <rect x="50" y="1800" width="2100" height="380" rx="12" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="3" filter="url(#proofShadow)"/>
+  <rect x="50" y="1800" width="2100" height="50" rx="12" fill="#5c6bc0"/>
+  <text x="90" y="1835" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Step 4: MoE Auxiliary Losses - Mathematical Justification
+  </text>
+  
+  <text x="90" y="1900" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Load Balancing Loss Derivation:</text>
+  <rect x="90" y="1920" width="1000" height="100" rx="10" fill="#c5cae9" stroke="#3949ab" stroke-width="2"/>
+  <text x="590" y="1960" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Pᵢ = (1/T) Σₜ p_{t,i}  (avg routing prob to expert i)
+  </text>
+  <text x="590" y="2000" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    fᵢ = (1/T) Σₜ 𝟙[i ∈ TopK(pₜ)]  (selection frequency)
+  </text>
+  
+  <text x="1140" y="1900" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Why this works:</text>
+  <text x="1140" y="1940" font-family="Arial, sans-serif" font-size="20" fill="#000000">• L_LB = N · Σᵢ fᵢ · Pᵢ penalizes when fᵢ and Pᵢ</text>
+  <text x="1140" y="1970" font-family="Arial, sans-serif" font-size="20" fill="#000000">  are both high for same expert (overuse)</text>
+  <text x="1140" y="2010" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Minimum when fᵢ = Pᵢ = 1/N for all experts</text>
+  <text x="1140" y="2050" font-family="Arial, sans-serif" font-size="20" fill="#000000">  (uniform distribution = balanced load)</text>
+  
+  <text x="90" y="2100" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Z-Loss prevents large logits:</text>
+  <rect x="90" y="2120" width="2020" height="50" rx="10" fill="#9fa8da" stroke="#303f9f" stroke-width="2"/>
+  <text x="1100" y="2155" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_Z = (1/T) Σₜ (log Σⱼ e^{z_j})² → Penalizes large router logits → Prevents one expert dominating
+  </text>
+  
+  <!-- Section 6: Convergence Properties -->
+  <rect x="50" y="2220" width="2100" height="280" rx="12" fill="#e0f7fa" stroke="#00acc1" stroke-width="3" filter="url(#proofShadow)"/>
+  <rect x="50" y="2220" width="2100" height="50" rx="12" fill="#00acc1"/>
+  <text x="90" y="2255" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📚 Theoretical Guarantees
+  </text>
+  
+  <rect x="90" y="2295" width="650" height="180" rx="10" fill="#b2ebf2" stroke="#00838f" stroke-width="2"/>
+  <text x="415" y="2330" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">ELBO Bound Property</text>
+  <text x="415" y="2370" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">-L_Pretrain ≤ log p_θ(y)</text>
+  <text x="415" y="2405" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Minimizing loss maximizes</text>
+  <text x="415" y="2435" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">lower bound on likelihood</text>
+  
+  <rect x="780" y="2295" width="650" height="180" rx="10" fill="#b2ebf2" stroke="#00838f" stroke-width="2"/>
+  <text x="1105" y="2330" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Consistency</text>
+  <text x="1105" y="2370" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">As t → 0, model predictions</text>
+  <text x="1105" y="2405" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">converge to true sequence</text>
+  <text x="1105" y="2435" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">with high probability</text>
+  
+  <rect x="1470" y="2295" width="650" height="180" rx="10" fill="#b2ebf2" stroke="#00838f" stroke-width="2"/>
+  <text x="1795" y="2330" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Scalability</text>
+  <text x="1795" y="2370" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">MoE allows scaling total params</text>
+  <text x="1795" y="2405" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">while keeping active params fixed</text>
+  <text x="1795" y="2435" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">(7B total, 1.4B active)</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2540" width="2100" height="220" rx="12" fill="#263238" filter="url(#proofShadow)"/>
+  <text x="1100" y="2600" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+    Summary: Why This Math Works
+  </text>
+  
+  <text x="100" y="2660" font-family="Arial, sans-serif" font-size="20" fill="#b0bec5">
+    ✓ ELBO provides tractable training objective that bounds true likelihood from below
+  </text>
+  <text x="100" y="2700" font-family="Arial, sans-serif" font-size="20" fill="#b0bec5">
+    ✓ 1/t weighting ensures unbiased gradient estimates across all noise levels
+  </text>
+  <text x="100" y="2740" font-family="Arial, sans-serif" font-size="20" fill="#b0bec5">
+    ✓ MoE auxiliary losses prevent routing collapse while enabling sparse activation
+  </text>
+</svg>
+
+

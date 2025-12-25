@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2800" width="2200" height="2800">
+  <defs>
+    <linearGradient id="mathHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4a148c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="eqGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1bee7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow2" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2800" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#mathHeaderGrad)" filter="url(#shadow2)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Mathematical Foundations of Block Diffusion
+  </text>
+  
+  <!-- Section 1: Notation -->
+  <rect x="50" y="180" width="2100" height="320" rx="12" fill="#e8eaf6" stroke="#3f51b5" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="180" width="2100" height="55" rx="12" fill="#3f51b5"/>
+  <text x="90" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    📝 Notation and Preliminaries
+  </text>
+  
+  <text x="90" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Discrete Random Variables:</text>
+  <rect x="90" y="300" width="950" height="80" rx="8" fill="url(#eqGrad)" stroke="#9c27b0" stroke-width="2"/>
+  <text x="130" y="350" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    V = { x ∈ {0,1}ᵛ : Σᵢ xᵢ = 1 } ⊂ Δᵛ    (one-hot vectors in V-simplex)
+  </text>
+  
+  <text x="1080" y="280" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Special Tokens:</text>
+  <rect x="1080" y="300" width="1030" height="80" rx="8" fill="url(#eqGrad)" stroke="#9c27b0" stroke-width="2"/>
+  <text x="1120" y="350" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    m ∈ V  →  [MASK] token (V-th category)
+  </text>
+  
+  <text x="90" y="425" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Sequence Notation:</text>
+  <rect x="90" y="445" width="2020" height="40" rx="8" fill="#e1bee7" stroke="#9c27b0" stroke-width="1"/>
+  <text x="130" y="475" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000">
+    x₁:L = (x¹, x², ..., xᴸ)  where xˡ ∈ V for all tokens ℓ ∈ {1,...,L}    |    Cat(·; p) = Categorical distribution with prob p ∈ Δᵛ
+  </text>
+  
+  <!-- Section 2: Autoregressive Model -->
+  <rect x="50" y="540" width="1010" height="340" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="540" width="1010" height="55" rx="12" fill="#1976d2"/>
+  <text x="90" y="580" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Equation (1): Autoregressive Model
+  </text>
+  
+  <text x="90" y="640" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Factorized Distribution:</text>
+  
+  <rect x="90" y="665" width="930" height="90" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="555" y="725" font-family="Times New Roman, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">
+    log p_θ(x) = Σ log p_θ(xˡ | x&lt;ˡ)
+  </text>
+  <text x="850" y="745" font-family="Arial, sans-serif" font-size="20" fill="#000000">ℓ=1 to L</text>
+  
+  <text x="90" y="795" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Each p_θ(xˡ | x&lt;ˡ) parameterized by neural network</text>
+  <text x="90" y="830" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Trained via next token prediction</text>
+  <text x="90" y="865" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Requires L steps to generate L tokens (sequential)</text>
+  
+  <!-- Section 2b: D3PM -->
+  <rect x="1090" y="540" width="1060" height="340" rx="12" fill="#fce4ec" stroke="#c2185b" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="1090" y="540" width="1060" height="55" rx="12" fill="#c2185b"/>
+  <text x="1130" y="580" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Equation (2): D3PM Reverse Process
+  </text>
+  
+  <text x="1130" y="640" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Reverse Diffusion Model:</text>
+  
+  <rect x="1130" y="665" width="980" height="90" rx="10" fill="#f8bbd9" stroke="#ad1457" stroke-width="2"/>
+  <text x="1620" y="720" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    p_θ(x_s | x_t) = Π Σ q(xˡ_s | xˡ_t, xˡ) p_θ(xˡ | x_t)
+  </text>
+  
+  <text x="1130" y="795" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Forward: q(xˡ_t | xˡ_s) = Cat(xˡ_t; Q_t xˡ_s)</text>
+  <text x="1130" y="830" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Q_t models masking/random changes</text>
+  <text x="1130" y="865" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Denoiser predicts clean token from noisy</text>
+  
+  <!-- Section 3: NELBO -->
+  <rect x="50" y="920" width="2100" height="280" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="920" width="2100" height="55" rx="12" fill="#f57c00"/>
+  <text x="90" y="960" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Equation (3): Negative ELBO (NELBO) - Training Objective for Diffusion
+  </text>
+  
+  <rect x="90" y="1000" width="2020" height="100" rx="10" fill="#ffe0b2" stroke="#ef6c00" stroke-width="2"/>
+  <text x="1100" y="1055" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    L(x; θ) = E_q[ -log p_θ(x|x_t(1)) + Σⱼ₌₁ᵀ D_KL[q(x_s(j)|x_t(j),x) ∥ p_θ(x_s(j)|x_t(j))] + D_KL[q(x_t(T)|x) ∥ p_θ(x_t(T))] ]
+  </text>
+  
+  <text x="90" y="1140" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Components:</text>
+  <text x="280" y="1140" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    Reconstruction Loss + Diffusion Loss (KL divergences) + Prior Loss
+  </text>
+  <text x="90" y="1175" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • T = number of discretization steps  |  s(j) = (j-1)/T  |  t(j) = j/T  |  Extends to continuous time via CTMC theory
+  </text>
+  
+  <!-- Section 4: Block Diffusion Likelihood -->
+  <rect x="50" y="1240" width="2100" height="350" rx="12" fill="#e8f5e9" stroke="#388e3c" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="1240" width="2100" height="55" rx="12" fill="#388e3c"/>
+  <text x="90" y="1280" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Equations (4-6): Block Diffusion Likelihood - THE CORE INNOVATION
+  </text>
+  
+  <text x="90" y="1340" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Block Decomposition (Eq. 4):</text>
+  <rect x="90" y="1360" width="900" height="80" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="540" y="1410" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    log p_θ(x) = Σ log p_θ(xᵇ | x&lt;ᵇ)
+  </text>
+  <text x="850" y="1430" font-family="Arial, sans-serif" font-size="18" fill="#000000">b=1 to B</text>
+  
+  <text x="1040" y="1340" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Within-Block Diffusion (Eq. 5):</text>
+  <rect x="1040" y="1360" width="1070" height="80" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1575" y="1410" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    p_θ(xᵇ_s | xᵇ_t, x&lt;ᵇ) = Σ q(xᵇ_s | xᵇ_t, xᵇ) p_θ(xᵇ | xᵇ_t, x&lt;ᵇ)
+  </text>
+  
+  <text x="90" y="1485" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Block Diffusion NELBO (Eq. 6):</text>
+  <rect x="90" y="1505" width="2020" height="70" rx="10" fill="#a5d6a7" stroke="#1b5e20" stroke-width="3"/>
+  <text x="1100" y="1550" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    -log p_θ(x) ≤ L_BD(x; θ) := Σ L(xᵇ, x&lt;ᵇ; θ)     where B = L/L' blocks of size L'
+  </text>
+  
+  <!-- Section 5: Masked BD3-LM Objective -->
+  <rect x="50" y="1630" width="2100" height="320" rx="12" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="1630" width="2100" height="55" rx="12" fill="#7b1fa2"/>
+  <text x="90" y="1670" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Equation (8): Masked BD3-LM Simplified Objective
+  </text>
+  
+  <text x="90" y="1730" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Per-Token Noise Process:</text>
+  <rect x="90" y="1750" width="800" height="60" rx="8" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="490" y="1790" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(xˡ_t | xˡ) = Cat(xˡ_t; α_t xˡ + (1-α_t) m)
+  </text>
+  
+  <text x="940" y="1730" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Simplified NELBO:</text>
+  <rect x="940" y="1750" width="1170" height="60" rx="8" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="1525" y="1790" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    -log p_θ(x) ≤ L_BD(x;θ) = Σᵇ E_t [ (α'_t)/(1-α_t) log p_θ(xᵇ|xᵇ_t, x&lt;ᵇ) ]
+  </text>
+  
+  <text x="90" y="1860" font-family="Arial, sans-serif" font-size="22" fill="#000000">• α_t ∈ [0,1] strictly decreasing: α₀ = 1, α₁ = 0</text>
+  <text x="90" y="1900" font-family="Arial, sans-serif" font-size="22" fill="#000000">• α'_t = instantaneous rate of change under continuous-time extension</text>
+  <text x="90" y="1940" font-family="Arial, sans-serif" font-size="22" fill="#000000">• NELBO is tight for L'=1, becomes looser as L'→L</text>
+  
+  <!-- Section 6: Gradient Variance -->
+  <rect x="50" y="1990" width="2100" height="380" rx="12" fill="#e0f7fa" stroke="#0097a7" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="1990" width="2100" height="55" rx="12" fill="#0097a7"/>
+  <text x="90" y="2030" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Equations (9-10): Batch NELBO Estimator and Gradient Variance
+  </text>
+  
+  <text x="90" y="2095" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Batch NELBO Estimator (Eq. 9):</text>
+  <rect x="90" y="2115" width="2020" height="75" rx="10" fill="#b2ebf2" stroke="#00838f" stroke-width="2"/>
+  <text x="1100" y="2165" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    L̂_BD(X; θ) = l(X; θ) = (1/K) Σₖ Σᵇ [ (α'_t(k,b))/(1-α_t(k,b)) log p_θ(x^(k),b | x^(k),b_t(k,b), x^(k),&lt;b) ]
+  </text>
+  
+  <text x="90" y="2235" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Gradient Variance Estimator (Eq. 10):</text>
+  <rect x="90" y="2255" width="2020" height="75" rx="10" fill="#b2ebf2" stroke="#00838f" stroke-width="2"/>
+  <text x="1100" y="2305" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    Var_X,t[∇_θ l(X; θ)] ≈ (1/(M-1)) Σₘ ‖∇_θ l(Xₘ; θ) - (1/M) Σₘ ∇_θ l(Xₘ; θ)‖²
+  </text>
+  
+  <text x="90" y="2355" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • K = batch size, B = number of blocks, M = number of batches for variance estimation
+  </text>
+  
+  <!-- Section 7: Clipped Schedules -->
+  <rect x="50" y="2410" width="2100" height="250" rx="12" fill="#fff8e1" stroke="#ffa000" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="2410" width="2100" height="55" rx="12" fill="#ffa000"/>
+  <text x="90" y="2450" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    Low-Variance Clipped Schedules
+  </text>
+  
+  <text x="90" y="2510" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Clipped Noise Schedules:</text>
+  <rect x="90" y="2530" width="700" height="60" rx="8" fill="#ffecb3" stroke="#ff8f00" stroke-width="2"/>
+  <text x="440" y="2570" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    1 - α_t ~ U[β, ω]    for 0 ≤ β, ω ≤ 1
+  </text>
+  
+  <text x="850" y="2510" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Optimization:</text>
+  <rect x="850" y="2530" width="1260" height="60" rx="8" fill="#ffecb3" stroke="#ff8f00" stroke-width="2"/>
+  <text x="1480" y="2570" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    min_β,ω Var_X,t[L(X; θ, β, ω)]    (grid search during training)
+  </text>
+  
+  <text x="90" y="2640" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • Avoid extreme mask rates (too few or all masked) → poor gradients  |  • Within range: α'_t ≈ 1/(β - ω)  |  • Different optimal [β,ω] for each block size L'
+  </text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2700" width="2100" height="70" rx="10" fill="#37474f"/>
+  <text x="1100" y="2745" font-family="Arial, sans-serif" font-size="22" fill="white" text-anchor="middle">
+    Block Diffusion: Mathematical Framework | ICLR 2025 | Cornell Tech
+  </text>
+</svg>
+

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2400" width="2200" height="2400">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a237e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#283593;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="arGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="diffGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8bbd9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="blockGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2400" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" filter="url(#shadow)"/>
+  <text x="1100" y="115" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="white" text-anchor="middle">
+    BLOCK DIFFUSION: Overview &amp; Key Concepts
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="24" fill="#e3f2fd" text-anchor="middle">
+    Interpolating Between Autoregressive and Diffusion Language Models (ICLR 2025)
+  </text>
+  
+  <!-- Section 1: Problem Statement -->
+  <rect x="50" y="200" width="2100" height="280" rx="12" fill="#fff3e0" stroke="#ff9800" stroke-width="3" filter="url(#shadow)"/>
+  <text x="90" y="255" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#000000">
+    🎯 Problem Statement: Three Limitations of Discrete Diffusion Models
+  </text>
+  
+  <!-- Problem boxes -->
+  <rect x="90" y="290" width="640" height="160" rx="10" fill="#fff8e1" stroke="#ffc107" stroke-width="2"/>
+  <text x="130" y="335" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">1. Fixed-Length Generation</text>
+  <text x="130" y="375" font-family="Arial, sans-serif" font-size="22" fill="#000000">Most diffusion architectures only</text>
+  <text x="130" y="405" font-family="Arial, sans-serif" font-size="22" fill="#000000">generate fixed-length vectors</text>
+  <text x="130" y="435" font-family="Arial, sans-serif" font-size="22" fill="#000000">(cannot handle variable outputs)</text>
+  
+  <rect x="770" y="290" width="640" height="160" rx="10" fill="#fff8e1" stroke="#ffc107" stroke-width="2"/>
+  <text x="810" y="335" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">2. No KV Caching</text>
+  <text x="810" y="375" font-family="Arial, sans-serif" font-size="22" fill="#000000">Bidirectional context prevents</text>
+  <text x="810" y="405" font-family="Arial, sans-serif" font-size="22" fill="#000000">reusing previous computations,</text>
+  <text x="810" y="435" font-family="Arial, sans-serif" font-size="22" fill="#000000">making inference inefficient</text>
+  
+  <rect x="1450" y="290" width="660" height="160" rx="10" fill="#fff8e1" stroke="#ffc107" stroke-width="2"/>
+  <text x="1490" y="335" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">3. Lower Quality (Perplexity)</text>
+  <text x="1490" y="375" font-family="Arial, sans-serif" font-size="22" fill="#000000">Discrete diffusion models lag</text>
+  <text x="1490" y="405" font-family="Arial, sans-serif" font-size="22" fill="#000000">behind autoregressive models</text>
+  <text x="1490" y="435" font-family="Arial, sans-serif" font-size="22" fill="#000000">in language modeling metrics</text>
+  
+  <!-- Section 2: Three Paradigms Comparison -->
+  <text x="90" y="540" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#000000">
+    📊 Comparison of Three Language Modeling Paradigms
+  </text>
+  
+  <!-- Autoregressive Box -->
+  <rect x="50" y="580" width="680" height="420" rx="12" fill="url(#arGrad)" stroke="#1565c0" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="50" y="580" width="680" height="60" rx="12" fill="#1565c0"/>
+  <text x="390" y="622" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    AUTOREGRESSIVE (AR)
+  </text>
+  
+  <text x="90" y="690" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ High Quality</text>
+  <text x="90" y="730" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ Arbitrary-Length</text>
+  <text x="90" y="770" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ KV Caching</text>
+  <text x="90" y="810" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#c62828">✗ NOT Parallelizable</text>
+  
+  <text x="90" y="870" font-family="Arial, sans-serif" font-size="22" fill="#000000">Generation: Token by token</text>
+  <text x="90" y="905" font-family="Arial, sans-serif" font-size="22" fill="#000000">L tokens → L generation steps</text>
+  
+  <!-- AR visualization -->
+  <rect x="90" y="935" width="80" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="130" y="962" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">T₁</text>
+  <text x="185" y="962" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <rect x="210" y="935" width="80" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="250" y="962" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">T₂</text>
+  <text x="305" y="962" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <rect x="330" y="935" width="80" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="370" y="962" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">T₃</text>
+  <text x="425" y="962" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <rect x="450" y="935" width="80" height="40" rx="5" fill="#81c784" stroke="#2e7d32" stroke-width="2"/>
+  <text x="490" y="962" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">...</text>
+  
+  <!-- Diffusion Box -->
+  <rect x="760" y="580" width="680" height="420" rx="12" fill="url(#diffGrad)" stroke="#c2185b" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="760" y="580" width="680" height="60" rx="12" fill="#c2185b"/>
+  <text x="1100" y="622" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    DIFFUSION
+  </text>
+  
+  <text x="800" y="690" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#c62828">✗ Lower Quality</text>
+  <text x="800" y="730" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#c62828">✗ Fixed-Length</text>
+  <text x="800" y="770" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#c62828">✗ No KV Caching</text>
+  <text x="800" y="810" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ Parallelizable</text>
+  
+  <text x="800" y="870" font-family="Arial, sans-serif" font-size="22" fill="#000000">Generation: Iterative denoising</text>
+  <text x="800" y="905" font-family="Arial, sans-serif" font-size="22" fill="#000000">All tokens refined in parallel</text>
+  
+  <!-- Diffusion visualization -->
+  <rect x="800" y="935" width="60" height="40" rx="5" fill="#9e9e9e" stroke="#616161" stroke-width="2"/>
+  <text x="830" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">M</text>
+  <rect x="870" y="935" width="60" height="40" rx="5" fill="#9e9e9e" stroke="#616161" stroke-width="2"/>
+  <text x="900" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">M</text>
+  <rect x="940" y="935" width="60" height="40" rx="5" fill="#9e9e9e" stroke="#616161" stroke-width="2"/>
+  <text x="970" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">M</text>
+  <rect x="1010" y="935" width="60" height="40" rx="5" fill="#9e9e9e" stroke="#616161" stroke-width="2"/>
+  <text x="1040" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">M</text>
+  <text x="1095" y="962" font-family="Arial, sans-serif" font-size="20" fill="#000000">⟹</text>
+  <rect x="1130" y="935" width="60" height="40" rx="5" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
+  <text x="1160" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">T₁</text>
+  <rect x="1200" y="935" width="60" height="40" rx="5" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
+  <text x="1230" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">T₂</text>
+  <rect x="1270" y="935" width="60" height="40" rx="5" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
+  <text x="1300" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">T₃</text>
+  <rect x="1340" y="935" width="60" height="40" rx="5" fill="#e91e63" stroke="#880e4f" stroke-width="2"/>
+  <text x="1370" y="962" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">T₄</text>
+  
+  <!-- Block Diffusion Box -->
+  <rect x="1470" y="580" width="680" height="420" rx="12" fill="url(#blockGrad)" stroke="#2e7d32" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="1470" y="580" width="680" height="60" rx="12" fill="#2e7d32"/>
+  <text x="1810" y="622" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    BLOCK DIFFUSION (Ours)
+  </text>
+  
+  <text x="1510" y="690" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ High Quality</text>
+  <text x="1510" y="730" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ Arbitrary-Length</text>
+  <text x="1510" y="770" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ KV Caching</text>
+  <text x="1510" y="810" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">✓ Parallelizable (within blocks)</text>
+  
+  <text x="1510" y="870" font-family="Arial, sans-serif" font-size="22" fill="#000000">Generation: AR over blocks,</text>
+  <text x="1510" y="905" font-family="Arial, sans-serif" font-size="22" fill="#000000">Diffusion within each block</text>
+  
+  <!-- Block Diffusion visualization -->
+  <rect x="1510" y="930" width="180" height="50" rx="5" fill="#4caf50" stroke="#1b5e20" stroke-width="2"/>
+  <text x="1600" y="962" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 1</text>
+  <text x="1705" y="962" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <rect x="1730" y="930" width="180" height="50" rx="5" fill="#66bb6a" stroke="#1b5e20" stroke-width="2"/>
+  <text x="1820" y="962" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 2</text>
+  <text x="1925" y="962" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <rect x="1950" y="930" width="180" height="50" rx="5" fill="#81c784" stroke="#1b5e20" stroke-width="2"/>
+  <text x="2040" y="962" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 3...</text>
+  
+  <!-- Section 3: Core Innovation -->
+  <rect x="50" y="1040" width="2100" height="400" rx="12" fill="#e8eaf6" stroke="#3f51b5" stroke-width="3" filter="url(#shadow)"/>
+  <text x="90" y="1095" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#000000">
+    💡 Core Innovation: BD3-LMs (Block Discrete Denoising Diffusion Language Models)
+  </text>
+  
+  <!-- Key idea boxes -->
+  <rect x="90" y="1130" width="980" height="280" rx="10" fill="#c5cae9" stroke="#5c6bc0" stroke-width="2"/>
+  <text x="130" y="1180" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Key Idea: Hybrid Approach</text>
+  <text x="130" y="1230" font-family="Arial, sans-serif" font-size="24" fill="#000000">• Divide sequence into B blocks of L' tokens each</text>
+  <text x="130" y="1275" font-family="Arial, sans-serif" font-size="24" fill="#000000">• AUTOREGRESSIVE over blocks: p(x) = Π p(xᵇ | x&lt;ᵇ)</text>
+  <text x="130" y="1320" font-family="Arial, sans-serif" font-size="24" fill="#000000">• DIFFUSION within each block: denoise tokens in parallel</text>
+  <text x="130" y="1365" font-family="Arial, sans-serif" font-size="24" fill="#000000">• Each block conditions on all previous clean blocks</text>
+  
+  <rect x="1110" y="1130" width="1000" height="280" rx="10" fill="#c5cae9" stroke="#5c6bc0" stroke-width="2"/>
+  <text x="1150" y="1180" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Block Size Spectrum (L' parameter)</text>
+  <text x="1150" y="1230" font-family="Arial, sans-serif" font-size="24" fill="#000000">• L' = 1: Equivalent to Autoregressive</text>
+  <text x="1150" y="1275" font-family="Arial, sans-serif" font-size="24" fill="#000000">• L' = L: Equivalent to Full Diffusion</text>
+  <text x="1150" y="1320" font-family="Arial, sans-serif" font-size="24" fill="#000000">• 1 &lt; L' &lt; L: Interpolation (best of both worlds)</text>
+  <text x="1150" y="1365" font-family="Arial, sans-serif" font-size="24" fill="#000000">• Optimal L' balances parallelism and quality</text>
+  
+  <!-- Section 4: Key Contributions -->
+  <rect x="50" y="1480" width="2100" height="420" rx="12" fill="#e0f2f1" stroke="#00897b" stroke-width="3" filter="url(#shadow)"/>
+  <text x="90" y="1535" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#000000">
+    🏆 Key Contributions
+  </text>
+  
+  <rect x="90" y="1570" width="490" height="300" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="130" y="1620" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">1. Block Diffusion</text>
+  <text x="160" y="1665" font-family="Arial, sans-serif" font-size="22" fill="#000000">AR over blocks + Diffusion</text>
+  <text x="160" y="1705" font-family="Arial, sans-serif" font-size="22" fill="#000000">within blocks</text>
+  <text x="160" y="1760" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Variable-length output</text>
+  <text x="160" y="1800" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ KV caching support</text>
+  <text x="160" y="1840" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Parallel token sampling</text>
+  
+  <rect x="620" y="1570" width="490" height="300" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="660" y="1620" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">2. Efficient Training</text>
+  <text x="690" y="1665" font-family="Arial, sans-serif" font-size="22" fill="#000000">Custom algorithms for</text>
+  <text x="690" y="1705" font-family="Arial, sans-serif" font-size="22" fill="#000000">block diffusion training</text>
+  <text x="690" y="1760" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Vectorized implementation</text>
+  <text x="690" y="1800" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Leverage full token batch</text>
+  <text x="690" y="1840" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ 2x forward passes only</text>
+  
+  <rect x="1150" y="1570" width="490" height="300" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1190" y="1620" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">3. Gradient Variance</text>
+  <text x="1220" y="1665" font-family="Arial, sans-serif" font-size="22" fill="#000000">Identified variance as key</text>
+  <text x="1220" y="1705" font-family="Arial, sans-serif" font-size="22" fill="#000000">limiting factor</text>
+  <text x="1220" y="1760" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Derived variance estimators</text>
+  <text x="1220" y="1800" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Explains AR-Diffusion gap</text>
+  <text x="1220" y="1840" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Theoretical analysis</text>
+  
+  <rect x="1680" y="1570" width="430" height="300" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1720" y="1620" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">4. Low-Var Schedules</text>
+  <text x="1750" y="1665" font-family="Arial, sans-serif" font-size="22" fill="#000000">Data-driven noise</text>
+  <text x="1750" y="1705" font-family="Arial, sans-serif" font-size="22" fill="#000000">schedules</text>
+  <text x="1750" y="1760" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Clipped schedules</text>
+  <text x="1750" y="1800" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Minimize variance</text>
+  <text x="1750" y="1840" font-family="Arial, sans-serif" font-size="22" fill="#000000">✓ Close perplexity gap</text>
+  
+  <!-- Section 5: Results Summary -->
+  <rect x="50" y="1940" width="2100" height="200" rx="12" fill="#fce4ec" stroke="#d81b60" stroke-width="3" filter="url(#shadow)"/>
+  <text x="90" y="1995" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#000000">
+    📈 Key Results
+  </text>
+  <text x="90" y="2050" font-family="Arial, sans-serif" font-size="26" fill="#000000">
+    • State-of-the-art perplexity among diffusion models on language modeling benchmarks
+  </text>
+  <text x="90" y="2095" font-family="Arial, sans-serif" font-size="26" fill="#000000">
+    • Generates sequences of arbitrary length (including lengths exceeding training context)
+  </text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2180" width="2100" height="80" rx="10" fill="#37474f"/>
+  <text x="1100" y="2230" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">
+    Paper: arXiv:2503.09573 | Code: https://github.com/kuleshov-group/bd3lms | ICLR 2025
+  </text>
+  
+  <!-- Decorative elements -->
+  <circle cx="2050" y="250" r="30" fill="#ff9800" opacity="0.3"/>
+  <circle cx="2000" y="300" r="20" fill="#ff9800" opacity="0.2"/>
+</svg>
+

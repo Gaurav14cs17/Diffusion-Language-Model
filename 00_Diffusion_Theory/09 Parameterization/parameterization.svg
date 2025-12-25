@@ -1,0 +1,364 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 4600" width="2200" height="4600">
+  <defs>
+    <linearGradient id="headerGrad7" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1B5E20;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E7D32;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="epsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E3F2FD;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#90CAF9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="x0Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FCE4EC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F48FB1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="vGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A5D6A7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF3E0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFCC80;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565C0"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#C62828"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2E7D32"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="4600" fill="#FAFBFC"/>
+  
+  <!-- Main Title Box -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad7)" stroke="#1B5E20" stroke-width="4"/>
+  <text x="1100" y="115" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#FFFFFF" text-anchor="middle">PARAMETERIZATION STRATEGIES</text>
+  
+  <!-- VISUAL DIAGRAM 1: Overview Flowchart -->
+  <rect x="50" y="200" width="2100" height="500" rx="12" fill="#FFFFFF" stroke="#2E7D32" stroke-width="3"/>
+  <text x="1100" y="250" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">Overview: What Does the Network Predict?</text>
+  
+  <!-- Central Node: Neural Network -->
+  <ellipse cx="1100" cy="450" rx="180" ry="80" fill="#E8F5E9" stroke="#2E7D32" stroke-width="4"/>
+  <text x="1100" y="440" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Neural Network</text>
+  <text x="1100" y="475" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1B5E20" text-anchor="middle">f_θ(x_t, t)</text>
+  
+  <!-- Input -->
+  <rect x="100" y="400" width="200" height="100" rx="15" fill="#BBDEFB" stroke="#1565C0" stroke-width="3"/>
+  <text x="200" y="445" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">Input</text>
+  <text x="200" y="475" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#1565C0" text-anchor="middle">x_t, t</text>
+  <line x1="300" y1="450" x2="910" y2="450" stroke="#1565C0" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Output Options -->
+  <!-- Epsilon prediction -->
+  <rect x="1500" y="300" width="220" height="80" rx="15" fill="url(#epsGrad)" stroke="#1565C0" stroke-width="3"/>
+  <text x="1610" y="350" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">ε-prediction</text>
+  <line x1="1280" y1="420" x2="1500" y2="360" stroke="#1565C0" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  
+  <!-- x_0 prediction -->
+  <rect x="1500" y="410" width="220" height="80" rx="15" fill="url(#x0Grad)" stroke="#C62828" stroke-width="3"/>
+  <text x="1610" y="460" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">x₀-prediction</text>
+  <line x1="1280" y1="450" x2="1500" y2="450" stroke="#C62828" stroke-width="3" marker-end="url(#arrowRed)"/>
+  
+  <!-- v prediction -->
+  <rect x="1500" y="520" width="220" height="80" rx="15" fill="url(#vGrad)" stroke="#2E7D32" stroke-width="3"/>
+  <text x="1610" y="570" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">v-prediction</text>
+  <line x1="1280" y1="480" x2="1500" y2="540" stroke="#2E7D32" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Formulas next to each -->
+  <text x="1750" y="350" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#1565C0">ε_θ(x_t, t)</text>
+  <text x="1750" y="460" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#C62828">x̂₀(x_t, t)</text>
+  <text x="1750" y="570" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#2E7D32">v_θ(x_t, t)</text>
+  
+  <!-- Score -->
+  <rect x="1850" y="410" width="200" height="80" rx="15" fill="url(#scoreGrad)" stroke="#EF6C00" stroke-width="3"/>
+  <text x="1950" y="460" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Score s_θ</text>
+  <text x="2070" y="460" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#EF6C00">∇log p</text>
+  
+  <!-- VISUAL DIAGRAM 2: Epsilon Prediction -->
+  <rect x="50" y="740" width="2100" height="700" rx="12" fill="url(#epsGrad)" stroke="#1565C0" stroke-width="3"/>
+  <text x="80" y="800" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">1. ε-Prediction (Noise Prediction) — DDPM Standard</text>
+  
+  <!-- Visual: Noisy Image to Noise -->
+  <rect x="100" y="860" width="600" height="400" rx="10" fill="#FFFFFF" stroke="#1565C0" stroke-width="2"/>
+  <text x="400" y="900" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">Visual Concept</text>
+  
+  <!-- Noisy image representation -->
+  <rect x="150" y="950" width="150" height="150" rx="5" fill="#E3F2FD" stroke="#666" stroke-width="2"/>
+  <text x="225" y="1010" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Noisy</text>
+  <text x="225" y="1035" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Image</text>
+  <text x="225" y="1070" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#1565C0" text-anchor="middle">x_t</text>
+  <!-- Add noise pattern -->
+  <circle cx="170" cy="970" r="3" fill="#666"/>
+  <circle cx="200" cy="990" r="2" fill="#666"/>
+  <circle cx="250" cy="960" r="4" fill="#666"/>
+  <circle cx="280" cy="1000" r="3" fill="#666"/>
+  <circle cx="190" cy="1050" r="2" fill="#666"/>
+  <circle cx="260" cy="1080" r="3" fill="#666"/>
+  
+  <!-- Arrow -->
+  <line x1="320" y1="1020" x2="400" y2="1020" stroke="#1565C0" stroke-width="4" marker-end="url(#arrowBlue)"/>
+  <text x="360" y="1000" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0">f_θ</text>
+  
+  <!-- Network box -->
+  <rect x="420" y="970" width="100" height="100" rx="10" fill="#64B5F6" stroke="#1565C0" stroke-width="2"/>
+  <text x="470" y="1030" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFF" text-anchor="middle">UNet</text>
+  
+  <!-- Arrow -->
+  <line x1="540" y1="1020" x2="620" y2="1020" stroke="#1565C0" stroke-width="4" marker-end="url(#arrowBlue)"/>
+  
+  <!-- Predicted noise -->
+  <rect x="640" y="950" width="150" height="150" rx="5" fill="#FFF" stroke="#666" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="715" y="1010" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Predicted</text>
+  <text x="715" y="1035" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Noise</text>
+  <text x="715" y="1070" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#1565C0" text-anchor="middle">ε̂_θ</text>
+  <!-- Random noise pattern -->
+  <circle cx="665" cy="970" r="4" fill="#999"/>
+  <circle cx="700" cy="985" r="3" fill="#888"/>
+  <circle cx="740" cy="965" r="3" fill="#777"/>
+  <circle cx="760" cy="1000" r="4" fill="#999"/>
+  <circle cx="680" cy="1055" r="3" fill="#888"/>
+  <circle cx="730" cy="1075" r="4" fill="#777"/>
+  
+  <!-- Loss comparison -->
+  <text x="400" y="1180" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Loss: ||ε - ε̂_θ||²</text>
+  <text x="400" y="1220" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0" text-anchor="middle">Compare with actual noise ε</text>
+  
+  <!-- Formulas on right -->
+  <rect x="750" y="860" width="1350" height="540" rx="10" fill="#FFFFFF" stroke="#1565C0" stroke-width="2"/>
+  <text x="780" y="910" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Mathematical Formulation:</text>
+  
+  <text x="800" y="970" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Network Output:</text>
+  <rect x="820" y="990" width="600" height="60" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="1120" y="1030" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">ε̂ = ε_θ(x_t, t)</text>
+  
+  <text x="800" y="1100" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Recover x₀:</text>
+  <rect x="820" y="1120" width="800" height="60" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="1220" y="1160" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">x̂₀ = (x_t - √(1-ᾱ_t) · ε̂) / √ᾱ_t</text>
+  
+  <text x="800" y="1230" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Training Loss:</text>
+  <rect x="820" y="1250" width="700" height="60" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="1170" y="1290" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">L = E_{t,x₀,ε}[||ε - ε_θ(x_t, t)||²]</text>
+  
+  <text x="800" y="1360" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#1565C0" font-style="italic">✓ Most common   ✓ Works well at high noise   ✗ Can struggle at low noise</text>
+  
+  <!-- VISUAL DIAGRAM 3: x_0 Prediction -->
+  <rect x="50" y="1480" width="2100" height="700" rx="12" fill="url(#x0Grad)" stroke="#C62828" stroke-width="3"/>
+  <text x="80" y="1540" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">2. x₀-Prediction (Data Prediction) — Direct Denoising</text>
+  
+  <!-- Visual: Noisy to Clean -->
+  <rect x="100" y="1600" width="600" height="400" rx="10" fill="#FFFFFF" stroke="#C62828" stroke-width="2"/>
+  <text x="400" y="1640" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">Visual Concept</text>
+  
+  <!-- Noisy image -->
+  <rect x="150" y="1700" width="150" height="150" rx="5" fill="#FCE4EC" stroke="#666" stroke-width="2"/>
+  <!-- Simple face with noise -->
+  <circle cx="195" cy="1760" r="8" fill="#666"/>
+  <circle cx="255" cy="1760" r="8" fill="#666"/>
+  <path d="M 195 1800 Q 225 1830 255 1800" stroke="#666" stroke-width="3" fill="none"/>
+  <!-- Noise dots -->
+  <circle cx="170" cy="1720" r="3" fill="#999"/>
+  <circle cx="280" cy="1730" r="3" fill="#999"/>
+  <circle cx="200" cy="1840" r="3" fill="#999"/>
+  <text x="225" y="1880" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#C62828" text-anchor="middle">x_t</text>
+  
+  <!-- Arrow -->
+  <line x1="320" y1="1775" x2="400" y2="1775" stroke="#C62828" stroke-width="4" marker-end="url(#arrowRed)"/>
+  <text x="360" y="1755" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C62828">f_θ</text>
+  
+  <!-- Network -->
+  <rect x="420" y="1720" width="100" height="100" rx="10" fill="#EF5350" stroke="#C62828" stroke-width="2"/>
+  <text x="470" y="1780" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFF" text-anchor="middle">UNet</text>
+  
+  <!-- Arrow -->
+  <line x1="540" y1="1775" x2="620" y2="1775" stroke="#C62828" stroke-width="4" marker-end="url(#arrowRed)"/>
+  
+  <!-- Clean image prediction -->
+  <rect x="640" y="1700" width="150" height="150" rx="5" fill="#FFF" stroke="#C62828" stroke-width="2"/>
+  <!-- Clean face -->
+  <circle cx="685" cy="1760" r="10" fill="#333"/>
+  <circle cx="745" cy="1760" r="10" fill="#333"/>
+  <path d="M 685 1810 Q 715 1840 745 1810" stroke="#333" stroke-width="3" fill="none"/>
+  <text x="715" y="1880" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#C62828" text-anchor="middle">x̂₀</text>
+  
+  <text x="400" y="1960" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Directly predict the clean data!</text>
+  
+  <!-- Formulas -->
+  <rect x="750" y="1600" width="1350" height="540" rx="10" fill="#FFFFFF" stroke="#C62828" stroke-width="2"/>
+  <text x="780" y="1650" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Mathematical Formulation:</text>
+  
+  <text x="800" y="1710" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Network Output:</text>
+  <rect x="820" y="1730" width="600" height="60" rx="8" fill="#FCE4EC" stroke="#C62828" stroke-width="2"/>
+  <text x="1120" y="1770" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">x̂₀ = f_θ(x_t, t)</text>
+  
+  <text x="800" y="1840" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Recover ε:</text>
+  <rect x="820" y="1860" width="800" height="60" rx="8" fill="#FCE4EC" stroke="#C62828" stroke-width="2"/>
+  <text x="1220" y="1900" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">ε̂ = (x_t - √ᾱ_t · x̂₀) / √(1-ᾱ_t)</text>
+  
+  <text x="800" y="1970" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Training Loss:</text>
+  <rect x="820" y="1990" width="700" height="60" rx="8" fill="#FCE4EC" stroke="#C62828" stroke-width="2"/>
+  <text x="1170" y="2030" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">L = E_{t,x₀}[||x₀ - f_θ(x_t, t)||²]</text>
+  
+  <text x="800" y="2100" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#C62828" font-style="italic">✓ Intuitive   ✓ Good at low noise   ✗ Can be unstable at high noise</text>
+  
+  <!-- VISUAL DIAGRAM 4: v-Prediction -->
+  <rect x="50" y="2220" width="2100" height="750" rx="12" fill="url(#vGrad)" stroke="#2E7D32" stroke-width="3"/>
+  <text x="80" y="2280" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">3. v-Prediction (Velocity) — Progressive Distillation / Imagen</text>
+  
+  <!-- Visual: Vector Field Diagram -->
+  <rect x="100" y="2340" width="600" height="450" rx="10" fill="#FFFFFF" stroke="#2E7D32" stroke-width="2"/>
+  <text x="400" y="2380" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">v = Velocity in Latent Space</text>
+  
+  <!-- Draw interpolation path -->
+  <circle cx="200" cy="2550" r="40" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
+  <text x="200" y="2555" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">x₀</text>
+  <text x="200" y="2620" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32" text-anchor="middle">Data</text>
+  
+  <circle cx="600" cy="2550" r="40" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3"/>
+  <text x="600" y="2555" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">ε</text>
+  <text x="600" y="2620" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32" text-anchor="middle">Noise</text>
+  
+  <!-- Interpolation path with arrows -->
+  <path d="M 250 2550 Q 400 2480 550 2550" stroke="#2E7D32" stroke-width="3" fill="none" stroke-dasharray="10,5"/>
+  
+  <!-- x_t on the path -->
+  <circle cx="400" cy="2500" r="30" fill="#A5D6A7" stroke="#2E7D32" stroke-width="3"/>
+  <text x="400" y="2505" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">x_t</text>
+  
+  <!-- Velocity vector -->
+  <line x1="400" y1="2500" x2="320" y2="2530" stroke="#1B5E20" stroke-width="4" marker-end="url(#arrowGreen)"/>
+  <text x="340" y="2480" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#1B5E20">v</text>
+  
+  <!-- Formula visualization -->
+  <text x="400" y="2720" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">x_t = √ᾱ_t · x₀ + √(1-ᾱ_t) · ε</text>
+  <text x="400" y="2760" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#2E7D32" text-anchor="middle">v = √ᾱ_t · ε - √(1-ᾱ_t) · x₀</text>
+  
+  <!-- Formulas on right -->
+  <rect x="750" y="2340" width="1350" height="590" rx="10" fill="#FFFFFF" stroke="#2E7D32" stroke-width="2"/>
+  <text x="780" y="2390" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Mathematical Formulation:</text>
+  
+  <text x="800" y="2450" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Definition of v (velocity):</text>
+  <rect x="820" y="2470" width="800" height="60" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1220" y="2510" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">v = √ᾱ_t · ε - √(1-ᾱ_t) · x₀</text>
+  
+  <text x="800" y="2580" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Recover x₀ and ε:</text>
+  <rect x="820" y="2600" width="500" height="50" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1070" y="2635" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">x̂₀ = √ᾱ_t · x_t - √(1-ᾱ_t) · v̂</text>
+  <rect x="1350" y="2600" width="500" height="50" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1600" y="2635" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">ε̂ = √(1-ᾱ_t) · x_t + √ᾱ_t · v̂</text>
+  
+  <text x="800" y="2710" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Training Loss:</text>
+  <rect x="820" y="2730" width="700" height="60" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1170" y="2770" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">L = E_{t,x₀,ε}[||v - v_θ(x_t, t)||²]</text>
+  
+  <text x="800" y="2860" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#2E7D32" font-style="italic">✓ Balanced across all noise levels   ✓ Better for distillation   ✓ Numerically stable</text>
+  
+  <!-- VISUAL DIAGRAM 5: Comparison Chart -->
+  <rect x="50" y="3010" width="2100" height="600" rx="12" fill="#FFFFFF" stroke="#333" stroke-width="3"/>
+  <text x="1100" y="3070" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">4. Visual Comparison: When to Use Each?</text>
+  
+  <!-- SNR axis diagram -->
+  <rect x="150" y="3130" width="1900" height="400" rx="10" fill="#FAFAFA" stroke="#666" stroke-width="2"/>
+  
+  <!-- Axis -->
+  <line x1="250" y1="3450" x2="1950" y2="3450" stroke="#333" stroke-width="3"/>
+  <line x1="250" y1="3450" x2="250" y2="3180" stroke="#333" stroke-width="3"/>
+  <text x="1100" y="3500" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">SNR (Signal-to-Noise Ratio) →</text>
+  <text x="200" y="3320" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" transform="rotate(-90, 200, 3320)">Performance</text>
+  
+  <!-- Labels on axis -->
+  <text x="350" y="3480" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Low SNR</text>
+  <text x="350" y="3510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">(High Noise)</text>
+  <text x="1850" y="3480" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">High SNR</text>
+  <text x="1850" y="3510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">(Low Noise)</text>
+  
+  <!-- Epsilon curve -->
+  <path d="M 300 3220 Q 600 3240 900 3350 Q 1200 3410 1800 3430" stroke="#1565C0" stroke-width="4" fill="none"/>
+  <circle cx="450" cy="3230" r="8" fill="#1565C0"/>
+  <text x="500" y="3220" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0">ε-prediction (best at high noise)</text>
+  
+  <!-- x0 curve -->
+  <path d="M 300 3400 Q 600 3380 900 3300 Q 1200 3240 1800 3220" stroke="#C62828" stroke-width="4" fill="none"/>
+  <circle cx="1650" cy="3225" r="8" fill="#C62828"/>
+  <text x="1500" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C62828">x₀-prediction (best at low noise)</text>
+  
+  <!-- v curve -->
+  <path d="M 300 3310 Q 600 3290 900 3280 Q 1200 3280 1800 3300" stroke="#2E7D32" stroke-width="4" fill="none"/>
+  <circle cx="1100" cy="3275" r="8" fill="#2E7D32"/>
+  <text x="1100" y="3260" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32">v-prediction (balanced)</text>
+  
+  <!-- VISUAL DIAGRAM 6: Relationships -->
+  <rect x="50" y="3650" width="2100" height="500" rx="12" fill="#F5F5F5" stroke="#333" stroke-width="3"/>
+  <text x="1100" y="3710" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">5. Interconversion Between Parameterizations</text>
+  
+  <!-- Triangle of conversions -->
+  <polygon points="600,3850 1100,4050 1600,3850" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Epsilon node -->
+  <circle cx="600" cy="3850" r="60" fill="url(#epsGrad)" stroke="#1565C0" stroke-width="3"/>
+  <text x="600" y="3855" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">ε</text>
+  
+  <!-- x0 node -->
+  <circle cx="1600" cy="3850" r="60" fill="url(#x0Grad)" stroke="#C62828" stroke-width="3"/>
+  <text x="1600" y="3855" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">x₀</text>
+  
+  <!-- v node -->
+  <circle cx="1100" cy="4050" r="60" fill="url(#vGrad)" stroke="#2E7D32" stroke-width="3"/>
+  <text x="1100" y="4055" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">v</text>
+  
+  <!-- Conversion formulas -->
+  <text x="1100" y="3820" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">x₀ = (x_t - √(1-ᾱ_t)ε) / √ᾱ_t</text>
+  
+  <text x="750" y="3980" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">v = √ᾱ_t·ε - √(1-ᾱ_t)·x₀</text>
+  
+  <text x="1450" y="3980" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">ε = (x_t - √ᾱ_t·x₀) / √(1-ᾱ_t)</text>
+  
+  <!-- Key insight box -->
+  <rect x="200" y="4020" width="400" height="80" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="400" y="4070" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0" text-anchor="middle">All equivalent with</text>
+  <text x="400" y="4095" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0" text-anchor="middle">proper weighting!</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="4190" width="2100" height="80" rx="10" fill="#1B5E20" stroke="#1B5E20" stroke-width="3"/>
+  <text x="1100" y="4245" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Diffusion Theory - Parameterization | What Should the Network Predict?</text>
+  
+  <!-- Summary table at bottom -->
+  <rect x="50" y="4300" width="2100" height="250" rx="12" fill="#FFFFFF" stroke="#333" stroke-width="3"/>
+  <text x="1100" y="4350" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Quick Reference Summary</text>
+  
+  <rect x="100" y="4380" width="2000" height="150" rx="8" fill="#FAFAFA" stroke="#666" stroke-width="1"/>
+  
+  <!-- Headers -->
+  <text x="300" y="4420" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Method</text>
+  <text x="600" y="4420" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Output</text>
+  <text x="1000" y="4420" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Best For</text>
+  <text x="1500" y="4420" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Used In</text>
+  <text x="1900" y="4420" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Loss</text>
+  
+  <line x1="100" y1="4440" x2="2100" y2="4440" stroke="#CCC" stroke-width="1"/>
+  
+  <text x="300" y="4475" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0" text-anchor="middle">ε-prediction</text>
+  <text x="600" y="4475" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Noise ε</text>
+  <text x="1000" y="4475" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">High noise levels</text>
+  <text x="1500" y="4475" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">DDPM, Stable Diffusion</text>
+  <text x="1900" y="4475" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">||ε - ε̂||²</text>
+  
+  <text x="300" y="4510" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C62828" text-anchor="middle">x₀-prediction</text>
+  <text x="600" y="4510" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Clean data x₀</text>
+  <text x="1000" y="4510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">Low noise levels</text>
+  <text x="1500" y="4510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">D3PM, Some VAEs</text>
+  <text x="1900" y="4510" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">||x₀ - x̂₀||²</text>
+  
+  <text x="300" y="4545" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">v-prediction</text>
+  <text x="600" y="4545" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Velocity v</text>
+  <text x="1000" y="4545" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">All noise levels</text>
+  <text x="1500" y="4545" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">Imagen, Distillation</text>
+  <text x="1900" y="4545" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">||v - v̂||²</text>
+</svg>

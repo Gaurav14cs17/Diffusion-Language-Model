@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3200" width="2200" height="3200">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0369A1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0EA5E9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3200" fill="#FAFAFA"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" stroke="#075985" stroke-width="3"/>
+  <text x="1100" y="110" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Experimental Results &amp; Key Findings
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="22" fill="#BAE6FD" text-anchor="middle">
+    MDLM Performance on Language Modeling Benchmarks
+  </text>
+
+  <!-- Section 1: Main Results -->
+  <rect x="50" y="200" width="2100" height="580" rx="12" fill="#F0F9FF" stroke="#0EA5E9" stroke-width="3"/>
+  <rect x="50" y="200" width="2100" height="60" rx="12" fill="#0EA5E9"/>
+  <text x="1100" y="242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. MAIN RESULTS: PERPLEXITY COMPARISON
+  </text>
+
+  <rect x="100" y="290" width="2000" height="460" rx="10" fill="#FFFFFF" stroke="#0284C7" stroke-width="3"/>
+  
+  <text x="1100" y="340" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    OpenWebText Perplexity (lower is better)
+  </text>
+  
+  <!-- Table header -->
+  <rect x="140" y="370" width="400" height="50" fill="#E0F2FE"/>
+  <text x="340" y="405" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Model</text>
+  <rect x="540" y="370" width="250" height="50" fill="#E0F2FE"/>
+  <text x="665" y="405" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Type</text>
+  <rect x="790" y="370" width="250" height="50" fill="#E0F2FE"/>
+  <text x="915" y="405" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Params</text>
+  <rect x="1040" y="370" width="250" height="50" fill="#E0F2FE"/>
+  <text x="1165" y="405" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">PPL</text>
+  <rect x="1290" y="370" width="300" height="50" fill="#E0F2FE"/>
+  <text x="1440" y="405" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Steps</text>
+  
+  <!-- GPT-2 Row -->
+  <rect x="140" y="420" width="400" height="45" fill="#FAFAFA"/>
+  <text x="340" y="450" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">GPT-2</text>
+  <text x="665" y="450" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Autoregressive</text>
+  <text x="915" y="450" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">124M</text>
+  <text x="1165" y="450" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E" text-anchor="middle">29.0</text>
+  <text x="1440" y="450" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">1024</text>
+  
+  <!-- D3PM Row -->
+  <rect x="140" y="465" width="400" height="45" fill="#FFFFFF"/>
+  <text x="340" y="495" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">D3PM (absorbing)</text>
+  <text x="665" y="495" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Diffusion</text>
+  <text x="915" y="495" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">110M</text>
+  <text x="1165" y="495" font-family="Arial, sans-serif" font-size="18" fill="#DC2626" text-anchor="middle">65.9</text>
+  <text x="1440" y="495" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">1024</text>
+  
+  <!-- SEDD Row -->
+  <rect x="140" y="510" width="400" height="45" fill="#FAFAFA"/>
+  <text x="340" y="540" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">SEDD</text>
+  <text x="665" y="540" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Diffusion</text>
+  <text x="915" y="540" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">110M</text>
+  <text x="1165" y="540" font-family="Arial, sans-serif" font-size="18" fill="#F59E0B" text-anchor="middle">32.5</text>
+  <text x="1440" y="540" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">1024</text>
+  
+  <!-- MDLM Row (highlighted) -->
+  <rect x="140" y="555" width="400" height="50" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="340" y="590" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">MDLM (Ours)</text>
+  <rect x="540" y="555" width="250" height="50" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="665" y="590" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Diffusion</text>
+  <rect x="790" y="555" width="250" height="50" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="915" y="590" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">110M</text>
+  <rect x="1040" y="555" width="250" height="50" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="1165" y="590" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#16A34A" text-anchor="middle">31.4</text>
+  <rect x="1290" y="555" width="300" height="50" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="1440" y="590" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">1024</text>
+  
+  <!-- Key finding box -->
+  <rect x="140" y="630" width="1900" height="90" rx="8" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/>
+  <text x="1090" y="670" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Key Finding: MDLM achieves 31.4 PPL, closing the gap with GPT-2 (29.0)
+  </text>
+  <text x="1090" y="705" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a" text-anchor="middle">
+    Best discrete diffusion LM result • Only 2.4 PPL gap to autoregressive • State-of-the-art for diffusion
+  </text>
+
+  <!-- Section 2: Scaling -->
+  <rect x="50" y="820" width="2100" height="480" rx="12" fill="#F0FDF4" stroke="#22C55E" stroke-width="3"/>
+  <rect x="50" y="820" width="2100" height="60" rx="12" fill="#22C55E"/>
+  <text x="1100" y="862" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. SCALING BEHAVIOR
+  </text>
+
+  <rect x="100" y="910" width="980" height="360" rx="10" fill="#FFFFFF" stroke="#16A34A" stroke-width="3"/>
+  <text x="590" y="955" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Model Size Scaling
+  </text>
+  
+  <text x="140" y="1010" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    MDLM scales well with parameters:
+  </text>
+  <text x="160" y="1055" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • 39M params  → 44.8 PPL
+  </text>
+  <text x="160" y="1095" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • 110M params → 31.4 PPL
+  </text>
+  <text x="160" y="1135" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • 200M params → 28.1 PPL
+  </text>
+  <text x="160" y="1175" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • 400M params → 25.8 PPL
+  </text>
+  <text x="140" y="1230" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#22C55E">
+    ✓ Follows similar scaling laws to AR models
+  </text>
+
+  <rect x="1120" y="910" width="980" height="360" rx="10" fill="#FFFFFF" stroke="#16A34A" stroke-width="3"/>
+  <text x="1610" y="955" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Steps Scaling
+  </text>
+  
+  <text x="1160" y="1010" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    More steps = better perplexity:
+  </text>
+  <text x="1180" y="1055" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • T=16   → ~35 PPL (fast)
+  </text>
+  <text x="1180" y="1095" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • T=64   → ~32 PPL (balanced)
+  </text>
+  <text x="1180" y="1135" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • T=256  → ~31.5 PPL
+  </text>
+  <text x="1180" y="1175" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    • T=1024 → 31.4 PPL (best)
+  </text>
+  <text x="1160" y="1230" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#22C55E">
+    ✓ Converges to ELBO bound
+  </text>
+
+  <!-- Section 3: Key Ablations -->
+  <rect x="50" y="1340" width="2100" height="560" rx="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+  <rect x="50" y="1340" width="2100" height="60" rx="12" fill="#F59E0B"/>
+  <text x="1100" y="1382" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. KEY ABLATIONS &amp; DESIGN CHOICES
+  </text>
+
+  <rect x="100" y="1430" width="650" height="440" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="425" y="1475" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Noise Schedule
+  </text>
+  <text x="140" y="1525" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    Linear αₜ = 1-t vs Cosine:
+  </text>
+  <text x="160" y="1565" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Linear: 31.4 PPL
+  </text>
+  <text x="160" y="1600" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Cosine: 31.6 PPL
+  </text>
+  <text x="140" y="1655" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#22C55E">
+    Finding: Linear works great!
+  </text>
+  <text x="160" y="1695" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    Simpler is better. No need for
+  </text>
+  <text x="160" y="1725" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    complex schedules.
+  </text>
+  <text x="140" y="1780" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    Implication:
+  </text>
+  <text x="160" y="1815" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    MDLM simplifies design space
+  </text>
+  <text x="160" y="1845" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    significantly.
+  </text>
+
+  <rect x="780" y="1430" width="650" height="440" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="1105" y="1475" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Time Conditioning
+  </text>
+  <text x="820" y="1525" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    Adding time t as input:
+  </text>
+  <text x="840" y="1565" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • With time: 31.4 PPL
+  </text>
+  <text x="840" y="1600" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Without time: 34.2 PPL
+  </text>
+  <text x="820" y="1655" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#22C55E">
+    Finding: Time matters!
+  </text>
+  <text x="840" y="1695" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    Model needs to know "how
+  </text>
+  <text x="840" y="1725" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    noisy" the input is.
+  </text>
+  <text x="820" y="1780" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    Method:
+  </text>
+  <text x="840" y="1815" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    Sinusoidal embedding of t,
+  </text>
+  <text x="840" y="1845" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    added to all positions.
+  </text>
+
+  <rect x="1460" y="1430" width="640" height="440" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="1780" y="1475" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Loss Weighting
+  </text>
+  <text x="1500" y="1525" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    ELBO weighting schemes:
+  </text>
+  <text x="1520" y="1565" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Uniform (λ=1): 31.4 PPL
+  </text>
+  <text x="1520" y="1600" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • SNR weight: 31.2 PPL
+  </text>
+  <text x="1520" y="1635" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Min-SNR-5: 31.3 PPL
+  </text>
+  <text x="1500" y="1690" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#22C55E">
+    Finding: Marginal diff!
+  </text>
+  <text x="1520" y="1730" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    Uniform weighting is fine,
+  </text>
+  <text x="1520" y="1760" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    keeps things simple.
+  </text>
+  <text x="1500" y="1815" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    Recommendation:
+  </text>
+  <text x="1520" y="1850" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    Use uniform (simplest)
+  </text>
+
+  <!-- Section 4: Comparison with AR -->
+  <rect x="50" y="1940" width="2100" height="480" rx="12" fill="#FAF5FF" stroke="#A855F7" stroke-width="3"/>
+  <rect x="50" y="1940" width="2100" height="60" rx="12" fill="#A855F7"/>
+  <text x="1100" y="1982" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. ADVANTAGES OVER AUTOREGRESSIVE MODELS
+  </text>
+
+  <rect x="100" y="2030" width="650" height="360" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
+  <text x="425" y="2075" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Parallel Generation
+  </text>
+  <text x="140" y="2125" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    MDLM: O(T) forward passes
+  </text>
+  <text x="140" y="2165" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    GPT: O(n) forward passes
+  </text>
+  <text x="140" y="2220" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    Example (n=1024):
+  </text>
+  <text x="160" y="2260" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • GPT: 1024 passes
+  </text>
+  <text x="160" y="2295" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • MDLM (T=64): 64 passes
+  </text>
+  <text x="160" y="2330" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    → 16× speedup potential
+  </text>
+  <text x="140" y="2375" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    (with quality trade-off)
+  </text>
+
+  <rect x="780" y="2030" width="650" height="360" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
+  <text x="1105" y="2075" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Bidirectional Context
+  </text>
+  <text x="820" y="2125" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    Every token sees full sequence
+  </text>
+  <text x="820" y="2180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    Benefits:
+  </text>
+  <text x="840" y="2220" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Better global coherence
+  </text>
+  <text x="840" y="2255" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Natural infilling support
+  </text>
+  <text x="840" y="2290" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Can revise earlier decisions
+  </text>
+  <text x="840" y="2325" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Better for structured output
+  </text>
+  <text x="820" y="2375" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    GPT can only look backward
+  </text>
+
+  <rect x="1460" y="2030" width="640" height="360" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
+  <text x="1780" y="2075" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Flexible Trade-offs
+  </text>
+  <text x="1500" y="2125" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    Adjust T at inference time:
+  </text>
+  <text x="1520" y="2175" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Need speed? Use T=16
+  </text>
+  <text x="1520" y="2210" font-family="Arial, sans-serif" font-size="16" fill="#000000">
+    • Need quality? Use T=1024
+  </text>
+  <text x="1500" y="2265" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    No retraining needed!
+  </text>
+  <text x="1500" y="2310" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    Single model serves all
+  </text>
+  <text x="1500" y="2345" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    quality/speed requirements.
+  </text>
+  <text x="1500" y="2380" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    AR: fixed at O(n) always.
+  </text>
+
+  <!-- Section 5: Takeaways -->
+  <rect x="50" y="2460" width="2100" height="700" rx="12" fill="#1E3A5F" stroke="#0F172A" stroke-width="3"/>
+  <text x="1100" y="2520" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. KEY TAKEAWAYS
+  </text>
+
+  <rect x="100" y="2560" width="980" height="280" rx="10" fill="#F1F5F9" stroke="#334155" stroke-width="2"/>
+  <text x="590" y="2605" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    What MDLM Achieves
+  </text>
+  <text x="140" y="2655" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ State-of-the-art diffusion LM (31.4 PPL)
+  </text>
+  <text x="140" y="2695" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Closes gap with GPT-2 (29.0 PPL)
+  </text>
+  <text x="140" y="2735" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Simple: just MLM with variable rate
+  </text>
+  <text x="140" y="2775" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Principled: tight ELBO bound
+  </text>
+  <text x="140" y="2815" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Flexible: speed/quality trade-off
+  </text>
+
+  <rect x="1120" y="2560" width="980" height="280" rx="10" fill="#F1F5F9" stroke="#334155" stroke-width="2"/>
+  <text x="1610" y="2605" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Design Recommendations
+  </text>
+  <text x="1160" y="2655" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Use linear schedule αₜ = 1-t
+  </text>
+  <text x="1160" y="2695" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Add time embedding to model
+  </text>
+  <text x="1160" y="2735" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Use uniform time sampling
+  </text>
+  <text x="1160" y="2775" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Use x₀-parameterization
+  </text>
+  <text x="1160" y="2815" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Keep it simple!
+  </text>
+
+  <!-- Final summary box -->
+  <rect x="100" y="2870" width="2000" height="260" rx="10" fill="#ECFDF5" stroke="#10B981" stroke-width="3"/>
+  <text x="1100" y="2920" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    MDLM: The Simplest Effective Discrete Diffusion LM
+  </text>
+  <text x="1100" y="2970" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">
+    "Masked Language Modeling with principled, time-varying masking rates"
+  </text>
+  
+  <text x="400" y="3030" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a" text-anchor="middle">
+    Foundation for Dream 7B
+  </text>
+  <text x="1100" y="3030" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a" text-anchor="middle">
+    Competitive with AR models
+  </text>
+  <text x="1800" y="3030" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a" text-anchor="middle">
+    Simple implementation
+  </text>
+  
+  <text x="400" y="3080" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">
+    ✓ 7B scale achieved
+  </text>
+  <text x="1100" y="3080" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">
+    ✓ 2.4 PPL gap to GPT-2
+  </text>
+  <text x="1800" y="3080" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">
+    ✓ ~100 lines of core code
+  </text>
+  
+  <text x="1100" y="3115" font-family="Arial, sans-serif" font-size="16" fill="#64748B" text-anchor="middle">
+    Paper: "Simple and Effective Masked Diffusion Language Models" (Sahoo et al., 2024)
+  </text>
+</svg>
+
