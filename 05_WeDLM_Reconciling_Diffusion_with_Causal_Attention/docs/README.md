@@ -735,8 +735,9 @@ def compute_cmlm_loss(model, input_ids, labels, mask_flags):
 **Formal Statement**: Let $x_j$ be a token at position $j$. Under the assumption of left-to-right language structure:
 
 $$
-I(x_j ; x_{>j} \mid x_{<j}) \approx 0
+I(x_j ; x_{\text{>}j} \mid x_{\text{<}j}) \approx 0
 $$
+
 
 **Proof Sketch**:
 1. Natural language follows left-to-right dependencies (subject before verb before object)
