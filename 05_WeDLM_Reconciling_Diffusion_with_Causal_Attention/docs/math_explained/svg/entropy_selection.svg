@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 750">
+  <defs>
+    <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="lowEntropyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e"/>
+      <stop offset="100%" style="stop-color:#38ef7d"/>
+    </linearGradient>
+    <linearGradient id="highEntropyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5576c"/>
+      <stop offset="100%" style="stop-color:#f093fb"/>
+    </linearGradient>
+    <linearGradient id="medEntropyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7b731"/>
+      <stop offset="100%" style="stop-color:#fa8231"/>
+    </linearGradient>
+    <filter id="glow5">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="950" height="750" fill="url(#bgGrad5)"/>
+  
+  <!-- Title -->
+  <text x="475" y="40" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle" font-family="system-ui">Entropy-Based Position Selection</text>
+  <text x="475" y="68" fill="#aaa" font-size="14" text-anchor="middle" font-family="system-ui">Dynamically decide which positions to fill based on model confidence</text>
+  
+  <!-- What is Entropy Section -->
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="420" height="200" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="210" y="30" fill="#667eea" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">What is Entropy?</text>
+    
+    <!-- Low entropy example -->
+    <g transform="translate(20, 55)">
+      <text x="0" y="0" fill="#38ef7d" font-size="12" font-weight="bold" font-family="system-ui">Low Entropy (H ≈ 0.2)</text>
+      <text x="0" y="15" fill="#aaa" font-size="10" font-family="system-ui">Model is CONFIDENT</text>
+      
+      <!-- Probability distribution - peaked -->
+      <rect x="0" y="25" width="170" height="60" rx="4" fill="#2a2a4e"/>
+      <rect x="10" y="75" width="20" height="8" fill="#38ef7d" opacity="0.3"/>
+      <rect x="35" y="75" width="20" height="8" fill="#38ef7d" opacity="0.3"/>
+      <rect x="60" y="35" width="20" height="48" fill="#38ef7d" opacity="0.9"/>
+      <rect x="85" y="75" width="20" height="8" fill="#38ef7d" opacity="0.3"/>
+      <rect x="110" y="75" width="20" height="8" fill="#38ef7d" opacity="0.3"/>
+      <rect x="135" y="75" width="20" height="8" fill="#38ef7d" opacity="0.3"/>
+      <text x="85" y="95" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">P("four") ≈ 0.95</text>
+    </g>
+    
+    <!-- High entropy example -->
+    <g transform="translate(215, 55)">
+      <text x="0" y="0" fill="#f5576c" font-size="12" font-weight="bold" font-family="system-ui">High Entropy (H ≈ 2.5)</text>
+      <text x="0" y="15" fill="#aaa" font-size="10" font-family="system-ui">Model is UNCERTAIN</text>
+      
+      <!-- Probability distribution - flat -->
+      <rect x="0" y="25" width="170" height="60" rx="4" fill="#2a2a4e"/>
+      <rect x="10" y="55" width="20" height="28" fill="#f5576c" opacity="0.7"/>
+      <rect x="35" y="60" width="20" height="23" fill="#f5576c" opacity="0.7"/>
+      <rect x="60" y="52" width="20" height="31" fill="#f5576c" opacity="0.7"/>
+      <rect x="85" y="58" width="20" height="25" fill="#f5576c" opacity="0.7"/>
+      <rect x="110" y="54" width="20" height="29" fill="#f5576c" opacity="0.7"/>
+      <rect x="135" y="62" width="20" height="21" fill="#f5576c" opacity="0.7"/>
+      <text x="85" y="95" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">Many tokens likely</text>
+    </g>
+    
+    <!-- Formula -->
+    <g transform="translate(20, 165)">
+      <rect x="0" y="0" width="380" height="25" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="17" fill="#fff" font-size="11" text-anchor="middle" font-family="monospace">H(p) = -Σ p(x) log p(x)   →   Lower H = More Confident</text>
+    </g>
+  </g>
+  
+  <!-- Position Penalty Section -->
+  <g transform="translate(490, 100)">
+    <rect x="0" y="0" width="420" height="200" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="210" y="30" fill="#667eea" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Position-Adjusted Entropy</text>
+    
+    <!-- Explanation -->
+    <g transform="translate(20, 55)">
+      <text x="0" y="0" fill="#fff" font-size="11" font-family="system-ui">Prefer filling earlier positions to maintain coherence:</text>
+      
+      <!-- Formula -->
+      <rect x="0" y="15" width="380" height="35" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="38" fill="#fff" font-size="12" text-anchor="middle" font-family="monospace">H_adj(i) = H(i) + α × (pos_i - pos_0)</text>
+      
+      <!-- Visual representation -->
+      <g transform="translate(0, 65)">
+        <text x="0" y="0" fill="#aaa" font-size="10" font-family="system-ui">Position penalty increases with distance:</text>
+        
+        <!-- Position boxes -->
+        <rect x="20" y="15" width="60" height="40" rx="4" fill="#38ef7d" opacity="0.3" stroke="#38ef7d" stroke-width="1"/>
+        <text x="50" y="35" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">pos 3</text>
+        <text x="50" y="48" fill="#38ef7d" font-size="8" text-anchor="middle" font-family="system-ui">+0.0</text>
+        
+        <rect x="95" y="15" width="60" height="40" rx="4" fill="#f7b731" opacity="0.3" stroke="#f7b731" stroke-width="1"/>
+        <text x="125" y="35" fill="#f7b731" font-size="9" text-anchor="middle" font-family="system-ui">pos 4</text>
+        <text x="125" y="48" fill="#f7b731" font-size="8" text-anchor="middle" font-family="system-ui">+0.1</text>
+        
+        <rect x="170" y="15" width="60" height="40" rx="4" fill="#fa8231" opacity="0.3" stroke="#fa8231" stroke-width="1"/>
+        <text x="200" y="35" fill="#fa8231" font-size="9" text-anchor="middle" font-family="system-ui">pos 5</text>
+        <text x="200" y="48" fill="#fa8231" font-size="8" text-anchor="middle" font-family="system-ui">+0.2</text>
+        
+        <rect x="245" y="15" width="60" height="40" rx="4" fill="#f5576c" opacity="0.3" stroke="#f5576c" stroke-width="1"/>
+        <text x="275" y="35" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">pos 6</text>
+        <text x="275" y="48" fill="#f5576c" font-size="8" text-anchor="middle" font-family="system-ui">+0.3</text>
+        
+        <text x="340" y="40" fill="#aaa" font-size="9" font-family="system-ui">...</text>
+      </g>
+      
+      <text x="0" y="130" fill="#aaa" font-size="10" font-family="system-ui">α = position penalty factor (hyperparameter)</text>
+    </g>
+  </g>
+  
+  <!-- Selection Algorithm Section -->
+  <g transform="translate(40, 320)">
+    <rect x="0" y="0" width="870" height="230" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="435" y="30" fill="#667eea" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Selection Algorithm in Action</text>
+    
+    <!-- Example sequence -->
+    <g transform="translate(30, 55)">
+      <text x="0" y="0" fill="#aaa" font-size="11" font-family="system-ui">Example: "2+2=" → predict next 6 positions</text>
+      
+      <!-- Tokens with entropy values -->
+      <g transform="translate(0, 20)">
+        <!-- Position headers -->
+        <text x="60" y="0" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">pos 4</text>
+        <text x="140" y="0" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">pos 5</text>
+        <text x="220" y="0" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">pos 6</text>
+        <text x="300" y="0" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">pos 7</text>
+        <text x="380" y="0" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">pos 8</text>
+        <text x="460" y="0" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">pos 9</text>
+        
+        <!-- Token boxes -->
+        <rect x="20" y="12" width="80" height="50" rx="6" fill="#38ef7d" opacity="0.2" stroke="#38ef7d" stroke-width="2" filter="url(#glow5)"/>
+        <text x="60" y="35" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">"The"</text>
+        <text x="60" y="52" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">H=0.15 ✓</text>
+        
+        <rect x="100" y="12" width="80" height="50" rx="6" fill="#38ef7d" opacity="0.2" stroke="#38ef7d" stroke-width="2" filter="url(#glow5)"/>
+        <text x="140" y="35" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">"answer"</text>
+        <text x="140" y="52" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">H=0.22 ✓</text>
+        
+        <rect x="180" y="12" width="80" height="50" rx="6" fill="#38ef7d" opacity="0.2" stroke="#38ef7d" stroke-width="2" filter="url(#glow5)"/>
+        <text x="220" y="35" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">"is"</text>
+        <text x="220" y="52" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">H=0.18 ✓</text>
+        
+        <rect x="260" y="12" width="80" height="50" rx="6" fill="#38ef7d" opacity="0.2" stroke="#38ef7d" stroke-width="2" filter="url(#glow5)"/>
+        <text x="300" y="35" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">"four"</text>
+        <text x="300" y="52" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">H=0.28 ✓</text>
+        
+        <rect x="340" y="12" width="80" height="50" rx="6" fill="#f5576c" opacity="0.2" stroke="#f5576c" stroke-width="2"/>
+        <text x="380" y="35" fill="#aaa" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[MASK]</text>
+        <text x="380" y="52" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">H=1.85 ✗</text>
+        
+        <rect x="420" y="12" width="80" height="50" rx="6" fill="#f5576c" opacity="0.2" stroke="#f5576c" stroke-width="2"/>
+        <text x="460" y="35" fill="#aaa" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[MASK]</text>
+        <text x="460" y="52" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">H=2.31 ✗</text>
+        
+        <!-- Threshold line -->
+        <line x1="510" y1="10" x2="510" y2="70" stroke="#667eea" stroke-width="1" stroke-dasharray="3,3"/>
+      </g>
+      
+      <!-- Threshold explanation -->
+      <g transform="translate(540, 20)">
+        <rect x="0" y="0" width="280" height="105" rx="6" fill="#2a2a4e"/>
+        <text x="140" y="20" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">Threshold τ = 0.5</text>
+        <line x1="20" y1="30" x2="260" y2="30" stroke="#444" stroke-width="1"/>
+        <text x="20" y="50" fill="#38ef7d" font-size="10" font-family="system-ui">H_adj &lt; τ → Fill position</text>
+        <text x="20" y="68" fill="#f5576c" font-size="10" font-family="system-ui">H_adj ≥ τ → Keep mask, retry later</text>
+        <line x1="20" y1="78" x2="260" y2="78" stroke="#444" stroke-width="1"/>
+        <text x="140" y="95" fill="#38ef7d" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">4 tokens filled in 1 step!</text>
+      </g>
+    </g>
+    
+    <!-- Benefits -->
+    <g transform="translate(30, 160)">
+      <text x="0" y="0" fill="#fff" font-size="12" font-weight="bold" font-family="system-ui">Benefits of Entropy-Based Selection:</text>
+      
+      <g transform="translate(0, 20)">
+        <rect x="0" y="0" width="265" height="40" rx="5" fill="#2a2a4e"/>
+        <text x="132" y="16" fill="#38ef7d" font-size="10" text-anchor="middle" font-weight="bold" font-family="system-ui">Adaptive Parallelism</text>
+        <text x="132" y="32" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">More tokens when confident, fewer when uncertain</text>
+        
+        <rect x="280" y="0" width="265" height="40" rx="5" fill="#2a2a4e"/>
+        <text x="412" y="16" fill="#38ef7d" font-size="10" text-anchor="middle" font-weight="bold" font-family="system-ui">Quality Preservation</text>
+        <text x="412" y="32" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Avoid committing when model is unsure</text>
+        
+        <rect x="560" y="0" width="265" height="40" rx="5" fill="#2a2a4e"/>
+        <text x="692" y="16" fill="#38ef7d" font-size="10" text-anchor="middle" font-weight="bold" font-family="system-ui">Task-Aware Speed</text>
+        <text x="692" y="32" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Math/code → faster; Creative → careful</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Task examples -->
+  <g transform="translate(40, 570)">
+    <rect x="0" y="0" width="870" height="160" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="435" y="30" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Entropy Varies by Task Type</text>
+    
+    <g transform="translate(50, 55)">
+      <!-- Math task -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="240" height="85" rx="8" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+        <text x="120" y="22" fill="#38ef7d" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">📐 Math/Structured</text>
+        <text x="120" y="42" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">"2+2=" → "4" (deterministic)</text>
+        <rect x="20" y="52" width="200" height="8" rx="2" fill="#1a1a3e"/>
+        <rect x="20" y="52" width="180" height="8" rx="2" fill="#38ef7d" opacity="0.8"/>
+        <text x="120" y="75" fill="#38ef7d" font-size="10" text-anchor="middle" font-family="system-ui">Low entropy → 4-6 tokens/step</text>
+      </g>
+      
+      <!-- Code task -->
+      <g transform="translate(270, 0)">
+        <rect x="0" y="0" width="240" height="85" rx="8" fill="#2a2a4e" stroke="#f7b731" stroke-width="1"/>
+        <text x="120" y="22" fill="#f7b731" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">💻 Code Generation</text>
+        <text x="120" y="42" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">"for i in" → "range(10):"</text>
+        <rect x="20" y="52" width="200" height="8" rx="2" fill="#1a1a3e"/>
+        <rect x="20" y="52" width="140" height="8" rx="2" fill="#f7b731" opacity="0.8"/>
+        <text x="120" y="75" fill="#f7b731" font-size="10" text-anchor="middle" font-family="system-ui">Medium entropy → 2-4 tokens/step</text>
+      </g>
+      
+      <!-- Creative task -->
+      <g transform="translate(540, 0)">
+        <rect x="0" y="0" width="240" height="85" rx="8" fill="#2a2a4e" stroke="#f5576c" stroke-width="1"/>
+        <text x="120" y="22" fill="#f5576c" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">✍️ Creative/Open-ended</text>
+        <text x="120" y="42" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">"Write a poem about..." → ?</text>
+        <rect x="20" y="52" width="200" height="8" rx="2" fill="#1a1a3e"/>
+        <rect x="20" y="52" width="80" height="8" rx="2" fill="#f5576c" opacity="0.8"/>
+        <text x="120" y="75" fill="#f5576c" font-size="10" text-anchor="middle" font-family="system-ui">High entropy → 1-2 tokens/step</text>
+      </g>
+    </g>
+  </g>
+</svg>
+

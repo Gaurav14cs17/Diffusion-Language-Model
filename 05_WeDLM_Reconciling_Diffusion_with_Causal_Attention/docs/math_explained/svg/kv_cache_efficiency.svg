@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 700">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="cacheGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="recomputeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5576c"/>
+      <stop offset="100%" style="stop-color:#f093fb"/>
+    </linearGradient>
+    <linearGradient id="efficientGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e"/>
+      <stop offset="100%" style="stop-color:#38ef7d"/>
+    </linearGradient>
+    <filter id="glow4">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="950" height="700" fill="url(#bgGrad4)"/>
+  
+  <!-- Title -->
+  <text x="475" y="40" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle" font-family="system-ui">Why Standard Causal Attention Enables KV Cache</text>
+  <text x="475" y="68" fill="#aaa" font-size="14" text-anchor="middle" font-family="system-ui">The key to translating parallel prediction into real-world speedup</text>
+  
+  <!-- Bidirectional Section (Standard Diffusion) -->
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="420" height="280" rx="12" fill="#1a1a3e" stroke="#f5576c" stroke-width="2"/>
+    <text x="210" y="30" fill="#f5576c" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Standard Diffusion LM</text>
+    <text x="210" y="50" fill="#aaa" font-size="12" text-anchor="middle" font-family="system-ui">(Bidirectional Attention)</text>
+    
+    <!-- Attention matrix visualization -->
+    <g transform="translate(30, 70)">
+      <text x="80" y="-5" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">Full Attention Matrix</text>
+      
+      <!-- 5x5 full attention matrix -->
+      <g transform="translate(0, 10)">
+        <rect x="0" y="0" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="0" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="0" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="0" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="128" y="0" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        
+        <rect x="0" y="32" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="32" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="32" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="32" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="128" y="32" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        
+        <rect x="0" y="64" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="64" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="64" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="64" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="128" y="64" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        
+        <rect x="0" y="96" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="96" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="96" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="96" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="128" y="96" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        
+        <rect x="0" y="128" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="128" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="128" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="128" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="128" y="128" width="32" height="32" fill="#f5576c" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+      </g>
+      
+      <!-- Problem explanation -->
+      <g transform="translate(190, 30)">
+        <rect x="0" y="0" width="190" height="130" rx="6" fill="#2a2a4e"/>
+        <text x="95" y="22" fill="#f5576c" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">❌ Cannot Use KV Cache</text>
+        <text x="10" y="45" fill="#aaa" font-size="10" font-family="system-ui">• Tokens attend to future tokens</text>
+        <text x="10" y="62" fill="#aaa" font-size="10" font-family="system-ui">• K,V depend on full sequence</text>
+        <text x="10" y="79" fill="#aaa" font-size="10" font-family="system-ui">• Must recompute all every step</text>
+        <line x1="10" y1="90" x2="180" y2="90" stroke="#444" stroke-width="1"/>
+        <text x="95" y="108" fill="#f5576c" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">O(N² × T) computation</text>
+        <text x="95" y="123" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">N=seq len, T=steps</text>
+      </g>
+    </g>
+    
+    <!-- Recompute visualization -->
+    <g transform="translate(40, 205)">
+      <text x="0" y="0" fill="#aaa" font-size="10" font-family="system-ui">Each diffusion step:</text>
+      <rect x="0" y="10" width="340" height="50" rx="5" fill="#2a2a4e" stroke="#f5576c" stroke-width="1"/>
+      <text x="170" y="30" fill="#f5576c" font-size="10" text-anchor="middle" font-family="system-ui">Recompute entire K,V matrices</text>
+      <text x="170" y="48" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">for ALL positions → SLOW 🐢</text>
+    </g>
+  </g>
+  
+  <!-- WeDLM Section (Causal Attention) -->
+  <g transform="translate(490, 100)">
+    <rect x="0" y="0" width="420" height="280" rx="12" fill="#1a1a3e" stroke="#38ef7d" stroke-width="2"/>
+    <text x="210" y="30" fill="#38ef7d" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">WeDLM</text>
+    <text x="210" y="50" fill="#aaa" font-size="12" text-anchor="middle" font-family="system-ui">(Standard Causal Attention)</text>
+    
+    <!-- Attention matrix visualization -->
+    <g transform="translate(30, 70)">
+      <text x="80" y="-5" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">Causal Attention Matrix</text>
+      
+      <!-- 5x5 causal attention matrix (lower triangular) -->
+      <g transform="translate(0, 10)">
+        <!-- Row 1 -->
+        <rect x="0" y="0" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="0" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        <rect x="64" y="0" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        <rect x="96" y="0" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        <rect x="128" y="0" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        
+        <!-- Row 2 -->
+        <rect x="0" y="32" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="32" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="32" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        <rect x="96" y="32" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        <rect x="128" y="32" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        
+        <!-- Row 3 -->
+        <rect x="0" y="64" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="64" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="64" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="64" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        <rect x="128" y="64" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        
+        <!-- Row 4 -->
+        <rect x="0" y="96" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="96" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="96" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="96" width="32" height="32" fill="#667eea" opacity="0.8" stroke="#a855f7" stroke-width="2"/>
+        <rect x="128" y="96" width="32" height="32" fill="#1a1a3e" stroke="#333" stroke-width="0.5"/>
+        
+        <!-- Row 5 -->
+        <rect x="0" y="128" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="32" y="128" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="64" y="128" width="32" height="32" fill="#38ef7d" opacity="0.8" stroke="#fff" stroke-width="0.5"/>
+        <rect x="96" y="128" width="32" height="32" fill="#667eea" opacity="0.8" stroke="#a855f7" stroke-width="2"/>
+        <rect x="128" y="128" width="32" height="32" fill="#667eea" opacity="0.8" stroke="#a855f7" stroke-width="2"/>
+        
+        <!-- Legend for colors -->
+        <rect x="0" y="175" width="12" height="12" rx="2" fill="#38ef7d" opacity="0.8"/>
+        <text x="18" y="185" fill="#aaa" font-size="9" font-family="system-ui">Cached prefix K,V</text>
+        <rect x="90" y="175" width="12" height="12" rx="2" fill="#667eea" opacity="0.8"/>
+        <text x="108" y="185" fill="#aaa" font-size="9" font-family="system-ui">Window (compute)</text>
+      </g>
+      
+      <!-- Advantage explanation -->
+      <g transform="translate(190, 30)">
+        <rect x="0" y="0" width="190" height="130" rx="6" fill="#2a2a4e"/>
+        <text x="95" y="22" fill="#38ef7d" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">✓ Full KV Cache Support</text>
+        <text x="10" y="45" fill="#aaa" font-size="10" font-family="system-ui">• Tokens only attend to past</text>
+        <text x="10" y="62" fill="#aaa" font-size="10" font-family="system-ui">• K,V independent of future</text>
+        <text x="10" y="79" fill="#aaa" font-size="10" font-family="system-ui">• Cache &amp; reuse prefix K,V</text>
+        <line x1="10" y1="90" x2="180" y2="90" stroke="#444" stroke-width="1"/>
+        <text x="95" y="108" fill="#38ef7d" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">O(W × T) computation</text>
+        <text x="95" y="123" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">W=window, T=steps</text>
+      </g>
+    </g>
+    
+    <!-- Cache visualization -->
+    <g transform="translate(40, 205)">
+      <text x="0" y="0" fill="#aaa" font-size="10" font-family="system-ui">Each diffusion step:</text>
+      <rect x="0" y="10" width="340" height="50" rx="5" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="170" y="30" fill="#38ef7d" font-size="10" text-anchor="middle" font-family="system-ui">Reuse cached K,V + Compute window only</text>
+      <text x="170" y="48" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">→ Much FASTER ⚡</text>
+    </g>
+  </g>
+  
+  <!-- Compatibility section -->
+  <g transform="translate(40, 400)">
+    <rect x="0" y="0" width="870" height="140" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="435" y="30" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Compatible with Optimized Inference Stack</text>
+    
+    <g transform="translate(60, 55)">
+      <!-- FlashAttention -->
+      <rect x="0" y="0" width="160" height="65" rx="8" fill="url(#efficientGrad)" opacity="0.15" stroke="#38ef7d" stroke-width="2"/>
+      <text x="80" y="25" fill="#38ef7d" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">FlashAttention</text>
+      <text x="80" y="45" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">Memory-efficient</text>
+      <text x="80" y="58" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">attention kernel</text>
+      
+      <!-- PagedAttention -->
+      <rect x="185" y="0" width="160" height="65" rx="8" fill="url(#efficientGrad)" opacity="0.15" stroke="#38ef7d" stroke-width="2"/>
+      <text x="265" y="25" fill="#38ef7d" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">PagedAttention</text>
+      <text x="265" y="45" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">Dynamic KV cache</text>
+      <text x="265" y="58" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">memory management</text>
+      
+      <!-- CUDA Graphs -->
+      <rect x="370" y="0" width="160" height="65" rx="8" fill="url(#efficientGrad)" opacity="0.15" stroke="#38ef7d" stroke-width="2"/>
+      <text x="450" y="25" fill="#38ef7d" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">CUDA Graphs</text>
+      <text x="450" y="45" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">Reduced kernel</text>
+      <text x="450" y="58" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">launch overhead</text>
+      
+      <!-- vLLM -->
+      <rect x="555" y="0" width="160" height="65" rx="8" fill="url(#efficientGrad)" opacity="0.15" stroke="#38ef7d" stroke-width="2"/>
+      <text x="635" y="25" fill="#38ef7d" font-size="12" font-weight="bold" text-anchor="middle" font-family="system-ui">vLLM Engine</text>
+      <text x="635" y="45" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">Production-grade</text>
+      <text x="635" y="58" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">serving infrastructure</text>
+    </g>
+  </g>
+  
+  <!-- Bottom summary -->
+  <g transform="translate(40, 560)">
+    <rect x="0" y="0" width="870" height="120" rx="12" fill="#1a1a3e" stroke="#38ef7d" stroke-width="2"/>
+    <text x="435" y="30" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">The Key Insight</text>
+    
+    <g transform="translate(60, 50)">
+      <rect x="0" y="0" width="750" height="55" rx="6" fill="#2a2a4e"/>
+      <text x="375" y="22" fill="#fff" font-size="12" text-anchor="middle" font-family="system-ui">
+        Through <tspan fill="#667eea" font-weight="bold">Topological Reordering</tspan>, mask tokens are placed AFTER non-mask tokens,
+      </text>
+      <text x="375" y="42" fill="#fff" font-size="12" text-anchor="middle" font-family="system-ui">
+        enabling <tspan fill="#38ef7d" font-weight="bold">parallel mask prediction</tspan> while maintaining <tspan fill="#38ef7d" font-weight="bold">standard causal attention</tspan> = <tspan fill="#a855f7" font-weight="bold">KV Cache works!</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
+

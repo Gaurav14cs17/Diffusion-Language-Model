@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="arGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="100%" style="stop-color:#ee5a5a"/>
+    </linearGradient>
+    <linearGradient id="diffGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4ecdc4"/>
+      <stop offset="100%" style="stop-color:#44a08d"/>
+    </linearGradient>
+    <linearGradient id="wedlmGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Title -->
+  <text x="450" y="45" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle" font-family="system-ui">The Problem: Attention Pattern Mismatch</text>
+  
+  <!-- AR Section -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="250" height="40" rx="8" fill="url(#arGrad)" filter="url(#glow)"/>
+    <text x="125" y="27" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Autoregressive (AR)</text>
+    
+    <!-- AR Attention Matrix - Causal/Lower Triangular -->
+    <g transform="translate(25, 60)">
+      <!-- Matrix cells -->
+      <rect x="0" y="0" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="40" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="40" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="80" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="80" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="80" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="120" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="120" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="120" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="120" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="160" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="160" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="160" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="160" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="160" y="160" width="40" height="40" fill="#ff6b6b" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      
+      <!-- Empty cells (upper triangular) -->
+      <rect x="40" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="80" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="120" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="80" y="40" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="120" y="40" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="40" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="120" y="80" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="80" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="120" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      
+      <!-- Labels -->
+      <text x="100" y="-10" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui">Keys (past tokens)</text>
+      <text x="-15" y="100" fill="#aaa" font-size="11" text-anchor="middle" transform="rotate(-90, -15, 100)" font-family="system-ui">Queries</text>
+    </g>
+    
+    <text x="125" y="290" fill="#ff6b6b" font-size="13" text-anchor="middle" font-family="system-ui">✓ KV Cache Compatible</text>
+    <text x="125" y="310" fill="#ff6b6b" font-size="13" text-anchor="middle" font-family="system-ui">✗ Sequential (1 token/step)</text>
+  </g>
+  
+  <!-- Diffusion Section -->
+  <g transform="translate(325, 80)">
+    <rect x="0" y="0" width="250" height="40" rx="8" fill="url(#diffGrad)" filter="url(#glow)"/>
+    <text x="125" y="27" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">Standard Diffusion LM</text>
+    
+    <!-- Diffusion Attention Matrix - Full/Bidirectional -->
+    <g transform="translate(25, 60)">
+      <!-- All cells filled (bidirectional) -->
+      <rect x="0" y="0" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="0" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="0" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="0" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="160" y="0" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="40" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="40" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="40" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="40" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="160" y="40" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="80" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="80" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="80" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="80" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="160" y="80" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="120" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="120" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="120" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="120" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="160" y="120" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="160" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="160" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="160" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="160" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="160" y="160" width="40" height="40" fill="#4ecdc4" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      
+      <text x="100" y="-10" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui">Keys (all tokens)</text>
+    </g>
+    
+    <text x="125" y="290" fill="#4ecdc4" font-size="13" text-anchor="middle" font-family="system-ui">✗ No KV Cache (recompute all)</text>
+    <text x="125" y="310" fill="#4ecdc4" font-size="13" text-anchor="middle" font-family="system-ui">✓ Parallel prediction</text>
+  </g>
+  
+  <!-- WeDLM Section -->
+  <g transform="translate(600, 80)">
+    <rect x="0" y="0" width="250" height="40" rx="8" fill="url(#wedlmGrad)" filter="url(#glow)"/>
+    <text x="125" y="27" fill="#fff" font-size="16" font-weight="bold" text-anchor="middle" font-family="system-ui">WeDLM</text>
+    
+    <!-- WeDLM Attention Matrix - Causal with window -->
+    <g transform="translate(25, 60)">
+      <!-- Committed prefix (solid) -->
+      <rect x="0" y="0" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="40" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="40" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="0" y="80" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="80" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="80" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      
+      <!-- Window region (gradient) -->
+      <rect x="0" y="120" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="120" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="120" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="120" width="40" height="40" fill="#a855f7" opacity="0.9" stroke="#fff" stroke-width="2"/>
+      <rect x="0" y="160" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="40" y="160" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="80" y="160" width="40" height="40" fill="#667eea" opacity="0.9" stroke="#fff" stroke-width="1"/>
+      <rect x="120" y="160" width="40" height="40" fill="#a855f7" opacity="0.9" stroke="#fff" stroke-width="2"/>
+      <rect x="160" y="160" width="40" height="40" fill="#a855f7" opacity="0.9" stroke="#fff" stroke-width="2"/>
+      
+      <!-- Empty cells -->
+      <rect x="40" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="80" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="120" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="0" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="80" y="40" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="120" y="40" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="40" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="120" y="80" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="80" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      <rect x="160" y="120" width="40" height="40" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+      
+      <text x="100" y="-10" fill="#aaa" font-size="11" text-anchor="middle" font-family="system-ui">Keys (prefix + window)</text>
+      
+      <!-- Window bracket -->
+      <path d="M118,115 L118,205 M118,115 L128,115 M118,205 L128,205" stroke="#a855f7" stroke-width="2" fill="none"/>
+      <text x="190" y="165" fill="#a855f7" font-size="10" font-family="system-ui">Parallel</text>
+      <text x="190" y="178" fill="#a855f7" font-size="10" font-family="system-ui">Window</text>
+    </g>
+    
+    <text x="125" y="290" fill="#a855f7" font-size="13" text-anchor="middle" font-family="system-ui">✓ KV Cache Compatible</text>
+    <text x="125" y="310" fill="#a855f7" font-size="13" text-anchor="middle" font-family="system-ui">✓ Parallel (N tokens/step)</text>
+  </g>
+  
+  <!-- Bottom summary -->
+  <g transform="translate(0, 420)">
+    <rect x="50" y="0" width="800" height="60" rx="10" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="450" y="25" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold" font-family="system-ui">
+      Key Insight: Causal attention preserves KV cache while enabling parallel mask prediction
+    </text>
+    <text x="450" y="48" fill="#aaa" font-size="12" text-anchor="middle" font-family="system-ui">
+      WeDLM achieves best of both worlds through Topological Reordering
+    </text>
+  </g>
+</svg>
+

@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 850">
+  <defs>
+    <linearGradient id="bgGrad7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="formulaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <filter id="glow7">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="950" height="850" fill="url(#bgGrad7)"/>
+  
+  <!-- Title -->
+  <text x="475" y="40" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle" font-family="system-ui">Mathematical Formulation</text>
+  <text x="475" y="68" fill="#aaa" font-size="14" text-anchor="middle" font-family="system-ui">Core equations and algorithms behind WeDLM</text>
+  
+  <!-- Section 1: Standard Diffusion LM -->
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="420" height="180" rx="12" fill="#1a1a3e" stroke="#f5576c" stroke-width="2"/>
+    <text x="210" y="30" fill="#f5576c" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">Standard Diffusion LM</text>
+    
+    <g transform="translate(20, 55)">
+      <!-- Forward process -->
+      <text x="0" y="0" fill="#aaa" font-size="11" font-family="system-ui">Forward (corruption):</text>
+      <rect x="0" y="10" width="380" height="35" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="32" fill="#fff" font-size="13" text-anchor="middle" font-family="monospace">q(x_t | x_0) = (1-β_t)x_0 + β_t · [MASK]</text>
+      
+      <!-- Reverse process -->
+      <text x="0" y="60" fill="#aaa" font-size="11" font-family="system-ui">Reverse (denoising):</text>
+      <rect x="0" y="70" width="380" height="35" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="92" fill="#fff" font-size="13" text-anchor="middle" font-family="monospace">p_θ(x_0 | x_t) = Π p_θ(x_0^i | x_t)</text>
+      
+      <!-- Problem note -->
+      <text x="0" y="125" fill="#f5576c" font-size="10" font-family="system-ui">⚠ Requires bidirectional attention for full x_t context</text>
+    </g>
+  </g>
+  
+  <!-- Section 2: WeDLM Formulation -->
+  <g transform="translate(490, 100)">
+    <rect x="0" y="0" width="420" height="180" rx="12" fill="#1a1a3e" stroke="#38ef7d" stroke-width="2"/>
+    <text x="210" y="30" fill="#38ef7d" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">WeDLM Formulation</text>
+    
+    <g transform="translate(20, 55)">
+      <!-- Reordered factorization -->
+      <text x="0" y="0" fill="#aaa" font-size="11" font-family="system-ui">Topologically reordered factorization:</text>
+      <rect x="0" y="10" width="380" height="35" rx="4" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="190" y="32" fill="#38ef7d" font-size="13" text-anchor="middle" font-family="monospace">p_θ(x_M | x_C) = Π p_θ(x_M^i | x_C, x_M^&lt;i)</text>
+      
+      <!-- Key insight -->
+      <text x="0" y="60" fill="#aaa" font-size="11" font-family="system-ui">Key insight:</text>
+      <rect x="0" y="70" width="380" height="35" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="92" fill="#fff" font-size="12" text-anchor="middle" font-family="system-ui">Masks only attend to committed prefix x_C</text>
+      
+      <!-- Benefit -->
+      <text x="0" y="125" fill="#38ef7d" font-size="10" font-family="system-ui">✓ Compatible with causal attention → KV cache works!</text>
+    </g>
+  </g>
+  
+  <!-- Section 3: Topological Reordering -->
+  <g transform="translate(40, 300)">
+    <rect x="0" y="0" width="870" height="160" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="435" y="30" fill="#667eea" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">Topological Reordering Algorithm</text>
+    
+    <g transform="translate(30, 55)">
+      <!-- Input -->
+      <rect x="0" y="0" width="250" height="90" rx="6" fill="#2a2a4e"/>
+      <text x="125" y="20" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">Input Sequence</text>
+      <text x="125" y="40" fill="#aaa" font-size="10" text-anchor="middle" font-family="monospace">[The, answer, is, [M], [M], [M]]</text>
+      <text x="125" y="60" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">positions: [0, 1, 2, 3, 4, 5]</text>
+      <text x="125" y="80" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">C={0,1,2}, M={3,4,5}</text>
+      
+      <!-- Arrow -->
+      <path d="M270,45 L310,45" stroke="#667eea" stroke-width="2" fill="none"/>
+      <polygon points="310,42 320,45 310,48" fill="#667eea"/>
+      <text x="290" y="35" fill="#667eea" font-size="10" text-anchor="middle" font-family="system-ui">reorder</text>
+      
+      <!-- Reordering function -->
+      <rect x="340" y="0" width="220" height="90" rx="6" fill="#2a2a4e"/>
+      <text x="450" y="20" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">Reorder Function</text>
+      <text x="350" y="40" fill="#38ef7d" font-size="10" font-family="monospace">π = sort(indices, key=is_mask)</text>
+      <text x="350" y="58" fill="#aaa" font-size="10" font-family="monospace">ids' = ids[π]</text>
+      <text x="350" y="76" fill="#aaa" font-size="10" font-family="monospace">pos' = pos[π]</text>
+      
+      <!-- Arrow -->
+      <path d="M580,45 L620,45" stroke="#38ef7d" stroke-width="2" fill="none"/>
+      <polygon points="620,42 630,45 620,48" fill="#38ef7d"/>
+      
+      <!-- Output -->
+      <rect x="650" y="0" width="180" height="90" rx="6" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="740" y="20" fill="#38ef7d" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">Reordered</text>
+      <text x="740" y="40" fill="#38ef7d" font-size="10" text-anchor="middle" font-family="monospace">[The,answer,is,[M],[M],[M]]</text>
+      <text x="740" y="60" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">positions: [0,1,2,3,4,5]</text>
+      <text x="740" y="80" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">✓ Non-masks first!</text>
+    </g>
+  </g>
+  
+  <!-- Section 4: Entropy-Based Selection -->
+  <g transform="translate(40, 480)">
+    <rect x="0" y="0" width="420" height="180" rx="12" fill="#1a1a3e" stroke="#f7b731" stroke-width="2"/>
+    <text x="210" y="30" fill="#f7b731" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">Entropy-Based Position Selection</text>
+    
+    <g transform="translate(20, 50)">
+      <!-- Entropy formula -->
+      <text x="0" y="0" fill="#aaa" font-size="11" font-family="system-ui">1. Compute entropy for each mask:</text>
+      <rect x="0" y="10" width="380" height="30" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="30" fill="#fff" font-size="12" text-anchor="middle" font-family="monospace">H(i) = -Σ_v p_θ(v|x) log p_θ(v|x)</text>
+      
+      <!-- Position adjustment -->
+      <text x="0" y="55" fill="#aaa" font-size="11" font-family="system-ui">2. Add position penalty:</text>
+      <rect x="0" y="65" width="380" height="30" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="85" fill="#fff" font-size="12" text-anchor="middle" font-family="monospace">H_adj(i) = H(i) + α × (pos_i - pos_0)</text>
+      
+      <!-- Selection rule -->
+      <text x="0" y="110" fill="#aaa" font-size="11" font-family="system-ui">3. Select positions below threshold:</text>
+      <rect x="0" y="120" width="380" height="30" rx="4" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="190" y="140" fill="#38ef7d" font-size="12" text-anchor="middle" font-family="monospace">Fill = {i : H_adj(i) &lt; τ}</text>
+    </g>
+  </g>
+  
+  <!-- Section 5: Window Dynamics -->
+  <g transform="translate(490, 480)">
+    <rect x="0" y="0" width="420" height="180" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="210" y="30" fill="#667eea" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">Sliding Window Dynamics</text>
+    
+    <g transform="translate(20, 50)">
+      <!-- Window state -->
+      <text x="0" y="0" fill="#aaa" font-size="11" font-family="system-ui">Window state at step t:</text>
+      <rect x="0" y="10" width="380" height="30" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="30" fill="#fff" font-size="11" text-anchor="middle" font-family="monospace">W_t = [filled_prefix, remaining_masks]</text>
+      
+      <!-- Commit operation -->
+      <text x="0" y="55" fill="#aaa" font-size="11" font-family="system-ui">Commit filled prefix tokens:</text>
+      <rect x="0" y="65" width="380" height="30" rx="4" fill="#2a2a4e"/>
+      <text x="190" y="85" fill="#fff" font-size="11" text-anchor="middle" font-family="monospace">C' = C ∪ filled_prefix(W_t)</text>
+      
+      <!-- Refill -->
+      <text x="0" y="110" fill="#aaa" font-size="11" font-family="system-ui">Slide window and refill masks:</text>
+      <rect x="0" y="120" width="380" height="30" rx="4" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="190" y="140" fill="#38ef7d" font-size="11" text-anchor="middle" font-family="monospace">W_{t+1} = [remaining, new_masks]</text>
+    </g>
+  </g>
+  
+  <!-- Section 6: Complete Algorithm -->
+  <g transform="translate(40, 680)">
+    <rect x="0" y="0" width="870" height="150" rx="12" fill="#1a1a3e" stroke="#38ef7d" stroke-width="2"/>
+    <text x="435" y="28" fill="#38ef7d" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">Complete WeDLM Algorithm</text>
+    
+    <g transform="translate(30, 45)">
+      <rect x="0" y="0" width="810" height="90" rx="6" fill="#2a2a4e"/>
+      
+      <!-- Algorithm steps -->
+      <text x="20" y="20" fill="#667eea" font-size="11" font-weight="bold" font-family="monospace">while</text>
+      <text x="60" y="20" fill="#aaa" font-size="11" font-family="monospace">remaining_masks &gt; 0:</text>
+      
+      <text x="40" y="38" fill="#f7b731" font-size="10" font-family="monospace">1.</text>
+      <text x="60" y="38" fill="#aaa" font-size="10" font-family="monospace">Reorder: [committed, masks] = topological_sort(sequence)</text>
+      
+      <text x="40" y="54" fill="#f7b731" font-size="10" font-family="monospace">2.</text>
+      <text x="60" y="54" fill="#aaa" font-size="10" font-family="monospace">Forward: logits = model(reordered_ids, positions)  </text>
+      <text x="450" y="54" fill="#38ef7d" font-size="10" font-family="monospace"># Uses cached KV for committed</text>
+      
+      <text x="40" y="70" fill="#f7b731" font-size="10" font-family="monospace">3.</text>
+      <text x="60" y="70" fill="#aaa" font-size="10" font-family="monospace">Select: fill_pos = {i : entropy_adj(logits[i]) &lt; τ}</text>
+      
+      <text x="40" y="86" fill="#f7b731" font-size="10" font-family="monospace">4.</text>
+      <text x="60" y="86" fill="#aaa" font-size="10" font-family="monospace">Update: sequence[fill_pos] = sample(logits[fill_pos]); commit(filled_prefix); slide_window()</text>
+    </g>
+  </g>
+</svg>
+

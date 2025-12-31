@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 750">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="committedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#11998e"/>
+      <stop offset="100%" style="stop-color:#38ef7d"/>
+    </linearGradient>
+    <linearGradient id="windowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <linearGradient id="maskGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb"/>
+      <stop offset="100%" style="stop-color:#f5576c"/>
+    </linearGradient>
+    <marker id="arrow3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38ef7d"/>
+    </marker>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="950" height="750" fill="url(#bgGrad3)"/>
+  
+  <!-- Title -->
+  <text x="475" y="40" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle" font-family="system-ui">Streaming Parallel Decoding: Sliding Window</text>
+  <text x="475" y="68" fill="#aaa" font-size="14" text-anchor="middle" font-family="system-ui">Continuous prefix commitment with window sliding forward</text>
+  
+  <!-- Step 1: Initial Window -->
+  <g transform="translate(40, 100)">
+    <rect x="0" y="0" width="870" height="145" rx="10" fill="#1a1a3e" stroke="#444" stroke-width="1"/>
+    <text x="20" y="28" fill="#667eea" font-size="15" font-weight="bold" font-family="system-ui">Step 1: Initialize Window with Mask Tokens</text>
+    
+    <g transform="translate(30, 50)">
+      <!-- Prompt tokens -->
+      <rect x="0" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="27" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">What</text>
+      
+      <rect x="60" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="87" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">is</text>
+      
+      <rect x="120" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="147" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">2+2</text>
+      
+      <rect x="180" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="207" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">?</text>
+      
+      <!-- Separator line -->
+      <line x1="250" y1="-10" x2="250" y2="65" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5"/>
+      
+      <!-- Window tokens (all masks) -->
+      <rect x="265" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="292" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      
+      <rect x="325" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="352" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      
+      <rect x="385" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="412" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      
+      <rect x="445" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="472" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      
+      <!-- Window bracket -->
+      <path d="M263,-15 L263,-8 L502,-8 L502,-15" stroke="#a855f7" stroke-width="2" fill="none"/>
+      <text x="382" y="-20" fill="#a855f7" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">Sliding Window (size=4)</text>
+      
+      <!-- Labels -->
+      <rect x="580" y="5" width="12" height="12" rx="2" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="600" y="15" fill="#aaa" font-size="10" font-family="system-ui">Committed Prefix</text>
+      <rect x="580" y="25" width="12" height="12" rx="2" fill="url(#maskGrad)" opacity="0.85"/>
+      <text x="600" y="35" fill="#aaa" font-size="10" font-family="system-ui">Mask Tokens</text>
+      
+      <!-- KV Cache indicator -->
+      <text x="750" y="10" fill="#667eea" font-size="10" font-family="system-ui">KV Cache:</text>
+      <rect x="720" y="20" width="100" height="25" rx="4" fill="#2a2a4e" stroke="#667eea" stroke-width="1"/>
+      <text x="770" y="37" fill="#38ef7d" font-size="10" text-anchor="middle" font-family="system-ui">Prefix cached ✓</text>
+    </g>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M475,255 L475,275" stroke="#38ef7d" stroke-width="2" marker-end="url(#arrow3)"/>
+  
+  <!-- Step 2: Parallel Prediction -->
+  <g transform="translate(40, 285)">
+    <rect x="0" y="0" width="870" height="145" rx="10" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="20" y="28" fill="#667eea" font-size="15" font-weight="bold" font-family="system-ui">Step 2: Parallel Prediction → Fill High-Confidence Positions</text>
+    
+    <g transform="translate(30, 50)">
+      <!-- Prompt tokens -->
+      <rect x="0" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="27" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">What</text>
+      
+      <rect x="60" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="87" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">is</text>
+      
+      <rect x="120" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="147" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">2+2</text>
+      
+      <rect x="180" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="207" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">?</text>
+      
+      <line x1="250" y1="-10" x2="250" y2="65" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5"/>
+      
+      <!-- Window tokens (filled + masks) -->
+      <rect x="265" y="0" width="55" height="45" rx="5" fill="#667eea" opacity="0.9" stroke="#38ef7d" stroke-width="3"/>
+      <text x="292" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">The</text>
+      <text x="292" y="58" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">H=0.2 ✓</text>
+      
+      <rect x="325" y="0" width="55" height="45" rx="5" fill="#667eea" opacity="0.9" stroke="#38ef7d" stroke-width="3"/>
+      <text x="352" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">answer</text>
+      <text x="352" y="58" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">H=0.3 ✓</text>
+      
+      <rect x="385" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#f5576c" stroke-width="2"/>
+      <text x="412" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      <text x="412" y="58" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">H=1.8 ✗</text>
+      
+      <rect x="445" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#f5576c" stroke-width="2"/>
+      <text x="472" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      <text x="472" y="58" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">H=2.1 ✗</text>
+      
+      <!-- Legend -->
+      <rect x="580" y="0" width="230" height="65" rx="5" fill="#2a2a4e"/>
+      <text x="595" y="18" fill="#fff" font-size="11" font-weight="bold" font-family="system-ui">Entropy-Based Selection:</text>
+      <text x="595" y="35" fill="#38ef7d" font-size="10" font-family="system-ui">• H &lt; threshold → Fill (confident)</text>
+      <text x="595" y="52" fill="#f5576c" font-size="10" font-family="system-ui">• H ≥ threshold → Keep mask (uncertain)</text>
+    </g>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M475,440 L475,460" stroke="#38ef7d" stroke-width="2" marker-end="url(#arrow3)"/>
+  
+  <!-- Step 3: Commit & Slide -->
+  <g transform="translate(40, 470)">
+    <rect x="0" y="0" width="870" height="145" rx="10" fill="#1a1a3e" stroke="#38ef7d" stroke-width="2"/>
+    <text x="20" y="28" fill="#38ef7d" font-size="15" font-weight="bold" font-family="system-ui">Step 3: Commit Prefix → Slide Window Forward → Refill Masks</text>
+    
+    <g transform="translate(30, 50)">
+      <!-- Old prompt (faded) -->
+      <rect x="0" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.4"/>
+      <text x="27" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui" opacity="0.5">What</text>
+      
+      <rect x="60" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.4"/>
+      <text x="87" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui" opacity="0.5">is</text>
+      
+      <rect x="120" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.4"/>
+      <text x="147" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui" opacity="0.5">2+2</text>
+      
+      <rect x="180" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.4"/>
+      <text x="207" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui" opacity="0.5">?</text>
+      
+      <!-- New committed tokens -->
+      <rect x="240" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="267" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">The</text>
+      <text x="267" y="58" fill="#38ef7d" font-size="9" text-anchor="middle" font-weight="bold" font-family="system-ui">COMMITTED</text>
+      
+      <rect x="300" y="0" width="55" height="45" rx="5" fill="url(#committedGrad)" opacity="0.9"/>
+      <text x="327" y="28" fill="#000" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">answer</text>
+      <text x="327" y="58" fill="#38ef7d" font-size="9" text-anchor="middle" font-weight="bold" font-family="system-ui">COMMITTED</text>
+      
+      <line x1="370" y1="-10" x2="370" y2="65" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5"/>
+      
+      <!-- New window -->
+      <rect x="385" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="412" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      
+      <rect x="445" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="472" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      
+      <rect x="505" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="532" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      <text x="532" y="58" fill="#a855f7" font-size="9" text-anchor="middle" font-family="system-ui">NEW</text>
+      
+      <rect x="565" y="0" width="55" height="45" rx="5" fill="url(#maskGrad)" opacity="0.85" stroke="#a855f7" stroke-width="2"/>
+      <text x="592" y="28" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">[M]</text>
+      <text x="592" y="58" fill="#a855f7" font-size="9" text-anchor="middle" font-family="system-ui">NEW</text>
+      
+      <!-- New window bracket -->
+      <path d="M383,-15 L383,-8 L622,-8 L622,-15" stroke="#a855f7" stroke-width="2" fill="none"/>
+      <text x="502" y="-20" fill="#a855f7" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">New Window Position</text>
+      
+      <!-- Sliding arrow -->
+      <path d="M340,70 C380,90 420,90 460,70" stroke="#38ef7d" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+      <text x="400" y="95" fill="#38ef7d" font-size="10" text-anchor="middle" font-family="system-ui">Window slides →</text>
+    </g>
+  </g>
+  
+  <!-- Bottom summary -->
+  <g transform="translate(40, 640)">
+    <rect x="0" y="0" width="870" height="95" rx="10" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <text x="435" y="28" fill="#fff" font-size="14" text-anchor="middle" font-weight="bold" font-family="system-ui">Key Advantage: Multiple Tokens per Step</text>
+    
+    <g transform="translate(60, 45)">
+      <!-- AR comparison -->
+      <rect x="0" y="0" width="180" height="40" rx="5" fill="#2a2a4e"/>
+      <text x="90" y="15" fill="#ff6b6b" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">Autoregressive</text>
+      <text x="90" y="32" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">1 token/step</text>
+      
+      <!-- vs -->
+      <text x="220" y="25" fill="#fff" font-size="14" text-anchor="middle" font-family="system-ui">vs</text>
+      
+      <!-- WeDLM -->
+      <rect x="260" y="0" width="180" height="40" rx="5" fill="#2a2a4e"/>
+      <text x="350" y="15" fill="#38ef7d" font-size="11" text-anchor="middle" font-weight="bold" font-family="system-ui">WeDLM</text>
+      <text x="350" y="32" fill="#aaa" font-size="10" text-anchor="middle" font-family="system-ui">N tokens/step (N≈2-6)</text>
+      
+      <!-- Result -->
+      <rect x="500" y="0" width="250" height="40" rx="5" fill="#1a3a2e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="625" y="25" fill="#38ef7d" font-size="12" text-anchor="middle" font-weight="bold" font-family="system-ui">⚡ 3-6× Faster on Math/Code</text>
+    </g>
+  </g>
+</svg>
+
