@@ -155,37 +155,37 @@ python scripts/train.py \
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        WeDLM Inference Flow                              │
+│                        WeDLM Inference Flow                             │
 ├─────────────────────────────────────────────────────────────────────────┤
-│                                                                          │
+│                                                                         │
 │   Prefix (KV Cached)              Window (Processing)                   │
-│   ┌─────┬─────┬─────┐            ┌───┬───┬───┬───┬───┬───┬───┬───┐     │
-│   │ The │quick│brown│            │ M │ M │ M │ M │ M │ M │ M │ M │     │
-│   └─────┴─────┴─────┘            └───┴───┴───┴───┴───┴───┴───┴───┘     │
-│                                           │                              │
-│                                           ▼                              │
+│   ┌─────┬─────┬─────┐            ┌───┬───┬───┬───┬───┬───┬───┬───┐      │
+│   │ The │quick│brown│            │ M │ M │ M │ M │ M │ M │ M │ M │      │
+│   └─────┴─────┴─────┘            └───┴───┴───┴───┴───┴───┴───┴───┘      │
+│                                           │                             │
+│                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  1. Forward Pass (Causal) │                 │
+│                            │  1. Forward Pass (Causal) │                │
 │                            └──────────────────────────┘                 │
-│                                           │                              │
-│                                           ▼                              │
+│                                           │                             │
+│                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  2. Compute Entropy H(P)  │                 │
-│                            │     for each mask token   │                 │
+│                            │  2. Compute Entropy H(P)  │                │
+│                            │     for each mask token   │                │
 │                            └──────────────────────────┘                 │
-│                                           │                              │
-│                                           ▼                              │
+│                                           │                             │
+│                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  3. Fill positions where  │                 │
-│                            │     H̃ < threshold τ       │                 │
+│                            │  3. Fill positions where  │                │
+│                            │     H̃ < threshold τ       │                │
 │                            └──────────────────────────┘                 │
-│                                           │                              │
-│                                           ▼                              │
+│                                           │                             │
+│                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  4. Commit prefix tokens  │                 │
-│                            │     & slide window        │                 │
+│                            │  4. Commit prefix tokens  │                │
+│                            │     & slide window        │                │
 │                            └──────────────────────────┘                 │
-│                                                                          │
+│                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -237,7 +237,7 @@ $$\tilde{H}_j = H(P_j) + \lambda(j - j_{\min}), \quad \text{Fill if } \tilde{H}_
 
 | Resource | Description |
 |:---------|:------------|
-| [📄 **Paper Explained**](./docs/WeDLM_Paper_Explained.md) | Full mathematical walkthrough of WeDLM |
+| [📄 **Paper Explained**](./docs/README.md) | Full mathematical walkthrough of WeDLM |
 | [🎨 **Visual Math Guide**](./docs/math_explained/README.md) | Interactive SVG diagrams for key concepts |
 
 <details>
