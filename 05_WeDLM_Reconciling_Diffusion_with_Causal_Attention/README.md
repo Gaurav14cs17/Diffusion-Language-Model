@@ -165,25 +165,25 @@ python scripts/train.py \
 │                                           │                             │
 │                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  1. Forward Pass (Causal) │                │
+│                            │  1. Forward Pass (Causal)│                 │
 │                            └──────────────────────────┘                 │
 │                                           │                             │
 │                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  2. Compute Entropy H(P)  │                │
-│                            │     for each mask token   │                │
+│                            │  2. Compute Entropy H(P) │                 │
+│                            │     for each mask token  │                 │
 │                            └──────────────────────────┘                 │
 │                                           │                             │
 │                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  3. Fill positions where  │                │
-│                            │     H̃ < threshold τ       │                │
+│                            │  3. Fill positions where │                 │
+│                            │     H̃ < threshold τ      │                 │
 │                            └──────────────────────────┘                 │
 │                                           │                             │
 │                                           ▼                             │
 │                            ┌──────────────────────────┐                 │
-│                            │  4. Commit prefix tokens  │                │
-│                            │     & slide window        │                │
+│                            │  4. Commit prefix tokens │                 │
+│                            │     & slide window       │                 │
 │                            └──────────────────────────┘                 │
 │                                                                         │
 └─────────────────────────────────────────────────────────────────────────┘
