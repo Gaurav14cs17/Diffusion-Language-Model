@@ -142,8 +142,8 @@ python scripts/train.py \
 
 | Notebook | Description | Colab |
 |:---------|:------------|:-----:|
-| **Training** | Fine-tune AR model → WeDLM | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gaurav14cs17/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention/blob/main/notebooks/WeDLM_Training.ipynb) |
-| **Inference** | Fast parallel generation demo | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Gaurav14cs17/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention/blob/main/notebooks/WeDLM_Inference.ipynb) |
+| **Training** | Fine-tune AR model → WeDLM | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://api.github.com/repos/Gaurav14cs17/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention/blob/main/notebooks/WeDLM_Training.ipynb) |
+| **Inference** | Fast parallel generation demo | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://api.github.com/repos/Gaurav14cs17/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention/blob/main/notebooks/WeDLM_Inference.ipynb) |
 
 </div>
 
