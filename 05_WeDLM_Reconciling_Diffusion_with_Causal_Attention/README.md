@@ -314,6 +314,6 @@ triton
 
 
 
-[📄 Paper](https://arxiv.org/abs/2512.22737) • [💻 Code](https://github.com/Gaurav14cs17/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention) • [🤗 Models](https://huggingface.co/collections/tencent/wedlm)
+[📄 Paper](https://arxiv.org/abs/2512.22737) • [💻 Code](https://github.com/Tencent/WeDLM) • [🤗 Models](https://huggingface.co/collections/tencent/wedlm)
 
 </div>
