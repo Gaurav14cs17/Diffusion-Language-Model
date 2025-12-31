@@ -85,8 +85,9 @@ Where each position can attend to **all** other positions.
 The standard AR factorization:
 
 $$
-P_\theta(x_{1:n}) = \prod_{i=1}^{n} P_\theta(x_i \mid x_{<i})
+P_\theta(x_{1:n}) = \prod_{i=1}^{n} P_\theta(x_i \mid x_{1:i-1})
 $$
+
 
 **Attention Mask (Causal)**:
 
