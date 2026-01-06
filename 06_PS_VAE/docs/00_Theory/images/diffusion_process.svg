@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <linearGradient id="cleanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#40c057;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="noiseGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#888;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#555;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowDiff" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowDiff" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4facfe"/>
+    </marker>
+    <marker id="arrowRev" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f093fb"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="350" fill="#1a1a2e" rx="15"/>
+  
+  <!-- Title -->
+  <text x="400" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Diffusion Process</text>
+  
+  <!-- Forward Process -->
+  <text x="400" y="65" font-family="Arial, sans-serif" font-size="14" fill="#4facfe" text-anchor="middle" font-weight="bold">Forward Process (Adding Noise)</text>
+  
+  <!-- z_0 -->
+  <rect x="50" y="85" width="60" height="60" rx="10" fill="url(#cleanGrad)" filter="url(#shadowDiff)"/>
+  <text x="80" y="115" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z₀</text>
+  <text x="80" y="135" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">clean</text>
+  
+  <!-- Arrow + noise -->
+  <path d="M 115 115 L 165 115" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowDiff)"/>
+  <text x="140" y="105" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">+ε</text>
+  
+  <!-- z_1 -->
+  <rect x="170" y="85" width="60" height="60" rx="10" fill="#6abe6a" filter="url(#shadowDiff)"/>
+  <text x="200" y="115" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z₁</text>
+  
+  <!-- Arrow + noise -->
+  <path d="M 235 115 L 285 115" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowDiff)"/>
+  <text x="260" y="105" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">+ε</text>
+  
+  <!-- z_2 -->
+  <rect x="290" y="85" width="60" height="60" rx="10" fill="#8ab88a" filter="url(#shadowDiff)"/>
+  <text x="320" y="115" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z₂</text>
+  
+  <!-- Dots -->
+  <text x="390" y="120" font-family="Arial, sans-serif" font-size="20" fill="#888" text-anchor="middle">···</text>
+  
+  <!-- Arrow + noise -->
+  <path d="M 420 115 L 470 115" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowDiff)"/>
+  <text x="445" y="105" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">+ε</text>
+  
+  <!-- z_{T-1} -->
+  <rect x="475" y="85" width="60" height="60" rx="10" fill="#999" filter="url(#shadowDiff)"/>
+  <text x="505" y="115" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">z_{T-1}</text>
+  
+  <!-- Arrow + noise -->
+  <path d="M 540 115 L 590 115" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowDiff)"/>
+  <text x="565" y="105" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">+ε</text>
+  
+  <!-- z_T -->
+  <rect x="595" y="85" width="60" height="60" rx="10" fill="url(#noiseGradD)" filter="url(#shadowDiff)"/>
+  <text x="625" y="115" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">z_T</text>
+  <text x="625" y="135" font-family="Arial, sans-serif" font-size="9" fill="#e0e0e0" text-anchor="middle">noise</text>
+  
+  <!-- Pure noise icon -->
+  <rect x="680" y="85" width="80" height="60" rx="8" fill="#2d2d44"/>
+  <text x="720" y="115" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">🌫️</text>
+  <text x="720" y="140" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">~ N(0, I)</text>
+  
+  <!-- Reverse Process -->
+  <text x="400" y="185" font-family="Arial, sans-serif" font-size="14" fill="#f093fb" text-anchor="middle" font-weight="bold">Reverse Process (Denoising)</text>
+  
+  <!-- z_T -->
+  <rect x="595" y="205" width="60" height="60" rx="10" fill="url(#noiseGradD)" filter="url(#shadowDiff)"/>
+  <text x="625" y="235" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">z_T</text>
+  
+  <!-- Arrow denoise -->
+  <path d="M 590 235 L 540 235" stroke="#f093fb" stroke-width="2" fill="none" marker-end="url(#arrowRev)"/>
+  <text x="565" y="225" font-family="Arial, sans-serif" font-size="9" fill="#f093fb" text-anchor="middle">denoise</text>
+  
+  <!-- z_{T-1} -->
+  <rect x="475" y="205" width="60" height="60" rx="10" fill="#999" filter="url(#shadowDiff)"/>
+  <text x="505" y="235" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">z_{T-1}</text>
+  
+  <!-- Dots -->
+  <text x="420" y="240" font-family="Arial, sans-serif" font-size="20" fill="#888" text-anchor="middle">···</text>
+  
+  <!-- Arrow denoise -->
+  <path d="M 385 235 L 355 235" stroke="#f093fb" stroke-width="2" fill="none" marker-end="url(#arrowRev)"/>
+  
+  <!-- z_1 -->
+  <rect x="290" y="205" width="60" height="60" rx="10" fill="#8ab88a" filter="url(#shadowDiff)"/>
+  <text x="320" y="235" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z₁</text>
+  
+  <!-- Arrow denoise -->
+  <path d="M 285 235 L 235 235" stroke="#f093fb" stroke-width="2" fill="none" marker-end="url(#arrowRev)"/>
+  <text x="260" y="225" font-family="Arial, sans-serif" font-size="9" fill="#f093fb" text-anchor="middle">denoise</text>
+  
+  <!-- z_0 -->
+  <rect x="170" y="205" width="60" height="60" rx="10" fill="url(#cleanGrad)" filter="url(#shadowDiff)"/>
+  <text x="200" y="235" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z₀</text>
+  
+  <!-- Generated image -->
+  <rect x="50" y="205" width="80" height="60" rx="8" fill="#2d2d44"/>
+  <text x="90" y="235" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">🖼️</text>
+  <text x="90" y="260" font-family="Arial, sans-serif" font-size="9" fill="#51cf66" text-anchor="middle">Generated!</text>
+  
+  <!-- Arrow to image -->
+  <path d="M 165 235 L 135 235" stroke="#f093fb" stroke-width="2" fill="none" marker-end="url(#arrowRev)"/>
+  
+  <!-- Formula box -->
+  <rect x="150" y="285" width="500" height="45" rx="8" fill="#2d2d44" stroke="#4facfe" stroke-width="2"/>
+  <text x="400" y="310" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-style="italic">z_t = √ᾱ_t · z₀ + √(1 - ᾱ_t) · ε,  where ε ~ N(0, I)</text>
+  <text x="400" y="325" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">ᾱ_t = ∏α_s controls noise level</text>
+</svg>
+

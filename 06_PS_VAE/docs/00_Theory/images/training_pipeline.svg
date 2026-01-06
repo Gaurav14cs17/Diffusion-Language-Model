@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+  <defs>
+    <linearGradient id="stage1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stage2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stage3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#888"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="550" fill="#1a1a2e" rx="15"/>
+  
+  <!-- Title -->
+  <text x="400" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Three-Stage Training Pipeline</text>
+  
+  <!-- Stage 1: S-VAE -->
+  <rect x="50" y="55" width="700" height="130" rx="10" fill="#2d2d44" stroke="url(#stage1Grad)" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="55" width="150" height="30" rx="10" fill="url(#stage1Grad)"/>
+  <text x="125" y="75" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">STAGE 1: S-VAE</text>
+  
+  <g font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0">
+    <text x="70" y="105">• Freeze representation encoder (DINOv2)</text>
+    <text x="70" y="125">• Train projector + semantic decoder</text>
+    <text x="70" y="145">• Loss: ℒ_semantic + β·ℒ_KL</text>
+  </g>
+  
+  <!-- Stage 1 Pipeline -->
+  <g transform="translate(420, 95)">
+    <rect x="0" y="0" width="70" height="35" rx="5" fill="#4a4a6a"/>
+    <text x="35" y="22" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">Image</text>
+    
+    <path d="M 75 17 L 95 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="100" y="0" width="80" height="35" rx="5" fill="#667eea" opacity="0.5"/>
+    <text x="140" y="15" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Frozen</text>
+    <text x="140" y="28" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Encoder</text>
+    
+    <path d="M 185 17 L 205 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="210" y="0" width="70" height="35" rx="5" fill="url(#stage1Grad)"/>
+    <text x="245" y="22" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Projector</text>
+    
+    <path d="M 285 17 L 305 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="310" y="0" width="30" height="35" rx="5" fill="#51cf66"/>
+    <text x="325" y="22" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z</text>
+  </g>
+  
+  <!-- Arrow down -->
+  <path d="M 400 190 L 400 215" stroke="#888" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+  
+  <!-- Stage 2: PS-VAE -->
+  <rect x="50" y="220" width="700" height="130" rx="10" fill="#2d2d44" stroke="url(#stage2Grad)" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="220" width="160" height="30" rx="10" fill="url(#stage2Grad)"/>
+  <text x="130" y="240" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">STAGE 2: PS-VAE</text>
+  
+  <g font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0">
+    <text x="70" y="270">• Unfreeze representation encoder</text>
+    <text x="70" y="290">• Add pixel decoder</text>
+    <text x="70" y="310">• Loss: α·ℒ_sem + γ·ℒ_pix + λ·ℒ_perc + β·ℒ_KL</text>
+  </g>
+  
+  <!-- Stage 2 Pipeline -->
+  <g transform="translate(420, 260)">
+    <rect x="0" y="0" width="70" height="35" rx="5" fill="#4a4a6a"/>
+    <text x="35" y="22" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">Image</text>
+    
+    <path d="M 75 17 L 95 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="100" y="0" width="80" height="35" rx="5" fill="url(#stage2Grad)"/>
+    <text x="140" y="15" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Trainable</text>
+    <text x="140" y="28" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Encoder</text>
+    
+    <path d="M 185 17 L 205 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="210" y="0" width="30" height="35" rx="5" fill="#51cf66"/>
+    <text x="225" y="22" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z</text>
+    
+    <path d="M 245 17 L 265 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="270" y="0" width="70" height="35" rx="5" fill="url(#stage2Grad)"/>
+    <text x="305" y="15" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Pixel</text>
+    <text x="305" y="28" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Decoder</text>
+  </g>
+  
+  <!-- Arrow down -->
+  <path d="M 400 355 L 400 380" stroke="#888" stroke-width="3" fill="none" marker-end="url(#arrow2)"/>
+  
+  <!-- Stage 3: DiT -->
+  <rect x="50" y="385" width="700" height="130" rx="10" fill="#2d2d44" stroke="url(#stage3Grad)" stroke-width="3" filter="url(#shadow2)"/>
+  <rect x="50" y="385" width="140" height="30" rx="10" fill="url(#stage3Grad)"/>
+  <text x="120" y="405" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">STAGE 3: DiT</text>
+  
+  <g font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0">
+    <text x="70" y="435">• Freeze PS-VAE completely</text>
+    <text x="70" y="455">• Train Diffusion Transformer in latent space</text>
+    <text x="70" y="475">• Loss: 𝔼[‖ε - ε_θ(z_t, t, c)‖²]</text>
+  </g>
+  
+  <!-- Stage 3 Pipeline -->
+  <g transform="translate(420, 425)">
+    <rect x="0" y="0" width="50" height="35" rx="5" fill="#4a4a6a"/>
+    <text x="25" y="22" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">Noise</text>
+    
+    <path d="M 55 17 L 75 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="80" y="0" width="80" height="35" rx="5" fill="url(#stage3Grad)"/>
+    <text x="120" y="15" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">DiT +</text>
+    <text x="120" y="28" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">Text</text>
+    
+    <path d="M 165 17 L 185 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="190" y="0" width="30" height="35" rx="5" fill="#51cf66"/>
+    <text x="205" y="22" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z₀</text>
+    
+    <path d="M 225 17 L 245 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="250" y="0" width="70" height="35" rx="5" fill="#667eea" opacity="0.5"/>
+    <text x="285" y="15" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Frozen</text>
+    <text x="285" y="28" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">PS-VAE</text>
+    
+    <path d="M 325 17 L 345 17" stroke="#888" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+    
+    <rect x="350" y="0" width="50" height="35" rx="5" fill="#51cf66"/>
+    <text x="375" y="22" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle">🖼️</text>
+  </g>
+</svg>
+
