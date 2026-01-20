@@ -1,12 +1,24 @@
-title: "Diffusion Language Model"
-description: "By Gaurav Goswami"
-theme: jekyll-theme-cayman
-show_downloads: false
-google_analytics:
+title: "🌊 Diffusion Models"
+description: "Text-to-Image & Beyond • By Gaurav Goswami"
+author: "Gaurav Goswami"
+url: "https://gaurav14cs17.github.io"
+baseurl: "/Diffusion-Language-Model"
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
 plugins:
   - jekyll-relative-links
+  - jekyll-seo-tag
+
 relative_links:
   enabled: true
   collections: true
+
 include:
   - README.md
+  - _layouts
