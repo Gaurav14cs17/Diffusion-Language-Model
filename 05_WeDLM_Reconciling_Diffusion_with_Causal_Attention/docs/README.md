@@ -164,12 +164,17 @@ State:  [The] [MASK] [MASK] [MASK]
 ```
 
 **Traditional Bidirectional Thinking**:
+
 - Position 2's [MASK] should see positions 3, 4 to decide what token to generate
+
 - Position 3's [MASK] should see positions 2, 4 as well
 
 **WeDLM's Insight**:
+
 - Position 2's [MASK] only needs to see "[The]" (the prefix context)
+
 - Position 3's [MASK] only needs to see "[The]" (same prefix context)
+
 - Position 4's [MASK] only needs to see "[The]" (same prefix context)
 
 **Why?** Because all masks are **independently** predicting tokens given the **same** committed prefix!
@@ -201,7 +206,9 @@ But this is inefficient (duplicates context). WeDLM uses a clever attention stru
 WeDLM maintains causal attention but processes multiple masks in one forward pass:
 
 **Window Setup**:
+
 - **Prefix**: Committed tokens (e.g., "[The]") - these are in KV cache
+
 - **Window**: Current mask tokens being processed
 
 **Key Innovation**: Arrange the window so:
@@ -220,9 +227,13 @@ WeDLM maintains causal attention but processes multiple masks in one forward pas
 ```
 
 Each mask position:
+
 - ✅ Sees all prefix tokens (via KV cache)
+
 - ✅ Sees non-mask tokens in window
+
 - ❌ Cannot see other mask positions (causal mask blocks this)
+
 - ❌ Cannot see future positions (causal mask blocks this)
 
 **This is exactly what we want!**
@@ -234,11 +245,15 @@ Each mask position:
 ### Formal Definition
 
 Let $S = (x\_1, x\_2, \ldots, x\_L)$ be a sequence where:
+
 - $x\_i \in V$ (vocabulary) for committed tokens
+
 - $x\_i = \text{[MASK]}$ for mask tokens
 
 Define:
+
 - $\mathcal{P} = \{i : x\_i \neq \text{[MASK]}\}$ - indices of committed (prefix) tokens
+
 - $\mathcal{M} = \{i : x\_i = \text{[MASK]}\}$ - indices of mask tokens
 
 ### The WeDLM Objective
@@ -286,7 +301,9 @@ holds because future context (positions $> j$) provides redundant information th
 ### The Attention Mask Formulation
 
 For a window of size $W$ with positions $p\_1, p\_2, \ldots, p\_W$ where:
+
 - Positions $p\_1, \ldots, p\_k$ are non-mask
+
 - Positions $p\_{k+1}, \ldots, p\_W$ are mask
 
 The attention mask $A \in \mathbb{R}^{W \times (L\_{\text{prefix}} + W)}$:
@@ -405,7 +422,9 @@ Committable: [quick]  (only the first consecutive non-mask run)
 ```
 
 **Why?** 
+
 - Tokens after a gap might change when the gap is filled
+
 - Only tokens before all remaining masks are "finalized"
 
 ### Proof: Consistency of Prefix Commitment
@@ -456,7 +475,9 @@ H(P) = -\sum_{i=1}^{V} p_i \log p_i
 ```
 
 **Properties**:
+
 - $H(P) = 0$ when $P$ is deterministic (one token has probability 1)
+
 - $H(P) = \log V$ when $P$ is uniform (maximum uncertainty)
 
 **Intuition**: Low entropy = model is confident → safe to commit this prediction
@@ -471,8 +492,11 @@ WeDLM adds a **position penalty** to encourage left-to-right generation:
 ```
 
 Where:
+
 - $H(P\_j)$ = raw entropy at position $j$
+
 - $\lambda$ = position penalty factor (default: 0.02)
+
 - $j\_{\min}$ = first mask position in window
 
 **Effect**: Earlier positions are favored when entropies are similar.
@@ -672,8 +696,11 @@ Step 4: REPEAT Until Stop Token or Max Length
 | Memory | $O(L + W)$ | $O(L)$ | $O(L)$ |
 
 Where:
+
 - $L$ = current sequence length
+
 - $W$ = window size (typically 16)
+
 - $k$ = tokens filled per step
 
 **Theorem 4** (Speedup Bound): *WeDLM achieves speedup factor:*
@@ -686,8 +713,11 @@ Where:
 *where $k$ is the number of positions filled per step.*
 
 **Empirical Results**: 
+
 - Math reasoning (GSM8K): $\mathbb{E}[k] \approx 4-6$
+
 - Code generation: $\mathbb{E}[k] \approx 2-3$
+
 - Open-ended QA: $\mathbb{E}[k] \approx 1.5-2$
 
 ---
@@ -704,8 +734,11 @@ WeDLM uses a **causal masked language modeling (CMLM)** objective:
 ```
 
 Where:
+
 - $\mathcal{D}$ = training data distribution
+
 - $\mathcal{M}$ = set of masked positions
+
 - $p(\mathcal{M}|x)$ = masking strategy
 
 ### Masking Strategy
@@ -725,8 +758,11 @@ r_t = r_{\min} + (r_{\max} - r_{\min}) \cdot \frac{t}{T}
 ```
 
 Where:
+
 - $r\_{\min} = 0.1$ (10% masking)
+
 - $r\_{\max} = 0.5$ (50% masking)
+
 - $t$ = training step, $T$ = total steps
 
 ### Training from AR Models
@@ -744,8 +780,11 @@ Where:
 3. Fine-tune with CMLM objective
 
 **Training Efficiency**:
+
 - ~10% of original pretraining compute
+
 - 100B tokens of fine-tuning data
+
 - Preserves base model capabilities
 
 ### Loss Function Implementation
@@ -818,7 +857,9 @@ P(x_i, x_j \mid \text{prefix}) = P(x_i \mid \text{prefix}) \cdot P(x_j \mid \tex
 **Theorem 7** (Speedup-Error Tradeoff): *Lower entropy threshold increases speedup but may increase error rate.*
 
 Let $\tau$ be the entropy threshold. Define:
+
 - $\bar{k}(\tau)$ = expected number of positions filled per step
+
 - $\epsilon(\tau)$ = expected error rate
 
 **Relation**:
@@ -869,7 +910,9 @@ Let $\tau$ be the entropy threshold. Define:
 ### The Big Picture
 
 WeDLM bridges two worlds:
+
 - **Theoretical elegance** of diffusion models (parallel generation)
+
 - **Engineering efficiency** of AR models (optimized infrastructure)
 
 By recognizing that mask positions don't need to see each other, WeDLM unlocks the speed benefits of parallel decoding while maintaining compatibility with the entire ecosystem of AR model optimizations.

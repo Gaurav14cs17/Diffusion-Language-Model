@@ -20,18 +20,26 @@
 <td width="50%">
 
 ### 🔬 Mathematical Foundations
+
 - Gaussian transitions & proofs
+
 - Markov chain properties
+
 - Variance preservation
+
 - Score functions
 
 </td>
 <td width="50%">
 
 ### 🚀 Practical Implementation
+
 - Training objectives (ELBO → MSE)
+
 - Sampling algorithms (DDPM, DDIM)
+
 - Parameterization strategies
+
 - Noise schedules
 
 </td>

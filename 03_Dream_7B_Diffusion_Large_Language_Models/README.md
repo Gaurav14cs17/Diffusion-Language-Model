@@ -55,7 +55,9 @@ The key mathematical insight is adapting continuous diffusion (used for images) 
 ### The Core Framework: Masked Diffusion
 
 For text, we use **absorbing-state diffusion** where:
+
 - The "noise" is a special `[MASK]` token
+
 - Forward process: gradually replace tokens with `[MASK]`
 - Reverse process: learn to predict original tokens from masked context
 
@@ -99,8 +101,11 @@ Q_t[i, j] = (1 - \beta_t) \cdot \delta_{ij} + \beta_t \cdot \delta_{j, [M]}
 ```
 
 Where:
+
 - $\beta\_t$ is the **masking probability** at step $t$
+
 - $\delta\_{ij}$ is the Kronecker delta (1 if $i=j$, 0 otherwise)
+
 - $[M]$ is the index of the `[MASK]` token
 
 **Interpretation of each entry:**
@@ -207,8 +212,11 @@ q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}, x_0) \cdot q(x_{t-1} \mid x
 By the Markov property: $q(x\_t \mid x\_{t-1}, x\_0) = q(x\_t \mid x\_{t-1})$
 
 Substituting the known distributions:
+
 - $q(x\_t \mid x\_{t-1}) = \text{Cat}(x\_t; x\_{t-1} \cdot Q\_t)$
+
 - $q(x\_{t-1} \mid x\_0) = \text{Cat}(x\_{t-1}; x\_0 \cdot \bar{Q}\_{t-1})$
+
 - $q(x\_t \mid x\_0) = \text{Cat}(x\_t; x\_0 \cdot \bar{Q}\_t)$
 
 ### 3.3 Posterior for Absorbing-State Diffusion
@@ -377,7 +385,9 @@ For masked (absorbing-state) diffusion, the ELBO simplifies beautifully:
 4. **Train to predict the original tokens at masked positions only**
 
 This is remarkably similar to **BERT's masked language modeling (MLM)** objective, but with:
+
 - Variable masking rate depending on $t$
+
 - Time conditioning in the model
 
 ### 4.5 Continuous-Time ELBO
@@ -474,7 +484,9 @@ L = \sum_{i=1}^{n} \mathbb{1}[x_t^i = [M]] \cdot \left(-\log p_\theta(x_0^i \mid
 ```
 
 **Key Insight:** We only compute loss on **masked positions**!
+
 - If $x\_t^i \neq [M]$: No loss (position already correct)
+
 - If $x\_t^i = [M]$: Compute cross-entropy between prediction and true $x\_0^i$
 
 ### 5.5 Loss Weighting Strategies
@@ -583,7 +595,9 @@ p'(v) \propto p(v)^{1/\tau}
 ```
 
 - $\tau < 1$: Sharper distribution (more deterministic)
+
 - $\tau > 1$: Flatter distribution (more random)
+
 - $\tau \to 0$: Becomes argmax
 
 **Typical values:** $\tau = 0.7-0.9$ for coherence, $\tau = 1.0-1.2$ for creativity
@@ -591,6 +605,7 @@ p'(v) \propto p(v)^{1/\tau}
 #### Top-k / Top-p Sampling
 
 - **Top-k:** Sample only from the $k$ highest probability tokens
+
 - **Top-p (nucleus):** Sample from the smallest set with cumulative probability $\geq p$
 
 **Typical values:** $k = 50$, $p = 0.95$
@@ -605,7 +620,9 @@ p'(v) \propto p(v)^{1/\tau}
 | Context | Bidirectional | Unidirectional |
 
 **Example:** For a 1000-token generation:
+
 - GPT: 1000 forward passes
+
 - Dream (T=64): 64 forward passes → **15.6× faster**
 
 ### 6.6 Conditional Generation
@@ -650,6 +667,7 @@ where $w > 1$ strengthens conditioning (typical: $w = 3-7$).
 
 **Dream 7B typical settings:**
 - High quality: $T = 128-256$
+
 - Fast inference: $T = 16-32$
 
 ---
@@ -701,8 +719,11 @@ x_T \to x_{T-1} \to \cdots \to x_1 \to x_0
 Dream 7B represents a significant step toward **non-autoregressive language modeling**. As the field develops, we may see:
 
 - Larger diffusion LLMs competing with AR models
+
 - Hybrid approaches combining AR and diffusion
+
 - Novel applications leveraging bidirectional generation
+
 - Improved sampling algorithms for better quality/speed
 
 ---

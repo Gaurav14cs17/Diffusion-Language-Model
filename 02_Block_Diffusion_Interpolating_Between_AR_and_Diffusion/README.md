@@ -98,7 +98,9 @@ return x
 
 **Key advantages:**
 - ✅ **Variable-length generation**: Can generate any number of blocks
+
 - ✅ **KV caching**: Reuse computation from previous blocks
+
 - ✅ **Parallel sampling**: Tokens within a block are sampled in parallel
 
 ### Block-Causal Attention
@@ -122,6 +124,7 @@ Here's something surprising: with block size L' = 1, the Block Diffusion objecti
 ### The Root Cause
 
 - **Autoregressive training**: Computes cross-entropy loss for ALL L tokens in every batch
+
 - **Diffusion training**: Only computes loss for MASKED tokens (~50% on average)
 
 This means diffusion effectively trains with half the data per batch, leading to **2x higher gradient variance**.
@@ -191,8 +194,11 @@ x^b_logits, K_b, V_b ← x^b_θ(x^b_t, K_{1:b-1}, V_{1:b-1})
 ```
 
 Where:
+
 - `x^b_logits`: Predictions for clean tokens in block b
+
 - `K_b, V_b`: Key-value cache for block b
+
 - `K_{1:b-1}, V_{1:b-1}`: Cached KVs from previous blocks
 
 ### Within-Block Diffusion
@@ -256,16 +262,21 @@ t=0.0:  [the][cat][is][happy]       (block complete!)
 
 **vs. Autoregressive:**
 - Parallel generation within blocks
+
 - Potentially better long-term planning (bidirectional context within blocks)
 
 **vs. Full Diffusion:**
 - Variable-length generation
+
 - KV caching for efficiency
+
 - Better perplexity
 
 **vs. Continuous Diffusion (SSD-LM, etc.):**
 - Tractable likelihood estimation
+
 - 10x fewer generation steps
+
 - Better generative perplexity
 
 ---
@@ -303,8 +314,11 @@ As LLMs continue to scale and applications demand both quality and efficiency, B
 ## Resources
 
 - 📄 **Paper**: [arXiv:2503.09573](https://arxiv.org/abs/2503.09573)
+
 - 💻 **Code**: [github.com/kuleshov-group/bd3lms](https://github.com/kuleshov-group/bd3lms)
+
 - 🌐 **Project Page**: [m-arriola.com/bd3lms](https://m-arriola.com/bd3lms)
+
 - 🎥 **Video Tutorial**: Available on project page
 
 ---

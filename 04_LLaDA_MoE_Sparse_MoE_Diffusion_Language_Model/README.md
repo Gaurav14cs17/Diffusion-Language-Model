@@ -79,7 +79,9 @@ With diffusion models requiring **T denoising steps** during generation, the eff
 Total Compute Savings = Efficiency Ratio × Number of Steps
 
 Example:
+
 - 32 steps × 5.7x efficiency = 182x total savings
+
 - 64 steps × 5.7x efficiency = 365x total savings
 
 ```
@@ -794,7 +796,9 @@ Steps  | LLaDA-8B Cost | LLaDA-MoE Cost | Total Savings
 ## Resources
 
 - 📄 **Paper**: [arXiv:2509.24389](https://arxiv.org/abs/2509.24389)
+
 - 🤗 **Models**: [HuggingFace Collection](https://huggingface.co/collections/inclusionAI/llada-68c141bca386b06b599cfe45)
+
 - 🏢 **Institutions**: Renmin University, Ant Group, SJTU, Zhejiang University
 
 ---

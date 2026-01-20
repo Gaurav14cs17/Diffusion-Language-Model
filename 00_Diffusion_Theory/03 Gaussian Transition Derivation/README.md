@@ -37,7 +37,9 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \mu_t, \sigma_t^2 I)
 ### Design Choice
 
 We choose:
+
 - **Mean**: $\mu\_t = \sqrt{\alpha\_t} \cdot x\_{t-1}$ (scaled previous state)
+
 - **Variance**: $\sigma\_t^2 = \beta\_t$ (added noise)
 
 ### Why This Design?
@@ -121,7 +123,9 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
 ### Apply Reparameterization
 
 - Mean: $\mu = \sqrt{\alpha\_t} x\_{t-1}$
+
 - Std: $\sigma = \sqrt{\beta\_t}$
+
 - Noise: $\epsilon\_t \sim \mathcal{N}(0, I)$
 
 ### Result

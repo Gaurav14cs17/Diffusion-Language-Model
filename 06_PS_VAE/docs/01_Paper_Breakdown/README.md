@@ -82,7 +82,9 @@ The paper finds that two-stage training is crucial:
 
 **Direct PS-VAE training fails:**
 - ✗ Encoder forgets semantic knowledge
+
 - ✗ Latent space becomes irregular
+
 - ✗ Poor generation quality
 
 ---
@@ -101,7 +103,9 @@ The paper finds that two-stage training is crucial:
 
 **PS-VAE achieves:**
 - 28% better FID than SD-VAE
+
 - 43% better FID than RAE
+
 - 10× smaller latent than RAE
 
 ### Reconstruction Quality
@@ -133,6 +137,7 @@ PS-VAE converges **2× faster** due to semantic-rich latent space!
 
 **β = 10⁻⁴ is the sweet spot:**
 - Too small → no regularization effect
+
 - Too large → loses reconstruction quality
 
 ### Insight 2: Frozen vs Trainable Encoder

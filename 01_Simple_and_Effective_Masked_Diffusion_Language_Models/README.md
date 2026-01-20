@@ -44,9 +44,13 @@ This is similar to BERT's masked language modeling, but with a crucial differenc
 MDLM answers a fundamental question: **What is the simplest principled way to do discrete diffusion for language?**
 
 The answer is surprisingly elegant:
+
 - Use `[MASK]` as the "noise" state
+
 - Use a simple linear noise schedule
+
 - Train with cross-entropy on masked positions only
+
 - Sample by iterative unmasking
 
 ---
@@ -72,9 +76,13 @@ where $R\_t$ is the rate matrix (generator) of the Markov process.
 
 **Why continuous time?**
 - Cleaner mathematical framework
+
 - Simpler loss derivation
+
 - Flexible sampling (any number of steps)
+
 - Direct connection to score matching
+
 - Avoids discrete timestep hyperparameter
 
 ### 2.2 Marginal Distribution
@@ -90,6 +98,7 @@ where $\alpha\_t = 1 - t$ is the **survival probability** (linear schedule).
 
 **Interpretation:**
 - With probability $\alpha\_t = 1-t$: token remains as original $x\_0^i$
+
 - With probability $1-\alpha\_t = t$: token becomes `[MASK]`
 
 ### 2.3 The Linear Schedule
@@ -119,8 +128,11 @@ q(x_t \mid x_0) = \prod_{i=1}^{n} q(x_t^i \mid x_0^i)
 ```
 
 This means:
+
 - Each position is masked with probability $t$, independently
+
 - Number of masked tokens $\sim \text{Binomial}(n, t)$
+
 - Expected number of masks = $n \cdot t$
 
 ### 2.5 Sampling the Forward Process
@@ -214,7 +226,9 @@ p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
 
 **Architecture:**
 - Input: $h\_0 = \text{Embed}(x\_t) + \text{PosEmbed} + \text{TimeEmbed}(t)$
+
 - Transformer with **bidirectional attention** (no causal mask!)
+
 - Output: vocabulary logits for each position
 
 **Key difference from GPT:** All positions attend to all others.
@@ -243,8 +257,11 @@ p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
 | x₀-prediction | ✅ | Directly outputs token probabilities |
 
 For text, x₀-prediction is natural because:
+
 - Same as standard language modeling
+
 - Simple cross-entropy loss
+
 - Works with discrete vocabulary
 
 ---
@@ -303,6 +320,7 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 **Step 4: Only masked positions contribute**
 
 - If $x\_t^i \neq [\text{MASK}]$: no loss (already revealed)
+
 - If $x\_t^i = [\text{MASK}]$: must predict $x\_0^i$
 
 ### 4.3 Final Training Objective
@@ -328,8 +346,11 @@ The ELBO-optimal weighting is:
 ```
 
 This means:
+
 - All timesteps contribute equally
+
 - Sample $t \sim \text{Uniform}(0, 1)$
+
 - No importance sampling needed!
 
 **MDLM finding:** Uniform weighting works great. Simpler is better.
@@ -439,11 +460,14 @@ p'(v) \propto p(v)^{1/\tau}
 ```
 
 - $\tau < 1$: Sharper (more deterministic)
+
 - $\tau = 1$: Standard
+
 - $\tau > 1$: Flatter (more random)
 
 **Top-k / Top-p:**
 - Top-k: Sample from $k$ highest probability tokens
+
 - Top-p (nucleus): Sample from smallest set with cumulative prob $\geq p$
 
 ### 5.4 Number of Steps Trade-off
@@ -502,8 +526,11 @@ On OpenWebText benchmark:
 
 **Model size scaling:**
 - 39M params → 44.8 PPL
+
 - 110M params → 31.4 PPL
+
 - 200M params → 28.1 PPL
+
 - 400M params → 25.8 PPL
 
 ✓ Follows similar scaling laws to autoregressive models!
@@ -555,8 +582,10 @@ Based on MDLM's findings:
 MDLM proves that **simple is effective** for discrete diffusion:
 
 - **Clean theory:** Proper ELBO derivation
+
 - **Strong results:** Competitive with GPT-2
 - **Practical:** Easy to implement (~100 lines of core code)
+
 - **Foundation:** Enabled Dream 7B and future diffusion LLMs
 
 The key insight: Masked language modeling with principled, time-varying masking rates is all you need!

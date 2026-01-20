@@ -109,7 +109,9 @@ For $t > 1$:
 ### Key Insight
 
 - **$L\_T$**: Constant (no learnable params)! Just measures how close $x\_T$ is to $\mathcal{N}(0,I)$
+
 - **$L\_{t-1}$**: The main learning signal! Match reverse to true posterior
+
 - **$L\_0$**: Discretized decoder (often ignored or simplified)
 
 ---
@@ -121,6 +123,7 @@ For $t > 1$:
 Both $q(x\_{t-1}|x\_t,x\_0)$ and $p\_\theta(x\_{t-1}|x\_t)$ are Gaussian!
 
 - True: $\mathcal{N}(\tilde{\mu}\_t, \tilde{\beta}\_t I)$
+
 - Model: $\mathcal{N}(\mu\_\theta, \sigma\_t^2 I)$
 
 ### KL for Gaussians
@@ -208,6 +211,7 @@ where $x\_t = \sqrt{\bar{\alpha}\_t}x\_0 + \sqrt{1-\bar{\alpha}\_t}\epsilon$.
 ### Empirical Finding
 
 - VLB weighting: Emphasizes early steps (high $t$)
+
 - Uniform weighting: Better sample quality!
 
 ### Intuition
@@ -274,8 +278,11 @@ for each training iteration:
 The model $\epsilon\_\theta(x\_t, t)$ must know which timestep it's at!
 
 Common approaches:
+
 - Sinusoidal embeddings (like Transformers)
+
 - Learned embeddings
+
 - Fourier features
 
 ---

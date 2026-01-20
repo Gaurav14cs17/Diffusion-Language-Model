@@ -67,8 +67,11 @@ x \in [0, 1]^{H \times W \times C}
 ```
 
 where:
+
 - $H$ = height
+
 - $W$ = width  
+
 - $C$ = channels (3 for RGB)
 
 ### For Latent Diffusion

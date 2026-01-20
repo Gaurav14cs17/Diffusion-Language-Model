@@ -39,16 +39,23 @@ Given an image $\mathbf{x} \in \mathbb{R}^{H \times W \times 3}$, a representati
 ```
 
 where:
+
 - $h = w = H/p$ (patch size $p = 14$ for DINOv2)
+
 - $d = 1024$ for DINOv2-Large
+
 - $\phi$ are the pretrained encoder parameters
 
 ### Why Are They Powerful?
 
 These features are **semantically meaningful** - they encode high-level understanding:
+
 - ✓ Object identity ("This is a dog")
+
 - ✓ Object category ("It's a golden retriever")
+
 - ✓ Scene context ("It's sitting on grass")
+
 - ✓ Attributes ("It looks happy")
 
 ---
@@ -267,7 +274,9 @@ where $s$ is the guidance scale (typically 7.5).
 4. **Decode**: $x' = \text{PS-VAE.decode}(z'\_0)$
 
 The edit strength is controlled by $t$:
+
 - **Small t** → Minor edits (style, color)
+
 - **Large t** → Major edits (structure, content)
 
 ---

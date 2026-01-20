@@ -92,8 +92,11 @@ S-VAE addresses the off-manifold problem by projecting representation features i
 ```
 
 where:
+
 - $\mathbf{x} \in \mathbb{R}^{H \times W \times 3}$ is the input image
+
 - $h = w = H/p$ (patch size $p = 14$ for DINOv2)
+
 - $d = 1024$ for DINOv2-Large
 
 #### 2. Semantic Projector (Encoder)
@@ -173,6 +176,7 @@ For Gaussian distributions with $p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, \mathbf
 ```
 
 **Hyperparameters**:
+
 - $\beta = 10^{-4}$ (small weight for regularization without over-constraining)
 
 ---
@@ -297,9 +301,13 @@ Same as S-VAE:
 ```
 
 **Default Hyperparameters**:
+
 - $\alpha = 1.0$ (semantic weight)
+
 - $\gamma = 1.0$ (pixel weight)
+
 - $\lambda = 0.1$ (perceptual weight)
+
 - $\beta = 10^{-4}$ (KL weight)
 
 ---
@@ -328,8 +336,11 @@ q(\mathbf{z}_t | \mathbf{z}_0) = \mathcal{N}\left( \mathbf{z}_t; \sqrt{\bar{\alp
 ```
 
 where:
+
 - $\bar{\alpha}\_t = \prod\_{s=1}^t \alpha\_s$
+
 - $\alpha\_t = 1 - \beta\_t$
+
 - $\beta\_t$ follows a scaled linear schedule: $\beta\_t \in [10^{-4}, 0.02]$
 
 Equivalently:
@@ -424,9 +435,13 @@ Each block consists of:
 ```
 
 where:
+
 - $\mathbf{z}\_0 = \text{PS-VAE.encode}(\mathbf{x})$
+
 - $\boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$
+
 - $t \sim \text{Uniform}(1, T)$
+
 - $\mathbf{c}$ is the text conditioning
 
 ### Classifier-Free Guidance (CFG)
@@ -439,7 +454,9 @@ During inference, we use CFG for better text alignment:
 ```
 
 where:
+
 - $s$ is the guidance scale (typically 7.5)
+
 - $\varnothing$ is the null/empty text embedding
 
 ---
