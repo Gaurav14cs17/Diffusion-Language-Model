@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" width="2200" height="2200">
+  <defs>
+    <linearGradient id="dsHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c5282;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowDS" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="2200" height="2200" fill="#FAFAFA"/>
+  
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#dsHeader)" filter="url(#shadowDS)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Data Space in Diffusion Models</text>
+  
+  <rect x="50" y="180" width="2100" height="400" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="3" filter="url(#shadowDS)"/>
+  <text x="90" y="240" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Types of Data Spaces</text>
+  
+  <rect x="100" y="280" width="480" height="260" rx="15" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="340" y="330" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#1565C0" text-anchor="middle">Images</text>
+  <rect x="140" y="360" width="80" height="80" fill="#FF6B6B" rx="5"/>
+  <rect x="230" y="360" width="80" height="80" fill="#4ECDC4" rx="5"/>
+  <rect x="320" y="360" width="80" height="80" fill="#45B7D1" rx="5"/>
+  <rect x="410" y="360" width="80" height="80" fill="#96CEB4" rx="5"/>
+  <rect x="140" y="450" width="80" height="80" fill="#FFEAA7" rx="5"/>
+  <rect x="230" y="450" width="80" height="80" fill="#DDA0DD" rx="5"/>
+  <rect x="320" y="450" width="80" height="80" fill="#87CEEB" rx="5"/>
+  <rect x="410" y="450" width="80" height="80" fill="#98D8C8" rx="5"/>
+  <text x="340" y="560" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#1565C0" text-anchor="middle">X = R^(H x W x C)</text>
+  
+  <rect x="620" y="280" width="480" height="260" rx="15" fill="#FFF3E0" stroke="#FF8F00" stroke-width="2"/>
+  <text x="860" y="330" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#FF8F00" text-anchor="middle">Text/Language</text>
+  <rect x="660" y="370" width="70" height="45" fill="#FFE0B2" stroke="#FF8F00" rx="5"/>
+  <text x="695" y="400" font-family="Courier, monospace" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">The</text>
+  <rect x="740" y="370" width="70" height="45" fill="#FFE0B2" stroke="#FF8F00" rx="5"/>
+  <text x="775" y="400" font-family="Courier, monospace" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">cat</text>
+  <rect x="820" y="370" width="70" height="45" fill="#FFE0B2" stroke="#FF8F00" rx="5"/>
+  <text x="855" y="400" font-family="Courier, monospace" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">sat</text>
+  <rect x="900" y="370" width="70" height="45" fill="#FFE0B2" stroke="#FF8F00" rx="5"/>
+  <text x="935" y="400" font-family="Courier, monospace" font-size="14" font-weight="bold" fill="#000" text-anchor="middle">...</text>
+  <rect x="660" y="450" width="340" height="40" fill="#FFCC80" stroke="#FF8F00" rx="5"/>
+  <text x="830" y="478" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000" text-anchor="middle">Embedding vectors</text>
+  <text x="860" y="560" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#FF8F00" text-anchor="middle">X = R^(L x D)</text>
+  
+  <rect x="1140" y="280" width="480" height="260" rx="15" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1380" y="330" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#2E7D32" text-anchor="middle">Audio</text>
+  <path d="M 1200 420 Q 1280 350 1360 420 Q 1440 490 1520 420" stroke="#2E7D32" stroke-width="4" fill="none"/>
+  <text x="1380" y="510" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">Waveform/Spectrogram</text>
+  <text x="1380" y="560" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#2E7D32" text-anchor="middle">X = R^(T x F)</text>
+  
+  <rect x="1660" y="280" width="440" height="260" rx="15" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="1880" y="330" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#7B1FA2" text-anchor="middle">3D/Points</text>
+  <circle cx="1780" cy="400" r="10" fill="#7B1FA2"/>
+  <circle cx="1840" cy="430" r="10" fill="#9C27B0"/>
+  <circle cx="1900" cy="380" r="10" fill="#7B1FA2"/>
+  <circle cx="1960" cy="450" r="10" fill="#9C27B0"/>
+  <circle cx="1820" cy="480" r="10" fill="#7B1FA2"/>
+  <circle cx="1920" cy="500" r="10" fill="#9C27B0"/>
+  <text x="1880" y="560" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#7B1FA2" text-anchor="middle">X = R^(N x 3)</text>
+  
+  <rect x="50" y="620" width="2100" height="300" rx="12" fill="#FFF8E1" stroke="#FF8F00" stroke-width="3" filter="url(#shadowDS)"/>
+  <text x="90" y="680" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Mathematical Definition</text>
+  
+  <rect x="90" y="720" width="2020" height="80" rx="10" fill="#FFE082" stroke="#FF8F00" stroke-width="2"/>
+  <text x="1100" y="775" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">Data Space: X is a subset of R^d where d = dimensionality</text>
+  
+  <text x="90" y="860" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Data Distribution: x0 ~ p_data(x) - the unknown true distribution we want to learn</text>
+  
+  <rect x="50" y="960" width="2100" height="350" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" filter="url(#shadowDS)"/>
+  <text x="90" y="1020" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">The Manifold Hypothesis</text>
+  
+  <rect x="100" y="1060" width="900" height="220" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="550" y="1110" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">Key Idea</text>
+  <text x="140" y="1160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Real data lives on a low-dimensional manifold M</text>
+  <text x="140" y="1200" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">embedded in high-dimensional space R^d</text>
+  <text x="140" y="1250" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#2E7D32">dim(M) = k much smaller than d</text>
+  
+  <rect x="1050" y="1060" width="1050" height="220" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1575" y="1110" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">Implications for Diffusion</text>
+  <text x="1090" y="1160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Forward: Noise destroys manifold structure</text>
+  <text x="1090" y="1200" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Reverse: Model learns to project back onto M</text>
+  <text x="1090" y="1250" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Score function points toward the manifold</text>
+  
+  <rect x="50" y="1350" width="2100" height="300" rx="12" fill="#FCE4EC" stroke="#C2185B" stroke-width="3" filter="url(#shadowDS)"/>
+  <text x="90" y="1410" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Data Normalization</text>
+  
+  <rect x="90" y="1450" width="2020" height="70" rx="10" fill="#F8BBD9" stroke="#C2185B" stroke-width="2"/>
+  <text x="1100" y="1500" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">x_normalized = (x - mean) / std  mapped to [-1, 1]^d</text>
+  
+  <text x="90" y="1580" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Images: [0, 255] to [-1, 1] via x' = 2*(x/255) - 1</text>
+  <text x="90" y="1620" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#C2185B">Why? Diffusion adds N(0,I) noise - data should have similar scale!</text>
+  
+  <rect x="50" y="1690" width="2100" height="200" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="3" filter="url(#shadowDS)"/>
+  <text x="90" y="1750" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Key Properties</text>
+  
+  <text x="120" y="1810" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565C0">P1. Continuous: X = R^d for Gaussian diffusion</text>
+  <text x="750" y="1810" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565C0">P2. Finite Variance: E[||x||^2] less than infinity</text>
+  <text x="120" y="1860" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565C0">P3. Measurable: Forms probability space</text>
+  <text x="750" y="1860" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565C0">P4. Separable: Has countable dense subset</text>
+  
+  <rect x="50" y="1930" width="2100" height="80" rx="10" fill="#1a365d" filter="url(#shadowDS)"/>
+  <text x="1100" y="1985" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Diffusion Theory - Data Space | Foundation for Generative Models</text>
+</svg>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" width="2200" height="2200">
+  <defs>
+    <linearGradient id="mdHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A148C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7B1FA2;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowMD" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <rect width="2200" height="2200" fill="#FAFAFA"/>
+  
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#mdHeader)" filter="url(#shadowMD)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Marginal Distributions</text>
+  
+  <rect x="50" y="180" width="2100" height="350" rx="12" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="3" filter="url(#shadowMD)"/>
+  <text x="90" y="240" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Visual: Distribution Evolution Over Time</text>
+  
+  <rect x="100" y="280" width="400" height="220" rx="10" fill="#E8F5E9" stroke="#4CAF50" stroke-width="2"/>
+  <text x="300" y="320" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#4CAF50" text-anchor="middle">t = 0 (Data)</text>
+  <path d="M 150 450 L 290 320 L 310 320 L 450 450" stroke="#4CAF50" stroke-width="3" fill="#C8E6C9"/>
+  <circle cx="300" cy="320" r="6" fill="#2E7D32"/>
+  <text x="300" y="480" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Sharp peak at x0</text>
+  
+  <rect x="550" y="280" width="400" height="220" rx="10" fill="#E3F2FD" stroke="#1976D2" stroke-width="2"/>
+  <text x="750" y="320" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1976D2" text-anchor="middle">t = T/3</text>
+  <path d="M 600 450 Q 680 380 750 340 Q 820 380 900 450" stroke="#1976D2" stroke-width="3" fill="#BBDEFB"/>
+  <text x="750" y="480" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Spreading out</text>
+  
+  <rect x="1000" y="280" width="400" height="220" rx="10" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="1200" y="320" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#FF9800" text-anchor="middle">t = 2T/3</text>
+  <path d="M 1050 450 Q 1130 400 1200 370 Q 1270 400 1350 450" stroke="#FF9800" stroke-width="3" fill="#FFE0B2"/>
+  <text x="1200" y="480" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Mostly noise</text>
+  
+  <rect x="1450" y="280" width="500" height="220" rx="10" fill="#FFEBEE" stroke="#D32F2F" stroke-width="2"/>
+  <text x="1700" y="320" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#D32F2F" text-anchor="middle">t = T (Pure Noise)</text>
+  <path d="M 1480 450 Q 1580 420 1700 380 Q 1820 420 1920 450" stroke="#D32F2F" stroke-width="3" fill="#FFCDD2"/>
+  <line x1="1700" y1="380" x2="1700" y2="455" stroke="#D32F2F" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="1700" y="480" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Centered at 0: N(0, I)</text>
+  
+  <rect x="50" y="570" width="2100" height="280" rx="12" fill="#E8EAF6" stroke="#3F51B5" stroke-width="3" filter="url(#shadowMD)"/>
+  <text x="90" y="630" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">The Fundamental Marginal Formula</text>
+  
+  <rect x="200" y="670" width="1800" height="80" rx="10" fill="#C5CAE9" stroke="#3F51B5" stroke-width="2"/>
+  <text x="1100" y="725" font-family="Times New Roman, serif" font-size="36" font-weight="bold" fill="#000" text-anchor="middle">q(xt | x0) = N(xt; sqrt(alpha_bar_t) * x0, (1 - alpha_bar_t) * I)</text>
+  
+  <text x="90" y="800" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Direct sampling: xt = sqrt(alpha_bar_t) * x0 + sqrt(1 - alpha_bar_t) * E,  where E ~ N(0, I)</text>
+  
+  <rect x="50" y="890" width="2100" height="300" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" filter="url(#shadowMD)"/>
+  <text x="90" y="950" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Key Properties</text>
+  
+  <rect x="100" y="1000" width="480" height="160" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="340" y="1050" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">Mean</text>
+  <rect x="140" y="1070" width="400" height="40" rx="5" fill="#FFF" stroke="#2E7D32"/>
+  <text x="340" y="1100" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000" text-anchor="middle">mu = sqrt(alpha_bar_t) * x0</text>
+  <text x="140" y="1140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666">Shrinks toward 0 as t increases</text>
+  
+  <rect x="620" y="1000" width="480" height="160" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="860" y="1050" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">Variance</text>
+  <rect x="660" y="1070" width="400" height="40" rx="5" fill="#FFF" stroke="#2E7D32"/>
+  <text x="860" y="1100" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000" text-anchor="middle">sigma^2 = (1 - alpha_bar_t) * I</text>
+  <text x="660" y="1140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666">Grows toward 1 as t increases</text>
+  
+  <rect x="1140" y="1000" width="480" height="160" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1380" y="1050" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">SNR</text>
+  <rect x="1180" y="1070" width="400" height="40" rx="5" fill="#FFF" stroke="#2E7D32"/>
+  <text x="1380" y="1100" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000" text-anchor="middle">alpha_bar / (1 - alpha_bar)</text>
+  <text x="1180" y="1140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666">Infinity at t=0, 0 at t=T</text>
+  
+  <rect x="1660" y="1000" width="440" height="160" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1880" y="1050" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">Total Var</text>
+  <rect x="1700" y="1070" width="360" height="40" rx="5" fill="#FFF" stroke="#2E7D32"/>
+  <text x="1880" y="1100" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000" text-anchor="middle">= 1 (preserved)</text>
+  <text x="1700" y="1140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666">Variance preserving</text>
+  
+  <rect x="50" y="1230" width="2100" height="220" rx="12" fill="#FCE4EC" stroke="#C2185B" stroke-width="3" filter="url(#shadowMD)"/>
+  <text x="90" y="1290" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Boundary Conditions</text>
+  
+  <rect x="100" y="1330" width="980" height="100" rx="10" fill="#F8BBD9" stroke="#C2185B" stroke-width="2"/>
+  <text x="590" y="1375" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#C2185B" text-anchor="middle">At t = 0</text>
+  <text x="140" y="1410" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#000">alpha_bar_0 = 1: q(x0|x0) = delta(x - x0) - Perfect reconstruction</text>
+  
+  <rect x="1120" y="1330" width="980" height="100" rx="10" fill="#F8BBD9" stroke="#C2185B" stroke-width="2"/>
+  <text x="1610" y="1375" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#C2185B" text-anchor="middle">At t = T</text>
+  <text x="1160" y="1410" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#000">alpha_bar_T = 0: q(xT|x0) = N(0, I) - Pure noise, independent of x0</text>
+  
+  <rect x="50" y="1490" width="2100" height="300" rx="12" fill="#FFF3E0" stroke="#FF8F00" stroke-width="3" filter="url(#shadowMD)"/>
+  <text x="90" y="1550" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Why This Matters: Tractable Training</text>
+  
+  <text x="90" y="1610" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Without closed-form marginal: Need to simulate entire forward process (T steps)</text>
+  <text x="90" y="1660" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2E7D32">With closed-form marginal: Sample any xt directly from x0 in O(1)!</text>
+  
+  <rect x="200" y="1700" width="1800" height="70" rx="10" fill="#FFE0B2" stroke="#FF8F00" stroke-width="2"/>
+  <text x="1100" y="1745" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000" text-anchor="middle">Training: Sample random t, compute xt = sqrt(alpha_bar) * x0 + sqrt(1-alpha_bar) * noise</text>
+  
+  <rect x="50" y="1830" width="2100" height="80" rx="10" fill="#4A148C" filter="url(#shadowMD)"/>
+  <text x="1100" y="1885" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Diffusion Theory - Marginal Distributions | The Heart of Tractable Diffusion</text>
+</svg>

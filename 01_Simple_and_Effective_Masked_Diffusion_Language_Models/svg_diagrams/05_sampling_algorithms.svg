@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3800" width="2200" height="3800">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7C3AED;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A855F7;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#22C55E"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3800" fill="#FAFAFA"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" stroke="#5B21B6" stroke-width="3"/>
+  <text x="1100" y="110" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Sampling Algorithms for MDLM
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="22" fill="#E9D5FF" text-anchor="middle">
+    Generating Text from Noise via Iterative Unmasking
+  </text>
+
+  <!-- Section 1: Basic Sampling -->
+  <rect x="50" y="200" width="2100" height="700" rx="12" fill="#FAF5FF" stroke="#A855F7" stroke-width="3"/>
+  <rect x="50" y="200" width="2100" height="60" rx="12" fill="#A855F7"/>
+  <text x="1100" y="242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. BASIC SAMPLING ALGORITHM
+  </text>
+
+  <rect x="100" y="290" width="2000" height="580" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
+  
+  <text x="1100" y="340" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    Algorithm: MDLM Ancestral Sampling
+  </text>
+  
+  <rect x="140" y="370" width="1920" height="470" rx="8" fill="#FAF5FF" stroke="#A855F7" stroke-width="2"/>
+  
+  <text x="180" y="415" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#7C3AED">
+    Input: Trained model f_θ, sequence length n, number of steps T
+  </text>
+  <text x="180" y="455" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#7C3AED">
+    Output: Generated sequence x₀
+  </text>
+  
+  <line x1="180" y1="475" x2="2020" y2="475" stroke="#4A5568" stroke-width="1" stroke-dasharray="5,5"/>
+  
+  <text x="180" y="515" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    1. Initialize: x₁ ← [MASK, MASK, ..., MASK]  (n tokens, all masked)
+  </text>
+  
+  <text x="180" y="560" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    2. Define time steps: t_T = 1, t_{T-1}, ..., t_1, t_0 = 0
+  </text>
+  <text x="200" y="595" font-family="Courier New, monospace" font-size="16" fill="#718096">
+    # Typically uniform: tₖ = k/T
+  </text>
+  
+  <text x="180" y="640" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    3. for k = T, T-1, ..., 1 do:
+  </text>
+  
+  <text x="220" y="680" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    a. t = tₖ, s = tₖ - t_{k-1}  (current time, step size)
+  </text>
+  
+  <text x="220" y="720" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    b. logits = f_θ(xₜ, t)  →  probs = softmax(logits)
+  </text>
+  
+  <text x="220" y="760" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    c. θ = s / t  (unmasking probability for this step)
+  </text>
+  
+  <text x="220" y="800" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    d. For each position i where xₜⁱ = [MASK]:
+  </text>
+  <text x="260" y="835" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    With probability θ: xₜ₋ₛⁱ ~ Categorical(probs[i])  (unmask)
+  </text>
+  <text x="260" y="865" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    Otherwise: xₜ₋ₛⁱ = [MASK]  (stay masked)
+  </text>
+  
+  <text x="180" y="905" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    4. return x₀
+  </text>
+
+  <!-- Section 2: Step-by-Step Example -->
+  <rect x="50" y="940" width="2100" height="560" rx="12" fill="#F0FDF4" stroke="#22C55E" stroke-width="3"/>
+  <rect x="50" y="940" width="2100" height="60" rx="12" fill="#22C55E"/>
+  <text x="1100" y="982" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. VISUAL EXAMPLE: T=4 STEPS
+  </text>
+
+  <text x="100" y="1050" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000">
+    Generating "The quick brown fox" with 4 denoising steps:
+  </text>
+  
+  <!-- Step T=4 (t=1.0) -->
+  <text x="100" y="1100" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7C3AED">Step 0 (t=1.0):</text>
+  <rect x="280" y="1075" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="325" y="1105" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="380" y="1075" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="425" y="1105" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="480" y="1075" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="525" y="1105" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="580" y="1075" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="625" y="1105" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <text x="720" y="1105" font-family="Arial, sans-serif" font-size="18" fill="#718096">← All masked, θ=0.25</text>
+  
+  <!-- Arrow -->
+  <line x1="1100" y1="1130" x2="1100" y2="1165" stroke="#22C55E" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Step T=3 (t=0.75) -->
+  <text x="100" y="1205" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7C3AED">Step 1 (t=0.75):</text>
+  <rect x="280" y="1180" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="325" y="1210" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="380" y="1180" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="425" y="1210" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">quick</text>
+  <rect x="480" y="1180" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="525" y="1210" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="580" y="1180" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="625" y="1210" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <text x="720" y="1210" font-family="Arial, sans-serif" font-size="18" fill="#718096">← 1 revealed, θ=0.33</text>
+  
+  <!-- Arrow -->
+  <line x1="1100" y1="1235" x2="1100" y2="1270" stroke="#22C55E" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Step T=2 (t=0.5) -->
+  <text x="100" y="1310" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7C3AED">Step 2 (t=0.5):</text>
+  <rect x="280" y="1285" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="325" y="1315" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">The</text>
+  <rect x="380" y="1285" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="425" y="1315" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">quick</text>
+  <rect x="480" y="1285" width="90" height="45" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="525" y="1315" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="580" y="1285" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="625" y="1315" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">fox</text>
+  <text x="720" y="1315" font-family="Arial, sans-serif" font-size="18" fill="#718096">← 3 revealed, θ=0.5</text>
+  
+  <!-- Arrow -->
+  <line x1="1100" y1="1340" x2="1100" y2="1375" stroke="#22C55E" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Step T=1 (t=0.25) then t=0 -->
+  <text x="100" y="1415" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#16A34A">Step 3-4 (t=0):</text>
+  <rect x="280" y="1390" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="325" y="1420" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">The</text>
+  <rect x="380" y="1390" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="425" y="1420" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">quick</text>
+  <rect x="480" y="1390" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="525" y="1420" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">brown</text>
+  <rect x="580" y="1390" width="90" height="45" rx="5" fill="#BBF7D0" stroke="#16A34A" stroke-width="2"/>
+  <text x="625" y="1420" font-family="Courier New, monospace" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">fox</text>
+  <text x="720" y="1420" font-family="Arial, sans-serif" font-size="18" fill="#16A34A" font-weight="bold">← All revealed! ✓</text>
+
+  <!-- Section 3: Sampling Strategies -->
+  <rect x="50" y="1540" width="2100" height="540" rx="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+  <rect x="50" y="1540" width="2100" height="60" rx="12" fill="#F59E0B"/>
+  <text x="1100" y="1582" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. SAMPLING STRATEGIES
+  </text>
+
+  <rect x="100" y="1630" width="650" height="420" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="425" y="1675" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Argmax (Greedy)
+  </text>
+  <text x="140" y="1725" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    x₀ⁱ = argmax_v p_θ(v | xₜ)
+  </text>
+  <text x="140" y="1775" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    Always pick highest probability
+  </text>
+  <text x="140" y="1830" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    Pros:
+  </text>
+  <text x="160" y="1865" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Deterministic</text>
+  <text x="160" y="1900" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Fastest sampling</text>
+  <text x="160" y="1935" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Reproducible</text>
+  <text x="140" y="1980" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#DC2626">
+    Cons:
+  </text>
+  <text x="160" y="2015" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Can be repetitive</text>
+  <text x="160" y="2040" font-family="Arial, sans-serif" font-size="16" fill="#000000">• Less diverse</text>
+
+  <rect x="780" y="1630" width="650" height="420" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="1105" y="1675" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Temperature Sampling
+  </text>
+  <text x="820" y="1725" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    p'(v) ∝ p(v)^(1/τ)
+  </text>
+  <text x="820" y="1775" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    Scale logits before softmax
+  </text>
+  <text x="820" y="1830" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    Temperature τ:
+  </text>
+  <text x="840" y="1865" font-family="Arial, sans-serif" font-size="16" fill="#000000">• τ → 0: becomes argmax</text>
+  <text x="840" y="1900" font-family="Arial, sans-serif" font-size="16" fill="#000000">• τ = 1: standard sampling</text>
+  <text x="840" y="1935" font-family="Arial, sans-serif" font-size="16" fill="#000000">• τ &gt; 1: more random</text>
+  <text x="820" y="1980" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    Typical: τ = 0.7 - 0.9
+  </text>
+  <text x="840" y="2015" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">Balances quality and diversity</text>
+
+  <rect x="1460" y="1630" width="640" height="420" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="1780" y="1675" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Top-k / Top-p
+  </text>
+  <text x="1500" y="1725" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">
+    Top-k:
+  </text>
+  <text x="1520" y="1760" font-family="Arial, sans-serif" font-size="16" fill="#000000">Sample from top k tokens</text>
+  <text x="1500" y="1810" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">
+    Top-p (nucleus):
+  </text>
+  <text x="1520" y="1845" font-family="Arial, sans-serif" font-size="16" fill="#000000">Sample from smallest set</text>
+  <text x="1520" y="1875" font-family="Arial, sans-serif" font-size="16" fill="#000000">with cumulative prob ≥ p</text>
+  <text x="1500" y="1930" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#22C55E">
+    Typical values:
+  </text>
+  <text x="1520" y="1965" font-family="Arial, sans-serif" font-size="16" fill="#000000">• k = 40-50</text>
+  <text x="1520" y="2000" font-family="Arial, sans-serif" font-size="16" fill="#000000">• p = 0.9-0.95</text>
+  <text x="1500" y="2040" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">Filters unlikely tokens</text>
+
+  <!-- Section 4: Number of Steps -->
+  <rect x="50" y="2120" width="2100" height="480" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="50" y="2120" width="2100" height="60" rx="12" fill="#3B82F6"/>
+  <text x="1100" y="2162" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. NUMBER OF STEPS: QUALITY VS SPEED
+  </text>
+
+  <rect x="100" y="2210" width="2000" height="360" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  
+  <text x="140" y="2260" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000">
+    Trade-off: More steps = better quality, but slower
+  </text>
+  
+  <!-- Scale bar -->
+  <rect x="200" y="2300" width="1700" height="60" rx="5" fill="none" stroke="#4A5568" stroke-width="2"/>
+  <rect x="200" y="2300" width="400" height="60" rx="5" fill="#FECACA"/>
+  <rect x="600" y="2300" width="500" height="60" fill="#FEF3C7"/>
+  <rect x="1100" y="2300" width="800" height="60" rx="5" fill="#BBF7D0"/>
+  
+  <text x="400" y="2340" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">T = 1-8</text>
+  <text x="850" y="2340" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">T = 16-64</text>
+  <text x="1500" y="2340" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">T = 128-1024</text>
+  
+  <text x="400" y="2400" font-family="Arial, sans-serif" font-size="16" fill="#DC2626" text-anchor="middle">Fast, lower quality</text>
+  <text x="850" y="2400" font-family="Arial, sans-serif" font-size="16" fill="#D97706" text-anchor="middle">Balanced</text>
+  <text x="1500" y="2400" font-family="Arial, sans-serif" font-size="16" fill="#22C55E" text-anchor="middle">Best quality</text>
+  
+  <text x="140" y="2470" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">
+    MDLM Findings:
+  </text>
+  <text x="180" y="2510" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • T=1024 achieves near-optimal perplexity (matches ELBO bound)
+  </text>
+  <text x="180" y="2545" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • T=64 offers good trade-off for practical use
+  </text>
+
+  <!-- Section 5: Semi-Autoregressive -->
+  <rect x="50" y="2640" width="2100" height="480" rx="12" fill="#ECFDF5" stroke="#10B981" stroke-width="3"/>
+  <rect x="50" y="2640" width="2100" height="60" rx="12" fill="#10B981"/>
+  <text x="1100" y="2682" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. SEMI-AUTOREGRESSIVE SAMPLING
+  </text>
+
+  <rect x="100" y="2730" width="980" height="360" rx="10" fill="#FFFFFF" stroke="#059669" stroke-width="3"/>
+  <text x="590" y="2775" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Hybrid Approach
+  </text>
+  <text x="140" y="2830" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    Combine autoregressive + diffusion:
+  </text>
+  <text x="160" y="2875" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    1. Generate sequence in blocks
+  </text>
+  <text x="160" y="2915" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    2. Each block: diffusion sampling
+  </text>
+  <text x="160" y="2955" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    3. Blocks generated left-to-right
+  </text>
+  <text x="140" y="3010" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#22C55E">
+    Benefits:
+  </text>
+  <text x="160" y="3050" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Better for long sequences
+  </text>
+  <text x="160" y="3080" font-family="Arial, sans-serif" font-size="18" fill="#000000">
+    • Maintains local coherence
+  </text>
+
+  <rect x="1120" y="2730" width="980" height="360" rx="10" fill="#FFFFFF" stroke="#059669" stroke-width="3"/>
+  <text x="1610" y="2775" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Conditional Generation
+  </text>
+  <text x="1160" y="2830" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    MDLM naturally supports:
+  </text>
+  <text x="1180" y="2875" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    • Infilling: Fill in [M] in middle
+  </text>
+  <text x="1200" y="2910" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    "The [M] brown [M]" → "The quick brown fox"
+  </text>
+  <text x="1180" y="2960" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    • Continuation: Prefix + [M]
+  </text>
+  <text x="1200" y="2995" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    "The quick" + [M][M] → "brown fox"
+  </text>
+  <text x="1180" y="3045" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#3B82F6">
+    • Constrained: Fix some tokens
+  </text>
+  <text x="1200" y="3080" font-family="Arial, sans-serif" font-size="16" fill="#1a1a1a">
+    Natural for bidirectional models!
+  </text>
+
+  <!-- Section 6: Summary -->
+  <rect x="50" y="3160" width="2100" height="600" rx="12" fill="#1E3A5F" stroke="#0F172A" stroke-width="3"/>
+  <text x="1100" y="3220" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Complete Sampling Algorithm Summary
+  </text>
+  
+  <rect x="100" y="3260" width="2000" height="470" rx="10" fill="#F1F5F9" stroke="#334155" stroke-width="2"/>
+  
+  <text x="140" y="3310" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#7C3AED">
+    def sample_mdlm(model, length, num_steps, temperature=1.0, top_p=0.95):
+  </text>
+  
+  <text x="180" y="3355" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    # Initialize with all masks
+  </text>
+  <text x="180" y="3390" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    x = torch.full((length,), MASK_TOKEN)
+  </text>
+  <text x="180" y="3430" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    times = torch.linspace(1, 0, num_steps + 1)  # t: 1 → 0
+  </text>
+  
+  <text x="180" y="3475" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    for i in range(num_steps):
+  </text>
+  <text x="220" y="3510" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    t, t_next = times[i], times[i+1]
+  </text>
+  <text x="220" y="3545" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    logits = model(x, t) / temperature
+  </text>
+  <text x="220" y="3580" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    probs = top_p_filter(softmax(logits), top_p)
+  </text>
+  <text x="220" y="3615" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    unmask_prob = (t - t_next) / t
+  </text>
+  <text x="220" y="3650" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    mask = (x == MASK_TOKEN) &amp; (torch.rand(length) &lt; unmask_prob)
+  </text>
+  <text x="220" y="3685" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    x[mask] = sample_from(probs[mask])
+  </text>
+  
+  <text x="180" y="3725" font-family="Courier New, monospace" font-size="16" fill="#000000">
+    return x
+  </text>
+</svg>
+

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3000" width="2200" height="3000">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1E3A5F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E5984;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="forwardGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#DC2626;stop-opacity:0.12" />
+      <stop offset="100%" style="stop-color:#F87171;stop-opacity:0.12" />
+    </linearGradient>
+    <linearGradient id="reverseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:0.12" />
+      <stop offset="100%" style="stop-color:#34D399;stop-opacity:0.12" />
+    </linearGradient>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#059669"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3000" fill="#F8FAFC"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="140" rx="15" fill="url(#headerGrad)" stroke="#1E3A5F" stroke-width="3"/>
+  <text x="1100" y="100" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Simple and Effective Masked Diffusion
+  </text>
+  <text x="1100" y="145" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#93C5FD" text-anchor="middle">
+    Language Models (MDLM)
+  </text>
+  <text x="1100" y="175" font-family="Arial, sans-serif" font-size="20" fill="#BFDBFE" text-anchor="middle">
+    Sahoo, Arriola, Schiff, Gokaslan, Marber, Sahami, Kuleshov (2024)
+  </text>
+
+  <!-- Section 1: Key Contributions -->
+  <rect x="50" y="220" width="2100" height="380" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="50" y="220" width="2100" height="60" rx="12" fill="#3B82F6"/>
+  <text x="1100" y="262" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. KEY CONTRIBUTIONS OF MDLM
+  </text>
+
+  <rect x="100" y="310" width="480" height="260" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <text x="340" y="355" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Simplified Framework
+  </text>
+  <text x="130" y="395" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Absorbing-state diffusion</text>
+  <text x="130" y="430" font-family="Arial, sans-serif" font-size="20" fill="#000000">• [MASK] as noise state</text>
+  <text x="130" y="465" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Continuous-time limit</text>
+  <text x="130" y="500" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Clean mathematical</text>
+  <text x="145" y="530" font-family="Arial, sans-serif" font-size="20" fill="#000000">derivations</text>
+
+  <rect x="620" y="310" width="480" height="260" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <text x="860" y="355" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Efficient Training
+  </text>
+  <text x="650" y="395" font-family="Arial, sans-serif" font-size="20" fill="#000000">• No auxiliary losses</text>
+  <text x="650" y="430" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Single cross-entropy</text>
+  <text x="650" y="465" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Variable masking rate</text>
+  <text x="650" y="500" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Similar to BERT MLM</text>
+  <text x="665" y="530" font-family="Arial, sans-serif" font-size="20" fill="#000000">but principled</text>
+
+  <rect x="1140" y="310" width="480" height="260" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <text x="1380" y="355" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Strong Performance
+  </text>
+  <text x="1170" y="395" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Competitive with GPT-2</text>
+  <text x="1170" y="430" font-family="Arial, sans-serif" font-size="20" fill="#000000">• State-of-art for discrete</text>
+  <text x="1185" y="460" font-family="Arial, sans-serif" font-size="20" fill="#000000">diffusion LMs</text>
+  <text x="1170" y="495" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Scales to large models</text>
+  <text x="1170" y="530" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">• Flexible generation</text>
+
+  <rect x="1660" y="310" width="440" height="260" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <text x="1880" y="355" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Theoretical Rigor
+  </text>
+  <text x="1690" y="395" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Tight ELBO bounds</text>
+  <text x="1690" y="430" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Principled objectives</text>
+  <text x="1690" y="465" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Clear derivations</text>
+  <text x="1690" y="500" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Connects to score</text>
+  <text x="1705" y="530" font-family="Arial, sans-serif" font-size="20" fill="#000000">matching</text>
+
+  <!-- Section 2: Core Idea -->
+  <rect x="50" y="640" width="2100" height="520" rx="12" fill="#F0FDF4" stroke="#22C55E" stroke-width="3"/>
+  <rect x="50" y="640" width="2100" height="60" rx="12" fill="#22C55E"/>
+  <text x="1100" y="682" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. CORE IDEA: ABSORBING-STATE DIFFUSION
+  </text>
+
+  <text x="100" y="750" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000">
+    Key Insight: Use [MASK] token as the "absorbing state" (like noise in continuous diffusion)
+  </text>
+
+  <!-- Visual process -->
+  <rect x="100" y="790" width="980" height="340" rx="10" fill="url(#forwardGrad)" stroke="#DC2626" stroke-width="3"/>
+  <text x="590" y="835" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Forward Process: Corruption q(xₜ | x₀)
+  </text>
+  
+  <!-- Clean sequence -->
+  <text x="140" y="885" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">t = 0 (clean):</text>
+  <rect x="300" y="860" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="340" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">The</text>
+  <rect x="390" y="860" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="430" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">cat</text>
+  <rect x="480" y="860" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="520" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">sat</text>
+  <rect x="570" y="860" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="610" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">on</text>
+  <rect x="660" y="860" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="700" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">mat</text>
+  
+  <!-- Arrow down -->
+  <line x1="500" y1="910" x2="500" y2="945" stroke="#DC2626" stroke-width="3" marker-end="url(#arrowRed)"/>
+  
+  <!-- Partially masked -->
+  <text x="140" y="985" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">t = 0.5:</text>
+  <rect x="300" y="960" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="340" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="390" y="960" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="430" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">cat</text>
+  <rect x="480" y="960" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="520" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="570" y="960" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="610" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">on</text>
+  <rect x="660" y="960" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="700" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  
+  <!-- Arrow down -->
+  <line x1="500" y1="1010" x2="500" y2="1045" stroke="#DC2626" stroke-width="3" marker-end="url(#arrowRed)"/>
+  
+  <!-- Fully masked -->
+  <text x="140" y="1085" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">t = 1 (noise):</text>
+  <rect x="300" y="1060" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="340" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="390" y="1060" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="430" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="480" y="1060" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="520" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="570" y="1060" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="610" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="660" y="1060" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="700" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+
+  <!-- Reverse process -->
+  <rect x="1120" y="790" width="980" height="340" rx="10" fill="url(#reverseGrad)" stroke="#059669" stroke-width="3"/>
+  <text x="1610" y="835" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Reverse Process: Denoising p_θ(x₀ | xₜ)
+  </text>
+  
+  <!-- Fully masked start -->
+  <text x="1160" y="885" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">t = 1:</text>
+  <rect x="1300" y="860" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1340" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="1390" y="860" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1430" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="1480" y="860" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1520" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="1570" y="860" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1610" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="1660" y="860" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1700" y="888" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  
+  <!-- Arrow down -->
+  <line x1="1500" y1="910" x2="1500" y2="945" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Partially unmasked -->
+  <text x="1160" y="985" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">t = 0.5:</text>
+  <rect x="1300" y="960" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1340" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">The</text>
+  <rect x="1390" y="960" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1430" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="1480" y="960" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1520" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">sat</text>
+  <rect x="1570" y="960" width="80" height="40" rx="5" fill="#FECACA" stroke="#DC2626" stroke-width="2"/>
+  <text x="1610" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">[M]</text>
+  <rect x="1660" y="960" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1700" y="988" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">mat</text>
+  
+  <!-- Arrow down -->
+  <line x1="1500" y1="1010" x2="1500" y2="1045" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)"/>
+  
+  <!-- Clean result -->
+  <text x="1160" y="1085" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">t = 0:</text>
+  <rect x="1300" y="1060" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1340" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">The</text>
+  <rect x="1390" y="1060" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1430" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">cat</text>
+  <rect x="1480" y="1060" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1520" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">sat</text>
+  <rect x="1570" y="1060" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1610" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">on</text>
+  <rect x="1660" y="1060" width="80" height="40" rx="5" fill="#BBF7D0" stroke="#166534" stroke-width="2"/>
+  <text x="1700" y="1088" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">mat</text>
+
+  <!-- Section 3: Mathematical Framework -->
+  <rect x="50" y="1200" width="2100" height="580" rx="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+  <rect x="50" y="1200" width="2100" height="60" rx="12" fill="#F59E0B"/>
+  <text x="1100" y="1242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. MATHEMATICAL FRAMEWORK OVERVIEW
+  </text>
+
+  <rect x="100" y="1290" width="650" height="460" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="425" y="1335" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Forward Process
+  </text>
+  <text x="130" y="1385" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Continuous-time formulation:
+  </text>
+  <text x="150" y="1425" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    q(xₜ | x₀) for t ∈ [0, 1]
+  </text>
+  <text x="130" y="1480" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Masking probability:
+  </text>
+  <text x="150" y="1520" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    P(xₜ = x₀) = αₜ = 1 - t
+  </text>
+  <text x="150" y="1560" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    P(xₜ = [M]) = 1 - αₜ = t
+  </text>
+  <text x="130" y="1620" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    Linear noise schedule for simplicity
+  </text>
+  <text x="130" y="1660" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    Each token masked independently
+  </text>
+  <text x="130" y="1700" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    At t=1, all tokens are [MASK]
+  </text>
+
+  <rect x="780" y="1290" width="650" height="460" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="1105" y="1335" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Training Objective
+  </text>
+  <text x="810" y="1385" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    ELBO-derived loss:
+  </text>
+  <text x="830" y="1425" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    L = E_{t,x₀,xₜ}[-log p_θ(x₀|xₜ)]
+  </text>
+  <text x="810" y="1480" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Simplified form:
+  </text>
+  <text x="830" y="1520" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000000">
+    L = ∑_{masked} CE(x₀ⁱ, p_θ(·|xₜ))
+  </text>
+  <text x="810" y="1580" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Cross-entropy on masked positions
+  </text>
+  <text x="810" y="1620" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Sample t uniformly from [0,1]
+  </text>
+  <text x="810" y="1660" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • No auxiliary reconstruction loss
+  </text>
+  <text x="810" y="1700" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    • Theoretically justified weighting
+  </text>
+
+  <rect x="1460" y="1290" width="640" height="460" rx="10" fill="#FFFFFF" stroke="#D97706" stroke-width="3"/>
+  <text x="1780" y="1335" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Sampling
+  </text>
+  <text x="1490" y="1385" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Iterative unmasking:
+  </text>
+  <text x="1510" y="1425" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    1. Start with all [MASK]
+  </text>
+  <text x="1510" y="1465" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    2. For t = 1 → 0:
+  </text>
+  <text x="1530" y="1505" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    a. Predict p_θ(x₀|xₜ)
+  </text>
+  <text x="1530" y="1545" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    b. Sample tokens to unmask
+  </text>
+  <text x="1530" y="1585" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    c. Update sequence xₜ₋₁
+  </text>
+  <text x="1510" y="1625" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    3. Return fully unmasked x₀
+  </text>
+  <text x="1490" y="1680" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    Flexible step count: trade
+  </text>
+  <text x="1490" y="1715" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    speed vs quality
+  </text>
+
+  <!-- Section 4: Comparison -->
+  <rect x="50" y="1820" width="2100" height="480" rx="12" fill="#FAF5FF" stroke="#A855F7" stroke-width="3"/>
+  <rect x="50" y="1820" width="2100" height="60" rx="12" fill="#A855F7"/>
+  <text x="1100" y="1862" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. MDLM vs OTHER APPROACHES
+  </text>
+
+  <!-- Comparison table -->
+  <rect x="100" y="1910" width="2000" height="360" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
+  
+  <!-- Headers -->
+  <rect x="100" y="1910" width="400" height="50" fill="#E9D5FF"/>
+  <text x="300" y="1945" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Aspect</text>
+  <rect x="500" y="1910" width="400" height="50" fill="#E9D5FF"/>
+  <text x="700" y="1945" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">BERT MLM</text>
+  <rect x="900" y="1910" width="400" height="50" fill="#E9D5FF"/>
+  <text x="1100" y="1945" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">D3PM</text>
+  <rect x="1300" y="1910" width="400" height="50" fill="#E9D5FF"/>
+  <text x="1500" y="1945" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">MDLM (Ours)</text>
+  <rect x="1700" y="1910" width="400" height="50" fill="#E9D5FF"/>
+  <text x="1900" y="1945" font-family="Georgia, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">GPT-2 (AR)</text>
+
+  <!-- Row 1 -->
+  <text x="300" y="2000" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Masking Rate</text>
+  <text x="700" y="2000" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Fixed 15%</text>
+  <text x="1100" y="2000" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Discrete schedule</text>
+  <text x="1500" y="2000" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Continuous t∈[0,1]</text>
+  <text x="1900" y="2000" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">N/A</text>
+
+  <!-- Row 2 -->
+  <text x="300" y="2050" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Training Objective</text>
+  <text x="700" y="2050" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Heuristic MLM</text>
+  <text x="1100" y="2050" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Complex ELBO</text>
+  <text x="1500" y="2050" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Simple ELBO</text>
+  <text x="1900" y="2050" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Next-token CE</text>
+
+  <!-- Row 3 -->
+  <text x="300" y="2100" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Generation</text>
+  <text x="700" y="2100" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Not designed for</text>
+  <text x="1100" y="2100" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Multi-step</text>
+  <text x="1500" y="2100" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Flexible steps</text>
+  <text x="1900" y="2100" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Sequential</text>
+
+  <!-- Row 4 -->
+  <text x="300" y="2150" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Context</text>
+  <text x="700" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Bidirectional</text>
+  <text x="1100" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Bidirectional</text>
+  <text x="1500" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Bidirectional</text>
+  <text x="1900" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#DC2626" text-anchor="middle">Causal only</text>
+
+  <!-- Row 5 -->
+  <text x="300" y="2200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Likelihood</text>
+  <text x="700" y="2200" font-family="Arial, sans-serif" font-size="18" fill="#DC2626" text-anchor="middle">No bound</text>
+  <text x="1100" y="2200" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Lower bound</text>
+  <text x="1500" y="2200" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Tight bound</text>
+  <text x="1900" y="2200" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Exact</text>
+
+  <!-- Row 6 -->
+  <text x="300" y="2250" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Parallel Gen</text>
+  <text x="700" y="2250" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Possible</text>
+  <text x="1100" y="2250" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Yes</text>
+  <text x="1500" y="2250" font-family="Arial, sans-serif" font-size="18" fill="#22C55E" font-weight="bold" text-anchor="middle">Yes</text>
+  <text x="1900" y="2250" font-family="Arial, sans-serif" font-size="18" fill="#DC2626" text-anchor="middle">No</text>
+
+  <!-- Section 5: Key Equations -->
+  <rect x="50" y="2340" width="2100" height="320" rx="12" fill="#ECFDF5" stroke="#10B981" stroke-width="3"/>
+  <rect x="50" y="2340" width="2100" height="60" rx="12" fill="#10B981"/>
+  <text x="1100" y="2382" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. KEY EQUATIONS AT A GLANCE
+  </text>
+
+  <rect x="100" y="2430" width="650" height="200" rx="10" fill="#FFFFFF" stroke="#059669" stroke-width="3"/>
+  <text x="425" y="2475" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Forward Marginal
+  </text>
+  <text x="425" y="2530" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(xₜ|x₀) = αₜδ(xₜ,x₀) + (1-αₜ)δ(xₜ,[M])
+  </text>
+  <text x="425" y="2580" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a" text-anchor="middle">
+    where αₜ = 1 - t (linear schedule)
+  </text>
+
+  <rect x="780" y="2430" width="650" height="200" rx="10" fill="#FFFFFF" stroke="#059669" stroke-width="3"/>
+  <text x="1105" y="2475" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Training Loss
+  </text>
+  <text x="1105" y="2530" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    L = E_{t,x₀}[∑_{xₜ=[M]} -log p_θ(x₀ⁱ|xₜ)]
+  </text>
+  <text x="1105" y="2580" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a" text-anchor="middle">
+    Cross-entropy on masked positions only
+  </text>
+
+  <rect x="1460" y="2430" width="640" height="200" rx="10" fill="#FFFFFF" stroke="#059669" stroke-width="3"/>
+  <text x="1780" y="2475" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    Unmasking Probability
+  </text>
+  <text x="1780" y="2530" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    θₜ = (αₜ₋₁ - αₜ)/(1 - αₜ)
+  </text>
+  <text x="1780" y="2580" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a" text-anchor="middle">
+    Prob. of revealing token at step t
+  </text>
+
+  <!-- Footer -->
+  <rect x="50" y="2700" width="2100" height="260" rx="12" fill="#1E3A5F" stroke="#0F172A" stroke-width="3"/>
+  <text x="1100" y="2755" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Why MDLM Matters
+  </text>
+  <text x="1100" y="2810" font-family="Arial, sans-serif" font-size="24" fill="#93C5FD" text-anchor="middle">
+    MDLM provides the simplest and most principled framework for discrete diffusion language modeling
+  </text>
+  <text x="1100" y="2855" font-family="Arial, sans-serif" font-size="22" fill="#BFDBFE" text-anchor="middle">
+    • Clean continuous-time formulation • Single cross-entropy loss • Competitive with autoregressive models
+  </text>
+  <text x="1100" y="2900" font-family="Arial, sans-serif" font-size="22" fill="#BFDBFE" text-anchor="middle">
+    • Theoretical guarantees via ELBO • Flexible generation with variable step counts
+  </text>
+  <text x="1100" y="2945" font-family="Arial, sans-serif" font-size="20" fill="#64748B" text-anchor="middle">
+    Foundation for Dream 7B and other large-scale diffusion LLMs
+  </text>
+</svg>
+

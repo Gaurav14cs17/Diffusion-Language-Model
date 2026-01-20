@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 600">
+  <defs>
+    <linearGradient id="bgGradInf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f23"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <marker id="arrowInf" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38ef7d"/>
+    </marker>
+    <marker id="arrowLoop" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#667eea"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="950" height="600" fill="url(#bgGradInf)"/>
+  
+  <!-- Title -->
+  <text x="475" y="40" fill="#fff" font-size="24" font-weight="bold" text-anchor="middle" font-family="system-ui">Complete Inference Flow</text>
+  
+  <!-- Step boxes -->
+  <!-- Step 1: Input -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="180" height="110" rx="12" fill="#1a1a3e" stroke="#f7b731" stroke-width="2"/>
+    <circle cx="25" cy="25" r="15" fill="#f7b731"/>
+    <text x="25" y="30" fill="#000" font-size="12" text-anchor="middle" font-weight="bold" font-family="system-ui">1</text>
+    <text x="100" y="30" fill="#f7b731" font-size="13" font-weight="bold" text-anchor="middle" font-family="system-ui">Input</text>
+    
+    <rect x="15" y="45" width="150" height="50" rx="5" fill="#2a2a4e"/>
+    <text x="90" y="65" fill="#fff" font-size="10" text-anchor="middle" font-family="system-ui">"Solve: 2+2="</text>
+    <text x="90" y="82" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Tokenize → Prompt</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M240,135 L275,135" stroke="#38ef7d" stroke-width="2" marker-end="url(#arrowInf)"/>
+  
+  <!-- Step 2: Initialize -->
+  <g transform="translate(285, 80)">
+    <rect x="0" y="0" width="180" height="110" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <circle cx="25" cy="25" r="15" fill="#667eea"/>
+    <text x="25" y="30" fill="#fff" font-size="12" text-anchor="middle" font-weight="bold" font-family="system-ui">2</text>
+    <text x="100" y="30" fill="#667eea" font-size="13" font-weight="bold" text-anchor="middle" font-family="system-ui">Init Window</text>
+    
+    <g transform="translate(15, 45)">
+      <rect x="0" y="0" width="30" height="22" rx="3" fill="#38ef7d" opacity="0.7"/>
+      <rect x="33" y="0" width="30" height="22" rx="3" fill="#38ef7d" opacity="0.7"/>
+      <rect x="66" y="0" width="30" height="22" rx="3" fill="#f5576c" opacity="0.7"/>
+      <rect x="99" y="0" width="30" height="22" rx="3" fill="#f5576c" opacity="0.7"/>
+      <text x="15" y="15" fill="#000" font-size="8" text-anchor="middle" font-family="system-ui">2+2</text>
+      <text x="48" y="15" fill="#000" font-size="8" text-anchor="middle" font-family="system-ui">=</text>
+      <text x="81" y="15" fill="#fff" font-size="8" text-anchor="middle" font-family="system-ui">[M]</text>
+      <text x="114" y="15" fill="#fff" font-size="8" text-anchor="middle" font-family="system-ui">[M]</text>
+    </g>
+    <text x="90" y="82" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Add mask tokens</text>
+  </g>
+  
+  <!-- Arrow -->
+  <path d="M475,135 L510,135" stroke="#38ef7d" stroke-width="2" marker-end="url(#arrowInf)"/>
+  
+  <!-- Step 3: Prefill -->
+  <g transform="translate(520, 80)">
+    <rect x="0" y="0" width="180" height="110" rx="12" fill="#1a1a3e" stroke="#667eea" stroke-width="2"/>
+    <circle cx="25" cy="25" r="15" fill="#667eea"/>
+    <text x="25" y="30" fill="#fff" font-size="12" text-anchor="middle" font-weight="bold" font-family="system-ui">3</text>
+    <text x="100" y="30" fill="#667eea" font-size="13" font-weight="bold" text-anchor="middle" font-family="system-ui">Prefill</text>
+    
+    <rect x="15" y="45" width="150" height="50" rx="5" fill="#2a2a4e"/>
+    <text x="90" y="62" fill="#38ef7d" font-size="10" text-anchor="middle" font-family="system-ui">Cache prompt KV</text>
+    <text x="90" y="78" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">One-time computation</text>
+  </g>
+  
+  <!-- Arrow down -->
+  <path d="M610,200 L610,230" stroke="#38ef7d" stroke-width="2" marker-end="url(#arrowInf)"/>
+  
+  <!-- Decode Loop Box -->
+  <g transform="translate(50, 240)">
+    <rect x="0" y="0" width="850" height="240" rx="15" fill="#1a1a3e" stroke="#667eea" stroke-width="2" stroke-dasharray="8,4"/>
+    <text x="425" y="28" fill="#667eea" font-size="14" font-weight="bold" text-anchor="middle" font-family="system-ui">🔄 Decode Loop (repeat until done)</text>
+    
+    <!-- Step 4: Reorder -->
+    <g transform="translate(30, 50)">
+      <rect x="0" y="0" width="180" height="85" rx="10" fill="#2a2a4e" stroke="#f7b731" stroke-width="1"/>
+      <text x="90" y="20" fill="#f7b731" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">4. Reorder</text>
+      <text x="90" y="40" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">[prefix][masks] →</text>
+      <text x="90" y="55" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">[non-mask, mask]</text>
+      <text x="90" y="75" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">Topological sort</text>
+    </g>
+    
+    <!-- Arrow -->
+    <path d="M220,92 L260,92" stroke="#667eea" stroke-width="2" marker-end="url(#arrowLoop)"/>
+    
+    <!-- Step 5: Forward -->
+    <g transform="translate(270, 50)">
+      <rect x="0" y="0" width="180" height="85" rx="10" fill="#2a2a4e" stroke="#38ef7d" stroke-width="1"/>
+      <text x="90" y="20" fill="#38ef7d" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">5. Model Forward</text>
+      <text x="90" y="40" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Compute logits for</text>
+      <text x="90" y="55" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">window positions</text>
+      <text x="90" y="75" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">Uses cached KV ✓</text>
+    </g>
+    
+    <!-- Arrow -->
+    <path d="M460,92 L500,92" stroke="#667eea" stroke-width="2" marker-end="url(#arrowLoop)"/>
+    
+    <!-- Step 6: Select -->
+    <g transform="translate(510, 50)">
+      <rect x="0" y="0" width="180" height="85" rx="10" fill="#2a2a4e" stroke="#667eea" stroke-width="1"/>
+      <text x="90" y="20" fill="#667eea" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">6. Select &amp; Sample</text>
+      <text x="90" y="40" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Entropy &lt; threshold?</text>
+      <text x="90" y="55" fill="#38ef7d" font-size="9" text-anchor="middle" font-family="system-ui">→ Fill position</text>
+      <text x="90" y="70" fill="#f5576c" font-size="9" text-anchor="middle" font-family="system-ui">→ Keep mask</text>
+    </g>
+    
+    <!-- Arrow -->
+    <path d="M700,92 L740,92" stroke="#667eea" stroke-width="2" marker-end="url(#arrowLoop)"/>
+    
+    <!-- Step 7: Update -->
+    <g transform="translate(750, 50)">
+      <rect x="0" y="0" width="80" height="85" rx="10" fill="#2a2a4e" stroke="#a855f7" stroke-width="1"/>
+      <text x="40" y="20" fill="#a855f7" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">7. Slide</text>
+      <text x="40" y="40" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">Commit</text>
+      <text x="40" y="55" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">prefix</text>
+      <text x="40" y="70" fill="#aaa" font-size="9" text-anchor="middle" font-family="system-ui">→ Slide</text>
+    </g>
+    
+    <!-- Loop back arrow -->
+    <path d="M790,145 Q820,180 790,195 Q400,220 65,195 Q40,180 65,145" stroke="#667eea" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+    <polygon points="65,140 55,145 65,150" fill="#667eea"/>
+    
+    <!-- Parallel visualization -->
+    <g transform="translate(100, 150)">
+      <rect x="0" y="0" width="650" height="70" rx="8" fill="#1a3a2e" opacity="0.5"/>
+      <text x="325" y="20" fill="#38ef7d" font-size="11" font-weight="bold" text-anchor="middle" font-family="system-ui">Example: Single Step Generates Multiple Tokens</text>
+      
+      <g transform="translate(30, 35)">
+        <text x="0" y="0" fill="#aaa" font-size="10" font-family="system-ui">Before:</text>
+        <rect x="50" y="-12" width="35" height="18" rx="3" fill="#38ef7d" opacity="0.6"/>
+        <rect x="88" y="-12" width="35" height="18" rx="3" fill="#38ef7d" opacity="0.6"/>
+        <rect x="126" y="-12" width="35" height="18" rx="3" fill="#f5576c" opacity="0.6"/>
+        <rect x="164" y="-12" width="35" height="18" rx="3" fill="#f5576c" opacity="0.6"/>
+        <rect x="202" y="-12" width="35" height="18" rx="3" fill="#f5576c" opacity="0.6"/>
+        <text x="68" y="2" fill="#000" font-size="7" text-anchor="middle" font-family="system-ui">2+2=</text>
+        <text x="106" y="2" fill="#000" font-size="7" text-anchor="middle" font-family="system-ui">...</text>
+        <text x="144" y="2" fill="#fff" font-size="7" text-anchor="middle" font-family="system-ui">[M]</text>
+        <text x="182" y="2" fill="#fff" font-size="7" text-anchor="middle" font-family="system-ui">[M]</text>
+        <text x="220" y="2" fill="#fff" font-size="7" text-anchor="middle" font-family="system-ui">[M]</text>
+        
+        <text x="280" y="0" fill="#38ef7d" font-size="14" font-family="system-ui">→</text>
+        
+        <text x="310" y="0" fill="#aaa" font-size="10" font-family="system-ui">After:</text>
+        <rect x="355" y="-12" width="35" height="18" rx="3" fill="#38ef7d" opacity="0.6"/>
+        <rect x="393" y="-12" width="35" height="18" rx="3" fill="#38ef7d" opacity="0.6"/>
+        <rect x="431" y="-12" width="35" height="18" rx="3" fill="#38ef7d" opacity="0.6"/>
+        <rect x="469" y="-12" width="35" height="18" rx="3" fill="#38ef7d" opacity="0.6"/>
+        <rect x="507" y="-12" width="35" height="18" rx="3" fill="#f5576c" opacity="0.4"/>
+        <text x="373" y="2" fill="#000" font-size="7" text-anchor="middle" font-family="system-ui">2+2=</text>
+        <text x="411" y="2" fill="#000" font-size="7" text-anchor="middle" font-family="system-ui">...</text>
+        <text x="449" y="2" fill="#000" font-size="7" text-anchor="middle" font-weight="bold" font-family="system-ui">The</text>
+        <text x="487" y="2" fill="#000" font-size="7" text-anchor="middle" font-weight="bold" font-family="system-ui">ans</text>
+        <text x="525" y="2" fill="#aaa" font-size="7" text-anchor="middle" font-family="system-ui">[M]</text>
+        
+        <text x="560" y="0" fill="#38ef7d" font-size="10" font-family="system-ui">+2 tokens!</text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Step 8: Output -->
+  <g transform="translate(380, 500)">
+    <rect x="0" y="0" width="200" height="80" rx="12" fill="#1a1a3e" stroke="#38ef7d" stroke-width="2"/>
+    <circle cx="25" cy="25" r="15" fill="#38ef7d"/>
+    <text x="25" y="30" fill="#000" font-size="12" text-anchor="middle" font-weight="bold" font-family="system-ui">8</text>
+    <text x="110" y="30" fill="#38ef7d" font-size="13" font-weight="bold" text-anchor="middle" font-family="system-ui">Output</text>
+    
+    <rect x="15" y="45" width="170" height="25" rx="5" fill="#2a2a4e"/>
+    <text x="100" y="62" fill="#fff" font-size="10" text-anchor="middle" font-family="system-ui">"The answer is 4."</text>
+  </g>
+  
+  <!-- Arrow from loop to output -->
+  <path d="M475,490 L475,500" stroke="#38ef7d" stroke-width="2" marker-end="url(#arrowInf)"/>
+</svg>
+

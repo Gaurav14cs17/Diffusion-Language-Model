@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <linearGradient id="manifoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#40c057;stop-opacity:0.3" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="350" fill="#1a1a2e" rx="15"/>
+  
+  <!-- Title -->
+  <text x="400" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ff6b6b" text-anchor="middle">🚫 PROBLEM 1: OFF-MANIFOLD GENERATION</text>
+  
+  <!-- Feature Space Box -->
+  <rect x="100" y="60" width="350" height="250" rx="10" fill="#2d2d44" stroke="#4a4a6a" stroke-width="2"/>
+  <text x="275" y="85" font-family="Arial, sans-serif" font-size="12" fill="#888" text-anchor="middle">High-dimensional space ℝ^{16×16×1024}</text>
+  
+  <!-- Valid Manifold -->
+  <ellipse cx="275" cy="180" rx="100" ry="70" fill="url(#manifoldGrad)" stroke="#51cf66" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="275" y="145" font-family="Arial, sans-serif" font-size="11" fill="#51cf66" text-anchor="middle">Valid Manifold</text>
+  
+  <!-- Real image points (green) -->
+  <circle cx="230" cy="170" r="8" fill="#51cf66" filter="url(#glow)"/>
+  <circle cx="260" cy="185" r="8" fill="#51cf66" filter="url(#glow)"/>
+  <circle cx="290" cy="175" r="8" fill="#51cf66" filter="url(#glow)"/>
+  <circle cx="320" cy="190" r="8" fill="#51cf66" filter="url(#glow)"/>
+  <circle cx="250" cy="200" r="8" fill="#51cf66" filter="url(#glow)"/>
+  <circle cx="280" cy="210" r="8" fill="#51cf66" filter="url(#glow)"/>
+  
+  <!-- Off-manifold points (red X) -->
+  <g fill="none" stroke="#ff6b6b" stroke-width="3">
+    <path d="M 145 120 L 155 130 M 155 120 L 145 130"/>
+    <path d="M 395 240 L 405 250 M 405 240 L 395 250"/>
+    <path d="M 170 260 L 180 270 M 180 260 L 170 270"/>
+    <path d="M 380 100 L 390 110 M 390 100 L 380 110"/>
+  </g>
+  
+  <!-- Dots representing high-dim space -->
+  <g fill="#4a4a6a">
+    <circle cx="130" cy="90" r="2"/><circle cx="150" cy="95" r="2"/><circle cx="170" cy="88" r="2"/>
+    <circle cx="190" cy="100" r="2"/><circle cx="350" cy="95" r="2"/><circle cx="370" cy="90" r="2"/>
+    <circle cx="390" cy="98" r="2"/><circle cx="410" cy="92" r="2"/><circle cx="130" cy="280" r="2"/>
+    <circle cx="150" cy="275" r="2"/><circle cx="390" cy="280" r="2"/><circle cx="410" cy="275" r="2"/>
+  </g>
+  
+  <!-- Legend -->
+  <rect x="480" y="60" width="280" height="250" rx="10" fill="#2d2d44" stroke="#4a4a6a" stroke-width="2"/>
+  
+  <circle cx="510" cy="100" r="8" fill="#51cf66"/>
+  <text x="530" y="105" font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0">= Real image features</text>
+  
+  <g fill="none" stroke="#ff6b6b" stroke-width="3">
+    <path d="M 505 135 L 515 145 M 515 135 L 505 145"/>
+  </g>
+  <text x="530" y="145" font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0">= Diffusion generates here!</text>
+  
+  <!-- Explanation -->
+  <text x="620" y="190" font-family="Arial, sans-serif" font-size="11" fill="#ff6b6b" text-anchor="middle">Without regularization:</text>
+  <text x="620" y="210" font-family="Arial, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle">Diffusion generates features</text>
+  <text x="620" y="230" font-family="Arial, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle">OUTSIDE the valid manifold</text>
+  <text x="620" y="260" font-family="Arial, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">→ Decoder fails!</text>
+  <text x="620" y="285" font-family="Arial, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">→ Garbage output! 💥</text>
+</svg>
+

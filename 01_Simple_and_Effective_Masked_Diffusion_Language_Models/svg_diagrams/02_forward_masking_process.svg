@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3400" width="2200" height="3400">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#991B1B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="proofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FEF2F2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FEE2E2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3400" fill="#FAFAFA"/>
+  
+  <!-- Main Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad)" stroke="#7F1D1D" stroke-width="3"/>
+  <text x="1100" y="110" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Forward Masking Process: Mathematical Details
+  </text>
+  <text x="1100" y="145" font-family="Arial, sans-serif" font-size="22" fill="#FECACA" text-anchor="middle">
+    The Corruption Process q(xₜ | x₀) in MDLM
+  </text>
+
+  <!-- Section 1: Continuous-Time Formulation -->
+  <rect x="50" y="200" width="2100" height="500" rx="12" fill="#FEF2F2" stroke="#DC2626" stroke-width="3"/>
+  <rect x="50" y="200" width="2100" height="60" rx="12" fill="#DC2626"/>
+  <text x="1100" y="242" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    1. CONTINUOUS-TIME FORMULATION
+  </text>
+
+  <text x="100" y="310" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#000000">
+    Key Innovation: MDLM uses continuous time t ∈ [0, 1] instead of discrete steps
+  </text>
+  
+  <rect x="100" y="350" width="980" height="320" rx="10" fill="#FFFFFF" stroke="#B91C1C" stroke-width="3"/>
+  <text x="590" y="395" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Continuous-Time Markov Process
+  </text>
+  
+  <text x="140" y="445" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Definition:
+  </text>
+  <text x="160" y="490" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">
+    dx/dt = x · Rₜ
+  </text>
+  <text x="140" y="545" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    Where Rₜ is the rate matrix (generator)
+  </text>
+  
+  <text x="140" y="600" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    For absorbing diffusion:
+  </text>
+  <text x="160" y="645" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    R[i,j] = -γ(t)·δᵢⱼ + γ(t)·δⱼ,[M]  for i≠[M]
+  </text>
+
+  <rect x="1120" y="350" width="980" height="320" rx="10" fill="#FFFFFF" stroke="#B91C1C" stroke-width="3"/>
+  <text x="1610" y="395" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Why Continuous Time?
+  </text>
+  
+  <text x="1160" y="455" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Cleaner mathematical framework
+  </text>
+  <text x="1160" y="495" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Simpler loss derivation
+  </text>
+  <text x="1160" y="535" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Flexible sampling (any number of steps)
+  </text>
+  <text x="1160" y="575" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Direct connection to score matching
+  </text>
+  <text x="1160" y="615" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    ✓ Avoids discrete timestep hyperparameter
+  </text>
+  <text x="1160" y="655" font-family="Arial, sans-serif" font-size="20" fill="#1a1a1a">
+    ✓ Enables principled ELBO bounds
+  </text>
+
+  <!-- Section 2: Marginal Distribution -->
+  <rect x="50" y="740" width="2100" height="620" rx="12" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+  <rect x="50" y="740" width="2100" height="60" rx="12" fill="#F59E0B"/>
+  <text x="1100" y="782" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    2. MARGINAL DISTRIBUTION q(xₜ | x₀)
+  </text>
+
+  <rect x="100" y="830" width="2000" height="500" rx="10" fill="url(#proofGrad)" stroke="#D97706" stroke-width="3"/>
+  
+  <text x="140" y="880" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Theorem: Closed-Form Marginal for Absorbing Diffusion
+  </text>
+  
+  <text x="140" y="935" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E3A5F">
+    For a token x₀ⁱ at position i, the distribution at time t is:
+  </text>
+  
+  <rect x="160" y="960" width="1900" height="80" rx="8" fill="#FFFFFF" stroke="#4A5568" stroke-width="2"/>
+  <text x="1100" y="1010" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(xₜⁱ | x₀ⁱ) = αₜ · δ(xₜⁱ, x₀ⁱ) + (1 - αₜ) · δ(xₜⁱ, [MASK])
+  </text>
+  
+  <text x="140" y="1090" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Where αₜ is the survival probability:
+  </text>
+  
+  <rect x="160" y="1115" width="600" height="60" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <text x="460" y="1155" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">
+    αₜ = 1 - t   (linear schedule)
+  </text>
+  
+  <text x="140" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Interpretation:
+  </text>
+  <text x="180" y="1265" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • With probability αₜ = 1-t: token remains as original x₀ⁱ
+  </text>
+  <text x="180" y="1305" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • With probability 1-αₜ = t: token becomes [MASK]
+  </text>
+
+  <!-- Section 3: Noise Schedule Analysis -->
+  <rect x="50" y="1400" width="2100" height="580" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="50" y="1400" width="2100" height="60" rx="12" fill="#3B82F6"/>
+  <text x="1100" y="1442" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    3. NOISE SCHEDULE: αₜ = 1 - t
+  </text>
+
+  <rect x="100" y="1490" width="980" height="460" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <text x="590" y="1535" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Schedule Properties
+  </text>
+  
+  <text x="140" y="1590" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    At t = 0 (start):
+  </text>
+  <text x="160" y="1630" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    α₀ = 1 - 0 = 1  →  100% original tokens
+  </text>
+  
+  <text x="140" y="1690" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    At t = 0.5 (midpoint):
+  </text>
+  <text x="160" y="1730" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    α₀.₅ = 1 - 0.5 = 0.5  →  50% original
+  </text>
+  
+  <text x="140" y="1790" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    At t = 1 (end):
+  </text>
+  <text x="160" y="1830" font-family="Courier New, monospace" font-size="20" fill="#000000">
+    α₁ = 1 - 1 = 0  →  0% original (all [M])
+  </text>
+  
+  <text x="140" y="1890" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E3A5F">
+    Linear is simple but effective!
+  </text>
+  <text x="160" y="1930" font-family="Arial, sans-serif" font-size="18" fill="#1a1a1a">
+    MDLM shows this works as well as cosine
+  </text>
+
+  <!-- Schedule visualization -->
+  <rect x="1120" y="1490" width="980" height="460" rx="10" fill="#FFFFFF" stroke="#2563EB" stroke-width="3"/>
+  <text x="1610" y="1535" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Visual: Masking Rate Over Time
+  </text>
+  
+  <!-- Graph axes -->
+  <line x1="1200" y1="1880" x2="2000" y2="1880" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="1200" y1="1580" x2="1200" y2="1880" stroke="#1a1a1a" stroke-width="2"/>
+  
+  <!-- X-axis labels -->
+  <text x="1200" y="1915" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">0</text>
+  <text x="1600" y="1915" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">0.5</text>
+  <text x="2000" y="1915" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">1</text>
+  <text x="1600" y="1940" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Time t</text>
+  
+  <!-- Y-axis labels -->
+  <text x="1180" y="1880" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="end">0</text>
+  <text x="1180" y="1580" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="end">1</text>
+  <text x="1160" y="1730" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="end" transform="rotate(-90, 1160, 1730)">αₜ</text>
+  
+  <!-- αₜ line (decreasing) -->
+  <line x1="1200" y1="1580" x2="2000" y2="1880" stroke="#059669" stroke-width="4"/>
+  <text x="1500" y="1680" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#059669">αₜ = 1 - t</text>
+  
+  <!-- 1-αₜ line (increasing) -->
+  <line x1="1200" y1="1880" x2="2000" y2="1580" stroke="#DC2626" stroke-width="4"/>
+  <text x="1700" y="1780" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#DC2626">1-αₜ = t</text>
+  
+  <!-- Legend -->
+  <rect x="1750" y="1600" width="20" height="3" fill="#059669"/>
+  <text x="1780" y="1608" font-family="Arial, sans-serif" font-size="14" fill="#000000">Survival prob</text>
+  <rect x="1750" y="1625" width="20" height="3" fill="#DC2626"/>
+  <text x="1780" y="1633" font-family="Arial, sans-serif" font-size="14" fill="#000000">Mask prob</text>
+
+  <!-- Section 4: Token Independence -->
+  <rect x="50" y="2020" width="2100" height="480" rx="12" fill="#F0FDF4" stroke="#22C55E" stroke-width="3"/>
+  <rect x="50" y="2020" width="2100" height="60" rx="12" fill="#22C55E"/>
+  <text x="1100" y="2062" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    4. TOKEN INDEPENDENCE ASSUMPTION
+  </text>
+
+  <rect x="100" y="2110" width="2000" height="360" rx="10" fill="#FFFFFF" stroke="#16A34A" stroke-width="3"/>
+  
+  <text x="140" y="2160" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000">
+    Key Simplification: Tokens are masked independently
+  </text>
+  
+  <text x="140" y="2220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1E3A5F">
+    For a sequence x₀ = (x₀¹, x₀², ..., x₀ⁿ):
+  </text>
+  
+  <rect x="160" y="2250" width="1900" height="80" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="2"/>
+  <text x="1100" y="2300" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(xₜ | x₀) = ∏ᵢ₌₁ⁿ q(xₜⁱ | x₀ⁱ) = ∏ᵢ₌₁ⁿ [αₜ·δ(xₜⁱ,x₀ⁱ) + (1-αₜ)·δ(xₜⁱ,[M])]
+  </text>
+  
+  <text x="140" y="2380" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">
+    Implications:
+  </text>
+  <text x="180" y="2420" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Each position is masked with the same probability (1 - αₜ), independently
+  </text>
+  <text x="180" y="2455" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Number of masked tokens ~ Binomial(n, 1-αₜ)
+  </text>
+
+  <!-- Section 5: Sampling the Forward Process -->
+  <rect x="50" y="2540" width="2100" height="500" rx="12" fill="#FAF5FF" stroke="#A855F7" stroke-width="3"/>
+  <rect x="50" y="2540" width="2100" height="60" rx="12" fill="#A855F7"/>
+  <text x="1100" y="2582" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="white" text-anchor="middle">
+    5. SAMPLING THE FORWARD PROCESS (TRAINING)
+  </text>
+
+  <rect x="100" y="2630" width="2000" height="380" rx="10" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
+  
+  <text x="1100" y="2680" font-family="Georgia, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Algorithm: Sample Corrupted Sequence xₜ
+  </text>
+  
+  <rect x="140" y="2710" width="1920" height="270" rx="8" fill="#FAF5FF" stroke="#A855F7" stroke-width="2"/>
+  
+  <text x="180" y="2755" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#7C3AED">
+    Input: clean sequence x₀ = (x₀¹, ..., x₀ⁿ)
+  </text>
+  <text x="180" y="2795" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#7C3AED">
+    Output: corrupted sequence xₜ
+  </text>
+  
+  <text x="180" y="2845" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    1. Sample t ~ Uniform(0, 1)
+  </text>
+  <text x="180" y="2885" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    2. Compute αₜ = 1 - t
+  </text>
+  <text x="180" y="2925" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    3. For each position i = 1, ..., n:
+  </text>
+  <text x="220" y="2965" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    Sample uⁱ ~ Uniform(0, 1)
+  </text>
+  <text x="700" y="2965" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    If uⁱ &lt; αₜ: xₜⁱ = x₀ⁱ (keep original)
+  </text>
+  <text x="1200" y="2965" font-family="Courier New, monospace" font-size="18" fill="#000000">
+    Else: xₜⁱ = [MASK]
+  </text>
+
+  <!-- Footer -->
+  <rect x="50" y="3080" width="2100" height="280" rx="12" fill="#1E3A5F" stroke="#0F172A" stroke-width="3"/>
+  <text x="1100" y="3140" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Summary: Forward Process Properties
+  </text>
+  
+  <text x="300" y="3200" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Continuous time t ∈ [0, 1]
+  </text>
+  <text x="300" y="3240" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Linear schedule αₜ = 1 - t
+  </text>
+  <text x="300" y="3280" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Token independence
+  </text>
+  <text x="300" y="3320" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Simple closed-form marginal
+  </text>
+  
+  <text x="900" y="3200" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ t=0: all original tokens
+  </text>
+  <text x="900" y="3240" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ t=1: all [MASK] tokens
+  </text>
+  <text x="900" y="3280" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ [MASK] is absorbing state
+  </text>
+  <text x="900" y="3320" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Once masked, stays masked
+  </text>
+  
+  <text x="1550" y="3200" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ No transition matrix needed
+  </text>
+  <text x="1550" y="3240" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Direct sampling possible
+  </text>
+  <text x="1550" y="3280" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Efficient for training
+  </text>
+  <text x="1550" y="3320" font-family="Arial, sans-serif" font-size="20" fill="#93C5FD">
+    ✓ Principled framework
+  </text>
+</svg>
+

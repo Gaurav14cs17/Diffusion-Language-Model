@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2400" width="2200" height="2400">
+  <defs>
+    <linearGradient id="paHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#553C9A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B46C1;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowPA" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowPA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B46C1"/>
+    </marker>
+  </defs>
+  
+  <rect width="2200" height="2400" fill="#FAFAFA"/>
+  
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#paHeader)" filter="url(#shadowPA)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Probability Assumptions</text>
+  
+  <rect x="50" y="180" width="2100" height="350" rx="12" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="90" y="240" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Visual: Markov Chain Structure</text>
+  
+  <circle cx="200" cy="380" r="50" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="3"/>
+  <text x="200" y="390" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">x0</text>
+  
+  <line x1="260" y1="380" x2="340" y2="380" stroke="#7B1FA2" stroke-width="3" marker-end="url(#arrowPA)"/>
+  
+  <circle cx="400" cy="380" r="50" fill="#CE93D8" stroke="#7B1FA2" stroke-width="3"/>
+  <text x="400" y="390" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">x1</text>
+  
+  <line x1="460" y1="380" x2="540" y2="380" stroke="#7B1FA2" stroke-width="3" marker-end="url(#arrowPA)"/>
+  
+  <circle cx="600" cy="380" r="50" fill="#BA68C8" stroke="#7B1FA2" stroke-width="3"/>
+  <text x="600" y="390" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">x2</text>
+  
+  <text x="720" y="390" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#7B1FA2">...</text>
+  
+  <circle cx="850" cy="380" r="50" fill="#AB47BC" stroke="#7B1FA2" stroke-width="3"/>
+  <text x="850" y="390" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#FFF" text-anchor="middle">x(t-1)</text>
+  
+  <line x1="910" y1="380" x2="990" y2="380" stroke="#7B1FA2" stroke-width="3" marker-end="url(#arrowPA)"/>
+  
+  <circle cx="1050" cy="380" r="50" fill="#9C27B0" stroke="#7B1FA2" stroke-width="3"/>
+  <text x="1050" y="390" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#FFF" text-anchor="middle">xt</text>
+  
+  <text x="1170" y="390" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#7B1FA2">...</text>
+  
+  <circle cx="1300" cy="380" r="50" fill="#7B1FA2" stroke="#553C9A" stroke-width="3"/>
+  <text x="1300" y="390" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#FFF" text-anchor="middle">xT</text>
+  
+  <text x="200" y="460" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4CAF50" text-anchor="middle">Data</text>
+  <text x="1300" y="460" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#7B1FA2" text-anchor="middle">Noise</text>
+  
+  <rect x="100" y="480" width="1800" height="50" rx="8" fill="#E1BEE7" stroke="#7B1FA2" stroke-width="2"/>
+  <text x="1000" y="515" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000" text-anchor="middle">Markov Property: p(xt | x(t-1), x(t-2), ..., x0) = p(xt | x(t-1))</text>
+  
+  <rect x="50" y="570" width="2100" height="320" rx="12" fill="#E8EAF6" stroke="#3F51B5" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="90" y="630" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">A1: Markov Assumption</text>
+  
+  <rect x="90" y="670" width="2020" height="70" rx="10" fill="#C5CAE9" stroke="#3F51B5" stroke-width="2"/>
+  <text x="1100" y="715" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">Future depends ONLY on present, not on history</text>
+  
+  <text x="90" y="790" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Consequence - Joint factorizes:</text>
+  <rect x="200" y="810" width="1800" height="60" rx="8" fill="#FFFFFF" stroke="#3F51B5" stroke-width="2"/>
+  <text x="1100" y="850" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000" text-anchor="middle">q(x0:T) = q(x0) * Product[t=1 to T] q(xt | x(t-1))</text>
+  
+  <rect x="50" y="930" width="2100" height="320" rx="12" fill="#FFF3E0" stroke="#FF8F00" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="90" y="990" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">A2: Gaussian Transition</text>
+  
+  <rect x="90" y="1030" width="2020" height="80" rx="10" fill="#FFE0B2" stroke="#FF8F00" stroke-width="2"/>
+  <text x="1100" y="1080" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">q(xt | x(t-1)) = N(xt; sqrt(1-Bt) * x(t-1), Bt * I)</text>
+  
+  <text x="90" y="1170" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Reparameterization:</text>
+  <text x="90" y="1220" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000000">xt = sqrt(1-Bt) * x(t-1) + sqrt(Bt) * Et,   where Et ~ N(0, I)</text>
+  
+  <rect x="50" y="1290" width="1020" height="280" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="90" y="1350" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">A3: Independent Noise</text>
+  
+  <rect x="90" y="1390" width="940" height="60" rx="8" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="560" y="1430" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000" text-anchor="middle">Et independent of Es for t != s</text>
+  
+  <text x="110" y="1510" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Each Et ~ N(0, I) independently</text>
+  <text x="110" y="1550" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2E7D32">Enables reparameterization trick</text>
+  
+  <rect x="1130" y="1290" width="1020" height="280" rx="12" fill="#FCE4EC" stroke="#C2185B" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="1170" y="1350" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">A4: Terminal Distribution</text>
+  
+  <rect x="1170" y="1390" width="940" height="60" rx="8" fill="#F8BBD9" stroke="#C2185B" stroke-width="2"/>
+  <text x="1640" y="1430" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000" text-anchor="middle">q(xT) approximately N(0, I)</text>
+  
+  <text x="1190" y="1510" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">For large T: alpha_bar_T approaches 0</text>
+  <text x="1190" y="1550" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#C2185B">xT independent of x0 (pure noise)</text>
+  
+  <rect x="50" y="1610" width="2100" height="280" rx="12" fill="#E0F7FA" stroke="#00838F" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="90" y="1670" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">A5: Time Reversal (Anderson 1982)</text>
+  
+  <rect x="90" y="1710" width="2020" height="70" rx="10" fill="#B2EBF2" stroke="#00838F" stroke-width="2"/>
+  <text x="1100" y="1755" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000" text-anchor="middle">Reverse SDE: dx = [f - g^2 * grad_x log p_t(x)] dt + g dW_bar</text>
+  
+  <text x="90" y="1840" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Key requirement: Score function grad_x log p_t(x) must exist</text>
+  <text x="90" y="1880" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#00838F">This is what neural networks learn to approximate!</text>
+  
+  <rect x="50" y="1930" width="2100" height="200" rx="12" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="3" filter="url(#shadowPA)"/>
+  <text x="90" y="1990" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Summary of All Assumptions</text>
+  
+  <text x="120" y="2050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7B1FA2">A1. Markov: p(xt|x0:t-1) = p(xt|x(t-1))</text>
+  <text x="750" y="2050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7B1FA2">A2. Gaussian: q(xt|x(t-1)) = N(...)</text>
+  <text x="1350" y="2050" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7B1FA2">A3. Independent noise</text>
+  <text x="120" y="2100" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7B1FA2">A4. Terminal: q(xT) = N(0,I)</text>
+  <text x="750" y="2100" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#7B1FA2">A5. Reversible with score</text>
+  
+  <rect x="50" y="2170" width="2100" height="80" rx="10" fill="#553C9A" filter="url(#shadowPA)"/>
+  <text x="1100" y="2225" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Diffusion Theory - Probability Assumptions | Foundation of Diffusion</text>
+</svg>

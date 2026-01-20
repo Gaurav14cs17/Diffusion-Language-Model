@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2400" width="2200" height="2400">
+  <defs>
+    <linearGradient id="headerGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6a1b9a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8e24aa;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="moeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e1bee7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ce93d8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="diffGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#b3e5fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#81d4fa;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow1" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2400" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad1)" filter="url(#shadow1)"/>
+  <text x="1100" y="100" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    LLaDA-MoE: A Sparse MoE Diffusion Language Model
+  </text>
+  <text x="1100" y="140" font-family="Arial, sans-serif" font-size="24" fill="#e1bee7" text-anchor="middle">
+    First Masked Diffusion Model with Mixture-of-Experts Architecture | arXiv 2509.24389
+  </text>
+  
+  <!-- Key Innovation Box -->
+  <rect x="50" y="200" width="2100" height="200" rx="12" fill="#fce4ec" stroke="#c2185b" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="90" y="255" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#000000">
+    🎯 Key Innovation: Combining Masked Diffusion + Sparse MoE
+  </text>
+  <text x="90" y="310" font-family="Arial, sans-serif" font-size="26" fill="#000000">
+    • First diffusion language model pretrained from scratch with MoE architecture
+  </text>
+  <text x="90" y="355" font-family="Arial, sans-serif" font-size="26" fill="#000000">
+    • 7B total parameters, but only 1.4B active during inference → Massive efficiency gains!
+  </text>
+  
+  <!-- Stats Boxes -->
+  <rect x="50" y="440" width="500" height="180" rx="12" fill="url(#moeGrad)" stroke="#7b1fa2" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="300" y="500" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Total Parameters</text>
+  <text x="300" y="560" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#4a148c" text-anchor="middle">7B</text>
+  <text x="300" y="600" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">Full model capacity</text>
+  
+  <rect x="590" y="440" width="500" height="180" rx="12" fill="#c8e6c9" stroke="#2e7d32" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="840" y="500" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Active Parameters</text>
+  <text x="840" y="560" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#1b5e20" text-anchor="middle">1.4B</text>
+  <text x="840" y="600" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">During inference (80% savings!)</text>
+  
+  <rect x="1130" y="440" width="500" height="180" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="1380" y="500" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Training Data</text>
+  <text x="1380" y="560" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#e65100" text-anchor="middle">20T</text>
+  <text x="1380" y="600" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">Tokens from scratch</text>
+  
+  <rect x="1670" y="440" width="480" height="180" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="1910" y="500" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Experts</text>
+  <text x="1910" y="560" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#0d47a1" text-anchor="middle">64</text>
+  <text x="1910" y="600" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">Top-8 activated per token</text>
+  
+  <!-- What is LLaDA-MoE Section -->
+  <rect x="50" y="660" width="2100" height="380" rx="12" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="90" y="720" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    📚 What is LLaDA-MoE?
+  </text>
+  
+  <!-- Two paradigms -->
+  <rect x="90" y="760" width="980" height="250" rx="10" fill="#c5cae9" stroke="#3f51b5" stroke-width="2"/>
+  <text x="130" y="810" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Masked Diffusion Models (MDMs)</text>
+  <text x="130" y="860" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Generate text by iteratively denoising masked sequences</text>
+  <text x="130" y="900" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Alternative to autoregressive (left-to-right) generation</text>
+  <text x="130" y="940" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Parallel token prediction within each step</text>
+  <text x="130" y="980" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Examples: LLaDA, Dream, MDLM</text>
+  
+  <text x="1090" y="880" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#5c6bc0">+</text>
+  
+  <rect x="1130" y="760" width="980" height="250" rx="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="1170" y="810" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Mixture-of-Experts (MoE)</text>
+  <text x="1170" y="860" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Large pool of "expert" neural networks</text>
+  <text x="1170" y="900" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Router selects top-k experts per token</text>
+  <text x="1170" y="940" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Only activated experts compute → efficiency!</text>
+  <text x="1170" y="980" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Examples: Mixtral, DeepSeek-MoE, Qwen-MoE</text>
+  
+  <!-- Key Contributions -->
+  <rect x="50" y="1080" width="2100" height="420" rx="12" fill="#e0f2f1" stroke="#00897b" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="90" y="1140" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    🏆 Key Contributions
+  </text>
+  
+  <rect x="90" y="1180" width="660" height="280" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="420" y="1230" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">1. First MoE + Diffusion LM</text>
+  <text x="130" y="1280" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Pretrained from scratch</text>
+  <text x="130" y="1320" font-family="Arial, sans-serif" font-size="20" fill="#000000">• 20T tokens training</text>
+  <text x="130" y="1360" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Combines MDM objective</text>
+  <text x="130" y="1400" font-family="Arial, sans-serif" font-size="20" fill="#000000">  with sparse expert routing</text>
+  <text x="130" y="1440" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Proves MoE works for diffusion!</text>
+  
+  <rect x="790" y="1180" width="660" height="280" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1120" y="1230" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">2. State-of-the-Art Efficiency</text>
+  <text x="830" y="1280" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Beats 8B dense diffusion models</text>
+  <text x="830" y="1320" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Using only 1.4B active params</text>
+  <text x="830" y="1360" font-family="Arial, sans-serif" font-size="20" fill="#000000">• 5-6x compute reduction</text>
+  <text x="830" y="1400" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Matches Qwen2.5-3B-Instruct</text>
+  <text x="830" y="1440" font-family="Arial, sans-serif" font-size="20" fill="#000000">• With fewer active parameters!</text>
+  
+  <rect x="1490" y="1180" width="620" height="280" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1800" y="1230" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">3. Comprehensive Training</text>
+  <text x="1530" y="1280" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Multi-stage pipeline:</text>
+  <text x="1530" y="1320" font-family="Arial, sans-serif" font-size="20" fill="#000000">  - Pretrain Stage 1 (10T)</text>
+  <text x="1530" y="1360" font-family="Arial, sans-serif" font-size="20" fill="#000000">  - Pretrain Stage 2 (10T)</text>
+  <text x="1530" y="1400" font-family="Arial, sans-serif" font-size="20" fill="#000000">  - Annealing (500B × 2)</text>
+  <text x="1530" y="1440" font-family="Arial, sans-serif" font-size="20" fill="#000000">  - SFT for instruction tuning</text>
+  
+  <!-- Why This Matters Section -->
+  <rect x="50" y="1540" width="2100" height="350" rx="12" fill="#fff8e1" stroke="#ffa000" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="90" y="1600" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    💡 Why This Matters
+  </text>
+  
+  <rect x="90" y="1640" width="1000" height="220" rx="10" fill="#ffecb3" stroke="#ff8f00" stroke-width="2"/>
+  <text x="130" y="1690" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">The Problem with Dense Diffusion LMs:</text>
+  <text x="130" y="1740" font-family="Arial, sans-serif" font-size="22" fill="#000000">• LLaDA-8B activates ALL 8B parameters every step</text>
+  <text x="130" y="1780" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Dream-7B same issue - full computation</text>
+  <text x="130" y="1820" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Expensive inference, especially with many steps</text>
+  
+  <rect x="1110" y="1640" width="1000" height="220" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1150" y="1690" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">The LLaDA-MoE Solution:</text>
+  <text x="1150" y="1740" font-family="Arial, sans-serif" font-size="22" fill="#000000">• 7B total, but only 1.4B active per token</text>
+  <text x="1150" y="1780" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Same or better quality than dense 8B</text>
+  <text x="1150" y="1820" font-family="Arial, sans-serif" font-size="22" fill="#000000">• Opens path to efficient scaled diffusion LMs</text>
+  
+  <!-- Model Comparison -->
+  <rect x="50" y="1930" width="2100" height="340" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadow1)"/>
+  <text x="90" y="1990" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    📊 Model Comparison at a Glance
+  </text>
+  
+  <!-- Table -->
+  <rect x="90" y="2030" width="2020" height="210" rx="10" fill="#ffffff" stroke="#1565c0" stroke-width="2"/>
+  
+  <rect x="90" y="2030" width="2020" height="45" fill="#bbdefb"/>
+  <text x="300" y="2062" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Model</text>
+  <text x="600" y="2062" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Type</text>
+  <text x="850" y="2062" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Total Params</text>
+  <text x="1100" y="2062" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Active Params</text>
+  <text x="1400" y="2062" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Beats LLaDA-8B?</text>
+  <text x="1700" y="2062" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Efficiency</text>
+  
+  <text x="300" y="2110" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">LLaDA-8B</text>
+  <text x="600" y="2110" font-family="Arial, sans-serif" font-size="18" fill="#c2185b" text-anchor="middle">Dense Diffusion</text>
+  <text x="850" y="2110" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">8B</text>
+  <text x="1100" y="2110" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">8B</text>
+  <text x="1400" y="2110" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Baseline</text>
+  <text x="1700" y="2110" font-family="Arial, sans-serif" font-size="18" fill="#c62828" text-anchor="middle">Low</text>
+  
+  <text x="300" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Dream-7B</text>
+  <text x="600" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#c2185b" text-anchor="middle">Dense Diffusion</text>
+  <text x="850" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">7B</text>
+  <text x="1100" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">7B</text>
+  <text x="1400" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Yes (some tasks)</text>
+  <text x="1700" y="2150" font-family="Arial, sans-serif" font-size="18" fill="#c62828" text-anchor="middle">Low</text>
+  
+  <rect x="90" y="2165" width="2020" height="35" fill="#e8f5e9"/>
+  <text x="300" y="2190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">LLaDA-MoE</text>
+  <text x="600" y="2190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#7b1fa2" text-anchor="middle">MoE Diffusion</text>
+  <text x="850" y="2190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">7B</text>
+  <text x="1100" y="2190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32" text-anchor="middle">1.4B (80% less!)</text>
+  <text x="1400" y="2190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32" text-anchor="middle">Yes (all tasks!)</text>
+  <text x="1700" y="2190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32" text-anchor="middle">HIGH</text>
+  
+  <text x="300" y="2225" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Qwen2.5-3B</text>
+  <text x="600" y="2225" font-family="Arial, sans-serif" font-size="18" fill="#1565c0" text-anchor="middle">Dense AR</text>
+  <text x="850" y="2225" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">3B</text>
+  <text x="1100" y="2225" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">3B</text>
+  <text x="1400" y="2225" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">N/A (AR baseline)</text>
+  <text x="1700" y="2225" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Medium</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2300" width="2100" height="70" rx="10" fill="#37474f"/>
+  <text x="1100" y="2345" font-family="Arial, sans-serif" font-size="22" fill="white" text-anchor="middle">
+    Paper: arXiv:2509.24389 | Models: huggingface.co/collections/inclusionAI/llada | Institutions: Renmin University, Ant Group
+  </text>
+</svg>
+
+

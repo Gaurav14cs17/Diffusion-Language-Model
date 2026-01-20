@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 1800" width="2200" height="1800">
+  <defs>
+    <linearGradient id="pipeHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ad1457;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d81b60;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stageGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#42a5f5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stageGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2e7d32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#66bb6a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stageGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f57c00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb74d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stageGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7b1fa2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ab47bc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowPipe" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowPipe" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="1800" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#pipeHeader)" filter="url(#shadowPipe)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    LLaDA-MoE Training Pipeline
+  </text>
+  
+  <!-- Pipeline Overview -->
+  <rect x="50" y="180" width="2100" height="120" rx="12" fill="#fce4ec" stroke="#c2185b" stroke-width="3" filter="url(#shadowPipe)"/>
+  <text x="90" y="230" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">
+    📋 Training Overview: 20T+ tokens across 5 stages
+  </text>
+  <text x="90" y="275" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    Pretrain Stage 1 (10T) → Pretrain Stage 2 (10T) → Annealing 1 (500B) → Annealing 2 (500B, 8k ctx) → SFT
+  </text>
+  
+  <!-- Pipeline Stages -->
+  <rect x="50" y="340" width="2100" height="700" rx="12" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="2" filter="url(#shadowPipe)"/>
+  
+  <!-- Stage 1: Pretrain 1 -->
+  <rect x="90" y="380" width="380" height="280" rx="12" fill="url(#stageGrad1)" filter="url(#shadowPipe)"/>
+  <text x="280" y="430" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">
+    Pretrain Stage 1
+  </text>
+  <rect x="110" y="450" width="340" height="180" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <text x="280" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">10T Tokens</text>
+  <text x="130" y="530" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Train from scratch</text>
+  <text x="130" y="560" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Large mixed text corpus</text>
+  <text x="130" y="590" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Basic language modeling</text>
+  <text x="130" y="620" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Context: 4k tokens</text>
+  
+  <!-- Arrow -->
+  <line x1="470" y1="520" x2="520" y2="520" stroke="#333" stroke-width="4" marker-end="url(#arrowPipe)"/>
+  
+  <!-- Stage 2: Pretrain 2 -->
+  <rect x="530" y="380" width="380" height="280" rx="12" fill="url(#stageGrad2)" filter="url(#shadowPipe)"/>
+  <text x="720" y="430" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">
+    Pretrain Stage 2
+  </text>
+  <rect x="550" y="450" width="340" height="180" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <text x="720" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">10T Tokens</text>
+  <text x="570" y="530" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Continue pretraining</text>
+  <text x="570" y="560" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Resampled corpus</text>
+  <text x="570" y="590" font-family="Arial, sans-serif" font-size="18" fill="#000000">• ↑ Math &amp; Code weight</text>
+  <text x="570" y="620" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Context: 4k tokens</text>
+  
+  <!-- Arrow -->
+  <line x1="910" y1="520" x2="960" y2="520" stroke="#333" stroke-width="4" marker-end="url(#arrowPipe)"/>
+  
+  <!-- Stage 3: Annealing 1 -->
+  <rect x="970" y="380" width="380" height="280" rx="12" fill="url(#stageGrad3)" filter="url(#shadowPipe)"/>
+  <text x="1160" y="430" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">
+    Annealing Stage 1
+  </text>
+  <rect x="990" y="450" width="340" height="180" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <text x="1160" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">500B Tokens</text>
+  <text x="1010" y="530" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Best checkpoint init</text>
+  <text x="1010" y="560" font-family="Arial, sans-serif" font-size="18" fill="#000000">• High-quality text only</text>
+  <text x="1010" y="590" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Decay learning rate</text>
+  <text x="1010" y="620" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Context: 4k tokens</text>
+  
+  <!-- Arrow -->
+  <line x1="1350" y1="520" x2="1400" y2="520" stroke="#333" stroke-width="4" marker-end="url(#arrowPipe)"/>
+  
+  <!-- Stage 4: Annealing 2 -->
+  <rect x="1410" y="380" width="380" height="280" rx="12" fill="url(#stageGrad3)" filter="url(#shadowPipe)"/>
+  <text x="1600" y="430" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">
+    Annealing Stage 2
+  </text>
+  <rect x="1430" y="450" width="340" height="180" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <text x="1600" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">500B Tokens (8k ctx)</text>
+  <text x="1450" y="530" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Extend context to 8k</text>
+  <text x="1450" y="560" font-family="Arial, sans-serif" font-size="18" fill="#000000">• RoPE base: 10k→50k</text>
+  <text x="1450" y="590" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Long sequence support</text>
+  <text x="1450" y="620" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Final pretraining</text>
+  
+  <!-- Arrow -->
+  <line x1="1790" y1="520" x2="1840" y2="520" stroke="#333" stroke-width="4" marker-end="url(#arrowPipe)"/>
+  
+  <!-- Stage 5: SFT -->
+  <rect x="1850" y="380" width="280" height="280" rx="12" fill="url(#stageGrad4)" filter="url(#shadowPipe)"/>
+  <text x="1990" y="430" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">
+    SFT Stage
+  </text>
+  <rect x="1870" y="450" width="240" height="180" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <text x="1990" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Fine-tuning</text>
+  <text x="1890" y="530" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Q&amp;A pairs</text>
+  <text x="1890" y="560" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Instruction data</text>
+  <text x="1890" y="590" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Response-only</text>
+  <text x="1890" y="620" font-family="Arial, sans-serif" font-size="18" fill="#000000">  masking</text>
+  
+  <!-- Output models -->
+  <rect x="90" y="700" width="480" height="100" rx="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <text x="330" y="745" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">📦 LLaDA-MoE-7B-A1B-Base</text>
+  <text x="330" y="780" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">After Annealing Stage 2</text>
+  
+  <rect x="1630" y="700" width="480" height="100" rx="10" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="1870" y="745" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">📦 LLaDA-MoE-7B-A1B-Instruct</text>
+  <text x="1870" y="780" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">After SFT Stage</text>
+  
+  <!-- Arrows to outputs -->
+  <line x1="1350" y1="660" x2="330" y2="700" stroke="#4caf50" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="1990" y1="660" x2="1870" y2="700" stroke="#7b1fa2" stroke-width="2" stroke-dasharray="5,5"/>
+  
+  <!-- Data Statistics -->
+  <rect x="50" y="1080" width="2100" height="280" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadowPipe)"/>
+  <text x="90" y="1140" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">
+    📊 Training Data Statistics
+  </text>
+  
+  <rect x="90" y="1170" width="400" height="160" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="290" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Total Tokens</text>
+  <text x="290" y="1270" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#0d47a1" text-anchor="middle">~21T</text>
+  <text x="290" y="1310" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">10T + 10T + 1T</text>
+  
+  <rect x="530" y="1170" width="400" height="160" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="730" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Data Sources</text>
+  <text x="730" y="1270" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">Web, Books, Code</text>
+  <text x="730" y="1310" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Math, Science, Wiki</text>
+  
+  <rect x="970" y="1170" width="400" height="160" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="1170" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Context Length</text>
+  <text x="1170" y="1270" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="#0d47a1" text-anchor="middle">4k → 8k</text>
+  <text x="1170" y="1310" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Extended in Annealing 2</text>
+  
+  <rect x="1410" y="1170" width="400" height="160" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="1610" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Languages</text>
+  <text x="1610" y="1270" font-family="Arial, sans-serif" font-size="28" fill="#000000" text-anchor="middle">English, Chinese</text>
+  <text x="1610" y="1310" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">+ Code (multilingual)</text>
+  
+  <rect x="1850" y="1170" width="260" height="160" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1980" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Training</text>
+  <text x="1980" y="1270" font-family="Arial, sans-serif" font-size="22" fill="#000000" text-anchor="middle">From</text>
+  <text x="1980" y="1310" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1b5e20" text-anchor="middle">Scratch</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="1400" width="2100" height="360" rx="12" fill="#37474f" filter="url(#shadowPipe)"/>
+  <text x="1100" y="1460" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Key Training Insights
+  </text>
+  
+  <rect x="100" y="1490" width="620" height="240" rx="10" fill="#455a64"/>
+  <text x="410" y="1540" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#81d4fa" text-anchor="middle">🎯 Two-Phase Pretraining</text>
+  <text x="140" y="1590" font-family="Arial, sans-serif" font-size="20" fill="white">Stage 1: General language learning</text>
+  <text x="140" y="1630" font-family="Arial, sans-serif" font-size="20" fill="white">Stage 2: Emphasis on math/code</text>
+  <text x="140" y="1670" font-family="Arial, sans-serif" font-size="20" fill="white">Result: Better reasoning ability</text>
+  <text x="140" y="1710" font-family="Arial, sans-serif" font-size="20" fill="white">without sacrificing general skills</text>
+  
+  <rect x="780" y="1490" width="620" height="240" rx="10" fill="#455a64"/>
+  <text x="1090" y="1540" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#a5d6a7" text-anchor="middle">📏 Context Extension</text>
+  <text x="820" y="1590" font-family="Arial, sans-serif" font-size="20" fill="white">Annealing 2: 4k → 8k context</text>
+  <text x="820" y="1630" font-family="Arial, sans-serif" font-size="20" fill="white">RoPE base: 10,000 → 50,000</text>
+  <text x="820" y="1670" font-family="Arial, sans-serif" font-size="20" fill="white">Enables longer document</text>
+  <text x="820" y="1710" font-family="Arial, sans-serif" font-size="20" fill="white">understanding and generation</text>
+  
+  <rect x="1460" y="1490" width="640" height="240" rx="10" fill="#455a64"/>
+  <text x="1780" y="1540" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffcc80" text-anchor="middle">⚡ Efficient SFT</text>
+  <text x="1500" y="1590" font-family="Arial, sans-serif" font-size="20" fill="white">Response-only masking</text>
+  <text x="1500" y="1630" font-family="Arial, sans-serif" font-size="20" fill="white">Prompt as conditioning</text>
+  <text x="1500" y="1670" font-family="Arial, sans-serif" font-size="20" fill="white">Aligned with diffusion paradigm</text>
+  <text x="1500" y="1710" font-family="Arial, sans-serif" font-size="20" fill="white">Instruction-following capability</text>
+</svg>
+
+

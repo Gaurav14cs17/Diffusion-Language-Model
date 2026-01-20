@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2600" width="2200" height="2600">
+  <defs>
+    <linearGradient id="algoHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0d47a1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1565c0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="trainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#90caf9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sampleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a5d6a7;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <filter id="shadow3" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2600" fill="#F8F9FA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#algoHeaderGrad)" filter="url(#shadow3)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Training &amp; Sampling Algorithms for Block Diffusion
+  </text>
+  
+  <!-- Algorithm 1: Training -->
+  <rect x="50" y="180" width="1030" height="900" rx="12" fill="url(#trainGrad)" stroke="#1565c0" stroke-width="3" filter="url(#shadow3)"/>
+  <rect x="50" y="180" width="1030" height="60" rx="12" fill="#1565c0"/>
+  <text x="565" y="222" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Algorithm 1: Block Diffusion Training
+  </text>
+  
+  <!-- Algorithm 1 Content -->
+  <rect x="90" y="270" width="950" height="780" rx="10" fill="#ffffff" stroke="#1976d2" stroke-width="2"/>
+  
+  <text x="130" y="320" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">INPUT:</text>
+  <text x="130" y="355" font-family="Courier New, monospace" font-size="20" fill="#000000">• datapoint x</text>
+  <text x="130" y="385" font-family="Courier New, monospace" font-size="20" fill="#000000">• # of blocks B</text>
+  <text x="130" y="415" font-family="Courier New, monospace" font-size="20" fill="#000000">• forward noise process q_t(·|x)</text>
+  <text x="130" y="445" font-family="Courier New, monospace" font-size="20" fill="#000000">• model x_θ</text>
+  <text x="130" y="475" font-family="Courier New, monospace" font-size="20" fill="#000000">• loss L_BD</text>
+  
+  <line x1="130" y1="495" x2="1000" y2="495" stroke="#1976d2" stroke-width="2"/>
+  
+  <text x="130" y="535" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">REPEAT:</text>
+  
+  <text x="150" y="580" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Step 1:</text>
+  <text x="250" y="580" font-family="Courier New, monospace" font-size="20" fill="#000000">Sample t₁, ..., t_B ~ U[0, 1]</text>
+  
+  <text x="150" y="625" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Step 2:</text>
+  <text x="250" y="625" font-family="Courier New, monospace" font-size="20" fill="#000000">∀b ∈ {1,...,B}: x^b_tb ~ q_tb(·|x^b)</text>
+  <text x="270" y="655" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Apply noise to each block)</text>
+  
+  <text x="150" y="700" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Step 3:</text>
+  <text x="250" y="700" font-family="Courier New, monospace" font-size="20" fill="#000000">∅, K₁:B, V₁:B ← x_θ(x)</text>
+  <text x="270" y="730" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Compute KV cache for clean sequence)</text>
+  
+  <text x="150" y="775" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Step 4:</text>
+  <text x="250" y="775" font-family="Courier New, monospace" font-size="20" fill="#000000">∀b: x^b_logit, ∅, ∅ ← x^b_θ(x^b_tb, K₁:b-1, V₁:b-1)</text>
+  <text x="270" y="805" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Compute logits using cached KV)</text>
+  
+  <text x="150" y="850" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Step 5:</text>
+  <text x="250" y="850" font-family="Courier New, monospace" font-size="20" fill="#000000">Let x_logit ← x¹_logit ⊕ ... ⊕ x^B_logit</text>
+  <text x="270" y="880" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Concatenate all block logits)</text>
+  
+  <text x="150" y="925" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1565c0">Step 6:</text>
+  <text x="250" y="925" font-family="Courier New, monospace" font-size="20" fill="#000000">Take gradient step on ∇_θ L_BD(x_logit; θ)</text>
+  
+  <text x="130" y="980" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">UNTIL:</text>
+  <text x="250" y="980" font-family="Courier New, monospace" font-size="20" fill="#000000">converged</text>
+  
+  <rect x="130" y="1010" width="900" height="30" rx="5" fill="#bbdefb"/>
+  <text x="580" y="1032" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">
+    Each token passes through x_θ only TWICE (efficient!)
+  </text>
+  
+  <!-- Algorithm 2: Sampling -->
+  <rect x="1120" y="180" width="1030" height="900" rx="12" fill="url(#sampleGrad)" stroke="#2e7d32" stroke-width="3" filter="url(#shadow3)"/>
+  <rect x="1120" y="180" width="1030" height="60" rx="12" fill="#2e7d32"/>
+  <text x="1635" y="222" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Algorithm 2: Block Diffusion Sampling
+  </text>
+  
+  <!-- Algorithm 2 Content -->
+  <rect x="1160" y="270" width="950" height="780" rx="10" fill="#ffffff" stroke="#388e3c" stroke-width="2"/>
+  
+  <text x="1200" y="320" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">INPUT:</text>
+  <text x="1200" y="355" font-family="Courier New, monospace" font-size="20" fill="#000000">• # blocks B</text>
+  <text x="1200" y="385" font-family="Courier New, monospace" font-size="20" fill="#000000">• model x_θ</text>
+  <text x="1200" y="415" font-family="Courier New, monospace" font-size="20" fill="#000000">• diffusion sampling algorithm SAMPLE</text>
+  
+  <line x1="1200" y1="445" x2="2070" y2="445" stroke="#388e3c" stroke-width="2"/>
+  
+  <text x="1200" y="485" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">INITIALIZE:</text>
+  <text x="1200" y="525" font-family="Courier New, monospace" font-size="20" fill="#000000">x, K, V ← ∅</text>
+  <text x="1400" y="525" font-family="Arial, sans-serif" font-size="18" fill="#666666">(empty output &amp; KV cache)</text>
+  
+  <line x1="1200" y1="555" x2="2070" y2="555" stroke="#388e3c" stroke-width="2"/>
+  
+  <text x="1200" y="595" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">FOR b = 1 to B:</text>
+  
+  <text x="1220" y="650" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2e7d32">Step 1:</text>
+  <text x="1320" y="650" font-family="Courier New, monospace" font-size="20" fill="#000000">x^b ← SAMPLE(x^b_θ, K₁:b-1, V₁:b-1)</text>
+  <text x="1340" y="685" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Sample block using diffusion, conditioned on prev)</text>
+  
+  <text x="1220" y="740" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2e7d32">Step 2:</text>
+  <text x="1320" y="740" font-family="Courier New, monospace" font-size="20" fill="#000000">∅, K_b, V_b ← x^b_θ(x^b)</text>
+  <text x="1340" y="775" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Compute KV cache for new block)</text>
+  
+  <text x="1220" y="830" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2e7d32">Step 3:</text>
+  <text x="1320" y="830" font-family="Courier New, monospace" font-size="20" fill="#000000">x ← x₁:b-1 ⊕ x^b</text>
+  <text x="1340" y="865" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Append new block to output)</text>
+  
+  <text x="1220" y="920" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2e7d32">Step 4:</text>
+  <text x="1320" y="920" font-family="Courier New, monospace" font-size="20" fill="#000000">(K, V) ← (K₁:b-1 ⊕ K_b, V₁:b-1 ⊕ V_b)</text>
+  <text x="1340" y="955" font-family="Arial, sans-serif" font-size="18" fill="#666666">(Update KV cache)</text>
+  
+  <line x1="1200" y1="985" x2="2070" y2="985" stroke="#388e3c" stroke-width="2"/>
+  
+  <text x="1200" y="1020" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">RETURN:</text>
+  <text x="1340" y="1020" font-family="Courier New, monospace" font-size="20" fill="#000000">x</text>
+  
+  <!-- Key advantages box -->
+  <rect x="1200" y="1010" width="870" height="30" rx="5" fill="#c8e6c9"/>
+  <text x="1635" y="1032" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">
+    Supports ARBITRARY LENGTH generation + KV caching!
+  </text>
+  
+  <!-- Visual Explanation Section -->
+  <rect x="50" y="1120" width="2100" height="700" rx="12" fill="#fff3e0" stroke="#ff9800" stroke-width="3" filter="url(#shadow3)"/>
+  <rect x="50" y="1120" width="2100" height="55" rx="12" fill="#ff9800"/>
+  <text x="1100" y="1160" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Visual Explanation: How Block Diffusion Works
+  </text>
+  
+  <!-- Training Visualization -->
+  <text x="90" y="1220" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Training Process:</text>
+  
+  <!-- Clean sequence -->
+  <text x="90" y="1270" font-family="Arial, sans-serif" font-size="22" fill="#000000">Clean x:</text>
+  <rect x="200" y="1245" width="120" height="45" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="260" y="1275" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 1</text>
+  <rect x="340" y="1245" width="120" height="45" rx="5" fill="#66bb6a" stroke="#2e7d32" stroke-width="2"/>
+  <text x="400" y="1275" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 2</text>
+  <rect x="480" y="1245" width="120" height="45" rx="5" fill="#81c784" stroke="#2e7d32" stroke-width="2"/>
+  <text x="540" y="1275" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 3</text>
+  <rect x="620" y="1245" width="120" height="45" rx="5" fill="#a5d6a7" stroke="#2e7d32" stroke-width="2"/>
+  <text x="680" y="1275" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Block 4</text>
+  
+  <!-- Arrow -->
+  <text x="780" y="1275" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <text x="820" y="1275" font-family="Arial, sans-serif" font-size="20" fill="#000000">KV Cache</text>
+  
+  <!-- Noisy sequence -->
+  <text x="90" y="1350" font-family="Arial, sans-serif" font-size="22" fill="#000000">Noisy x_t:</text>
+  <rect x="200" y="1325" width="120" height="45" rx="5" fill="#ffcc80" stroke="#f57c00" stroke-width="2"/>
+  <text x="260" y="1352" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">t₁=0.3</text>
+  <rect x="340" y="1325" width="120" height="45" rx="5" fill="#ffb74d" stroke="#f57c00" stroke-width="2"/>
+  <text x="400" y="1352" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">t₂=0.7</text>
+  <rect x="480" y="1325" width="120" height="45" rx="5" fill="#ffa726" stroke="#f57c00" stroke-width="2"/>
+  <text x="540" y="1352" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">t₃=0.5</text>
+  <rect x="620" y="1325" width="120" height="45" rx="5" fill="#ff9800" stroke="#f57c00" stroke-width="2"/>
+  <text x="680" y="1352" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000" text-anchor="middle">t₄=0.9</text>
+  
+  <!-- Arrow -->
+  <text x="780" y="1355" font-family="Arial, sans-serif" font-size="24" fill="#000000">→</text>
+  <text x="820" y="1355" font-family="Arial, sans-serif" font-size="20" fill="#000000">Predict + Loss</text>
+  
+  <!-- Sampling Visualization -->
+  <text x="1100" y="1220" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Sampling Process (Block by Block):</text>
+  
+  <!-- Step 1 -->
+  <text x="1100" y="1270" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Step 1: Sample Block 1</text>
+  <rect x="1100" y="1285" width="120" height="40" rx="5" fill="#9e9e9e" stroke="#616161" stroke-width="2"/>
+  <text x="1160" y="1312" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">MASK</text>
+  <text x="1235" y="1312" font-family="Arial, sans-serif" font-size="20" fill="#000000">⟹</text>
+  <rect x="1260" y="1285" width="120" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1320" y="1312" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Block 1</text>
+  
+  <!-- Step 2 -->
+  <text x="1100" y="1360" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Step 2: Sample Block 2 (conditioned)</text>
+  <rect x="1100" y="1375" width="120" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1160" y="1402" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Block 1</text>
+  <rect x="1230" y="1375" width="120" height="40" rx="5" fill="#9e9e9e" stroke="#616161" stroke-width="2"/>
+  <text x="1290" y="1402" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">MASK</text>
+  <text x="1365" y="1402" font-family="Arial, sans-serif" font-size="20" fill="#000000">⟹</text>
+  <rect x="1390" y="1375" width="120" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1450" y="1402" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Block 1</text>
+  <rect x="1520" y="1375" width="120" height="40" rx="5" fill="#66bb6a" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1580" y="1402" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Block 2</text>
+  
+  <!-- Step 3 -->
+  <text x="1100" y="1450" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Step 3: Continue for B blocks...</text>
+  <rect x="1100" y="1465" width="100" height="40" rx="5" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1150" y="1492" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">B1</text>
+  <rect x="1210" y="1465" width="100" height="40" rx="5" fill="#66bb6a" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1260" y="1492" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">B2</text>
+  <rect x="1320" y="1465" width="100" height="40" rx="5" fill="#81c784" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1370" y="1492" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">B3</text>
+  <text x="1435" y="1492" font-family="Arial, sans-serif" font-size="20" fill="#000000">...</text>
+  <rect x="1470" y="1465" width="100" height="40" rx="5" fill="#a5d6a7" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1520" y="1492" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle">B_n</text>
+  
+  <!-- Block-Causal Attention Mask -->
+  <text x="90" y="1550" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#000000">Block-Causal Attention Mask:</text>
+  
+  <!-- Attention matrix visualization -->
+  <rect x="90" y="1575" width="400" height="200" rx="10" fill="#fff" stroke="#333" stroke-width="2"/>
+  
+  <!-- Headers -->
+  <text x="175" y="1600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B1</text>
+  <text x="235" y="1600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B2</text>
+  <text x="295" y="1600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B3</text>
+  <text x="355" y="1600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B4</text>
+  <text x="420" y="1600" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B5</text>
+  
+  <!-- Row labels -->
+  <text x="110" y="1640" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B1</text>
+  <text x="110" y="1680" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B2</text>
+  <text x="110" y="1720" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B3</text>
+  <text x="110" y="1760" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">B4</text>
+  
+  <!-- Attention cells (1 = can attend, 0 = masked) -->
+  <rect x="155" y="1620" width="40" height="30" fill="#4caf50"/>
+  <text x="175" y="1642" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="205" y="1620" width="40" height="30" fill="#ffcdd2"/>
+  <text x="225" y="1642" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  <rect x="255" y="1620" width="40" height="30" fill="#ffcdd2"/>
+  <text x="275" y="1642" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  <rect x="305" y="1620" width="40" height="30" fill="#ffcdd2"/>
+  <text x="325" y="1642" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  <rect x="355" y="1620" width="40" height="30" fill="#ffcdd2"/>
+  <text x="375" y="1642" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  
+  <rect x="155" y="1660" width="40" height="30" fill="#4caf50"/>
+  <text x="175" y="1682" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="205" y="1660" width="40" height="30" fill="#4caf50"/>
+  <text x="225" y="1682" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="255" y="1660" width="40" height="30" fill="#ffcdd2"/>
+  <text x="275" y="1682" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  <rect x="305" y="1660" width="40" height="30" fill="#ffcdd2"/>
+  <text x="325" y="1682" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  <rect x="355" y="1660" width="40" height="30" fill="#ffcdd2"/>
+  <text x="375" y="1682" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  
+  <rect x="155" y="1700" width="40" height="30" fill="#4caf50"/>
+  <text x="175" y="1722" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="205" y="1700" width="40" height="30" fill="#4caf50"/>
+  <text x="225" y="1722" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="255" y="1700" width="40" height="30" fill="#4caf50"/>
+  <text x="275" y="1722" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="305" y="1700" width="40" height="30" fill="#ffcdd2"/>
+  <text x="325" y="1722" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  <rect x="355" y="1700" width="40" height="30" fill="#ffcdd2"/>
+  <text x="375" y="1722" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  
+  <rect x="155" y="1740" width="40" height="30" fill="#4caf50"/>
+  <text x="175" y="1762" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="205" y="1740" width="40" height="30" fill="#4caf50"/>
+  <text x="225" y="1762" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="255" y="1740" width="40" height="30" fill="#4caf50"/>
+  <text x="275" y="1762" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="305" y="1740" width="40" height="30" fill="#4caf50"/>
+  <text x="325" y="1762" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <rect x="355" y="1740" width="40" height="30" fill="#ffcdd2"/>
+  <text x="375" y="1762" font-family="Arial, sans-serif" font-size="14" fill="#c62828" text-anchor="middle">0</text>
+  
+  <text x="530" y="1650" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Tokens in block b attend to</text>
+  <text x="545" y="1685" font-family="Arial, sans-serif" font-size="20" fill="#000000">blocks 1 to b (lower triangular)</text>
+  <text x="530" y="1730" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Enables KV caching</text>
+  <text x="530" y="1765" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Block-causal, not token-causal</text>
+  
+  <!-- Vectorized Training Section -->
+  <rect x="50" y="1860" width="2100" height="250" rx="12" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="3" filter="url(#shadow3)"/>
+  <rect x="50" y="1860" width="2100" height="55" rx="12" fill="#5c6bc0"/>
+  <text x="1100" y="1900" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Vectorized Training: Computing L_BD in One Forward Pass
+  </text>
+  
+  <text x="90" y="1960" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Key Insight:</text>
+  <text x="270" y="1960" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    Compute L_BD(x; θ) in one forward pass on concatenation: x_noisy ⊕ x
+  </text>
+  
+  <text x="90" y="2010" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Construction:</text>
+  <text x="290" y="2010" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    x_noisy = x¹_t₁ ⊕ x²_t₂ ⊕ ... ⊕ x^B_tB (each block with different noise level)
+  </text>
+  
+  <text x="90" y="2060" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Attention Mask:</text>
+  <text x="340" y="2060" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    Noisy tokens attend to: (1) other noisy tokens in same block, (2) all clean tokens in preceding blocks
+  </text>
+  
+  <!-- Model Signature Section -->
+  <rect x="50" y="2150" width="2100" height="200" rx="12" fill="#e0f2f1" stroke="#00897b" stroke-width="3" filter="url(#shadow3)"/>
+  <rect x="50" y="2150" width="2100" height="55" rx="12" fill="#00897b"/>
+  <text x="1100" y="2190" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">
+    Model Signature (Equation 7)
+  </text>
+  
+  <rect x="90" y="2230" width="2020" height="80" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1100" y="2280" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    x^b_logits, K_b, V_b ← x^b_θ(x^b_t, K₁:b-1, V₁:b-1) := x^b_θ(x^b_t, x&lt;b)
+  </text>
+  
+  <text x="90" y="2335" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    x^b_logits = predictions for clean x^b  |  K_b, V_b = key-value cache from forward pass  |  K₁:b-1, V₁:b-1 = cached from previous blocks (equivalent to x&lt;b)
+  </text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2400" width="2100" height="160" rx="12" fill="#37474f" filter="url(#shadow3)"/>
+  <text x="1100" y="2450" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+    Key Advantages of Block Diffusion Algorithms
+  </text>
+  <text x="300" y="2500" font-family="Arial, sans-serif" font-size="22" fill="#b0bec5">✓ Efficient: 2x forward passes only</text>
+  <text x="800" y="2500" font-family="Arial, sans-serif" font-size="22" fill="#b0bec5">✓ Vectorized: Full batch parallelism</text>
+  <text x="1350" y="2500" font-family="Arial, sans-serif" font-size="22" fill="#b0bec5">✓ KV Caching: Like AR models</text>
+  <text x="1800" y="2500" font-family="Arial, sans-serif" font-size="22" fill="#b0bec5">✓ Variable length</text>
+  <text x="1100" y="2540" font-family="Arial, sans-serif" font-size="20" fill="#78909c" text-anchor="middle">
+    Paper: arXiv:2503.09573 | ICLR 2025
+  </text>
+</svg>
+

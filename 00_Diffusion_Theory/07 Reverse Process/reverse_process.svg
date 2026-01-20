@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2400" width="2200" height="2400">
+  <defs>
+    <linearGradient id="rpHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#B71C1C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D32F2F;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowRP" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowRP" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D32F2F"/>
+    </marker>
+    <marker id="arrowGr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2E7D32"/>
+    </marker>
+  </defs>
+  
+  <rect width="2200" height="2400" fill="#FAFAFA"/>
+  
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#rpHeader)" filter="url(#shadowRP)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Reverse Process (Denoising)</text>
+  
+  <rect x="50" y="180" width="2100" height="300" rx="12" fill="#FFEBEE" stroke="#D32F2F" stroke-width="3" filter="url(#shadowRP)"/>
+  <text x="90" y="240" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Visual: Denoising from Noise to Data</text>
+  
+  <rect x="100" y="280" width="150" height="150" rx="15" fill="#EF5350" stroke="#C62828" stroke-width="2"/>
+  <text x="175" y="340" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">xT</text>
+  <circle cx="130" cy="380" r="4" fill="#FFCDD2"/>
+  <circle cx="160" cy="370" r="3" fill="#FFCDD2"/>
+  <circle cx="190" cy="390" r="4" fill="#FFCDD2"/>
+  <circle cx="220" cy="365" r="3" fill="#FFCDD2"/>
+  <text x="175" y="450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C62828" text-anchor="middle">Noise</text>
+  
+  <line x1="260" y1="355" x2="330" y2="355" stroke="#D32F2F" stroke-width="3" marker-end="url(#arrowRP)"/>
+  <text x="295" y="340" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#D32F2F" text-anchor="middle">p_theta</text>
+  
+  <rect x="350" y="280" width="150" height="150" rx="15" fill="#EF9A9A" stroke="#C62828" stroke-width="2"/>
+  <text x="425" y="340" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">x(T-k)</text>
+  <ellipse cx="425" cy="380" rx="30" ry="25" fill="#FFCDD2" stroke="#C62828"/>
+  <text x="425" y="450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C62828" text-anchor="middle">Less noisy</text>
+  
+  <line x1="510" y1="355" x2="580" y2="355" stroke="#D32F2F" stroke-width="3" marker-end="url(#arrowRP)"/>
+  
+  <rect x="600" y="280" width="150" height="150" rx="15" fill="#E57373" stroke="#C62828" stroke-width="2"/>
+  <text x="675" y="340" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">xt</text>
+  <ellipse cx="675" cy="380" rx="40" ry="30" fill="#FFCDD2" stroke="#B71C1C" stroke-width="2"/>
+  <circle cx="660" cy="375" r="5" fill="#333"/>
+  <circle cx="690" cy="375" r="5" fill="#333"/>
+  <text x="675" y="450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C62828" text-anchor="middle">Clearer</text>
+  
+  <text x="820" y="360" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#D32F2F">...</text>
+  
+  <rect x="900" y="280" width="150" height="150" rx="15" fill="#EF5350" stroke="#C62828" stroke-width="2"/>
+  <text x="975" y="340" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">x1</text>
+  <ellipse cx="975" cy="375" rx="45" ry="35" fill="#FFF" stroke="#333" stroke-width="2"/>
+  <circle cx="960" cy="365" r="7" fill="#111"/>
+  <circle cx="990" cy="365" r="7" fill="#111"/>
+  <path d="M 955 390 Q 975 410 995 390" stroke="#111" stroke-width="3" fill="none"/>
+  <text x="975" y="450" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C62828" text-anchor="middle">Almost clean</text>
+  
+  <line x1="1060" y1="355" x2="1130" y2="355" stroke="#2E7D32" stroke-width="3" marker-end="url(#arrowGr)"/>
+  
+  <rect x="1150" y="280" width="150" height="150" rx="15" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1225" y="340" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">x0</text>
+  <ellipse cx="1225" cy="375" rx="50" ry="40" fill="#FFEB3B" stroke="#222" stroke-width="2"/>
+  <circle cx="1205" cy="365" r="9" fill="#000"/>
+  <circle cx="1245" cy="365" r="9" fill="#000"/>
+  <path d="M 1195 395 Q 1225 425 1255 395" stroke="#000" stroke-width="4" fill="none"/>
+  <text x="1225" y="450" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32" text-anchor="middle">Generated!</text>
+  
+  <rect x="50" y="520" width="2100" height="320" rx="12" fill="#E3F2FD" stroke="#1976D2" stroke-width="3" filter="url(#shadowRP)"/>
+  <text x="90" y="580" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Learned Reverse Process</text>
+  
+  <rect x="90" y="620" width="2020" height="80" rx="10" fill="#BBDEFB" stroke="#1976D2" stroke-width="2"/>
+  <text x="1100" y="675" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000" text-anchor="middle">p_theta(x(t-1) | xt) = N(x(t-1); mu_theta(xt, t), Sigma_theta(xt, t))</text>
+  
+  <text x="90" y="750" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Neural network predicts mean mu_theta, variance often fixed or learned</text>
+  <text x="90" y="790" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1976D2">Train to match true posterior q(x(t-1) | xt, x0)</text>
+  
+  <rect x="50" y="880" width="2100" height="320" rx="12" fill="#FFF3E0" stroke="#FF8F00" stroke-width="3" filter="url(#shadowRP)"/>
+  <text x="90" y="940" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Target: Tractable Posterior q(x(t-1) | xt, x0)</text>
+  
+  <rect x="90" y="980" width="2020" height="70" rx="10" fill="#FFE0B2" stroke="#FF8F00" stroke-width="2"/>
+  <text x="1100" y="1025" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">q(x(t-1) | xt, x0) = N(x(t-1); mu_tilde(xt, x0), sigma_tilde^2 I)</text>
+  
+  <rect x="100" y="1070" width="980" height="100" rx="10" fill="#FFFFFF" stroke="#FF8F00" stroke-width="2"/>
+  <text x="590" y="1110" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#FF8F00" text-anchor="middle">Posterior Mean</text>
+  <text x="590" y="1150" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">mu_tilde = (sqrt(alpha_bar_(t-1)) * Bt * x0 + sqrt(at) * (1-alpha_bar_(t-1)) * xt) / (1 - alpha_bar_t)</text>
+  
+  <rect x="1120" y="1070" width="980" height="100" rx="10" fill="#FFFFFF" stroke="#FF8F00" stroke-width="2"/>
+  <text x="1610" y="1110" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#FF8F00" text-anchor="middle">Posterior Variance</text>
+  <text x="1610" y="1150" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000" text-anchor="middle">sigma_tilde^2 = (1 - alpha_bar_(t-1)) / (1 - alpha_bar_t) * Bt</text>
+  
+  <rect x="50" y="1240" width="2100" height="280" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" filter="url(#shadowRP)"/>
+  <text x="90" y="1300" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Key Insight: Noise Prediction</text>
+  
+  <text x="90" y="1360" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Since x0 is unknown, express mu_tilde in terms of noise E:</text>
+  
+  <rect x="200" y="1390" width="1800" height="70" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="1435" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000" text-anchor="middle">mu_tilde = (1/sqrt(at)) * (xt - (Bt/sqrt(1-alpha_bar_t)) * E)</text>
+  
+  <text x="90" y="1500" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E7D32">Training: Learn E_theta(xt, t) to predict the noise that was added!</text>
+  
+  <rect x="50" y="1560" width="2100" height="380" rx="12" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="3" filter="url(#shadowRP)"/>
+  <text x="90" y="1620" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">DDPM Sampling Algorithm</text>
+  
+  <rect x="100" y="1660" width="2000" height="250" rx="10" fill="#FFFFFF" stroke="#7B1FA2" stroke-width="2"/>
+  
+  <text x="150" y="1710" font-family="Courier New, monospace" font-size="22" font-weight="bold" fill="#7B1FA2">Algorithm: DDPM Sampling</text>
+  <text x="150" y="1750" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000">1:  xT ~ N(0, I)                              // Start from noise</text>
+  <text x="150" y="1785" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000">2:  for t = T, T-1, ..., 1 do</text>
+  <text x="150" y="1820" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#000">3:      z ~ N(0, I) if t &gt; 1, else z = 0     // Stochastic noise</text>
+  <text x="150" y="1855" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#7B1FA2">4:      E_hat = E_theta(xt, t)                 // Predict noise</text>
+  <text x="150" y="1890" font-family="Courier New, monospace" font-size="18" font-weight="bold" fill="#7B1FA2">5:      x(t-1) = (1/sqrt(at))*(xt - Bt/sqrt(1-alpha_bar)*E_hat) + sigma_t*z</text>
+  
+  <rect x="50" y="1980" width="2100" height="150" rx="12" fill="#E0F7FA" stroke="#00838F" stroke-width="3" filter="url(#shadowRP)"/>
+  <text x="90" y="2040" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Connection to Score Function</text>
+  
+  <rect x="200" y="2070" width="1800" height="50" rx="8" fill="#B2EBF2" stroke="#00838F" stroke-width="2"/>
+  <text x="1100" y="2105" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000" text-anchor="middle">grad_x log q(xt|x0) = -E / sqrt(1-alpha_bar_t)   so   E_theta = -sqrt(1-alpha_bar) * score</text>
+  
+  <rect x="50" y="2170" width="2100" height="80" rx="10" fill="#B71C1C" filter="url(#shadowRP)"/>
+  <text x="1100" y="2225" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Diffusion Theory - Reverse Process | Learning to Denoise</text>
+</svg>

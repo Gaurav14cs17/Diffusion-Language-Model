@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="#1a1a2e" rx="15"/>
+  
+  <!-- Title -->
+  <text x="400" y="45" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">🎯 WHAT PS-VAE SOLVES</text>
+  
+  <!-- Left Box: Representation Encoders -->
+  <rect x="50" y="80" width="200" height="140" rx="15" fill="url(#grad1)" filter="url(#shadow)"/>
+  <text x="150" y="115" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Representation</text>
+  <text x="150" y="135" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Encoders</text>
+  <text x="150" y="165" font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0" text-anchor="middle">(DINOv2, CLIP)</text>
+  <text x="150" y="195" font-family="Arial, sans-serif" font-size="28" fill="#fff" text-anchor="middle">🧠</text>
+  
+  <!-- Arrow -->
+  <path d="M 260 150 L 350 150" stroke="url(#grad3)" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00f2fe"/>
+    </marker>
+  </defs>
+  
+  <!-- Middle Box: PS-VAE Magic -->
+  <rect x="300" y="80" width="200" height="140" rx="15" fill="url(#grad2)" filter="url(#shadow)"/>
+  <text x="400" y="115" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">PS-VAE</text>
+  <text x="400" y="135" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Magic!</text>
+  <text x="400" y="165" font-family="Arial, sans-serif" font-size="28" fill="#fff" text-anchor="middle">✨</text>
+  <text x="400" y="195" font-family="Arial, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle">Compact + Regularized</text>
+  
+  <!-- Arrow -->
+  <path d="M 510 150 L 540 150" stroke="url(#grad3)" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Right Box: High-Quality Generation -->
+  <rect x="550" y="80" width="200" height="140" rx="15" fill="url(#grad3)" filter="url(#shadow)"/>
+  <text x="650" y="115" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1a1a2e" text-anchor="middle">High-Quality</text>
+  <text x="650" y="135" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1a1a2e" text-anchor="middle">Generation</text>
+  <text x="650" y="165" font-family="Arial, sans-serif" font-size="28" fill="#1a1a2e" text-anchor="middle">🖼️</text>
+  <text x="650" y="195" font-family="Arial, sans-serif" font-size="11" fill="#1a1a2e" text-anchor="middle">T2I + Editing</text>
+  
+  <!-- Problem/Solution Box -->
+  <rect x="100" y="250" width="600" height="120" rx="10" fill="#2d2d44" stroke="#667eea" stroke-width="2"/>
+  
+  <text x="400" y="285" font-family="Arial, sans-serif" font-size="13" fill="#ff6b6b" text-anchor="middle" font-weight="bold">❌ Problem:</text>
+  <text x="400" y="305" font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0" text-anchor="middle">Representation encoders understand images well, but can't reconstruct them!</text>
+  
+  <text x="400" y="335" font-family="Arial, sans-serif" font-size="13" fill="#51cf66" text-anchor="middle" font-weight="bold">✓ Solution:</text>
+  <text x="400" y="355" font-family="Arial, sans-serif" font-size="12" fill="#e0e0e0" text-anchor="middle">PS-VAE creates a compact, regularized latent space preserving BOTH semantics AND pixel details!</text>
+</svg>
+

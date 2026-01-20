@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+  <defs>
+    <linearGradient id="vaeEncGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="vaeDecGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="vaeLatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#40c057;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowV" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowV" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4facfe"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="320" fill="#1a1a2e" rx="15"/>
+  
+  <!-- Title -->
+  <text x="400" y="35" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Variational Autoencoder Framework</text>
+  
+  <!-- Input x -->
+  <rect x="40" y="80" width="80" height="80" rx="10" fill="#4a4a6a" filter="url(#shadowV)"/>
+  <text x="80" y="115" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">x</text>
+  <text x="80" y="140" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">(image)</text>
+  
+  <!-- Arrow -->
+  <path d="M 125 120 L 165 120" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowV)"/>
+  
+  <!-- Encoder -->
+  <rect x="170" y="70" width="120" height="100" rx="10" fill="url(#vaeEncGrad)" filter="url(#shadowV)"/>
+  <text x="230" y="105" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">Encoder</text>
+  <text x="230" y="125" font-family="Arial, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle">q(z|x)</text>
+  <text x="230" y="155" font-family="Arial, sans-serif" font-size="9" fill="#e0e0e0" text-anchor="middle">→ μ, σ²</text>
+  
+  <!-- Arrow -->
+  <path d="M 295 120 L 335 120" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowV)"/>
+  
+  <!-- Latent z -->
+  <rect x="340" y="80" width="80" height="80" rx="40" fill="url(#vaeLatGrad)" filter="url(#shadowV)"/>
+  <text x="380" y="115" font-family="Arial, sans-serif" font-size="16" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z</text>
+  <text x="380" y="140" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">(latent)</text>
+  
+  <!-- Arrow -->
+  <path d="M 425 120 L 465 120" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowV)"/>
+  
+  <!-- Decoder -->
+  <rect x="470" y="70" width="120" height="100" rx="10" fill="url(#vaeDecGrad)" filter="url(#shadowV)"/>
+  <text x="530" y="105" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">Decoder</text>
+  <text x="530" y="125" font-family="Arial, sans-serif" font-size="11" fill="#e0e0e0" text-anchor="middle">p(x|z)</text>
+  
+  <!-- Arrow -->
+  <path d="M 595 120 L 635 120" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowV)"/>
+  
+  <!-- Output x̂ -->
+  <rect x="640" y="80" width="80" height="80" rx="10" fill="#4a4a6a" filter="url(#shadowV)"/>
+  <text x="680" y="115" font-family="Arial, sans-serif" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">x̂</text>
+  <text x="680" y="140" font-family="Arial, sans-serif" font-size="10" fill="#888" text-anchor="middle">(recon)</text>
+  
+  <!-- Reparameterization box -->
+  <rect x="300" y="175" width="160" height="55" rx="8" fill="#2d2d44" stroke="#51cf66" stroke-width="2"/>
+  <text x="380" y="195" font-family="Arial, sans-serif" font-size="10" fill="#51cf66" text-anchor="middle" font-weight="bold">Reparameterization</text>
+  <text x="380" y="215" font-family="Arial, sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-style="italic">z = μ + σ ⊙ ε</text>
+  <text x="380" y="228" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">ε ~ N(0, I)</text>
+  
+  <!-- ELBO formula -->
+  <rect x="50" y="245" width="700" height="55" rx="10" fill="#2d2d44" stroke="#667eea" stroke-width="2"/>
+  <text x="400" y="268" font-family="Arial, sans-serif" font-size="12" fill="#667eea" text-anchor="middle" font-weight="bold">ELBO (Evidence Lower Bound):</text>
+  <text x="400" y="288" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-style="italic">log p(x) ≥ 𝔼_q[log p(x|z)] - D_KL(q(z|x) || p(z))</text>
+</svg>
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2600" width="2200" height="2600">
+  <defs>
+    <linearGradient id="fwdHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0D47A1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1565C0;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowFwd" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowFwd" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1565C0"/>
+    </marker>
+  </defs>
+  
+  <rect width="2200" height="2600" fill="#FAFAFA"/>
+  
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#fwdHeader)" filter="url(#shadowFwd)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">Forward Process (Diffusion)</text>
+  
+  <rect x="50" y="180" width="2100" height="350" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="3" filter="url(#shadowFwd)"/>
+  <text x="90" y="240" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Visual: Adding Noise Over Time</text>
+  
+  <rect x="120" y="280" width="180" height="120" rx="10" fill="#4CAF50" stroke="#2E7D32" stroke-width="2"/>
+  <text x="210" y="330" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">x0</text>
+  <text x="210" y="370" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">Clean Data</text>
+  
+  <line x1="310" y1="340" x2="380" y2="340" stroke="#1565C0" stroke-width="4" marker-end="url(#arrowFwd)"/>
+  <text x="345" y="325" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1565C0" text-anchor="middle">+noise</text>
+  
+  <rect x="400" y="280" width="180" height="120" rx="10" fill="#64B5F6" stroke="#1565C0" stroke-width="2"/>
+  <text x="490" y="330" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">x1</text>
+  <text x="490" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Slightly Noisy</text>
+  
+  <line x1="590" y1="340" x2="660" y2="340" stroke="#1565C0" stroke-width="4" marker-end="url(#arrowFwd)"/>
+  
+  <rect x="680" y="280" width="180" height="120" rx="10" fill="#42A5F5" stroke="#1565C0" stroke-width="2"/>
+  <text x="770" y="330" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">x2</text>
+  <text x="770" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">More Noisy</text>
+  
+  <text x="920" y="345" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#1565C0">...</text>
+  
+  <rect x="1000" y="280" width="180" height="120" rx="10" fill="#2196F3" stroke="#1565C0" stroke-width="2"/>
+  <text x="1090" y="330" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">x(t-1)</text>
+  <text x="1090" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Noisy</text>
+  
+  <line x1="1190" y1="340" x2="1260" y2="340" stroke="#1565C0" stroke-width="4" marker-end="url(#arrowFwd)"/>
+  
+  <rect x="1280" y="280" width="180" height="120" rx="10" fill="#1976D2" stroke="#0D47A1" stroke-width="2"/>
+  <text x="1370" y="330" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">xt</text>
+  <text x="1370" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Noisier</text>
+  
+  <text x="1520" y="345" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#1565C0">...</text>
+  
+  <rect x="1600" y="280" width="180" height="120" rx="10" fill="#0D47A1" stroke="#0D47A1" stroke-width="2"/>
+  <text x="1690" y="330" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">xT</text>
+  <text x="1690" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Pure Noise</text>
+  
+  <text x="120" y="480" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#4CAF50">t = 0</text>
+  <text x="1650" y="480" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#0D47A1">t = T</text>
+  
+  <rect x="50" y="570" width="2100" height="350" rx="12" fill="#FFF3E0" stroke="#FF8F00" stroke-width="3" filter="url(#shadowFwd)"/>
+  <text x="90" y="630" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Forward Transition Kernel</text>
+  
+  <rect x="90" y="670" width="2020" height="90" rx="10" fill="#FFE0B2" stroke="#FF8F00" stroke-width="2"/>
+  <text x="1100" y="730" font-family="Times New Roman, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">q(xt | x(t-1)) = N(xt; sqrt(1-Bt) x(t-1), Bt I)</text>
+  
+  <text x="90" y="810" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Reparameterization:</text>
+  <text x="90" y="860" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000">xt = sqrt(1-Bt) x(t-1) + sqrt(Bt) Et,  where Et ~ N(0, I)</text>
+  
+  <rect x="50" y="960" width="2100" height="400" rx="12" fill="#E8F5E9" stroke="#2E7D32" stroke-width="3" filter="url(#shadowFwd)"/>
+  <text x="90" y="1020" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Key Result: Closed-Form Marginal</text>
+  
+  <rect x="90" y="1060" width="2020" height="90" rx="10" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="1120" font-family="Times New Roman, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">q(xt | x0) = N(xt; sqrt(alpha_bar_t) x0, (1-alpha_bar_t) I)</text>
+  
+  <text x="90" y="1200" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Direct sampling formula:</text>
+  <rect x="200" y="1230" width="1800" height="70" rx="10" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="1280" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">xt = sqrt(alpha_bar_t) x0 + sqrt(1-alpha_bar_t) E,  E ~ N(0, I)</text>
+  
+  <text x="90" y="1340" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E7D32">This enables efficient training: sample any xt directly from x0 in O(1)!</text>
+  
+  <rect x="50" y="1400" width="2100" height="350" rx="12" fill="#E3F2FD" stroke="#1565C0" stroke-width="3" filter="url(#shadowFwd)"/>
+  <text x="90" y="1460" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Notation Reference</text>
+  
+  <rect x="100" y="1500" width="480" height="200" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="340" y="1550" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">Bt (beta_t)</text>
+  <text x="140" y="1600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Noise variance at step t</text>
+  <text x="140" y="1640" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Small: 0.0001 to 0.02</text>
+  <text x="140" y="1680" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#666">From noise schedule</text>
+  
+  <rect x="620" y="1500" width="480" height="200" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="860" y="1550" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">at = 1 - Bt</text>
+  <text x="660" y="1600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Signal retention at step t</text>
+  <text x="660" y="1640" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Close to 1 (0.98-0.9999)</text>
+  <text x="660" y="1680" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#666">How much signal kept</text>
+  
+  <rect x="1140" y="1500" width="480" height="200" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="1380" y="1550" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">alpha_bar_t</text>
+  <text x="1180" y="1600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Cumulative: product of all as</text>
+  <text x="1180" y="1640" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">1 at t=0, near 0 at t=T</text>
+  <text x="1180" y="1680" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#666">Total signal from x0</text>
+  
+  <rect x="1660" y="1500" width="440" height="200" rx="10" fill="#BBDEFB" stroke="#1565C0" stroke-width="2"/>
+  <text x="1880" y="1550" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">T</text>
+  <text x="1700" y="1600" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Total diffusion steps</text>
+  <text x="1700" y="1640" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">Typically 1000</text>
+  <text x="1700" y="1680" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#666">DDPM standard</text>
+  
+  <rect x="50" y="1790" width="2100" height="300" rx="12" fill="#FCE4EC" stroke="#C2185B" stroke-width="3" filter="url(#shadowFwd)"/>
+  <text x="90" y="1850" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#000000">Variance Preservation Property</text>
+  
+  <rect x="90" y="1890" width="2020" height="80" rx="10" fill="#F8BBD9" stroke="#C2185B" stroke-width="2"/>
+  <text x="1100" y="1945" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">Var[xt] = alpha_bar_t Var[x0] + (1-alpha_bar_t) Var[E] = alpha_bar_t + (1-alpha_bar_t) = 1</text>
+  
+  <text x="90" y="2030" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Key insight: If x0 has unit variance, then xt has unit variance for all t!</text>
+  <text x="90" y="2070" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#C2185B">The process smoothly interpolates between data distribution and N(0, I).</text>
+  
+  <rect x="50" y="2130" width="2100" height="80" rx="10" fill="#0D47A1" filter="url(#shadowFwd)"/>
+  <text x="1100" y="2185" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Diffusion Theory - Forward Process | The Noising Dynamics</text>
+</svg>

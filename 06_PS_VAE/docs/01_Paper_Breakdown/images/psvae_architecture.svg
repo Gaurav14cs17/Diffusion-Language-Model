@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
+  <defs>
+    <linearGradient id="trainableGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="frozenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.5" />
+    </linearGradient>
+    <linearGradient id="latentGradP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#40c057;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pixelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowP" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4facfe"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ff6b6b"/>
+    </marker>
+    <filter id="shadowP" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="350" fill="#1a1a2e" rx="15"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">PS-VAE Architecture</text>
+  
+  <!-- Image Input -->
+  <rect x="30" y="70" width="70" height="70" rx="10" fill="#4a4a6a" filter="url(#shadowP)"/>
+  <text x="65" y="100" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">Image</text>
+  <text x="65" y="115" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">x</text>
+  <text x="65" y="135" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">🖼️</text>
+  
+  <!-- Arrow to trainable encoder -->
+  <path d="M 105 105 L 135 105" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowP)"/>
+  
+  <!-- Trainable DINOv2 -->
+  <rect x="140" y="60" width="90" height="90" rx="10" fill="url(#trainableGrad)" filter="url(#shadowP)"/>
+  <text x="185" y="90" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Trainable</text>
+  <text x="185" y="105" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Encoder</text>
+  <text x="185" y="120" font-family="Arial, sans-serif" font-size="9" fill="#e0e0e0" text-anchor="middle">(DINOv2)</text>
+  <text x="185" y="140" font-family="Arial, sans-serif" font-size="12" fill="#fff" text-anchor="middle">🔓</text>
+  
+  <!-- Arrow to projector -->
+  <path d="M 235 105 L 265 105" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowP)"/>
+  
+  <!-- Projector -->
+  <rect x="270" y="70" width="80" height="70" rx="10" fill="url(#trainableGrad)" filter="url(#shadowP)"/>
+  <text x="310" y="100" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Projector</text>
+  <text x="310" y="120" font-family="Arial, sans-serif" font-size="9" fill="#e0e0e0" text-anchor="middle">μ, log σ²</text>
+  
+  <!-- Arrow to z -->
+  <path d="M 355 105 L 385 105" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowP)"/>
+  
+  <!-- Latent z -->
+  <rect x="390" y="75" width="60" height="60" rx="30" fill="url(#latentGradP)" filter="url(#shadowP)"/>
+  <text x="420" y="100" font-family="Arial, sans-serif" font-size="14" fill="#1a1a2e" text-anchor="middle" font-weight="bold">z</text>
+  <text x="420" y="120" font-family="Arial, sans-serif" font-size="8" fill="#1a1a2e" text-anchor="middle">(16²×96)</text>
+  
+  <!-- Branch to semantic decoder -->
+  <path d="M 455 90 L 485 90 L 485 90 L 515 90" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowP)"/>
+  
+  <!-- Branch to pixel decoder -->
+  <path d="M 455 120 L 485 120 L 485 200 L 515 200" stroke="#4facfe" stroke-width="2" fill="none" marker-end="url(#arrowP)"/>
+  
+  <!-- Semantic Decoder -->
+  <rect x="520" y="55" width="90" height="70" rx="10" fill="url(#trainableGrad)" filter="url(#shadowP)"/>
+  <text x="565" y="80" font-family="Arial, sans-serif" font-size="9" fill="#fff" text-anchor="middle">Semantic</text>
+  <text x="565" y="95" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Decoder</text>
+  <text x="565" y="115" font-family="Arial, sans-serif" font-size="9" fill="#e0e0e0" text-anchor="middle">→ f̂</text>
+  
+  <!-- Pixel Decoder -->
+  <rect x="520" y="165" width="90" height="70" rx="10" fill="url(#pixelGrad)" filter="url(#shadowP)"/>
+  <text x="565" y="190" font-family="Arial, sans-serif" font-size="9" fill="#1a1a2e" text-anchor="middle">Pixel</text>
+  <text x="565" y="205" font-family="Arial, sans-serif" font-size="10" fill="#1a1a2e" text-anchor="middle" font-weight="bold">Decoder</text>
+  <text x="565" y="225" font-family="Arial, sans-serif" font-size="9" fill="#2d2d44" text-anchor="middle">→ x̂</text>
+  
+  <!-- Frozen encoder (for semantic target) -->
+  <path d="M 65 145 L 65 280 L 620 280" stroke="#888" stroke-width="1" stroke-dasharray="4,2" fill="none"/>
+  <rect x="30" y="250" width="70" height="50" rx="8" fill="url(#frozenGrad)" filter="url(#shadowP)"/>
+  <text x="65" y="272" font-family="Arial, sans-serif" font-size="8" fill="#fff" text-anchor="middle">Frozen</text>
+  <text x="65" y="285" font-family="Arial, sans-serif" font-size="8" fill="#fff" text-anchor="middle">Encoder 🔒</text>
+  
+  <!-- Semantic Loss -->
+  <path d="M 615 90 L 680 90" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowRed)"/>
+  <rect x="685" y="60" width="80" height="60" rx="8" fill="#2d2d44" stroke="#ff6b6b" stroke-width="2"/>
+  <text x="725" y="85" font-family="Arial, sans-serif" font-size="9" fill="#ff6b6b" text-anchor="middle" font-weight="bold">Semantic</text>
+  <text x="725" y="100" font-family="Arial, sans-serif" font-size="9" fill="#ff6b6b" text-anchor="middle" font-weight="bold">Loss</text>
+  <text x="725" y="115" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">MSE(f̂, f)</text>
+  
+  <!-- Pixel Loss -->
+  <path d="M 615 200 L 680 200" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="4,2" fill="none" marker-end="url(#arrowRed)"/>
+  <rect x="685" y="155" width="80" height="90" rx="8" fill="#2d2d44" stroke="#ff6b6b" stroke-width="2"/>
+  <text x="725" y="180" font-family="Arial, sans-serif" font-size="9" fill="#ff6b6b" text-anchor="middle" font-weight="bold">Pixel Loss</text>
+  <text x="725" y="200" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">L1 + MSE</text>
+  <text x="725" y="220" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">+ LPIPS</text>
+  <text x="725" y="240" font-family="Arial, sans-serif" font-size="8" fill="#888" text-anchor="middle">+ KL</text>
+  
+  <!-- Key note -->
+  <rect x="140" y="280" width="250" height="45" rx="8" fill="#2d2d44" stroke="#51cf66" stroke-width="1"/>
+  <text x="265" y="300" font-family="Arial, sans-serif" font-size="10" fill="#51cf66" text-anchor="middle" font-weight="bold">Key: Encoder TRAINABLE</text>
+  <text x="265" y="315" font-family="Arial, sans-serif" font-size="9" fill="#888" text-anchor="middle">Joint optimization for pixel quality</text>
+</svg>
+

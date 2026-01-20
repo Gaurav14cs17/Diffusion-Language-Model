@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2800" width="2200" height="2800">
+  <defs>
+    <linearGradient id="varHeaderGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#b71c1c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c62828;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="graphBg" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#fafafa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5f5f5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow4" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="2800" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#varHeaderGrad)" filter="url(#shadow4)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle">
+    Understanding Gradient Variance &amp; Low-Variance Noise Schedules
+  </text>
+  
+  <!-- Section 1: The Problem -->
+  <rect x="50" y="180" width="2100" height="350" rx="12" fill="#ffebee" stroke="#c62828" stroke-width="3" filter="url(#shadow4)"/>
+  <rect x="50" y="180" width="2100" height="55" rx="12" fill="#c62828"/>
+  <text x="90" y="220" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    ⚠️ The Problem: Why Does Diffusion Lag Behind Autoregressive?
+  </text>
+  
+  <text x="90" y="290" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Key Discovery:</text>
+  <text x="330" y="290" font-family="Arial, sans-serif" font-size="24" fill="#000000">
+    For block size L'=1, Block Diffusion and Autoregressive should be EQUIVALENT in expectation!
+  </text>
+  
+  <rect x="90" y="320" width="2020" height="80" rx="10" fill="#ffcdd2" stroke="#b71c1c" stroke-width="2"/>
+  <text x="1100" y="370" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">
+    Yet there's a ~2 point PERPLEXITY GAP between them! Why?
+  </text>
+  
+  <text x="90" y="445" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Root Cause: High Training Variance</text>
+  <text x="90" y="485" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • AR training: Computes cross-entropy for ALL L tokens in every batch
+  </text>
+  <text x="90" y="520" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • Diffusion training: Only computes loss for MASKED tokens (~50% on average due to random t)
+  </text>
+  
+  <!-- Section 2: The Masking Problem Visualization -->
+  <rect x="50" y="570" width="2100" height="450" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadow4)"/>
+  <rect x="50" y="570" width="2100" height="55" rx="12" fill="#f57c00"/>
+  <text x="90" y="610" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    📊 Visualizing the Masking Rate Problem
+  </text>
+  
+  <!-- Graph: Mask Rate Distribution -->
+  <rect x="90" y="660" width="900" height="330" rx="10" fill="url(#graphBg)" stroke="#333" stroke-width="2"/>
+  
+  <!-- Axes -->
+  <line x1="150" y1="920" x2="950" y2="920" stroke="#333" stroke-width="2"/>
+  <line x1="150" y1="920" x2="150" y2="690" stroke="#333" stroke-width="2"/>
+  
+  <!-- X-axis labels -->
+  <text x="150" y="955" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">0</text>
+  <text x="350" y="955" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">0.25</text>
+  <text x="550" y="955" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">0.5</text>
+  <text x="750" y="955" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">0.75</text>
+  <text x="950" y="955" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">1.0</text>
+  <text x="550" y="985" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Mask Rate (1 - α_t)</text>
+  
+  <!-- Y-axis label -->
+  <text x="100" y="805" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" transform="rotate(-90, 100, 805)" text-anchor="middle">Gradient Quality</text>
+  
+  <!-- Curve showing gradient quality vs mask rate -->
+  <path d="M 150 900 Q 250 850 350 750 Q 450 680 550 700 Q 650 680 750 750 Q 850 850 950 900" 
+        fill="none" stroke="#2196f3" stroke-width="4"/>
+  
+  <!-- Optimal region -->
+  <rect x="380" y="690" width="340" height="230" fill="#4caf50" fill-opacity="0.2" stroke="#4caf50" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="550" y="720" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2e7d32" text-anchor="middle">OPTIMAL</text>
+  <text x="550" y="745" font-family="Arial, sans-serif" font-size="16" fill="#2e7d32" text-anchor="middle">REGION</text>
+  
+  <!-- Problem regions -->
+  <text x="230" y="720" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c62828" text-anchor="middle">Too Few</text>
+  <text x="230" y="745" font-family="Arial, sans-serif" font-size="16" fill="#c62828" text-anchor="middle">Masked</text>
+  <text x="870" y="720" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#c62828" text-anchor="middle">All</text>
+  <text x="870" y="745" font-family="Arial, sans-serif" font-size="16" fill="#c62828" text-anchor="middle">Masked</text>
+  
+  <!-- Explanation boxes -->
+  <rect x="1030" y="660" width="1080" height="330" rx="10" fill="#fff8e1" stroke="#ff9800" stroke-width="2"/>
+  
+  <text x="1070" y="705" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Why Extreme Mask Rates Are Bad:</text>
+  
+  <rect x="1070" y="725" width="500" height="120" rx="8" fill="#ffcdd2" stroke="#c62828" stroke-width="2"/>
+  <text x="1090" y="760" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Mask Rate ≈ 0 (Few masked):</text>
+  <text x="1090" y="795" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Reconstruction is trivially easy</text>
+  <text x="1090" y="825" font-family="Arial, sans-serif" font-size="18" fill="#000000">• No useful learning signal</text>
+  
+  <rect x="1590" y="725" width="500" height="120" rx="8" fill="#ffcdd2" stroke="#c62828" stroke-width="2"/>
+  <text x="1610" y="760" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Mask Rate ≈ 1 (All masked):</text>
+  <text x="1610" y="795" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Optimal prediction = marginals</text>
+  <text x="1610" y="825" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Also easy, not informative</text>
+  
+  <rect x="1070" y="865" width="1020" height="110" rx="8" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+  <text x="1090" y="905" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Sweet Spot (Mid-range mask rates):</text>
+  <text x="1090" y="940" font-family="Arial, sans-serif" font-size="18" fill="#000000">• Reconstruction is challenging but learnable → Strong gradients!</text>
+  
+  <!-- Section 3: Clipped Schedules Solution -->
+  <rect x="50" y="1060" width="2100" height="500" rx="12" fill="#e8f5e9" stroke="#388e3c" stroke-width="3" filter="url(#shadow4)"/>
+  <rect x="50" y="1060" width="2100" height="55" rx="12" fill="#388e3c"/>
+  <text x="90" y="1100" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    ✅ Solution: Clipped Noise Schedules
+  </text>
+  
+  <text x="90" y="1160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Key Idea: Restrict mask rates to a useful range [β, ω]</text>
+  
+  <!-- Formula box -->
+  <rect x="90" y="1190" width="700" height="90" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="3"/>
+  <text x="440" y="1250" font-family="Times New Roman, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">
+    1 - α_t ~ U[β, ω]
+  </text>
+  
+  <text x="850" y="1240" font-family="Arial, sans-serif" font-size="24" fill="#000000">
+    where 0 ≤ β &lt; ω ≤ 1
+  </text>
+  
+  <!-- Schedule comparison visualization -->
+  <rect x="90" y="1310" width="980" height="220" rx="10" fill="#ffffff" stroke="#388e3c" stroke-width="2"/>
+  <text x="130" y="1350" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Standard Schedule (Linear):</text>
+  
+  <!-- Standard schedule bar -->
+  <rect x="130" y="1375" width="900" height="40" rx="5" fill="#e0e0e0" stroke="#757575" stroke-width="1"/>
+  <text x="160" y="1402" font-family="Arial, sans-serif" font-size="16" fill="#000000">0.0</text>
+  <text x="560" y="1402" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">0.5</text>
+  <text x="980" y="1402" font-family="Arial, sans-serif" font-size="16" fill="#000000">1.0</text>
+  <!-- Gradient fill to show uniform sampling -->
+  <rect x="130" y="1375" width="900" height="40" rx="5" fill="url(#graphBg)" fill-opacity="0.7"/>
+  <text x="580" y="1395" font-family="Arial, sans-serif" font-size="14" fill="#666666" text-anchor="middle">↑ Uniform over [0,1] - includes bad regions!</text>
+  
+  <text x="130" y="1460" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Clipped Schedule U[β, ω]:</text>
+  
+  <!-- Clipped schedule bar -->
+  <rect x="130" y="1485" width="900" height="40" rx="5" fill="#ffcdd2" stroke="#757575" stroke-width="1"/>
+  <rect x="330" y="1485" width="400" height="40" rx="0" fill="#4caf50"/>
+  <text x="160" y="1510" font-family="Arial, sans-serif" font-size="16" fill="#c62828">0.0</text>
+  <text x="340" y="1510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">β</text>
+  <text x="530" y="1510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">OPTIMAL</text>
+  <text x="720" y="1510" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">ω</text>
+  <text x="980" y="1510" font-family="Arial, sans-serif" font-size="16" fill="#c62828">1.0</text>
+  
+  <!-- Explanation of equivalence -->
+  <rect x="1110" y="1310" width="1000" height="220" rx="10" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
+  <text x="1150" y="1355" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Mathematical Equivalence:</text>
+  <text x="1150" y="1400" font-family="Arial, sans-serif" font-size="20" fill="#000000">From gradient estimation perspective, clipped schedule is</text>
+  <text x="1150" y="1435" font-family="Arial, sans-serif" font-size="20" fill="#000000">equivalent to continuous schedule where:</text>
+  <rect x="1170" y="1455" width="900" height="50" rx="5" fill="#b3e5fc" stroke="#0277bd" stroke-width="1"/>
+  <text x="1620" y="1490" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">
+    1 - α_&lt;β ≈ ε  and  1 - α_&gt;ω ≈ 1 - ε  ⟹  α'_t ≈ 1/(β - ω)
+  </text>
+  
+  <!-- Section 4: Data-Driven Optimization -->
+  <rect x="50" y="1600" width="2100" height="380" rx="12" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" filter="url(#shadow4)"/>
+  <rect x="50" y="1600" width="2100" height="55" rx="12" fill="#7b1fa2"/>
+  <text x="90" y="1640" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    🎯 Data-Driven Schedule Optimization
+  </text>
+  
+  <text x="90" y="1710" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000">Optimization Objective:</text>
+  <rect x="90" y="1735" width="800" height="70" rx="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="2"/>
+  <text x="490" y="1780" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    min_β,ω Var_X,t[L(X; θ, β, ω)]
+  </text>
+  
+  <text x="950" y="1780" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    → Minimize variance of NELBO estimator
+  </text>
+  
+  <text x="90" y="1850" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Implementation:</text>
+  <text x="90" y="1890" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • Grid search over (β, ω) pairs at regular intervals during training
+  </text>
+  <text x="90" y="1930" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • Use NELBO variance as proxy for gradient variance (computationally cheaper)
+  </text>
+  <text x="90" y="1970" font-family="Arial, sans-serif" font-size="22" fill="#000000">
+    • Different optimal (β, ω) for different block sizes L'
+  </text>
+  
+  <!-- Section 5: Results Table -->
+  <rect x="50" y="2020" width="2100" height="400" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadow4)"/>
+  <rect x="50" y="2020" width="2100" height="55" rx="12" fill="#1976d2"/>
+  <text x="90" y="2060" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    📈 Results: Variance vs Perplexity Trade-off
+  </text>
+  
+  <!-- Table -->
+  <rect x="90" y="2100" width="2020" height="290" rx="10" fill="#ffffff" stroke="#1565c0" stroke-width="2"/>
+  
+  <!-- Table headers -->
+  <rect x="90" y="2100" width="2020" height="50" fill="#bbdefb"/>
+  <text x="200" y="2135" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Block Size L'</text>
+  <text x="450" y="2135" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Schedule</text>
+  <text x="750" y="2135" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">NELBO Variance</text>
+  <text x="1050" y="2135" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Test PPL</text>
+  <text x="1400" y="2135" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Notes</text>
+  
+  <!-- Table rows -->
+  <line x1="90" y1="2150" x2="2110" y2="2150" stroke="#90caf9" stroke-width="1"/>
+  
+  <text x="200" y="2195" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 1</text>
+  <text x="450" y="2195" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Linear (standard)</text>
+  <text x="750" y="2195" font-family="Arial, sans-serif" font-size="20" fill="#c62828" font-weight="bold" text-anchor="middle">1.52</text>
+  <text x="1050" y="2195" font-family="Arial, sans-serif" font-size="20" fill="#c62828" font-weight="bold" text-anchor="middle">≤25.56</text>
+  <text x="1400" y="2195" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">~2pt gap vs AR (22.88)</text>
+  
+  <line x1="90" y1="2220" x2="2110" y2="2220" stroke="#e3f2fd" stroke-width="1"/>
+  
+  <text x="200" y="2265" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 1</text>
+  <text x="450" y="2265" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32" font-weight="bold" text-anchor="middle">Full masking</text>
+  <text x="750" y="2265" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32" font-weight="bold" text-anchor="middle">0.11</text>
+  <text x="1050" y="2265" font-family="Arial, sans-serif" font-size="20" fill="#2e7d32" font-weight="bold" text-anchor="middle">22.88</text>
+  <text x="1400" y="2265" font-family="Arial, sans-serif" font-size="18" fill="#2e7d32" font-weight="bold" text-anchor="middle">MATCHES AR! Gap closed!</text>
+  
+  <line x1="90" y1="2290" x2="2110" y2="2290" stroke="#e3f2fd" stroke-width="1"/>
+  
+  <text x="200" y="2335" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">L' = 4, 16, 128</text>
+  <text x="450" y="2335" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">U[β, ω] (tuned)</text>
+  <text x="750" y="2335" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Minimized</text>
+  <text x="1050" y="2335" font-family="Arial, sans-serif" font-size="20" fill="#000000" text-anchor="middle">Best for each L'</text>
+  <text x="1400" y="2335" font-family="Arial, sans-serif" font-size="18" fill="#000000" text-anchor="middle">Different optimal [β,ω] per L'</text>
+  
+  <line x1="90" y1="2360" x2="2110" y2="2360" stroke="#90caf9" stroke-width="1"/>
+  
+  <!-- Key insight -->
+  <rect x="130" y="2370" width="1980" height="30" rx="5" fill="#c8e6c9"/>
+  <text x="1120" y="2392" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1b5e20" text-anchor="middle">
+    KEY INSIGHT: Variance of NELBO is strongly correlated with test perplexity! Lower variance → Better model!
+  </text>
+  
+  <!-- Section 6: Summary -->
+  <rect x="50" y="2460" width="2100" height="250" rx="12" fill="#e0f7fa" stroke="#00acc1" stroke-width="3" filter="url(#shadow4)"/>
+  <rect x="50" y="2460" width="2100" height="55" rx="12" fill="#00acc1"/>
+  <text x="90" y="2500" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    🎓 Summary: Key Takeaways
+  </text>
+  
+  <text x="90" y="2560" font-family="Arial, sans-serif" font-size="24" fill="#000000">
+    <tspan font-weight="bold">1.</tspan> High gradient variance explains the perplexity gap between diffusion and AR models
+  </text>
+  <text x="90" y="2605" font-family="Arial, sans-serif" font-size="24" fill="#000000">
+    <tspan font-weight="bold">2.</tspan> Diffusion trains on ~50% tokens (only masked ones), causing 2x variance vs AR
+  </text>
+  <text x="90" y="2650" font-family="Arial, sans-serif" font-size="24" fill="#000000">
+    <tspan font-weight="bold">3.</tspan> Clipped schedules U[β,ω] avoid extreme mask rates that produce poor gradients
+  </text>
+  <text x="90" y="2695" font-family="Arial, sans-serif" font-size="24" fill="#000000">
+    <tspan font-weight="bold">4.</tspan> Data-driven optimization finds optimal [β,ω] for each block size L'
+  </text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2740" width="2100" height="40" rx="10" fill="#37474f"/>
+  <text x="1100" y="2770" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">
+    Block Diffusion: Gradient Variance Analysis | ICLR 2025 | Cornell Tech
+  </text>
+</svg>
+

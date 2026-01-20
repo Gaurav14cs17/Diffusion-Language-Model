@@ -1,0 +1,422 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 5200" width="2200" height="5200">
+  <defs>
+    <linearGradient id="headerGrad9" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#01579B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ddpmGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E1F5FE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B3E5FC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ddimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F3E5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E1BEE7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="fastGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C8E6C9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="noiseToImage" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#90CAF9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8F5E9;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowSample" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0277BD"/>
+    </marker>
+    <marker id="arrowPink" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8E24AA"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="5200" fill="#FAFBFC"/>
+  
+  <!-- Main Title Box -->
+  <rect x="50" y="40" width="2100" height="120" rx="15" fill="url(#headerGrad9)" stroke="#01579B" stroke-width="4"/>
+  <text x="1100" y="115" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#FFFFFF" text-anchor="middle">SAMPLING ALGORITHMS</text>
+  
+  <!-- VISUAL DIAGRAM 1: Sampling Overview -->
+  <rect x="50" y="200" width="2100" height="450" rx="12" fill="#FFFFFF" stroke="#0277BD" stroke-width="3"/>
+  <text x="1100" y="260" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000" text-anchor="middle">The Sampling Process: From Noise to Data</text>
+  
+  <!-- Visual: Denoising trajectory -->
+  <rect x="100" y="300" width="2000" height="300" rx="10" fill="url(#noiseToImage)" stroke="#0277BD" stroke-width="2"/>
+  
+  <!-- Pure noise (left) -->
+  <rect x="150" y="350" width="180" height="180" rx="10" fill="#FFF" stroke="#0277BD" stroke-width="2"/>
+  <!-- Random noise pattern -->
+  <circle cx="195" cy="400" r="6" fill="#666"/>
+  <circle cx="240" cy="420" r="5" fill="#888"/>
+  <circle cx="280" cy="390" r="7" fill="#555"/>
+  <circle cx="210" cy="460" r="5" fill="#777"/>
+  <circle cx="260" cy="440" r="6" fill="#666"/>
+  <circle cx="180" cy="480" r="5" fill="#888"/>
+  <circle cx="300" cy="470" r="4" fill="#666"/>
+  <circle cx="230" cy="500" r="6" fill="#777"/>
+  <circle cx="275" cy="490" r="5" fill="#888"/>
+  <text x="240" y="560" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#0277BD" text-anchor="middle">x_T ~ N(0,I)</text>
+  <text x="240" y="590" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Pure Noise</text>
+  
+  <!-- Arrow -->
+  <line x1="350" y1="440" x2="430" y2="440" stroke="#0277BD" stroke-width="4" marker-end="url(#arrowSample)"/>
+  <text x="390" y="420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0277BD">denoise</text>
+  
+  <!-- Slightly denoised -->
+  <rect x="450" y="350" width="180" height="180" rx="10" fill="#FFF" stroke="#0277BD" stroke-width="2"/>
+  <circle cx="495" cy="410" r="8" fill="#555"/>
+  <circle cx="545" cy="420" r="7" fill="#666"/>
+  <circle cx="590" cy="400" r="9" fill="#444"/>
+  <circle cx="520" cy="470" r="7" fill="#555"/>
+  <circle cx="570" cy="460" r="8" fill="#666"/>
+  <text x="540" y="560" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#0277BD" text-anchor="middle">x_{T-k}</text>
+  
+  <!-- Arrow -->
+  <line x1="650" y1="440" x2="730" y2="440" stroke="#0277BD" stroke-width="4" marker-end="url(#arrowSample)"/>
+  
+  <!-- More structure -->
+  <rect x="750" y="350" width="180" height="180" rx="10" fill="#FFF" stroke="#0277BD" stroke-width="2"/>
+  <!-- Simple shape emerging -->
+  <ellipse cx="840" cy="420" rx="50" ry="40" fill="#DDD" stroke="#666" stroke-width="2"/>
+  <circle cx="825" cy="410" r="8" fill="#333"/>
+  <circle cx="855" cy="410" r="8" fill="#333"/>
+  <path d="M 820 445 Q 840 465 860 445" stroke="#333" stroke-width="3" fill="none"/>
+  <text x="840" y="560" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#0277BD" text-anchor="middle">x_t</text>
+  
+  <!-- Arrow -->
+  <line x1="950" y1="440" x2="1030" y2="440" stroke="#0277BD" stroke-width="4" marker-end="url(#arrowSample)"/>
+  
+  <!-- More clear -->
+  <rect x="1050" y="350" width="180" height="180" rx="10" fill="#FFF" stroke="#0277BD" stroke-width="2"/>
+  <!-- Clearer shape -->
+  <ellipse cx="1140" cy="415" rx="55" ry="45" fill="#EEE" stroke="#444" stroke-width="2"/>
+  <circle cx="1120" cy="405" r="10" fill="#222"/>
+  <circle cx="1160" cy="405" r="10" fill="#222"/>
+  <path d="M 1110 445 Q 1140 475 1170 445" stroke="#222" stroke-width="4" fill="none"/>
+  <text x="1140" y="560" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#0277BD" text-anchor="middle">x_{t-k}</text>
+  
+  <!-- Dots -->
+  <text x="1300" y="445" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#0277BD">···</text>
+  
+  <!-- Almost clean -->
+  <rect x="1400" y="350" width="180" height="180" rx="10" fill="#FFF" stroke="#0277BD" stroke-width="2"/>
+  <ellipse cx="1490" cy="410" rx="60" ry="50" fill="#FFF" stroke="#333" stroke-width="3"/>
+  <circle cx="1465" cy="395" r="12" fill="#111"/>
+  <circle cx="1515" cy="395" r="12" fill="#111"/>
+  <path d="M 1450 440 Q 1490 480 1530 440" stroke="#111" stroke-width="5" fill="none"/>
+  <text x="1490" y="560" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#0277BD" text-anchor="middle">x_1</text>
+  
+  <!-- Arrow -->
+  <line x1="1600" y1="440" x2="1680" y2="440" stroke="#0277BD" stroke-width="4" marker-end="url(#arrowSample)"/>
+  
+  <!-- Clean image -->
+  <rect x="1700" y="350" width="180" height="180" rx="10" fill="#FFF" stroke="#2E7D32" stroke-width="3"/>
+  <ellipse cx="1790" cy="405" rx="65" ry="55" fill="#FFEB3B" stroke="#222" stroke-width="3"/>
+  <circle cx="1760" cy="390" r="14" fill="#000"/>
+  <circle cx="1820" cy="390" r="14" fill="#000"/>
+  <path d="M 1740 435 Q 1790 485 1840 435" stroke="#000" stroke-width="6" fill="none"/>
+  <text x="1790" y="560" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#2E7D32" text-anchor="middle">x_0</text>
+  <text x="1790" y="590" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2E7D32" text-anchor="middle">Generated!</text>
+  
+  <!-- SECTION 2: DDPM Sampling -->
+  <rect x="50" y="690" width="2100" height="850" rx="12" fill="url(#ddpmGrad)" stroke="#0277BD" stroke-width="3"/>
+  <text x="80" y="750" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">1. DDPM Sampling (Stochastic)</text>
+  
+  <!-- Visual: Single step diagram -->
+  <rect x="100" y="810" width="900" height="350" rx="10" fill="#FFFFFF" stroke="#0277BD" stroke-width="2"/>
+  <text x="550" y="855" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">Single Denoising Step</text>
+  
+  <!-- x_t input -->
+  <rect x="150" y="920" width="140" height="100" rx="10" fill="#B3E5FC" stroke="#0277BD" stroke-width="2"/>
+  <text x="220" y="965" font-family="Times New Roman, serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">x_t</text>
+  <text x="220" y="995" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#666" text-anchor="middle">noisy</text>
+  
+  <!-- Arrow to network -->
+  <line x1="300" y1="970" x2="360" y2="970" stroke="#0277BD" stroke-width="3" marker-end="url(#arrowSample)"/>
+  
+  <!-- Neural network -->
+  <rect x="380" y="900" width="160" height="140" rx="15" fill="#4FC3F7" stroke="#0277BD" stroke-width="3"/>
+  <text x="460" y="960" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFF" text-anchor="middle">UNet</text>
+  <text x="460" y="990" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#FFF" text-anchor="middle">ε_θ(x_t, t)</text>
+  
+  <!-- Arrow to computation -->
+  <line x1="550" y1="970" x2="610" y2="970" stroke="#0277BD" stroke-width="3" marker-end="url(#arrowSample)"/>
+  
+  <!-- Computation box -->
+  <rect x="630" y="890" width="220" height="160" rx="10" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <text x="740" y="930" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Compute mean:</text>
+  <text x="740" y="965" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#0277BD" text-anchor="middle">μ = (1/√α_t)(x_t</text>
+  <text x="740" y="990" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#0277BD" text-anchor="middle">- β_t/√(1-ᾱ_t) · ε̂)</text>
+  <text x="740" y="1030" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000" text-anchor="middle">Add noise: + σ_t z</text>
+  
+  <!-- Arrow to output -->
+  <line x1="860" y1="970" x2="920" y2="970" stroke="#0277BD" stroke-width="3" marker-end="url(#arrowSample)"/>
+  
+  <!-- x_{t-1} output -->
+  <rect x="940" y="920" width="140" height="100" rx="10" fill="#81D4FA" stroke="#0277BD" stroke-width="2"/>
+  <text x="1010" y="965" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">x_{t-1}</text>
+  <text x="1010" y="995" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#666" text-anchor="middle">cleaner</text>
+  
+  <!-- z noise input -->
+  <rect x="680" y="1080" width="120" height="60" rx="8" fill="#FFF3E0" stroke="#EF6C00" stroke-width="2"/>
+  <text x="740" y="1118" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#EF6C00" text-anchor="middle">z ~ N(0,I)</text>
+  <line x1="740" y1="1080" x2="740" y2="1050" stroke="#EF6C00" stroke-width="2" stroke-dasharray="5,3"/>
+  
+  <!-- Algorithm on right -->
+  <rect x="1050" y="810" width="1050" height="680" rx="10" fill="#FFFFFF" stroke="#0277BD" stroke-width="2"/>
+  <text x="1575" y="860" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#0277BD" text-anchor="middle">Algorithm: DDPM Sampling</text>
+  <line x1="1080" y1="880" x2="2070" y2="880" stroke="#CCC" stroke-width="1"/>
+  
+  <text x="1080" y="920" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">Input: ε_θ (trained model), {α_t, β_t, σ_t}</text>
+  <text x="1080" y="960" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">Output: x_0 (generated sample)</text>
+  <line x1="1080" y1="980" x2="2070" y2="980" stroke="#EEE" stroke-width="1"/>
+  
+  <text x="1080" y="1020" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#0277BD">1:  x_T ~ N(0, I)</text>
+  <text x="1080" y="1060" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">2:  for t = T, T-1, ..., 1 do</text>
+  <text x="1080" y="1100" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">3:      z ~ N(0, I) if t > 1, else z = 0</text>
+  <text x="1080" y="1140" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#0277BD">4:      ε̂ = ε_θ(x_t, t)</text>
+  <text x="1080" y="1180" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">5:      μ = (1/√α_t)(x_t - β_t/√(1-ᾱ_t) · ε̂)</text>
+  <text x="1080" y="1220" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#0277BD">6:      x_{t-1} = μ + σ_t · z</text>
+  <text x="1080" y="1260" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">7:  end for</text>
+  <text x="1080" y="1300" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#2E7D32">8:  return x_0</text>
+  
+  <!-- Key properties -->
+  <rect x="1080" y="1340" width="970" height="130" rx="8" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <text x="1100" y="1380" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Properties:</text>
+  <text x="1100" y="1415" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0277BD">• Stochastic: adds random noise at each step (z ~ N(0,I))</text>
+  <text x="1100" y="1450" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0277BD">• Requires T steps (typically 1000) - SLOW</text>
+  
+  <!-- Variance formulas -->
+  <rect x="100" y="1180" width="900" height="150" rx="10" fill="#FFFFFF" stroke="#0277BD" stroke-width="2"/>
+  <text x="550" y="1220" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">Variance Options for σ_t</text>
+  
+  <rect x="140" y="1250" width="350" height="60" rx="8" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <text x="315" y="1290" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">σ_t² = β_t (DDPM)</text>
+  
+  <rect x="540" y="1250" width="420" height="60" rx="8" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <text x="750" y="1290" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">σ̃_t² = (1-ᾱ_{t-1})/(1-ᾱ_t)·β_t</text>
+  
+  <!-- SECTION 3: DDIM Sampling -->
+  <rect x="50" y="1580" width="2100" height="900" rx="12" fill="url(#ddimGrad)" stroke="#8E24AA" stroke-width="3"/>
+  <text x="80" y="1640" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">2. DDIM Sampling (Deterministic)</text>
+  
+  <!-- Visual comparison -->
+  <rect x="100" y="1700" width="600" height="400" rx="10" fill="#FFFFFF" stroke="#8E24AA" stroke-width="2"/>
+  <text x="400" y="1745" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">DDPM vs DDIM Trajectories</text>
+  
+  <!-- Draw coordinate system -->
+  <line x1="180" y1="2020" x2="650" y2="2020" stroke="#666" stroke-width="2"/>
+  <line x1="180" y1="2020" x2="180" y2="1780" stroke="#666" stroke-width="2"/>
+  <text x="415" y="2060" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">Latent Space</text>
+  
+  <!-- DDPM stochastic paths (multiple wavy) -->
+  <path d="M 200 1980 Q 280 1920 350 1950 Q 420 1870 500 1850 Q 560 1820 620 1800" stroke="#0277BD" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M 200 1980 Q 260 1940 340 1920 Q 400 1880 480 1870 Q 550 1840 620 1800" stroke="#0277BD" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M 200 1980 Q 290 1900 360 1930 Q 440 1860 510 1840 Q 580 1810 620 1800" stroke="#0277BD" stroke-width="2" fill="none" opacity="0.5"/>
+  <text x="520" y="1880" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0277BD">DDPM</text>
+  <text x="520" y="1900" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0277BD">(stochastic)</text>
+  
+  <!-- DDIM deterministic path (straight) -->
+  <path d="M 200 1980 Q 350 1900 500 1850 Q 580 1820 620 1800" stroke="#8E24AA" stroke-width="4" fill="none"/>
+  <text x="350" y="1830" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#8E24AA">DDIM</text>
+  <text x="350" y="1850" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#8E24AA">(deterministic)</text>
+  
+  <!-- Start and end points -->
+  <circle cx="200" cy="1980" r="10" fill="#666"/>
+  <text x="200" y="2010" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#666" text-anchor="middle">x_T</text>
+  <circle cx="620" cy="1800" r="10" fill="#2E7D32"/>
+  <text x="620" y="1790" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2E7D32" text-anchor="middle">x_0</text>
+  
+  <!-- Key insight box -->
+  <rect x="100" y="2120" width="600" height="100" rx="8" fill="#F3E5F5" stroke="#8E24AA" stroke-width="2"/>
+  <text x="400" y="2160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#8E24AA" text-anchor="middle">Key Insight: DDIM removes stochasticity!</text>
+  <text x="400" y="2195" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">Same x_T → Same x_0 (deterministic mapping)</text>
+  
+  <!-- DDIM Formula and Algorithm -->
+  <rect x="750" y="1700" width="1350" height="350" rx="10" fill="#FFFFFF" stroke="#8E24AA" stroke-width="2"/>
+  <text x="1425" y="1750" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">DDIM Update Rule</text>
+  
+  <text x="780" y="1800" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">General form (with η parameter):</text>
+  <rect x="800" y="1820" width="1250" height="80" rx="8" fill="#F3E5F5" stroke="#8E24AA" stroke-width="2"/>
+  <text x="1425" y="1855" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">x_{t-1} = √ᾱ_{t-1} · x̂₀ + √(1-ᾱ_{t-1}-σ_t²) · ε̂ + σ_t · z</text>
+  <text x="1425" y="1885" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#8E24AA" text-anchor="middle">where x̂₀ = (x_t - √(1-ᾱ_t)·ε̂) / √ᾱ_t and σ_t = η · √((1-ᾱ_{t-1})/(1-ᾱ_t)) · √(1-ᾱ_t/ᾱ_{t-1})</text>
+  
+  <text x="780" y="1950" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a">Special cases:</text>
+  <rect x="800" y="1970" width="550" height="50" rx="8" fill="#E1F5FE" stroke="#0277BD" stroke-width="2"/>
+  <text x="1075" y="2005" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#0277BD" text-anchor="middle">η = 1 → DDPM (stochastic)</text>
+  
+  <rect x="1400" y="1970" width="650" height="50" rx="8" fill="#F3E5F5" stroke="#8E24AA" stroke-width="2"/>
+  <text x="1725" y="2005" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#8E24AA" text-anchor="middle">η = 0 → DDIM (deterministic)</text>
+  
+  <!-- Algorithm -->
+  <rect x="750" y="2080" width="1350" height="360" rx="10" fill="#FFFFFF" stroke="#8E24AA" stroke-width="2"/>
+  <text x="1425" y="2130" font-family="Courier New, monospace" font-size="24" font-weight="bold" fill="#8E24AA" text-anchor="middle">Algorithm: DDIM Sampling</text>
+  <line x1="780" y1="2150" x2="2070" y2="2150" stroke="#CCC" stroke-width="1"/>
+  
+  <text x="780" y="2190" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">Input: ε_θ, subsequence τ = [τ_1,...,τ_S] ⊂ [1,...,T]</text>
+  <text x="780" y="2230" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#8E24AA">1:  x_{τ_S} ~ N(0, I)</text>
+  <text x="780" y="2270" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">2:  for i = S, S-1, ..., 1 do</text>
+  <text x="780" y="2310" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#8E24AA">3:      ε̂ = ε_θ(x_{τ_i}, τ_i)</text>
+  <text x="780" y="2350" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#000000">4:      x̂_0 = (x_{τ_i} - √(1-ᾱ_{τ_i})·ε̂) / √ᾱ_{τ_i}</text>
+  <text x="780" y="2390" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#8E24AA">5:      x_{τ_{i-1}} = √ᾱ_{τ_{i-1}}·x̂_0 + √(1-ᾱ_{τ_{i-1}})·ε̂</text>
+  <text x="780" y="2430" font-family="Courier New, monospace" font-size="20" font-weight="bold" fill="#2E7D32">6:  return x_0</text>
+  
+  <!-- SECTION 4: Fast Sampling Methods -->
+  <rect x="50" y="2520" width="2100" height="700" rx="12" fill="url(#fastGrad)" stroke="#2E7D32" stroke-width="3"/>
+  <text x="80" y="2580" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">3. Fast Sampling: Reducing Steps</text>
+  
+  <!-- Visual: Step reduction -->
+  <rect x="100" y="2640" width="2000" height="250" rx="10" fill="#FFFFFF" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="2690" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">Timestep Subsampling Strategy</text>
+  
+  <!-- Full steps -->
+  <text x="150" y="2760" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#666">DDPM (1000 steps):</text>
+  <line x1="350" y1="2755" x2="1950" y2="2755" stroke="#CCC" stroke-width="2"/>
+  <!-- Many small dots -->
+  <g fill="#0277BD">
+    <circle cx="360" cy="2755" r="3"/>
+    <circle cx="376" cy="2755" r="3"/>
+    <circle cx="392" cy="2755" r="3"/>
+    <circle cx="408" cy="2755" r="3"/>
+    <text x="450" y="2760" font-size="14">...</text>
+    <circle cx="500" cy="2755" r="3"/>
+    <circle cx="516" cy="2755" r="3"/>
+    <text x="560" y="2760" font-size="14">...</text>
+    <circle cx="1800" cy="2755" r="3"/>
+    <circle cx="1850" cy="2755" r="3"/>
+    <circle cx="1900" cy="2755" r="3"/>
+    <circle cx="1940" cy="2755" r="3"/>
+  </g>
+  
+  <!-- Subsampled steps -->
+  <text x="150" y="2830" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32">DDIM (50 steps):</text>
+  <line x1="350" y1="2825" x2="1950" y2="2825" stroke="#CCC" stroke-width="2"/>
+  <!-- Fewer larger dots -->
+  <g fill="#2E7D32">
+    <circle cx="370" cy="2825" r="8"/>
+    <circle cx="470" cy="2825" r="8"/>
+    <circle cx="570" cy="2825" r="8"/>
+    <circle cx="670" cy="2825" r="8"/>
+    <circle cx="770" cy="2825" r="8"/>
+    <text x="850" y="2830" font-size="18" font-weight="bold">...</text>
+    <circle cx="1600" cy="2825" r="8"/>
+    <circle cx="1700" cy="2825" r="8"/>
+    <circle cx="1800" cy="2825" r="8"/>
+    <circle cx="1900" cy="2825" r="8"/>
+  </g>
+  
+  <!-- Speedup label -->
+  <rect x="1000" y="2780" width="200" height="40" rx="8" fill="#A5D6A7" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="2808" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1B5E20" text-anchor="middle">20× faster!</text>
+  
+  <!-- Comparison table -->
+  <rect x="100" y="2920" width="2000" height="260" rx="10" fill="#FFFFFF" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="2970" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#000000" text-anchor="middle">Sampling Methods Comparison</text>
+  
+  <!-- Table header -->
+  <rect x="130" y="3000" width="1940" height="50" fill="#E8F5E9"/>
+  <text x="300" y="3035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Method</text>
+  <text x="550" y="3035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Steps</text>
+  <text x="800" y="3035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Stochastic?</text>
+  <text x="1100" y="3035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Quality</text>
+  <text x="1450" y="3035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Speed</text>
+  <text x="1800" y="3035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">Use Case</text>
+  
+  <!-- Rows -->
+  <line x1="130" y1="3055" x2="2070" y2="3055" stroke="#CCC" stroke-width="1"/>
+  <text x="300" y="3090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0277BD" text-anchor="middle">DDPM</text>
+  <text x="550" y="3090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">1000</text>
+  <text x="800" y="3090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Yes</text>
+  <text x="1100" y="3090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">Highest</text>
+  <text x="1450" y="3090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#D32F2F" text-anchor="middle">Very Slow</text>
+  <text x="1800" y="3090" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Best quality</text>
+  
+  <line x1="130" y1="3110" x2="2070" y2="3110" stroke="#EEE" stroke-width="1"/>
+  <text x="300" y="3145" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#8E24AA" text-anchor="middle">DDIM</text>
+  <text x="550" y="3145" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">50-100</text>
+  <text x="800" y="3145" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">No</text>
+  <text x="1100" y="3145" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">High</text>
+  <text x="1450" y="3145" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFA000" text-anchor="middle">Fast</text>
+  <text x="1800" y="3145" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Interpolation</text>
+  
+  <line x1="130" y1="3165" x2="2070" y2="3165" stroke="#EEE" stroke-width="1"/>
+  <text x="300" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">DPM-Solver</text>
+  <text x="550" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">10-25</text>
+  <text x="800" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">No</text>
+  <text x="1100" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">High</text>
+  <text x="1450" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2E7D32" text-anchor="middle">Very Fast</text>
+  <text x="1800" y="3200" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000" text-anchor="middle">Production</text>
+  
+  <!-- SECTION 5: Advanced Techniques -->
+  <rect x="50" y="3260" width="2100" height="600" rx="12" fill="#FFFFFF" stroke="#333" stroke-width="3"/>
+  <text x="80" y="3320" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#000000">4. Advanced Sampling Techniques</text>
+  
+  <!-- CFG -->
+  <rect x="100" y="3380" width="650" height="300" rx="10" fill="#FFF3E0" stroke="#EF6C00" stroke-width="2"/>
+  <text x="425" y="3425" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#EF6C00" text-anchor="middle">Classifier-Free Guidance</text>
+  
+  <rect x="130" y="3460" width="590" height="70" rx="8" fill="#FFFFFF" stroke="#EF6C00" stroke-width="1"/>
+  <text x="425" y="3505" font-family="Times New Roman, serif" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">ε̃ = ε_θ(x_t, ∅) + w·(ε_θ(x_t, c) - ε_θ(x_t, ∅))</text>
+  
+  <text x="150" y="3580" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">• w = guidance scale (typically 7-15)</text>
+  <text x="150" y="3615" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">• c = conditioning (text, class, etc.)</text>
+  <text x="150" y="3650" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#EF6C00">• Higher w → stronger conditioning</text>
+  
+  <!-- Ancestral Sampling -->
+  <rect x="780" y="3380" width="650" height="300" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+  <text x="1105" y="3425" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">Ancestral Sampling</text>
+  
+  <text x="810" y="3480" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">Adds noise back during sampling:</text>
+  <rect x="810" y="3500" width="590" height="50" rx="8" fill="#FFFFFF" stroke="#1565C0" stroke-width="1"/>
+  <text x="1105" y="3535" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">x_{t-1} = denoise(x_t) + σ · noise</text>
+  
+  <text x="810" y="3600" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">• More diverse outputs</text>
+  <text x="810" y="3635" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">• Can improve quality for some tasks</text>
+  <text x="810" y="3670" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1565C0">• Used in Euler-A, DPM++ 2M SDE</text>
+  
+  <!-- Negative Prompts -->
+  <rect x="1460" y="3380" width="650" height="300" rx="10" fill="#FCE4EC" stroke="#C62828" stroke-width="2"/>
+  <text x="1785" y="3425" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#C62828" text-anchor="middle">Negative Prompting</text>
+  
+  <rect x="1490" y="3460" width="590" height="70" rx="8" fill="#FFFFFF" stroke="#C62828" stroke-width="1"/>
+  <text x="1785" y="3505" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">ε̃ = ε_θ(x_t, c_neg) + w·(ε_θ(x_t, c) - ε_θ(x_t, c_neg))</text>
+  
+  <text x="1490" y="3580" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">• c_neg = negative condition</text>
+  <text x="1490" y="3615" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000">• Steers away from unwanted</text>
+  <text x="1490" y="3650" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#C62828">• "blurry, low quality, bad..."</text>
+  
+  <!-- Latent Space Interpolation -->
+  <rect x="100" y="3710" width="2000" height="140" rx="10" fill="#F3E5F5" stroke="#8E24AA" stroke-width="2"/>
+  <text x="1100" y="3755" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#8E24AA" text-anchor="middle">Latent Space Interpolation (DDIM feature)</text>
+  
+  <text x="200" y="3810" font-family="Times New Roman, serif" font-size="22" font-weight="bold" fill="#000000">Spherical interpolation: x_T^{interp} = slerp(x_T^{(1)}, x_T^{(2)}, α) → x_0^{interp}</text>
+  <text x="1500" y="3810" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#8E24AA">Smooth transitions between images!</text>
+  
+  <!-- Footer -->
+  <rect x="50" y="3900" width="2100" height="80" rx="10" fill="#01579B" stroke="#01579B" stroke-width="3"/>
+  <text x="1100" y="3955" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Diffusion Theory - Sampling | From Noise to High-Quality Samples</text>
+  
+  <!-- Quick Reference -->
+  <rect x="50" y="4020" width="2100" height="380" rx="12" fill="#FFFFFF" stroke="#333" stroke-width="3"/>
+  <text x="1100" y="4075" font-family="Georgia, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">Quick Reference: Sampling Equations</text>
+  
+  <rect x="100" y="4110" width="650" height="120" rx="10" fill="url(#ddpmGrad)" stroke="#0277BD" stroke-width="2"/>
+  <text x="425" y="4150" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#0277BD" text-anchor="middle">DDPM</text>
+  <text x="425" y="4190" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">x_{t-1} = μ_θ(x_t, t) + σ_t · z</text>
+  <text x="425" y="4220" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">z ~ N(0,I)</text>
+  
+  <rect x="780" y="4110" width="650" height="120" rx="10" fill="url(#ddimGrad)" stroke="#8E24AA" stroke-width="2"/>
+  <text x="1105" y="4150" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#8E24AA" text-anchor="middle">DDIM</text>
+  <text x="1105" y="4190" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">x_{t-1} = √ᾱ_{t-1}·x̂_0 + √(1-ᾱ_{t-1})·ε̂</text>
+  <text x="1105" y="4220" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">deterministic</text>
+  
+  <rect x="1460" y="4110" width="650" height="120" rx="10" fill="url(#fastGrad)" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1785" y="4150" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2E7D32" text-anchor="middle">CFG</text>
+  <text x="1785" y="4190" font-family="Times New Roman, serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">ε̃ = (1-w)ε_∅ + w·ε_c</text>
+  <text x="1785" y="4220" font-family="Times New Roman, serif" font-size="16" font-weight="bold" fill="#666" text-anchor="middle">w = guidance scale</text>
+  
+  <!-- Common x_0 prediction -->
+  <rect x="100" y="4260" width="2000" height="120" rx="10" fill="#FAFAFA" stroke="#666" stroke-width="2"/>
+  <text x="1100" y="4305" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">x₀ Prediction (used in all methods)</text>
+  <rect x="400" y="4330" width="1400" height="40" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1100" y="4360" font-family="Times New Roman, serif" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">x̂₀ = (x_t - √(1-ᾱ_t) · ε_θ(x_t, t)) / √ᾱ_t</text>
+</svg>

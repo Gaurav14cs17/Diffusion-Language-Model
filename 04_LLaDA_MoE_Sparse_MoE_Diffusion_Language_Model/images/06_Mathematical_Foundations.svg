@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 3200" width="2200" height="3200">
+  <defs>
+    <linearGradient id="mathHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4a148c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="eqBox" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1bee7;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadowMath" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="3" dy="3" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2200" height="3200" fill="#FAFAFA"/>
+  
+  <!-- Title Header -->
+  <rect x="50" y="40" width="2100" height="100" rx="15" fill="url(#mathHeader)" filter="url(#shadowMath)"/>
+  <text x="1100" y="105" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">
+    Mathematical Foundations of LLaDA-MoE
+  </text>
+  
+  <!-- Section 1: Notation -->
+  <rect x="50" y="180" width="2100" height="220" rx="12" fill="#e8eaf6" stroke="#5c6bc0" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="180" width="2100" height="50" rx="12" fill="#5c6bc0"/>
+  <text x="90" y="215" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📝 Notation and Preliminaries
+  </text>
+  
+  <text x="90" y="275" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Sequence Definition:</text>
+  <rect x="90" y="295" width="900" height="80" rx="8" fill="url(#eqBox)" stroke="#7b1fa2" stroke-width="2"/>
+  <text x="540" y="345" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    y ∈ {0, 1, ..., K-1}^L
+  </text>
+  
+  <text x="1030" y="275" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Where:</text>
+  <text x="1030" y="315" font-family="Arial, sans-serif" font-size="20" fill="#000000">• y = clean sequence of L tokens</text>
+  <text x="1030" y="350" font-family="Arial, sans-serif" font-size="20" fill="#000000">• K = vocabulary size</text>
+  <text x="1030" y="385" font-family="Arial, sans-serif" font-size="20" fill="#000000">• M = special [MASK] token</text>
+  
+  <!-- Section 2: Forward Process (Equation 1) -->
+  <rect x="50" y="440" width="2100" height="380" rx="12" fill="#e0f2f1" stroke="#00897b" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="440" width="2100" height="50" rx="12" fill="#00897b"/>
+  <text x="90" y="475" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Equation (1): Forward Process - Masking Noise
+  </text>
+  
+  <text x="90" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Joint Distribution over Masked Sequence:</text>
+  <rect x="90" y="560" width="800" height="70" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="490" y="605" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(y_t | t, y) = ∏ᵢ₌₁ᴸ q(yₜⁱ | t, yⁱ)
+  </text>
+  
+  <text x="950" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Per-Token Masking Probability:</text>
+  <rect x="950" y="560" width="1160" height="120" rx="10" fill="#b2dfdb" stroke="#00695c" stroke-width="2"/>
+  <text x="1530" y="600" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+              ⎧ 1 - t,    if yₜⁱ = yⁱ    (keep original)
+  </text>
+  <text x="1530" y="640" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    q(yₜⁱ | t, yⁱ) = ⎨ t,        if yₜⁱ = M     (mask token)
+  </text>
+  <text x="1530" y="680" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+              ⎩ 0,        otherwise
+  </text>
+  
+  <text x="90" y="720" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Interpretation:</text>
+  <text x="90" y="755" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • t ~ U[0,1] is the noise level (uniformly sampled)
+  </text>
+  <text x="90" y="790" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • Each token is independently masked with probability t, or kept with probability (1-t)
+  </text>
+  
+  <!-- Section 3: Training Objective (Equation 2) -->
+  <rect x="50" y="860" width="2100" height="420" rx="12" fill="#fff3e0" stroke="#f57c00" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="860" width="2100" height="50" rx="12" fill="#f57c00"/>
+  <text x="90" y="895" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Equation (2): Pretraining Objective - ELBO Upper Bound
+  </text>
+  
+  <text x="90" y="960" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Pretrain Loss Function:</text>
+  <rect x="90" y="980" width="2020" height="100" rx="10" fill="#ffe0b2" stroke="#ef6c00" stroke-width="3"/>
+  <text x="1100" y="1045" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_Pretrain(θ) = -E_{y~p_data} E_{t~U[0,1]} E_{y_t~q(y_t|t,y)} [ (1/t) Σᵢ₌₁ᴸ 𝟙[yₜⁱ = M] log p_θ(yⁱ | y_t) ]
+  </text>
+  
+  <text x="90" y="1120" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Components Explained:</text>
+  
+  <rect x="90" y="1145" width="480" height="110" rx="8" fill="#ffecb3" stroke="#ff8f00" stroke-width="1"/>
+  <text x="330" y="1180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">E_{y~p_data}</text>
+  <text x="330" y="1210" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Expectation over data</text>
+  <text x="330" y="1240" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">distribution</text>
+  
+  <rect x="590" y="1145" width="480" height="110" rx="8" fill="#ffecb3" stroke="#ff8f00" stroke-width="1"/>
+  <text x="830" y="1180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">E_{t~U[0,1]}</text>
+  <text x="830" y="1210" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Expectation over noise</text>
+  <text x="830" y="1240" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">level (uniform)</text>
+  
+  <rect x="1090" y="1145" width="480" height="110" rx="8" fill="#ffecb3" stroke="#ff8f00" stroke-width="1"/>
+  <text x="1330" y="1180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">1/t weighting</text>
+  <text x="1330" y="1210" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Importance weight for</text>
+  <text x="1330" y="1240" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">ELBO tightness</text>
+  
+  <rect x="1590" y="1145" width="480" height="110" rx="8" fill="#ffecb3" stroke="#ff8f00" stroke-width="1"/>
+  <text x="1830" y="1180" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">𝟙[yₜⁱ = M]</text>
+  <text x="1830" y="1210" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">Only compute loss on</text>
+  <text x="1830" y="1240" font-family="Arial, sans-serif" font-size="16" fill="#000000" text-anchor="middle">MASKED positions</text>
+  
+  <!-- Section 4: MoE Routing (Equation 3) -->
+  <rect x="50" y="1320" width="2100" height="380" rx="12" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="1320" width="2100" height="50" rx="12" fill="#1976d2"/>
+  <text x="90" y="1355" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Equation (3): MoE Routing Mechanism
+  </text>
+  
+  <text x="90" y="1420" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Top-K Gated MoE Layer:</text>
+  
+  <rect x="90" y="1445" width="700" height="80" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="440" y="1495" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    p_t = Softmax(Router(h_t))
+  </text>
+  
+  <rect x="820" y="1445" width="900" height="80" rx="10" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+  <text x="1270" y="1495" font-family="Times New Roman, serif" font-size="28" font-weight="bold" fill="#000000" text-anchor="middle">
+    o_t = Σᵢ p_{t,i} · E_i(h_t),  where p_{t,i} ∈ TopK(p_t)
+  </text>
+  
+  <text x="90" y="1570" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Notation:</text>
+  <text x="90" y="1610" font-family="Arial, sans-serif" font-size="20" fill="#000000">• h_t = hidden state for token t</text>
+  <text x="90" y="1645" font-family="Arial, sans-serif" font-size="20" fill="#000000">• Router(·) = linear layer producing per-expert logits</text>
+  <text x="700" y="1610" font-family="Arial, sans-serif" font-size="20" fill="#000000">• E_i(·) = i-th expert network (SwiGLU FFN)</text>
+  <text x="700" y="1645" font-family="Arial, sans-serif" font-size="20" fill="#000000">• TopK(·) = selects k=8 largest routing probabilities</text>
+  <text x="1350" y="1610" font-family="Arial, sans-serif" font-size="20" fill="#000000">• p_{t,i} = routing weight for expert i</text>
+  <text x="1350" y="1645" font-family="Arial, sans-serif" font-size="20" fill="#000000">• o_t = weighted combination output</text>
+  
+  <!-- Section 5: Auxiliary Losses (Equation 4) -->
+  <rect x="50" y="1740" width="2100" height="420" rx="12" fill="#fce4ec" stroke="#c2185b" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="1740" width="2100" height="50" rx="12" fill="#c2185b"/>
+  <text x="90" y="1775" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Equation (4): Auxiliary Losses for Load Balancing
+  </text>
+  
+  <text x="90" y="1840" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Load Balancing Loss:</text>
+  <rect x="90" y="1860" width="900" height="80" rx="10" fill="#f8bbd9" stroke="#ad1457" stroke-width="2"/>
+  <text x="540" y="1910" font-family="Times New Roman, serif" font-size="30" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_LB = N · Σᵢ₌₁ᴺ fᵢ · Pᵢ
+  </text>
+  
+  <text x="1050" y="1840" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Router Z-Loss:</text>
+  <rect x="1050" y="1860" width="1060" height="80" rx="10" fill="#f8bbd9" stroke="#ad1457" stroke-width="2"/>
+  <text x="1580" y="1910" font-family="Times New Roman, serif" font-size="30" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_Z = (1/T) Σₜ₌₁ᵀ ( log Σⱼ₌₁ᴺ e^{z_{t,j}} )²
+  </text>
+  
+  <text x="90" y="1990" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Where:</text>
+  <text x="90" y="2030" font-family="Arial, sans-serif" font-size="20" fill="#000000">• z_t = Router(h_t) = raw logits from router</text>
+  <text x="90" y="2065" font-family="Arial, sans-serif" font-size="20" fill="#000000">• p_t = Softmax(z_t) = normalized routing probabilities</text>
+  <text x="90" y="2100" font-family="Arial, sans-serif" font-size="20" fill="#000000">• P_i = average routing probability for expert i across tokens</text>
+  <text x="700" y="2030" font-family="Arial, sans-serif" font-size="20" fill="#000000">• f_i = frequency of expert i being selected</text>
+  <text x="700" y="2065" font-family="Arial, sans-serif" font-size="20" fill="#000000">• N = 64 (number of experts)</text>
+  <text x="700" y="2100" font-family="Arial, sans-serif" font-size="20" fill="#000000">• T = number of tokens in batch</text>
+  
+  <rect x="1300" y="1990" width="810" height="120" rx="8" fill="#ffcdd2" stroke="#c62828" stroke-width="2"/>
+  <text x="1340" y="2030" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Loss Weights (in practice):</text>
+  <text x="1340" y="2065" font-family="Arial, sans-serif" font-size="20" fill="#000000">• L_LB weight: 0.01</text>
+  <text x="1340" y="2100" font-family="Arial, sans-serif" font-size="20" fill="#000000">• L_Z weight: 0.001</text>
+  
+  <!-- Section 6: SFT Objective (Equation 5) -->
+  <rect x="50" y="2200" width="2100" height="380" rx="12" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="2200" width="2100" height="50" rx="12" fill="#7b1fa2"/>
+  <text x="90" y="2235" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Equation (5): Supervised Fine-Tuning (SFT) Objective
+  </text>
+  
+  <text x="90" y="2300" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">SFT Loss (Response-Only Masking):</text>
+  <rect x="90" y="2320" width="2020" height="100" rx="10" fill="#e1bee7" stroke="#9c27b0" stroke-width="3"/>
+  <text x="1100" y="2385" font-family="Times New Roman, serif" font-size="30" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_SFT(θ) = -E_{(x,y)~p_data} E_{t~U[0,1]} E_{y_t~q(y_t|t,y)} [ (1/t) Σᵢ₌₁^|y| 𝟙[yₜⁱ = M] log p_θ(yⁱ | x, y_t) ]
+  </text>
+  
+  <text x="90" y="2470" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#000000">Key Difference from Pretraining:</text>
+  <text x="90" y="2510" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • x = prompt (question) → kept CLEAN, serves as conditioning context
+  </text>
+  <text x="90" y="2545" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    • y = response (answer) → MASKED with probability t, model learns to reconstruct
+  </text>
+  
+  <!-- Section 7: Complete Loss -->
+  <rect x="50" y="2620" width="2100" height="280" rx="12" fill="#e8f5e9" stroke="#4caf50" stroke-width="3" filter="url(#shadowMath)"/>
+  <rect x="50" y="2620" width="2100" height="50" rx="12" fill="#4caf50"/>
+  <text x="90" y="2655" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white">
+    📐 Complete Training Objective
+  </text>
+  
+  <text x="90" y="2720" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Total Loss during Pretraining:</text>
+  <rect x="90" y="2740" width="2020" height="80" rx="10" fill="#c8e6c9" stroke="#2e7d32" stroke-width="3"/>
+  <text x="1100" y="2795" font-family="Times New Roman, serif" font-size="32" font-weight="bold" fill="#000000" text-anchor="middle">
+    L_Total = L_Pretrain + 0.01 · L_LB + 0.001 · L_Z
+  </text>
+  
+  <text x="90" y="2870" font-family="Arial, sans-serif" font-size="20" fill="#000000">
+    The main diffusion loss dominates, while auxiliary losses ensure balanced expert utilization without collapsing to few experts.
+  </text>
+  
+  <!-- Footer -->
+  <rect x="50" y="2940" width="2100" height="220" rx="12" fill="#37474f" filter="url(#shadowMath)"/>
+  <text x="1100" y="3000" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
+    Mathematical Intuition Summary
+  </text>
+  
+  <text x="100" y="3050" font-family="Arial, sans-serif" font-size="20" fill="white">
+    1. Forward Process: Gradually corrupt data by masking tokens with increasing probability t
+  </text>
+  <text x="100" y="3090" font-family="Arial, sans-serif" font-size="20" fill="white">
+    2. Reverse Process: Learn to predict original tokens from masked sequence (denoising)
+  </text>
+  <text x="100" y="3130" font-family="Arial, sans-serif" font-size="20" fill="white">
+    3. MoE Routing: Dynamically select subset of experts per token for computational efficiency
+  </text>
+  <text x="100" y="3170" font-family="Arial, sans-serif" font-size="20" fill="white">
+    4. The 1/t weighting ensures the ELBO bound is tight, giving more weight to less noisy samples
+  </text>
+</svg>
+
+
