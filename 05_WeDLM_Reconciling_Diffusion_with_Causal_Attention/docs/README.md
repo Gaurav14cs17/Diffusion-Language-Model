@@ -230,7 +230,6 @@ WeDLM maintains causal attention but processes multiple masks in one forward pas
 
 ```
 +-----------------------------------------+
-
 |  Prefix (cached)  |  Non-mask  |  Masks |
 |   [The] [quick]   |   [brown]  | [M] [M]|
 +-----------------------------------------+
@@ -656,7 +655,6 @@ def select_positions_to_fill(
 
 ```
 +----------------------------------------------------------------------+
-
 |                         WeDLM INFERENCE FLOW                         |
 +----------------------------------------------------------------------+
 

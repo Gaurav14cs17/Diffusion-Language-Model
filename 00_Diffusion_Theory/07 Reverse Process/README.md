@@ -47,7 +47,6 @@ This is **intractable** because:
 
 ```
 +-------------------------------------------------------------+
-
 |  Forward:  Known, fixed (Gaussian transitions)              |
 |  Reverse:  Unknown, learned (neural network)                |
 +-------------------------------------------------------------+
