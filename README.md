@@ -20,6 +20,7 @@
 
 ```
 .--------------------------------------------------------------------------.
+
 |                                                                          |
 |   ⬇️  FORWARD (Corruption)                                               |
 |   ====================================================================   |
@@ -162,34 +163,43 @@ Full context, full power...
 
 ```
 📦 Diffusion Language Model
+
 |
 +-- 🎓 00_Diffusion_Theory/
 |   |
 |   +-- 01 Data Space/              → What is our playground?
+
 |   +-- 02 Probability Assumptions/ → The math foundations
 |   +-- 03 Gaussian Transition/     → How noise is added
 |   +-- 04 Forward Process/         → Corruption step-by-step
+
 |   +-- 05 Noise Schedule/          → Controlling the chaos
 |   +-- 06 Marginal Distributions/  → Any-time noise levels
 |   +-- 07 Reverse Process/         → Learning to denoise
+
 |   +-- 08 Training Objective/      → What we optimize
 |   +-- 09 Parameterization/        → Network design choices
 |   +-- 10 Sampling/                → Generation algorithms
+
 |
 +-- 📄 01_Simple_and_Effective_MDLM/
 |   +-- 📖 README.md                → Detailed blog post
 |   +-- 🎨 svg_diagrams/            → Visual explanations
+
 |   +-- 📑 paper.pdf                → Original paper
 |
 +-- 📄 02_Block_Diffusion/
 |   +-- 📖 README.md                → Detailed blog post
+
 |   +-- 🎨 images/                  → Visual explanations
 |   +-- 📑 paper.pdf                → Original paper
 |
 +-- 📄 03_Dream_7B/
+
 |   +-- 📖 README.md                → Detailed blog post
 |   +-- 🎨 svg_diagrams/            → Visual explanations
 |   +-- 📑 paper.pdf                → Original paper
+
 |
 +-- 📄 04_LLaDA_MoE/
     +-- 📖 README.md                → Detailed blog post
@@ -232,6 +242,7 @@ Full context, full power...
 
 ```
 .--------------------------------------------------------------------.
+
 |                                                                    |
 |   Minimize the negative log-likelihood bound:                      |
 |                                                                    |
@@ -307,6 +318,7 @@ cd "../04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model"
 
 ```
 .--------------------------------------------------------------------------.
+
 |                                                                          |
 |                     🌟 THE BIG PICTURE 🌟                                |
 |                                                                          |

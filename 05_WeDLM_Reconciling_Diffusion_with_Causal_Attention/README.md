@@ -159,6 +159,7 @@ python scripts/train.py \
 
 ```
 +-------------------------------------------------------------------------+
+
 |                        WeDLM Inference Flow                             |
 +-------------------------------------------------------------------------+
 |                                                                         |
@@ -210,29 +211,37 @@ python scripts/train.py \
 ```
 📦 WeDLM/
 +-- 📂 wedlm/                    # Core library
+
 |   +-- __init__.py              # LLM, SamplingParams exports
 |   +-- llm.py                   # High-level API
 |   +-- engine/                  # Inference engine
+
 |   |   +-- llm_engine.py
 |   |   +-- wedlm_decoder.py     # Parallel decoding logic
+
 |   |   +-- sampler.py           # Entropy-based sampling
 |   +-- layers/                  # Model layers
+
 |   +-- models/                  # Model definitions
 |
 +-- 📂 scripts/                  # CLI tools
 |   +-- train.py                 # Training script
+
 |   +-- inference.py             # Generation script
 |   +-- evaluate.py              # Benchmark evaluation
 |   +-- download_data.py         # Dataset downloader
+
 |
 +-- 📂 notebooks/                # Interactive tutorials
 |   +-- WeDLM_Training.ipynb
 |   +-- WeDLM_Inference.ipynb
+
 |
 +-- 📂 evaluation/               # Benchmark system
 |   +-- benchmarks/              # GSM8K, MMLU, HumanEval, ARC
 |
 +-- 📂 docs/                     # Documentation
+
 |   +-- WeDLM_Paper_Explained.md
 |   +-- math_explained/          # Visual guides
 |

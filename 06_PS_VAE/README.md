@@ -16,17 +16,21 @@
 
 ```
 📦 PS-VAE
+
 |
 +-- 🎓 docs/
 |   +-- 00_Theory/                → Mathematical foundations
 |   +-- 01_Paper_Breakdown/       → Detailed paper analysis
+
 |   +-- architecture.md           → Complete architecture docs
 |   +-- images/                   → Architecture diagrams (SVG)
 |
 +-- 🧠 psvae/
+
 |   +-- models/                   → S-VAE, PS-VAE implementations
 |   +-- diffusion/                → DiT, schedulers, samplers
 |   +-- training/                 → Trainers, datasets
+
 |   +-- utils/                    → Metrics, visualization
 |
 +-- 📜 scripts/                   → Training & generation scripts

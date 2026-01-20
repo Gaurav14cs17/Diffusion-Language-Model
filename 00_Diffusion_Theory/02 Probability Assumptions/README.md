@@ -139,6 +139,7 @@ We require:
 
 ```
 +---------------------------------------------+
+
 |  α_t = "how much signal to keep"            |
 |  β_t = "how much noise to add"              |
 |                                             |
