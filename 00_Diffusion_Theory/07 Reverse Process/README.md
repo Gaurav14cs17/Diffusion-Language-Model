@@ -30,6 +30,7 @@ Given $x\_t$ (noisy), generate $x\_{t-1}$ (less noisy).
 
 ```math
 p(x_{t-1} \mid x_t) = \frac{p(x_t \mid x_{t-1}) p(x_{t-1})}{p(x_t)}
+
 ```
 
 We need $p(x\_{t-1})$ — the marginal distribution of data at step $t-1$!
@@ -47,6 +48,7 @@ This is **intractable** because:
 |  Forward:  Known, fixed (Gaussian transitions)              |
 |  Reverse:  Unknown, learned (neural network)                |
 +-------------------------------------------------------------+
+
 ```
 
 ---
@@ -61,6 +63,7 @@ For small $\beta\_t$, the reverse process is **also Gaussian**! (See Feller, 194
 
 ```math
 p_\theta(x_{t-1} \mid x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+
 ```
 
 ### Variance Choices
@@ -85,12 +88,14 @@ If we knew $x\_0$, the optimal reverse step would be:
 
 ```math
 q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)
+
 ```
 
 where:
 
 ```math
 \tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
+
 ```
 
 ### The Problem
@@ -103,6 +108,7 @@ We don't know $x\_0$ during generation!
 
 ```math
 \hat{x}_0 = f_\theta(x_t, t)
+
 ```
 
 Then substitute into $\tilde{\mu}\_t$!
@@ -115,6 +121,7 @@ Then substitute into $\tilde{\mu}\_t$!
 
 ```math
 \mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} \hat{x}_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
+
 ```
 
 ### Option B: Predict $\epsilon$ (Most Common!)
@@ -123,6 +130,7 @@ Since $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\
 
 ```math
 \boxed{\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x_t, t)\right)}
+
 ```
 
 ### Proof of Equivalence
@@ -131,6 +139,7 @@ Start with $\mu\_\theta$ in terms of $x\_0$:
 
 ```math
 \mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
+
 ```
 
 Substitute $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\_t}}$:
@@ -139,6 +148,7 @@ After algebraic simplification (tedious but straightforward):
 
 ```math
 \mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon\right) \quad \checkmark
+
 ```
 
 ### Option C: Predict $v$ (Velocity)
@@ -176,6 +186,7 @@ for t in [T, T-1, ..., 1]:
         x_0 = μ
         
 return x_0
+
 ```
 
 ### Why Add Noise?
@@ -191,6 +202,7 @@ Even though we're denoising, we add small noise $\sigma\_t z$ because:
 t=T        t=T-1      t=T-2       ...      t=1       t=0
 ⚪ ----▶ 🌫️ ----▶ 🌫️ ----▶ ... ----▶ 📉 ----▶ 📊
 noise    denoise   denoise            denoise   clean!
+
 ```
 
 ---
@@ -201,6 +213,7 @@ noise    denoise   denoise            denoise   clean!
 
 ```math
 \tilde{\beta}_t = \frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}
+
 ```
 
 ### Proof
@@ -212,6 +225,7 @@ Precision (inverse variance):
 ```math
 \tilde{\beta}_t^{-1} = \frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}
 = \frac{\alpha_t(1-\bar{\alpha}_{t-1}) + \beta_t}{\beta_t(1-\bar{\alpha}_{t-1})}
+
 ```
 
 Using $\alpha\_t + \beta\_t = 1$:
@@ -219,12 +233,14 @@ Using $\alpha\_t + \beta\_t = 1$:
 ```math
 = \frac{\alpha_t - \alpha_t\bar{\alpha}_{t-1} + 1 - \alpha_t}{\beta_t(1-\bar{\alpha}_{t-1})}
 = \frac{1 - \bar{\alpha}_t}{\beta_t(1-\bar{\alpha}_{t-1})}
+
 ```
 
 Therefore:
 
 ```math
 \tilde{\beta}_t = \frac{\beta_t(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} \quad \checkmark
+
 ```
 
 ### Two Common Choices

@@ -46,6 +46,7 @@ Mathematically, given a sequence of L tokens divided into B blocks of size L' ea
 
 ```
 log p_θ(x) = Σ_{b=1}^{B} log p_θ(x^b | x^{1:b-1})
+
 ```
 
 Each conditional `p_θ(x^b | x^{1:b-1})` is modeled using discrete diffusion over a block of L' tokens, conditioned on all previous blocks.
@@ -92,6 +93,7 @@ for b = 1 to B:
     K_b, V_b ← x^b_θ(x^b)                       # Update KV cache
     x ← x ⊕ x^b                                 # Append to output
 return x
+
 ```
 
 **Key advantages:**
@@ -146,6 +148,7 @@ The solution is elegantly simple: **restrict the mask rate to a useful range**:
 
 ```
 1 - α_t ~ U[β, ω]    where 0 ≤ β < ω ≤ 1
+
 ```
 
 This "clips" the schedule to avoid extreme mask rates that produce poor gradients.
@@ -156,6 +159,7 @@ Different block sizes need different optimal schedules. The paper proposes:
 
 ```
 min_{β,ω} Var_{X,t}[L(X; θ, β, ω)]
+
 ```
 
 A grid search finds the optimal (β, ω) for each block size during training.
@@ -183,6 +187,7 @@ The model has a clean functional signature:
 
 ```
 x^b_logits, K_b, V_b ← x^b_θ(x^b_t, K_{1:b-1}, V_{1:b-1})
+
 ```
 
 Where:
@@ -200,6 +205,7 @@ t=0.75: [~][MASK][~][MASK]          (~25% revealed)
 t=0.50: [the][~][is][~]             (~50% revealed)
 t=0.25: [the][cat][is][~]           (~75% revealed)
 t=0.0:  [the][cat][is][happy]       (block complete!)
+
 ```
 
 **All tokens within a block are denoised IN PARALLEL** at each step—this is the source of speedup over autoregressive generation.
@@ -289,6 +295,7 @@ As LLMs continue to scale and applications demand both quality and efficiency, B
   booktitle={International Conference on Learning Representations (ICLR)},
   year={2025}
 }
+
 ```
 
 ---

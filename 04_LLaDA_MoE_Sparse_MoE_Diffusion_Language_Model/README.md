@@ -81,6 +81,7 @@ Total Compute Savings = Efficiency Ratio × Number of Steps
 Example:
 - 32 steps × 5.7x efficiency = 182x total savings
 - 64 steps × 5.7x efficiency = 365x total savings
+
 ```
 
 ---
@@ -169,6 +170,7 @@ The forward process defines how clean data is corrupted by adding noise (masking
 
 ```math
 q(y_t | t, y) = \prod_{i=1}^{L} q(y_t^i | t, y^i)
+
 ```
 
 **Per-Token Distribution**:
@@ -179,6 +181,7 @@ q(y_t^i | t, y^i) = \begin{cases}
 t & \text{if } y_t^i = M \text{ (replace with mask)} \\
 0 & \text{otherwise}
 \end{cases}
+
 ```
 
 ### 05.2 Step-by-Step Interpretation
@@ -206,6 +209,7 @@ t & \text{if } y_t^i = M \text{ (replace with mask)} \\
 
 ```math
 \mathbb{E}[\text{\# masked}] = t \cdot L
+
 ```
 
 This linear relationship is crucial for the 1/t weighting in the training objective.
@@ -218,6 +222,7 @@ This linear relationship is crucial for the 1/t weighting in the training object
 
 ```math
 \mathcal{L}_{\text{Pretrain}}(\theta) = -\mathbb{E}_{y \sim p_{\text{data}}} \mathbb{E}_{t \sim U[0,1]} \mathbb{E}_{y_t \sim q(y_t|t,y)} \left[ \frac{1}{t} \sum_{i=1}^{L} \mathbb{1}[y_t^i = M] \log p_\theta(y^i | y_t) \right]
+
 ```
 
 ### 06.2 Breaking Down the Components
@@ -245,6 +250,7 @@ Since E[# masked] = t · L:
 
 ```math
 \frac{1}{t} \cdot \mathbb{E}[\text{\# masked}] = \frac{1}{t} \cdot tL = L \text{ (constant!)}
+
 ```
 
 ### 06.4 Training Algorithm
@@ -260,6 +266,7 @@ Step 5: Compute loss only on masked positions
 Step 6: Apply 1/t weight
 Step 7: Backpropagate and update θ
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ```
 
 ---
@@ -272,12 +279,14 @@ Step 7: Backpropagate and update θ
 
 ```math
 p_t = \text{Softmax}(\text{Router}(h_t))
+
 ```
 
 **Step 2 - Weighted Expert Combination**:
 
 ```math
 o_t = \sum_{i \in \text{TopK}(p_t)} p_{t,i} \cdot E_i(h_t)
+
 ```
 
 ### 07.2 Component Breakdown
@@ -322,6 +331,7 @@ Input: h_t ∈ ℝ^2048
 +-----------------------------+
           ↓
 Output: o_t ∈ ℝ^2048
+
 ```
 
 ### 07.4 Renormalization
@@ -330,6 +340,7 @@ Selected weights are renormalized to sum to 1:
 
 ```math
 \tilde{p}_{t,i} = \frac{p_{t,i}}{\sum_{j \in \text{TopK}(p_t)} p_{t,j}}
+
 ```
 
 ---
@@ -342,6 +353,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ```math
 \mathcal{L}_{\text{LB}} = N \cdot \sum_{i=1}^{N} f_i \cdot P_i
+
 ```
 
 | # | Symbol | Definition | Formula |
@@ -365,6 +377,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ```math
 \mathcal{L}_{Z} = \frac{1}{T} \sum_{t=1}^{T} \left( \log \sum_{j=1}^{N} e^{z_{t,j}} \right)^2
+
 ```
 
 | # | Purpose | Effect |
@@ -385,6 +398,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ```math
 \mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Pretrain}} + 0.01 \cdot \mathcal{L}_{\text{LB}} + 0.001 \cdot \mathcal{L}_{Z}
+
 ```
 
 ---
@@ -395,6 +409,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ```math
 \mathcal{L}_{\text{SFT}}(\theta) = -\mathbb{E}_{(x,y) \sim p_{\text{data}}} \mathbb{E}_{t \sim U[0,1]} \mathbb{E}_{y_t \sim q(y_t|t,y)} \left[ \frac{1}{t} \sum_{i=1}^{|y|} \mathbb{1}[y_t^i = M] \log p_\theta(y^i | x, y_t) \right]
+
 ```
 
 ### 09.2 Key Difference from Pretraining
@@ -419,6 +434,7 @@ Response (y):   "The capital of France is Paris."
 If t = 0.5:     "The [M] of [M] is Paris."
                  ↑ Model learns to predict "capital" and "France"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ```
 
 ### 09.4 SFT Training Algorithm
@@ -434,6 +450,7 @@ Step 5: Forward pass: p = p_θ(· | x, y_t)
 Step 6: Compute loss on masked response positions
 Step 7: Apply 1/t weight and backpropagate
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ```
 
 ---
@@ -450,6 +467,7 @@ Maximize the log-likelihood of data:
 
 ```math
 \max_\theta \mathbb{E}_{y \sim p_{\text{data}}} [\log p_\theta(y)]
+
 ```
 
 ### 10.2 Problem
@@ -458,6 +476,7 @@ Direct computation is intractable:
 
 ```math
 p_\theta(y) = \int p_\theta(y | y_t) p(y_t) dy_t
+
 ```
 
 ### 10.3 Solution: ELBO Derivation (Step-by-Step)
@@ -477,12 +496,14 @@ For concave function f (like log):
 
 ```math
 f(\mathbb{E}[X]) \geq \mathbb{E}[f(X)]
+
 ```
 
 Therefore:
 
 ```math
 \log \mathbb{E}[X] \geq \mathbb{E}[\log X]
+
 ```
 
 ### 10.5 Theoretical Properties
@@ -544,6 +565,7 @@ FOR t = T, T-1, ..., 1:
 
 RETURN: y = final generated response
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ```
 
 ### 11.2 Generation Example (T=4 steps, L=8 tokens)
@@ -599,6 +621,7 @@ RETURN: y = final generated response
 ### 12.2 Stage Details
 
 #### 12.2.1 Pretrain Stage 1 (10T tokens)
+
 | Item | Value |
 |------|-------|
 | Data | Large mixed text corpus |
@@ -607,6 +630,7 @@ RETURN: y = final generated response
 | RoPE Base | 10,000 |
 
 #### 12.2.2 Pretrain Stage 2 (10T tokens)
+
 | Item | Value |
 |------|-------|
 | Data | Resampled corpus |
@@ -615,6 +639,7 @@ RETURN: y = final generated response
 | RoPE Base | 10,000 |
 
 #### 12.2.3 Annealing Stage 1 (500B tokens)
+
 | Item | Value |
 |------|-------|
 | Init | Best checkpoint from Stage 2 |
@@ -623,6 +648,7 @@ RETURN: y = final generated response
 | Purpose | Quality refinement |
 
 #### 12.2.4 Annealing Stage 2 (500B tokens, 8k)
+
 | Item | Value |
 |------|-------|
 | Context | 4k → 8k (extended) |
@@ -630,6 +656,7 @@ RETURN: y = final generated response
 | Purpose | Long sequence support |
 
 #### 12.2.5 SFT Stage
+
 | Item | Value |
 |------|-------|
 | Data | Question-answer pairs |
@@ -647,6 +674,7 @@ For 99% of steps:
 For 1% of steps:
     Sample ℓ ~ Uniform[8, 4096]
     Truncate input to ℓ tokens
+
 ```
 
 ### 12.4 Output Models
@@ -710,6 +738,7 @@ Steps  | LLaDA-8B Cost | LLaDA-MoE Cost | Total Savings
 20     | 160.0x        | 28.0x          | 5.7x
 50     | 400.0x        | 70.0x          | 5.7x
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ```
 
 ---
@@ -752,6 +781,7 @@ Steps  | LLaDA-8B Cost | LLaDA-MoE Cost | Total Savings
   journal={arXiv preprint arXiv:2509.24389},
   year={2025}
 }
+
 ```
 
 ---

@@ -44,6 +44,7 @@
 |   "The cat sat on the mat"  ← Clean text!                                |
 |                                                                          |
 '--------------------------------------------------------------------------'
+
 ```
 
 </div>
@@ -67,6 +68,7 @@ Never looking back...
 • Can't revise past decisions
 • Only sees left context  
 • Sequential = slow for long text
+
 ```
 
 </td>
@@ -83,6 +85,7 @@ Full context, full power...
 • Revise any position anytime
 • Bidirectional context
 • Parallel = fast generation
+
 ```
 
 </td>
@@ -148,6 +151,7 @@ Full context, full power...
                     +----------------+----------------+
                     |     🎓 YOU'RE NOW AN EXPERT!    |
                     +---------------------------------+
+
 ```
 
 </div>
@@ -191,6 +195,7 @@ Full context, full power...
     +-- 📖 README.md                → Detailed blog post
     +-- 🎨 images/                  → Visual explanations
     +-- 📑 paper.pdf                → Original paper
+
 ```
 
 ---
@@ -220,6 +225,7 @@ Full context, full power...
 |   t = 1.0  →  "[M] [M] [M] [M]"            (fully masked)         |
 |                                                                    |
 '--------------------------------------------------------------------'
+
 ```
 
 ### Training Objective: ELBO
@@ -241,6 +247,7 @@ Full context, full power...
 |   Key insight: 1/t weighting makes gradients unbiased!            |
 |                                                                    |
 '--------------------------------------------------------------------'
+
 ```
 
 </div>
@@ -289,6 +296,7 @@ cd "../01_Simple_and_Effective_Masked_Diffusion_Language_Models"
 cd "../02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion"
 cd "../03_Dream_7B_Diffusion_Large_Language_Models"
 cd "../04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model"
+
 ```
 
 ---
@@ -323,6 +331,7 @@ cd "../04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model"
 |                    +-----------------+                                  |
 |                                                                          |
 '--------------------------------------------------------------------------'
+
 ```
 
 </div>

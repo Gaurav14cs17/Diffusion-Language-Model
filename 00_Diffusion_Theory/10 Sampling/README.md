@@ -35,12 +35,14 @@ for t in [T, T-1, ..., 1]:
         x_{t-1} = μ + σ_t * z,  z ~ N(0, I)
     else:
         x_0 = μ
+
 ```
 
 ### Mean Formula
 
 ```math
 \mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta\right)
+
 ```
 
 | ✅ Pros | ❌ Cons |
@@ -60,6 +62,7 @@ DDPM's stochasticity is optional! We can make sampling **deterministic**.
 
 ```math
 x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \hat{x}_0 + \sqrt{1-\bar{\alpha}_{t-1} - \sigma_t^2} \cdot \epsilon_\theta + \sigma_t \epsilon_t
+
 ```
 
 where $\hat{x}\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon\_\theta}{\sqrt{\bar{\alpha}\_t}}$
@@ -116,6 +119,7 @@ Uses higher-order ODE solvers:
 
 ```math
 \tilde{\epsilon}_\theta = \epsilon_\theta(x_t, \varnothing) + w \cdot (\epsilon_\theta(x_t, c) - \epsilon_\theta(x_t, \varnothing))
+
 ```
 
 ### Effect of Guidance Scale
@@ -148,6 +152,7 @@ def sample_ddim(model, timesteps, guidance_scale):
         x = sqrt(alpha_bar[t_prev]) * x0 + sqrt(1-alpha_bar[t_prev]) * eps
     
     return x
+
 ```
 
 ---

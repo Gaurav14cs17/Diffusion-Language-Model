@@ -33,6 +33,7 @@
 +-- ⚙️ configs/                   → YAML configurations
 +-- 📝 examples/                  → Getting started examples
 +-- 🧪 tests/                     → Unit tests
+
 ```
 
 ---
@@ -95,6 +96,7 @@ pip install -r requirements.txt
 
 # Install in development mode
 pip install -e .
+
 ```
 
 ### Basic Usage
@@ -117,6 +119,7 @@ latent = model.encode_to_latent(image)  # [1, 16, 16, 96]
 
 # Decode latent to image
 reconstructed = model.decode_to_image(latent)  # [1, 3, 256, 256]
+
 ```
 
 ### Training
@@ -130,6 +133,7 @@ python scripts/train_psvae.py --config configs/default.yaml --stage psvae
 
 # Stage 3: Train DiT
 python scripts/train_dit.py --config configs/default.yaml
+
 ```
 
 ### Generation
@@ -140,6 +144,7 @@ python scripts/generate.py \
     --prompt "A beautiful sunset over mountains" \
     --num_samples 4 \
     --cfg_scale 7.5
+
 ```
 
 ---
@@ -211,6 +216,7 @@ For comprehensive mathematical details, see [docs/architecture.md](docs/architec
   journal={arXiv preprint arXiv:2512.17909},
   year={2024}
 }
+
 ```
 
 ---

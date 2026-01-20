@@ -47,6 +47,7 @@ Given a pretrained representation encoder $E\_\phi: \mathbb{R}^{H \times W \time
 
 ```math
 p_\theta(\mathbf{f}) \neq p_{\text{data}}(\mathbf{f})
+
 ```
 
 The generated features $\hat{\mathbf{f}} \sim p\_\theta$ often fall outside the valid manifold $\mathcal{M} \subset \mathbb{R}^{h \times w \times d}$, causing decoding failures.
@@ -61,12 +62,14 @@ Representation encoders are trained with discriminative objectives:
 
 ```math
 \mathcal{L}_{\text{contrastive}} = -\log \frac{\exp(\text{sim}(\mathbf{f}_i, \mathbf{f}_j^+) / \tau)}{\sum_k \exp(\text{sim}(\mathbf{f}_i, \mathbf{f}_k) / \tau)}
+
 ```
 
 This objective preserves semantic similarity but discards fine-grained pixel information, leading to:
 
 ```math
 \mathbf{x} \neq D(E(\mathbf{x})) \quad \text{(poor reconstruction)}
+
 ```
 
 ---
@@ -85,6 +88,7 @@ S-VAE addresses the off-manifold problem by projecting representation features i
 
 ```math
 \mathbf{f} = E_\phi^{\text{frozen}}(\mathbf{x}) \in \mathbb{R}^{h \times w \times d}
+
 ```
 
 where:
@@ -98,13 +102,16 @@ The projector maps high-dimensional features to a compact latent distribution:
 
 ```math
 \boldsymbol{\mu}, \log \boldsymbol{\sigma}^2 = \text{Proj}_\psi(\mathbf{f})
+
 ```
 
 **Architecture**:
+
 ```
 Projector: Linear(d, 512) → LayerNorm → GELU → Linear(512, 256) → LayerNorm → GELU
            +-- Linear(256, z_dim) → μ
            +-- Linear(256, z_dim) → log σ²
+
 ```
 
 where $z\_{\text{dim}} = 96$ (compact latent dimension).
@@ -115,6 +122,7 @@ Sample latent vectors using the reparameterization trick:
 
 ```math
 \mathbf{z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}, \quad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
+
 ```
 
 This enables backpropagation through the sampling operation.
@@ -125,36 +133,43 @@ Reconstruct the original representation features:
 
 ```math
 \hat{\mathbf{f}} = D_\xi^{\text{sem}}(\mathbf{z})
+
 ```
 
 **Architecture**:
+
 ```
 Decoder: Linear(z_dim, 256) → LayerNorm → GELU → Linear(256, 512) → LayerNorm → GELU
          → Linear(512, d) → ResidualBlock(d) → ResidualBlock(d)
+
 ```
 
 ### S-VAE Loss Function
 
 ```math
 \mathcal{L}_{\text{S-VAE}} = \mathcal{L}_{\text{semantic}} + \beta \cdot \mathcal{L}_{\text{KL}}
+
 ```
 
 #### Semantic Reconstruction Loss
 
 ```math
 \mathcal{L}_{\text{semantic}} = \frac{1}{hwd} \sum_{i,j,k} \left( \hat{f}_{ijk} - f_{ijk} \right)^2 = \text{MSE}(\hat{\mathbf{f}}, \mathbf{f})
+
 ```
 
 #### KL Divergence Loss
 
 ```math
 \mathcal{L}_{\text{KL}} = D_{\text{KL}}\left( q_\psi(\mathbf{z}|\mathbf{x}) \| p(\mathbf{z}) \right)
+
 ```
 
 For Gaussian distributions with $p(\mathbf{z}) = \mathcal{N}(\mathbf{0}, \mathbf{I})$:
 
 ```math
 \mathcal{L}_{\text{KL}} = -\frac{1}{2} \sum_{i=1}^{z_{\text{dim}}} \left( 1 + \log \sigma_i^2 - \mu_i^2 - \sigma_i^2 \right)
+
 ```
 
 **Hyperparameters**:
@@ -184,6 +199,7 @@ PS-VAE extends S-VAE by adding pixel-level reconstruction with a trainable encod
 
 ```math
 \mathbf{f} = E_\phi^{\text{train}}(\mathbf{x})
+
 ```
 
 The encoder parameters $\phi$ are now updated during training.
@@ -192,6 +208,7 @@ The encoder parameters $\phi$ are now updated during training.
 
 ```math
 \mathbf{f}^{\text{target}} = E_{\phi_0}^{\text{frozen}}(\mathbf{x})
+
 ```
 
 A frozen copy provides stable semantic targets.
@@ -202,9 +219,11 @@ In addition to the semantic decoder, PS-VAE includes a pixel decoder:
 
 ```math
 \hat{\mathbf{x}} = D_\omega^{\text{pixel}}(\mathbf{z})
+
 ```
 
 **Architecture** (Convolutional Upsampling):
+
 ```
 PixelDecoder:
   Input: z ∈ ℝ^{16×16×96}
@@ -220,6 +239,7 @@ PixelDecoder:
   GroupNorm → SiLU → Conv2d(128, 3)
   
   Output: x̂ ∈ ℝ^{256×256×3}
+
 ```
 
 ### PS-VAE Loss Function
@@ -230,12 +250,14 @@ PixelDecoder:
 
 ```math
 \mathcal{L}_{\text{PS-VAE}} = \alpha \cdot \mathcal{L}_{\text{semantic}} + \gamma \cdot \mathcal{L}_{\text{pixel}} + \lambda \cdot \mathcal{L}_{\text{perceptual}} + \beta \cdot \mathcal{L}_{\text{KL}}
+
 ```
 
 #### Semantic Reconstruction Loss
 
 ```math
 \mathcal{L}_{\text{semantic}} = \text{MSE}\left( D_\xi^{\text{sem}}(\mathbf{z}), E_{\phi_0}^{\text{frozen}}(\mathbf{x}) \right)
+
 ```
 
 Note: Target is from the **frozen** encoder, not the trainable one.
@@ -246,18 +268,21 @@ Combined L1 and L2 losses:
 
 ```math
 \mathcal{L}_{\text{pixel}} = \frac{1}{2} \cdot \text{L1}(\hat{\mathbf{x}}, \mathbf{x}) + \frac{1}{2} \cdot \text{MSE}(\hat{\mathbf{x}}, \mathbf{x})
+
 ```
 
 where:
 
 ```math
 \text{L1}(\hat{\mathbf{x}}, \mathbf{x}) = \frac{1}{HWC} \sum_{i,j,c} |\hat{x}_{ijc} - x_{ijc}|
+
 ```
 
 #### Perceptual Loss (LPIPS)
 
 ```math
 \mathcal{L}_{\text{perceptual}} = \text{LPIPS}(\hat{\mathbf{x}}, \mathbf{x}) = \sum_l \frac{1}{H_l W_l} \sum_{h,w} \left\| \mathbf{w}_l \odot \left( \hat{\phi}_l^{hw} - \phi_l^{hw} \right) \right\|_2^2
+
 ```
 
 where $\phi\_l$ are VGG features at layer $l$ and $\mathbf{w}\_l$ are learned weights.
@@ -268,6 +293,7 @@ Same as S-VAE:
 
 ```math
 \mathcal{L}_{\text{KL}} = -\frac{1}{2} \sum_{i=1}^{z_{\text{dim}}} \left( 1 + \log \sigma_i^2 - \mu_i^2 - \sigma_i^2 \right)
+
 ```
 
 **Default Hyperparameters**:
@@ -298,6 +324,7 @@ Given clean latent $\mathbf{z}\_0$, the forward process adds Gaussian noise:
 
 ```math
 q(\mathbf{z}_t | \mathbf{z}_0) = \mathcal{N}\left( \mathbf{z}_t; \sqrt{\bar{\alpha}_t} \mathbf{z}_0, (1 - \bar{\alpha}_t) \mathbf{I} \right)
+
 ```
 
 where:
@@ -309,6 +336,7 @@ Equivalently:
 
 ```math
 \mathbf{z}_t = \sqrt{\bar{\alpha}_t} \mathbf{z}_0 + \sqrt{1 - \bar{\alpha}_t} \boldsymbol{\epsilon}, \quad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
+
 ```
 
 #### Reverse Process (Denoising)
@@ -317,6 +345,7 @@ The reverse process learns to denoise:
 
 ```math
 p_\theta(\mathbf{z}_{t-1} | \mathbf{z}_t) = \mathcal{N}\left( \mathbf{z}_{t-1}; \boldsymbol{\mu}_\theta(\mathbf{z}_t, t), \sigma_t^2 \mathbf{I} \right)
+
 ```
 
 ### DiT Architecture
@@ -327,29 +356,35 @@ p_\theta(\mathbf{z}_{t-1} | \mathbf{z}_t) = \mathcal{N}\left( \mathbf{z}_{t-1}; 
 
 ```math
 \mathbf{h}_0 = \text{Linear}(\mathbf{z}_t) + \mathbf{PE}
+
 ```math
 where $\mathbf{PE}$ is learnable positional embedding.
 
 2. **Timestep Embedding**: Sinusoidal encoding + MLP
+
 ```
 
 \mathbf{t}_{\text{emb}} = \text{MLP}\left( \left[ \sin\left(\frac{t}{10000^{2i/d}}\right), \cos\left(\frac{t}{10000^{2i/d}}\right) \right]_{i=0}^{d/2} \right)
+
 ```
 
 3. **Text Embedding**: From T5-XXL encoder
 
 ```math
 \mathbf{c} = \text{TextEncoder}(\text{prompt}) \in \mathbb{R}^{L \times d_{\text{text}}}
+
 ```math
 #### DiT Block
 
 Each block consists of:
 
 1. **Adaptive Layer Norm (AdaLN)**:
+
 ```
 
 \gamma, \beta = \text{MLP}(\mathbf{t}_{\text{emb}})
 \text{AdaLN}(\mathbf{h}) = \gamma \odot \text{LayerNorm}(\mathbf{h}) + \beta
+
 ```
 
 2. **Self-Attention**:
@@ -357,28 +392,35 @@ Each block consists of:
 ```math
 \mathbf{Q}, \mathbf{K}, \mathbf{V} = \mathbf{h} \mathbf{W}_Q, \mathbf{h} \mathbf{W}_K, \mathbf{h} \mathbf{W}_V
 \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left( \frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}} \right) \mathbf{V}
+
 ```math
 3. **Cross-Attention** (with text):
+
 ```
 
 \mathbf{Q} = \mathbf{h} \mathbf{W}_Q, \quad \mathbf{K}, \mathbf{V} = \mathbf{c} \mathbf{W}_K, \mathbf{c} \mathbf{W}_V
+
 ```
 
 4. **Feed-Forward Network**:
 
 ```math
 \text{FFN}(\mathbf{h}) = \text{GELU}(\mathbf{h} \mathbf{W}_1) \mathbf{W}_2
+
 ```math
 5. **Gated Residual**:
+
 ```
 
 \mathbf{h} = \mathbf{h} + \text{gate} \odot \text{Block}(\mathbf{h})
+
 ```
 
 ### Training Objective
 
 ```math
 \mathcal{L}_{\text{DiT}} = \mathbb{E}_{\mathbf{z}_0, \boldsymbol{\epsilon}, t} \left[ \left\| \boldsymbol{\epsilon} - \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \mathbf{c}) \right\|_2^2 \right]
+
 ```
 
 where:
@@ -393,6 +435,7 @@ During inference, we use CFG for better text alignment:
 
 ```math
 \tilde{\boldsymbol{\epsilon}}_\theta = \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \varnothing) + s \cdot \left( \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \mathbf{c}) - \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \varnothing) \right)
+
 ```
 
 where:
@@ -427,6 +470,7 @@ for x in dataloader:
     loss = loss_semantic + β * loss_kl
     
     loss.backward()
+
 ```
 
 ### Stage 2: Train PS-VAE
@@ -460,6 +504,7 @@ for x in dataloader:
     loss = α*loss_semantic + γ*loss_pixel + λ*loss_perceptual + β*loss_kl
     
     loss.backward()
+
 ```
 
 ### Stage 3: Train DiT
@@ -483,6 +528,7 @@ for x, text in dataloader:
     
     loss = MSE(ε_pred, ε)
     loss.backward()
+
 ```
 
 ---
@@ -511,12 +557,14 @@ for t in reversed(range(T)):
 
 # 4. Decode to image
 image = psvae.decode(z_0)
+
 ```
 
 ### DDIM Sampling Formula
 
 ```math
 \mathbf{z}_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \underbrace{\left( \frac{\mathbf{z}_t - \sqrt{1-\bar{\alpha}_t} \boldsymbol{\epsilon}_\theta}{\sqrt{\bar{\alpha}_t}} \right)}_{\text{predicted } \mathbf{z}_0} + \sqrt{1 - \bar{\alpha}_{t-1} - \sigma_t^2} \cdot \boldsymbol{\epsilon}_\theta + \sigma_t \boldsymbol{\epsilon}
+
 ```
 
 For deterministic sampling (DDIM), set $\sigma\_t = 0$.

@@ -65,6 +65,7 @@ MDLM uses **continuous time** $t \in [0, 1]$ rather than discrete steps $t \in \
 
 ```math
 \frac{dx}{dt} = x \cdot R_t
+
 ```
 
 where $R\_t$ is the rate matrix (generator) of the Markov process.
@@ -82,6 +83,7 @@ where $R\_t$ is the rate matrix (generator) of the Markov process.
 
 ```math
 \boxed{q(x_t^i \mid x_0^i) = \alpha_t \cdot \delta(x_t^i, x_0^i) + (1 - \alpha_t) \cdot \delta(x_t^i, [\text{MASK}])}
+
 ```
 
 where $\alpha\_t = 1 - t$ is the **survival probability** (linear schedule).
@@ -96,6 +98,7 @@ MDLM uses the simplest possible noise schedule:
 
 ```math
 \alpha_t = 1 - t \quad \text{for } t \in [0, 1]
+
 ```
 
 | Time $t$ | $\alpha\_t$ | Interpretation |
@@ -112,6 +115,7 @@ Tokens are masked **independently**:
 
 ```math
 q(x_t \mid x_0) = \prod_{i=1}^{n} q(x_t^i \mid x_0^i)
+
 ```
 
 This means:
@@ -122,6 +126,7 @@ This means:
 ### 2.5 Sampling the Forward Process
 
 **Algorithm: Create Corrupted Sequence**
+
 ```
 Input: clean sequence x₀ = (x₀¹, ..., x₀ⁿ)
 Output: corrupted sequence xₜ
@@ -132,6 +137,7 @@ Output: corrupted sequence xₜ
    If uⁱ < 1-t: xₜⁱ = x₀ⁱ (keep original)
    Else: xₜⁱ = [MASK]
 3. Return xₜ
+
 ```
 
 ---
@@ -148,6 +154,7 @@ Given a partially masked sequence $x\_t$, predict the original tokens:
 
 ```math
 p_\theta(x_0 \mid x_t) = ?
+
 ```
 
 We train a neural network to approximate this distribution.
@@ -160,6 +167,7 @@ We train a neural network to approximate this distribution.
 
 ```math
 q(x_{t-s}^i \mid x_t^i, x_0^i) = \delta(x_{t-s}^i, x_t^i) = \delta(x_{t-s}^i, x_0^i)
+
 ```
 
 Token was never masked → stays as original.
@@ -168,6 +176,7 @@ Token was never masked → stays as original.
 
 ```math
 q(x_{t-s}^i \mid x_t^i = [M], x_0^i) = \theta_{t,s} \cdot \delta(x_{t-s}^i, x_0^i) + (1-\theta_{t,s}) \cdot \delta(x_{t-s}^i, [M])
+
 ```
 
 Either unmask (with probability $\theta$) or stay masked.
@@ -178,6 +187,7 @@ The probability of revealing a token in one step:
 
 ```math
 \boxed{\theta_{t,s} = \frac{\alpha_{t-s} - \alpha_t}{1 - \alpha_t} = \frac{s}{t}}
+
 ```
 
 For the linear schedule $\alpha\_t = 1-t$.
@@ -192,12 +202,14 @@ The network directly predicts clean tokens:
 
 ```math
 f_\theta(x_t, t) \rightarrow \text{logits} \in \mathbb{R}^{n \times |V|}
+
 ```
 
 For each position:
 
 ```math
 p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
+
 ```
 
 **Architecture:**
@@ -220,6 +232,7 @@ p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
      Sample u ~ Uniform(0,1)
      If u < θ: xₜ₋ₛⁱ ~ Categorical(probs[i])  (reveal token)
      Else: xₜ₋ₛⁱ = [M]  (stay masked)
+
 ```
 
 ### 3.6 Why x₀-Prediction?
@@ -248,6 +261,7 @@ We want parameters $\theta$ that maximize:
 
 ```math
 \max_\theta \mathbb{E}_{x_0 \sim p_{\text{data}}}[\log p_\theta(x_0)]
+
 ```
 
 **Problem:** Computing $p\_\theta(x\_0)$ requires intractable marginalization.
@@ -260,12 +274,14 @@ We want parameters $\theta$ that maximize:
 
 ```math
 \log p_\theta(x_0) \geq \mathbb{E}_{q(x_{0\rightarrow 1}|x_0)}\left[\log p_\theta(x_0, x_{0\rightarrow 1}) - \log q(x_{0\rightarrow 1}|x_0)\right]
+
 ```
 
 **Step 2: For continuous-time absorbing diffusion**
 
 ```math
 \text{ELBO} = -\int_0^1 \mathbb{E}_{x_0, x_t}\left[\lambda(t) \cdot D_{KL}(q(x_0|x_t, x_0) \| p_\theta(x_0|x_t))\right] dt
+
 ```
 
 **Step 3: Key simplification—the posterior is deterministic!**
@@ -274,12 +290,14 @@ Since we know $x\_0$ exactly:
 
 ```math
 q(x_0^i \mid x_t^i, x_0^i) = \delta(\cdot, x_0^i)
+
 ```
 
 So the KL divergence becomes cross-entropy:
 
 ```math
 D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
+
 ```
 
 **Step 4: Only masked positions contribute**
@@ -291,6 +309,7 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 
 ```math
 \boxed{L_{\text{MDLM}} = \mathbb{E}_{t \sim U(0,1), x_0 \sim p_{\text{data}}, x_t \sim q(\cdot|x_0)}\left[\sum_{i: x_t^i = [\text{MASK}]} -\log p_\theta(x_0^i \mid x_t, t)\right]}
+
 ```
 
 **In words:**
@@ -305,6 +324,7 @@ The ELBO-optimal weighting is:
 
 ```math
 \lambda(t) = \frac{d}{dt}(1 - \alpha_t) = 1 \quad \text{(for linear } \alpha_t \text{)}
+
 ```
 
 This means:
@@ -349,6 +369,7 @@ def train_step(model, batch_x0, optimizer):
     optimizer.step()
     
     return loss
+
 ```
 
 ---
@@ -392,6 +413,7 @@ def sample(model, length, num_steps, temperature=1.0):
             x[unmask] = samples
     
     return x
+
 ```
 
 ### 5.2 Step-by-Step Example
@@ -413,6 +435,7 @@ Generating "The quick brown fox" with $T=4$ steps:
 
 ```math
 p'(v) \propto p(v)^{1/\tau}
+
 ```
 
 - $\tau < 1$: Sharper (more deterministic)
@@ -439,15 +462,19 @@ p'(v) \propto p(v)^{1/\tau}
 MDLM naturally supports:
 
 **Infilling:**
+
 ```
 Input:  "The [M] brown [M]"
 Output: "The quick brown fox"
+
 ```
 
 **Continuation:**
+
 ```
 Input:  "The quick" + [M][M]
 Output: "The quick" + "brown fox"
+
 ```
 
 Just initialize with partial masks and keep known tokens fixed!

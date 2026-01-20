@@ -38,6 +38,7 @@ Real-world data comes from an unknown **data distribution** $p\_{\text{data}}(x)
 
 ```math
 \int_{\mathcal{X}} p_{\text{data}}(x) \, dx = 1
+
 ```
 
 4. **Sampling notation**: We write $x \sim p\_{\text{data}}$ or $x\_0 \sim p\_{\text{data}}$
@@ -62,6 +63,7 @@ Real-world data comes from an unknown **data distribution** $p\_{\text{data}}(x)
 
 ```math
 x \in [0, 1]^{H \times W \times C}
+
 ```
 
 where:
@@ -73,6 +75,7 @@ where:
 
 ```math
 z = \text{Encoder}(x), \quad z \in \mathbb{R}^{h \times w \times c}
+
 ```
 
 Latent space is typically **8× compressed** per dimension.
@@ -96,6 +99,7 @@ Real data lies on a **low-dimensional manifold** $\mathcal{M} \subset \mathbb{R}
 ```math
 \dim(\mathcal{M}) \ll d
 p_{\text{data}}(x) \approx 0 \text{ for } x \notin \mathcal{M}
+
 ```
 
 ### Why This Matters
@@ -114,6 +118,7 @@ p_{\text{data}}(x) \approx 0 \text{ for } x \notin \mathcal{M}
 
 ```math
 x_0 \sim p_{\text{data}}(x)
+
 ```
 
 This is our **clean data**.
@@ -122,6 +127,7 @@ This is our **clean data**.
 
 ```math
 x_T \sim \mathcal{N}(0, I)
+
 ```
 
 This is **pure noise** — data has been completely destroyed.
@@ -133,6 +139,7 @@ The diffusion process must satisfy:
 ```math
 \lim_{t \to 0} q(x_t) = p_{\text{data}}(x)
 \lim_{t \to T} q(x_t) \approx \mathcal{N}(0, I)
+
 ```
 
 ### Visual
@@ -141,6 +148,7 @@ The diffusion process must satisfy:
 t=0          t=T/4         t=T/2         t=3T/4        t=T
 📊 ----------- 📉 ----------- 📈 ----------- 🌫️ ----------- ⚪
 Data         Some noise    Half noise    Mostly noise  Pure noise
+
 ```
 
 ---
@@ -153,6 +161,7 @@ Data         Some noise    Half noise    Mostly noise  Pure noise
 
 ```math
 x_{\text{norm}} = 2 \cdot \frac{x - x_{\min}}{x_{\max} - x_{\min}} - 1
+
 ```
 
 2. **Why this range?**
@@ -165,6 +174,7 @@ x_{\text{norm}} = 2 \cdot \frac{x - x_{\min}}{x_{\max} - x_{\min}} - 1
 ```python
 # Common preprocessing
 x = (x / 255.0) * 2 - 1  # [0, 255] → [-1, 1]
+
 ```
 
 ### For Other Modalities

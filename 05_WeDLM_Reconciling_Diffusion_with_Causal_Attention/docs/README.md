@@ -30,6 +30,7 @@ Modern Large Language Models (LLMs) like GPT-4, Qwen, and LLaMA use **autoregres
 
 ```math
 P(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} P(x_i \mid x_1, x_2, \ldots, x_{i-1})
+
 ```
 
 This means generating $n$ tokens requires **exactly $n$ sequential forward passes** through the model. Each token depends on all previous tokens, creating a fundamental speed bottleneck.
@@ -43,6 +44,7 @@ This means generating $n$ tokens requires **exactly $n$ sequential forward passe
 \text{Step 1: } [\text{The}][\text{MASK}][\text{MASK}][\text{MASK}][\text{MASK}]
 \text{Step 2: } [\text{The}][\text{quick}][\text{MASK}][\text{fox}][\text{MASK}]
 \text{Step 3: } [\text{The}][\text{quick}][\text{brown}][\text{fox}][\text{jumps}]
+
 ```
 
 **The Promise**: Generate $n$ tokens in $k \ll n$ steps by unmasking multiple tokens per step.
@@ -53,6 +55,7 @@ Most diffusion language models (like LLaDA, SEDD, MDLM) use **bidirectional atte
 
 ```math
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+
 ```
 
 Where each position can attend to **all** other positions.
@@ -80,6 +83,7 @@ The standard AR factorization:
 
 ```math
 P_\theta(x_{1:n}) = \prod_{i=1}^{n} P_\theta(x_i \mid x_{1:i-1})
+
 ```
 
 **Attention Mask (Causal)**:
@@ -89,12 +93,14 @@ M_{ij} = \begin{cases}
 0 & \text{if } j \leq i \\
 -\infty & \text{if } j > i
 \end{cases}
+
 ```
 
 This mask ensures position $i$ can only attend to positions $\leq i$:
 
 ```math
 \text{Attention}_i = \text{softmax}\left(\frac{q_i \cdot K_{1:i}^\top}{\sqrt{d_k}} + M_{i, 1:n}\right) \cdot V_{1:i}
+
 ```
 
 **KV Cache**: Since $K\_{1:i-1}$ and $V\_{1:i-1}$ are computed once and never change, we cache them:
@@ -103,6 +109,7 @@ This mask ensures position $i$ can only attend to positions $\leq i$:
 Step 1: Compute K₁, V₁, cache them
 Step 2: Load K₁, V₁ from cache, compute K₂, V₂, cache them
 Step 3: Load K₁, K₂, V₁, V₂ from cache, compute K₃, V₃...
+
 ```
 
 ### Diffusion Language Models
@@ -113,6 +120,7 @@ Discrete diffusion models define a forward process that corrupts data into noise
 
 ```math
 q(x_t \mid x_0) = \text{Categorical}(x_t; p = (1-\beta_t)x_0 + \beta_t \cdot \mathbf{u})
+
 ```
 
 Where $\mathbf{u} = [0, \ldots, 0, 1]$ is the one-hot vector for `[MASK]`, and $\beta\_t$ is a noise schedule.
@@ -121,6 +129,7 @@ Where $\mathbf{u} = [0, \ldots, 0, 1]$ is the one-hot vector for `[MASK]`, and $
 
 ```math
 p_\theta(x_{t-1} \mid x_t) = \prod_{i: x_t^{(i)} = \text{MASK}} P_\theta(x_{t-1}^{(i)} \mid x_t)
+
 ```
 
 The model predicts what token should replace each mask, conditioned on the current (partially masked) sequence.
@@ -151,6 +160,7 @@ Consider generating the sequence "[The] [quick] [brown] [fox]":
 State:  [The] [MASK] [MASK] [MASK]
                ↑       ↑       ↑
            Position 2  3       4
+
 ```
 
 **Traditional Bidirectional Thinking**:
@@ -169,15 +179,19 @@ State:  [The] [MASK] [MASK] [MASK]
 To use causal attention while processing multiple mask positions, WeDLM **reorders** the input sequence:
 
 **Original Order** (positions 1, 2, 3, 4):
+
 ```
 [The] [MASK₂] [MASK₃] [MASK₄]
+
 ```
 
 **Reordered for Causal Attention** (positions 1, 2, 1, 2, 1, 2):
+
 ```
 [The] [MASK₂]
 [The] [MASK₃]
 [The] [MASK₄]
+
 ```
 
 But this is inefficient (duplicates context). WeDLM uses a clever attention structure instead.
@@ -201,6 +215,7 @@ WeDLM maintains causal attention but processes multiple masks in one forward pas
 |   [The] [quick]   |   [brown]  | [M] [M]|
 +-----------------------------------------+
                      ← Causal attention flows this way ←
+
 ```
 
 Each mask position:
@@ -231,6 +246,7 @@ For each mask position $j \in \mathcal{M}$, WeDLM models:
 
 ```math
 P_\theta(x_j \mid \{x_i : i \in \mathcal{P}, i < j\})
+
 ```
 
 **Note**: Position $j$ only conditions on prefix tokens that appear **before** it in the sequence, not on other masks or future tokens.
@@ -245,6 +261,7 @@ Standard masked LM objective:
 
 ```math
 \mathcal{L}_{\text{MLM}} = -\mathbb{E}_{x \sim p_{\text{data}}}\left[\sum_{j \in \mathcal{M}} \log P_\theta(x_j \mid x_{\mathcal{M}^c})\right]
+
 ```
 
 Where $\mathcal{M}^c$ is the set of non-masked positions.
@@ -253,12 +270,14 @@ WeDLM's causal MLM objective:
 
 ```math
 \mathcal{L}_{\text{CMLM}} = -\mathbb{E}_{x \sim p_{\text{data}}}\left[\sum_{j \in \mathcal{M}} \log P_\theta(x_j \mid x_{1:j-1} \cap \mathcal{M}^c)\right]
+
 ```
 
 For left-to-right languages, the conditional independence assumption:
 
 ```math
 P(x_j \mid x_{\mathcal{M}^c}) \approx P(x_j \mid x_{1:j-1} \cap \mathcal{M}^c)
+
 ```
 
 holds because future context (positions $> j$) provides redundant information that the model can learn to predict from left context. $\square$
@@ -277,6 +296,7 @@ A_{ij} = \begin{cases}
 0 & \text{if } j - L_{\text{prefix}} \leq i \text{ and } j \leq L_{\text{prefix}} + k \text{ (can attend to prior non-masks)} \\
 -\infty & \text{otherwise}
 \end{cases}
+
 ```
 
 ### Position Encoding
@@ -289,6 +309,7 @@ x_m^{(1)} \cos(m\theta_1) - x_m^{(2)} \sin(m\theta_1) \\
 x_m^{(1)} \sin(m\theta_1) + x_m^{(2)} \cos(m\theta_1) \\
 \vdots
 \end{pmatrix}
+
 ```
 
 Where $\theta\_k = 10000^{-2k/d}$.
@@ -319,6 +340,7 @@ Step 2: [The][quick][brown]         [fox][M][M][M][M][M]...
         ↑↑↑ prefix grows             ↑ predicted
 
 Step 3: [The][quick][brown][fox]    [jumps][over][M][M][M]...
+
 ```
 
 ### Formal Algorithm
@@ -363,6 +385,7 @@ Output: generated tokens
 31.        finished = True
 
 32. return output
+
 ```
 
 ### Prefix Commitment Strategy
@@ -370,12 +393,14 @@ Output: generated tokens
 **Key Insight**: Only consecutive non-mask tokens from the start of the window can be committed.
 
 **Example**:
+
 ```
 Window:  [quick] [MASK] [fox] [jumps]
                    ↑
               Gap here!
 
 Committable: [quick]  (only the first consecutive non-mask run)
+
 ```
 
 **Why?** 
@@ -397,6 +422,7 @@ For causal attention at any mask position $q\_i$:
 
 ```math
 \text{Attention}(q_i) = f\left(\{x_\ell : \ell < q_i\}\right)
+
 ```
 
 Since $p\_k < q\_i$ for all $i$:
@@ -425,6 +451,7 @@ For a probability distribution $P = (p\_1, \ldots, p\_V)$ over vocabulary $V$:
 
 ```math
 H(P) = -\sum_{i=1}^{V} p_i \log p_i
+
 ```
 
 **Properties**:
@@ -439,6 +466,7 @@ WeDLM adds a **position penalty** to encourage left-to-right generation:
 
 ```math
 \tilde{H}_j = H(P_j) + \lambda \cdot (j - j_{\min})
+
 ```
 
 Where:
@@ -454,6 +482,7 @@ Where:
 
 ```math
 \text{Fill}(j) = \mathbb{1}\left[\tilde{H}_j < \tau\right]
+
 ```
 
 Where $\tau$ is the entropy threshold (default: 0.4).
@@ -462,6 +491,7 @@ Where $\tau$ is the entropy threshold (default: 0.4).
 
 ```math
 j^* = \arg\min_j \tilde{H}_j
+
 ```
 
 ### Proof: Threshold Selection Minimizes Expected Error
@@ -474,12 +504,14 @@ j^* = \arg\min_j \tilde{H}_j
 
 ```math
 P(\hat{x}_j = x_j^*) \approx \max_k p_{j,k}
+
 ```
 
 **Lemma**: For a categorical distribution, high confidence (low entropy) correlates with low error probability.
 
 ```math
 \mathbb{E}[e_j] = 1 - \max_k p_{j,k} \leq 1 - \exp(-H(P_j))
+
 ```
 
 **Proof of bound**:
@@ -487,18 +519,21 @@ Using the relationship between entropy and max probability:
 
 ```math
 H(P) \geq -\log(\max_k p_k) \implies \max_k p_k \geq \exp(-H(P))
+
 ```
 
 Therefore:
 
 ```math
 \mathbb{E}[e_j] = 1 - \max_k p_{j,k} \leq 1 - \exp(-H(P_j))
+
 ```
 
 **Corollary**: Selecting positions with $H(P\_j) < \tau$ ensures:
 
 ```math
 \mathbb{E}[e_j] \leq 1 - \exp(-\tau)
+
 ```
 
 For $\tau = 0.4$: $\mathbb{E}[e\_j] \leq 0.33$
@@ -538,6 +573,7 @@ def select_positions_to_fill(
     
     # Fallback: minimum adjusted entropy
     return [int(adjusted_entropy.argmin().item())]
+
 ```
 
 ---
@@ -617,6 +653,7 @@ Step 3: DECODE ITERATION
 +---------------------------------------------------------------------+
 
 Step 4: REPEAT Until Stop Token or Max Length
+
 ```
 
 ### Complexity Analysis
@@ -639,6 +676,7 @@ Where:
 
 ```math
 \text{Speedup} = \frac{\mathbb{E}[k]}{1} = \mathbb{E}[k]
+
 ```
 
 *where $k$ is the number of positions filled per step.*
@@ -658,6 +696,7 @@ WeDLM uses a **causal masked language modeling (CMLM)** objective:
 
 ```math
 \mathcal{L}_{\text{CMLM}} = -\mathbb{E}_{x \sim \mathcal{D}} \mathbb{E}_{\mathcal{M} \sim p(\mathcal{M}|x)} \left[\sum_{j \in \mathcal{M}} \log P_\theta(x_j \mid x_{1:j-1} \cap \mathcal{M}^c)\right]
+
 ```
 
 Where:
@@ -678,6 +717,7 @@ Where:
 
 ```math
 r_t = r_{\min} + (r_{\max} - r_{\min}) \cdot \frac{t}{T}
+
 ```
 
 Where:
@@ -727,6 +767,7 @@ def compute_cmlm_loss(model, input_ids, labels, mask_flags):
     )
     
     return loss
+
 ```
 
 ---
@@ -741,6 +782,7 @@ def compute_cmlm_loss(model, input_ids, labels, mask_flags):
 
 ```math
 I(x_j ; x_{j+1:} \mid x_{1:j-1}) \approx 0
+
 ```
 
 **Proof Sketch**:
@@ -757,6 +799,7 @@ $\square$
 
 ```math
 P(x_i, x_j \mid \text{prefix}) = P(x_i \mid \text{prefix}) \cdot P(x_j \mid \text{prefix})
+
 ```
 
 **This holds because**:
@@ -779,12 +822,14 @@ Let $\tau$ be the entropy threshold. Define:
 ```math
 \bar{k}(\tau) \approx \sum_{j=1}^{W} P(H_j < \tau)
 \epsilon(\tau) \approx \sum_{j=1}^{W} P(H_j < \tau) \cdot (1 - \exp(-\tau))
+
 ```
 
 **Optimal Threshold**: Minimize combined cost:
 
 ```math
 \tau^* = \arg\min_\tau \left[\frac{n}{\bar{k}(\tau)} \cdot c_{\text{time}} + \epsilon(\tau) \cdot n \cdot c_{\text{error}}\right]
+
 ```
 
 ---

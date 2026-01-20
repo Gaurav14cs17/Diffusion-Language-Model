@@ -35,6 +35,7 @@ Given an image $\mathbf{x} \in \mathbb{R}^{H \times W \times 3}$, a representati
 
 ```math
 \mathbf{f} = E_\phi(\mathbf{x}) \in \mathbb{R}^{h \times w \times d}
+
 ```
 
 where:
@@ -66,12 +67,14 @@ Without regularization, the diffusion model learns:
 
 ```math
 p_\theta(\mathbf{f}) \neq p_{\text{data}}(\mathbf{f})
+
 ```
 
 Generated features $\hat{\mathbf{f}} \sim p\_\theta$ often fall outside the valid manifold $\mathcal{M}$, causing:
 
 ```math
 D(\hat{\mathbf{f}}) = \text{garbage}
+
 ```
 
 ### Problem 2: Weak Pixel Reconstruction
@@ -96,12 +99,14 @@ The VAE optimizes the ELBO:
 
 ```math
 \log p(\mathbf{x}) \geq \mathbb{E}_{q(\mathbf{z}|\mathbf{x})}[\log p(\mathbf{x}|\mathbf{z})] - D_{\text{KL}}(q(\mathbf{z}|\mathbf{x}) \| p(\mathbf{z}))
+
 ```
 
 Which gives us the loss:
 
 ```math
 \mathcal{L}_{\text{VAE}} = \underbrace{\mathcal{L}_{\text{recon}}}_{\text{Reconstruction}} + \underbrace{\beta \cdot \mathcal{L}_{\text{KL}}}_{\text{Regularization}}
+
 ```
 
 ### The Reparameterization Trick
@@ -110,6 +115,7 @@ To enable backpropagation through sampling:
 
 ```math
 \mathbf{z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}, \quad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
+
 ```
 
 ### KL Divergence for Gaussians
@@ -118,6 +124,7 @@ For $q(\mathbf{z}|\mathbf{x}) = \mathcal{N}(\boldsymbol{\mu}, \text{diag}(\bolds
 
 ```math
 \mathcal{L}_{\text{KL}} = -\frac{1}{2} \sum_{i=1}^{d} \left( 1 + \log \sigma_i^2 - \mu_i^2 - \sigma_i^2 \right)
+
 ```
 
 ---
@@ -134,6 +141,7 @@ For $q(\mathbf{z}|\mathbf{x}) = \mathcal{N}(\boldsymbol{\mu}, \text{diag}(\bolds
 
 ```math
 \mathcal{L}_{\text{S-VAE}} = \mathcal{L}_{\text{semantic}} + \beta \cdot \mathcal{L}_{\text{KL}}
+
 ```
 
 where:
@@ -141,6 +149,7 @@ where:
 ```math
 \mathcal{L}_{\text{semantic}} = \text{MSE}(\hat{\mathbf{f}}, \mathbf{f}) = \frac{1}{hwd} \sum_{i,j,k} (\hat{f}_{ijk} - f_{ijk})^2
 \mathcal{L}_{\text{KL}} = -\frac{1}{2} \sum_{i} (1 + \log \sigma_i^2 - \mu_i^2 - \sigma_i^2)
+
 ```
 
 ### Why S-VAE Works
@@ -190,6 +199,7 @@ where:
 
 ```math
 \mathcal{L}_{\text{diffusion}} = \mathbb{E}_{\mathbf{z}_0, \boldsymbol{\epsilon}, t} \left[ \left\| \boldsymbol{\epsilon} - \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t) \right\|_2^2 \right]
+
 ```
 
 ---
@@ -206,6 +216,7 @@ where:
 
 ```math
 \tilde{\boldsymbol{\epsilon}}_\theta = \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \varnothing) + s \cdot \left( \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \mathbf{c}) - \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \varnothing) \right)
+
 ```
 
 where $s$ is the guidance scale (typically 7.5).

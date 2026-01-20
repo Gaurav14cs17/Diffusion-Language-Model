@@ -64,6 +64,7 @@ WeDLM uses **causal attention** (like standard LLMs) but generates **multiple to
 Step 1: "The quick [M] [M] [M] [M]"     → Compute entropy, fill confident positions
 Step 2: "The quick brown fox [M] [M]"  → Continue filling
 Step 3: "The quick brown fox jumps over" → Done in 3 steps instead of 6!
+
 ```
 
 <div align="center">
@@ -103,6 +104,7 @@ Step 3: "The quick brown fox jumps over" → Done in 3 steps instead of 6!
 git clone https://github.com/Gaurav14cs17/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention.git
 cd 05_WeDLM_Reconciling_Diffusion_with_Causal_Attention
 pip install -r requirements.txt
+
 ```
 
 ### Run Inference
@@ -122,6 +124,7 @@ params = SamplingParams(
 
 output = llm.generate("Solve: 15 × 7 + 23 = ", params)
 print(output)
+
 ```
 
 ### Train Your Own
@@ -132,6 +135,7 @@ python scripts/train.py \
     --dataset wikitext \
     --output ./wedlm_model \
     --epochs 3
+
 ```
 
 ---
@@ -187,6 +191,7 @@ python scripts/train.py \
 |                            +--------------------------+                 |
 |                                                                         |
 +-------------------------------------------------------------------------+
+
 ```
 
 </div>
@@ -195,6 +200,7 @@ python scripts/train.py \
 
 ```math
 \tilde{H}_j = H(P_j) + \lambda(j - j_{\min}), \quad \text{Fill if } \tilde{H}_j < \tau
+
 ```
 
 ---
@@ -231,6 +237,7 @@ python scripts/train.py \
 |   +-- math_explained/          # Visual guides
 |
 +-- 📂 data/                     # Downloaded datasets
+
 ```
 
 ---
@@ -289,12 +296,15 @@ transformers
 datasets
 tqdm
 accelerate
+
 ```
 
 **Optional (GPU acceleration):**
+
 ```
 flash-attn
 triton
+
 ```
 
 ---
@@ -308,6 +318,7 @@ triton
   journal={arXiv preprint arXiv:2512.22737},
   year={2025}
 }
+
 ```
 
 ---
