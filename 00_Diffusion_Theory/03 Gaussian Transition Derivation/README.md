@@ -14,9 +14,9 @@
 
 Derive and prove the Gaussian transition formula:
 
-```math
+$$
 \boxed{x_t = \sqrt{\alpha_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t}
-```
+$$
 
 where $\epsilon\_t \sim \mathcal{N}(0, I)$ and $\alpha\_t + \beta\_t = 1$.
 
@@ -28,9 +28,9 @@ where $\epsilon\_t \sim \mathcal{N}(0, I)$ and $\alpha\_t + \beta\_t = 1$.
 
 We **assume** each forward step is a Gaussian transition:
 
-```math
+$$
 q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \mu_t, \sigma_t^2 I)
-```
+$$
 
 ### Design Choice
 
@@ -48,9 +48,9 @@ We choose:
 
 ### Resulting Transition
 
-```math
+$$
 \boxed{q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)}
-```
+$$
 
 ---
 
@@ -64,9 +64,9 @@ Sampling $x\_t \sim \mathcal{N}(\mu, \sigma^2 I)$ is not differentiable!
 
 Any Gaussian sample can be written as:
 
-```math
+$$
 x = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
-```
+$$
 
 ### Proof
 
@@ -74,21 +74,21 @@ Let $\epsilon \sim \mathcal{N}(0, I)$. Define $x = \mu + \sigma \epsilon$.
 
 **Mean:**
 
-```math
+$$
 \mathbb{E}[x] = \mathbb{E}[\mu + \sigma \epsilon] = \mu + \sigma \cdot 0 = \mu \quad \checkmark
-```
+$$
 
 **Variance:**
 
-```math
+$$
 \text{Var}[x] = \text{Var}[\sigma \epsilon] = \sigma^2 \text{Var}[\epsilon] = \sigma^2 I \quad \checkmark
-```
+$$
 
 **Distribution:**
 
-```math
+$$
 x \sim \mathcal{N}(\mu, \sigma^2 I) \quad \checkmark
-```
+$$
 
 ### Why This Matters
 
@@ -105,9 +105,9 @@ After:  x = μ + σε        → Gradients flow through μ and σ!
 
 From our transition density:
 
-```math
+$$
 q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
-```
+$$
 
 ### Apply Reparameterization
 
@@ -117,9 +117,9 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
 
 ### Result
 
-```math
+$$
 \boxed{x_t = \sqrt{\alpha_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t}
-```
+$$
 
 ### Intuition
 
@@ -145,23 +145,23 @@ Why $\sqrt{\alpha\_t}$ and $\sqrt{\beta\_t}$, not $\alpha\_t$ and $\beta\_t$?
 
 When adding independent random variables:
 
-```math
+$$
 \text{Var}[aX + bY] = a^2 \text{Var}[X] + b^2 \text{Var}[Y]
-```
+$$
 
 ### Applied to Our Formula
 
-```math
+$$
 x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \epsilon_t
 \text{Var}[x_t] = (\sqrt{\alpha_t})^2 \text{Var}[x_{t-1}] + (\sqrt{\beta_t})^2 \text{Var}[\epsilon_t]
 = \alpha_t \cdot \text{Var}[x_{t-1}] + \beta_t \cdot I
-```
+$$
 
 ### If We Used α and β Directly
 
-```math
+$$
 \text{Var}[x_t] = \alpha_t^2 \cdot \text{Var}[x_{t-1}] + \beta_t^2 \cdot I
-```
+$$
 
 This would **not** preserve variance! ❌
 
@@ -177,28 +177,28 @@ Prove that if $\text{Var}[x\_0] = I$ and $\alpha\_t + \beta\_t = 1$, then $\text
 
 **Base Case ($t = 0$):**
 
-```math
+$$
 \text{Var}[x_0] = I \quad \checkmark
-```
+$$
 
 **Inductive Hypothesis:**
 Assume $\text{Var}[x\_{t-1}] = I$.
 
 **Inductive Step:**
 
-```math
+$$
 x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \epsilon_t
 \text{Var}[x_t] = \alpha_t \cdot \text{Var}[x_{t-1}] + \beta_t \cdot \text{Var}[\epsilon_t]
 = \alpha_t \cdot I + \beta_t \cdot I
 = (\alpha_t + \beta_t) \cdot I
 = 1 \cdot I = I \quad \checkmark
-```
+$$
 
 ### Conclusion
 
-```math
+$$
 \boxed{\text{Var}[x_t] = I \text{ for all } t \in \{0, 1, ..., T\}}
-```
+$$
 
 ### Visual Summary
 
@@ -219,16 +219,16 @@ Var:  I      I      I      I           I
 
 The diffusion process can also be derived from:
 
-```math
+$$
 dx = -\frac{1}{2}\beta(t) x \, dt + \sqrt{\beta(t)} \, dW_t
-```
+$$
 
 ### Discretizing
 
-```math
+$$
 x_t - x_{t-1} = -\frac{1}{2}\beta_t x_{t-1} + \sqrt{\beta_t} \epsilon_t
 x_t = (1 - \frac{1}{2}\beta_t) x_{t-1} + \sqrt{\beta_t} \epsilon_t
-```
+$$
 
 ### With $\alpha\_t = 1 - \beta\_t$
 

@@ -63,9 +63,9 @@ MDLM uses **continuous time** $t \in [0, 1]$ rather than discrete steps $t \in \
 
 **Definition (Continuous-Time Markov Process):**
 
-```math
+$$
 \frac{dx}{dt} = x \cdot R_t
-```
+$$
 
 where $R\_t$ is the rate matrix (generator) of the Markov process.
 
@@ -80,9 +80,9 @@ where $R\_t$ is the rate matrix (generator) of the Markov process.
 
 **Theorem (Closed-Form Marginal):** For a token $x\_0^i$ at position $i$, the distribution at time $t$ is:
 
-```math
+$$
 \boxed{q(x_t^i \mid x_0^i) = \alpha_t \cdot \delta(x_t^i, x_0^i) + (1 - \alpha_t) \cdot \delta(x_t^i, [\text{MASK}])}
-```
+$$
 
 where $\alpha\_t = 1 - t$ is the **survival probability** (linear schedule).
 
@@ -94,9 +94,9 @@ where $\alpha\_t = 1 - t$ is the **survival probability** (linear schedule).
 
 MDLM uses the simplest possible noise schedule:
 
-```math
+$$
 \alpha_t = 1 - t \quad \text{for } t \in [0, 1]
-```
+$$
 
 | Time $t$ | $\alpha\_t$ | Interpretation |
 |----------|------------|----------------|
@@ -110,9 +110,9 @@ MDLM uses the simplest possible noise schedule:
 
 Tokens are masked **independently**:
 
-```math
+$$
 q(x_t \mid x_0) = \prod_{i=1}^{n} q(x_t^i \mid x_0^i)
-```
+$$
 
 This means:
 - Each position is masked with probability $t$, independently
@@ -146,9 +146,9 @@ The reverse process learns to undo the masking—predicting original tokens from
 
 Given a partially masked sequence $x\_t$, predict the original tokens:
 
-```math
+$$
 p_\theta(x_0 \mid x_t) = ?
-```
+$$
 
 We train a neural network to approximate this distribution.
 
@@ -158,17 +158,17 @@ We train a neural network to approximate this distribution.
 
 **Case 1:** If $x\_t^i \neq [\text{MASK}]$ (token is visible):
 
-```math
+$$
 q(x_{t-s}^i \mid x_t^i, x_0^i) = \delta(x_{t-s}^i, x_t^i) = \delta(x_{t-s}^i, x_0^i)
-```
+$$
 
 Token was never masked → stays as original.
 
 **Case 2:** If $x\_t^i = [\text{MASK}]$ (token is masked):
 
-```math
+$$
 q(x_{t-s}^i \mid x_t^i = [M], x_0^i) = \theta_{t,s} \cdot \delta(x_{t-s}^i, x_0^i) + (1-\theta_{t,s}) \cdot \delta(x_{t-s}^i, [M])
-```
+$$
 
 Either unmask (with probability $\theta$) or stay masked.
 
@@ -176,9 +176,9 @@ Either unmask (with probability $\theta$) or stay masked.
 
 The probability of revealing a token in one step:
 
-```math
+$$
 \boxed{\theta_{t,s} = \frac{\alpha_{t-s} - \alpha_t}{1 - \alpha_t} = \frac{s}{t}}
-```
+$$
 
 For the linear schedule $\alpha\_t = 1-t$.
 
@@ -190,15 +190,15 @@ For the linear schedule $\alpha\_t = 1-t$.
 
 The network directly predicts clean tokens:
 
-```math
+$$
 f_\theta(x_t, t) \rightarrow \text{logits} \in \mathbb{R}^{n \times |V|}
-```
+$$
 
 For each position:
 
-```math
+$$
 p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
-```
+$$
 
 **Architecture:**
 - Input: $h\_0 = \text{Embed}(x\_t) + \text{PosEmbed} + \text{TimeEmbed}(t)$
@@ -246,9 +246,9 @@ MDLM's training objective is derived from a proper **Evidence Lower Bound (ELBO)
 
 We want parameters $\theta$ that maximize:
 
-```math
+$$
 \max_\theta \mathbb{E}_{x_0 \sim p_{\text{data}}}[\log p_\theta(x_0)]
-```
+$$
 
 **Problem:** Computing $p\_\theta(x\_0)$ requires intractable marginalization.
 
@@ -258,29 +258,29 @@ We want parameters $\theta$ that maximize:
 
 **Step 1: Apply Jensen's Inequality**
 
-```math
+$$
 \log p_\theta(x_0) \geq \mathbb{E}_{q(x_{0\rightarrow 1}|x_0)}\left[\log p_\theta(x_0, x_{0\rightarrow 1}) - \log q(x_{0\rightarrow 1}|x_0)\right]
-```
+$$
 
 **Step 2: For continuous-time absorbing diffusion**
 
-```math
+$$
 \text{ELBO} = -\int_0^1 \mathbb{E}_{x_0, x_t}\left[\lambda(t) \cdot D_{KL}(q(x_0|x_t, x_0) \| p_\theta(x_0|x_t))\right] dt
-```
+$$
 
 **Step 3: Key simplification—the posterior is deterministic!**
 
 Since we know $x\_0$ exactly:
 
-```math
+$$
 q(x_0^i \mid x_t^i, x_0^i) = \delta(\cdot, x_0^i)
-```
+$$
 
 So the KL divergence becomes cross-entropy:
 
-```math
+$$
 D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
-```
+$$
 
 **Step 4: Only masked positions contribute**
 
@@ -289,9 +289,9 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 
 ### 4.3 Final Training Objective
 
-```math
+$$
 \boxed{L_{\text{MDLM}} = \mathbb{E}_{t \sim U(0,1), x_0 \sim p_{\text{data}}, x_t \sim q(\cdot|x_0)}\left[\sum_{i: x_t^i = [\text{MASK}]} -\log p_\theta(x_0^i \mid x_t, t)\right]}
-```
+$$
 
 **In words:**
 1. Sample random time $t$ uniformly from $[0, 1]$
@@ -303,9 +303,9 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 
 The ELBO-optimal weighting is:
 
-```math
+$$
 \lambda(t) = \frac{d}{dt}(1 - \alpha_t) = 1 \quad \text{(for linear } \alpha_t \text{)}
-```
+$$
 
 This means:
 - All timesteps contribute equally
@@ -413,9 +413,9 @@ Generating "The quick brown fox" with $T=4$ steps:
 
 **Temperature Sampling:**
 
-```math
+$$
 p'(v) \propto p(v)^{1/\tau}
-```
+$$
 
 - $\tau < 1$: Sharper (more deterministic)
 - $\tau = 1$: Standard
