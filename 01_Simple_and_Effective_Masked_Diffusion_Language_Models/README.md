@@ -66,7 +66,7 @@ The answer is surprisingly elegant:
 
 ![Forward Masking Process](./svg_diagrams/02_forward_masking_process.svg)
 
-The forward process defines how we corrupt clean data $x\_0$ into progressively noisier versions.
+The forward process defines how we corrupt clean data $x_0$ into progressively noisier versions.
 
 ### 2.1 Continuous-Time Formulation
 
@@ -79,7 +79,7 @@ MDLM uses **continuous time** $t \in [0, 1]$ rather than discrete steps $t \in \
 
 ```
 
-where $R\_t$ is the rate matrix (generator) of the Markov process.
+where $R_t$ is the rate matrix (generator) of the Markov process.
 
 **Why continuous time?**
 - Cleaner mathematical framework
@@ -94,19 +94,19 @@ where $R\_t$ is the rate matrix (generator) of the Markov process.
 
 ### 2.2 Marginal Distribution
 
-**Theorem (Closed-Form Marginal):** For a token $x\_0^i$ at position $i$, the distribution at time $t$ is:
+**Theorem (Closed-Form Marginal):** For a token $x_0^i$ at position $i$, the distribution at time $t$ is:
 
 ```math
 \boxed{q(x_t^i \mid x_0^i) = \alpha_t \cdot \delta(x_t^i, x_0^i) + (1 - \alpha_t) \cdot \delta(x_t^i, [\text{MASK}])}
 
 ```
 
-where $\alpha\_t = 1 - t$ is the **survival probability** (linear schedule).
+where $\alpha_t = 1 - t$ is the **survival probability** (linear schedule).
 
 **Interpretation:**
-- With probability $\alpha\_t = 1-t$: token remains as original $x\_0^i$
+- With probability $\alpha_t = 1-t$: token remains as original $x_0^i$
 
-- With probability $1-\alpha\_t = t$: token becomes `[MASK]`
+- With probability $1-\alpha_t = t$: token becomes `[MASK]`
 
 ### 2.3 The Linear Schedule
 
@@ -117,11 +117,11 @@ MDLM uses the simplest possible noise schedule:
 
 ```
 
-| Time $t$ | $\alpha\_t$ | Interpretation |
+| Time $t$ | $\alpha_t$ | Interpretation |
 |----------|------------|----------------|
-| $t = 0$ | $\alpha\_0 = 1$ | 100% original tokens |
-| $t = 0.5$ | $\alpha\_{0.5} = 0.5$ | 50% masked |
-| $t = 1$ | $\alpha\_1 = 0$ | 100% masked |
+| $t = 0$ | $\alpha_0 = 1$ | 100% original tokens |
+| $t = 0.5$ | $\alpha_{0.5} = 0.5$ | 50% masked |
+| $t = 1$ | $\alpha_1 = 0$ | 100% masked |
 
 **Key finding:** Linear works as well as more complex schedules (cosine, etc.)!
 
@@ -171,7 +171,7 @@ The reverse process learns to undo the masking—predicting original tokens from
 
 ### 3.1 Goal
 
-Given a partially masked sequence $x\_t$, predict the original tokens:
+Given a partially masked sequence $x_t$, predict the original tokens:
 
 ```math
 p_\theta(x_0 \mid x_t) = ?
@@ -182,9 +182,9 @@ We train a neural network to approximate this distribution.
 
 ### 3.2 Posterior Distribution
 
-**Theorem (Tractable Posterior):** Given both $x\_t$ and $x\_0$, the posterior is tractable:
+**Theorem (Tractable Posterior):** Given both $x_t$ and $x_0$, the posterior is tractable:
 
-**Case 1:** If $x\_t^i \neq [\text{MASK}]$ (token is visible):
+**Case 1:** If $x_t^i \neq [\text{MASK}]$ (token is visible):
 
 ```math
 q(x_{t-s}^i \mid x_t^i, x_0^i) = \delta(x_{t-s}^i, x_t^i) = \delta(x_{t-s}^i, x_0^i)
@@ -193,7 +193,7 @@ q(x_{t-s}^i \mid x_t^i, x_0^i) = \delta(x_{t-s}^i, x_t^i) = \delta(x_{t-s}^i, x_
 
 Token was never masked → stays as original.
 
-**Case 2:** If $x\_t^i = [\text{MASK}]$ (token is masked):
+**Case 2:** If $x_t^i = [\text{MASK}]$ (token is masked):
 
 ```math
 q(x_{t-s}^i \mid x_t^i = [M], x_0^i) = \theta_{t,s} \cdot \delta(x_{t-s}^i, x_0^i) + (1-\theta_{t,s}) \cdot \delta(x_{t-s}^i, [M])
@@ -211,7 +211,7 @@ The probability of revealing a token in one step:
 
 ```
 
-For the linear schedule $\alpha\_t = 1-t$.
+For the linear schedule $\alpha_t = 1-t$.
 
 **Interpretation:** If we're at time $t$ and taking a step of size $s$, the probability of unmasking is $s/t$.
 
@@ -234,7 +234,7 @@ p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
 ```
 
 **Architecture:**
-- Input: $h\_0 = \text{Embed}(x\_t) + \text{PosEmbed} + \text{TimeEmbed}(t)$
+- Input: $h_0 = \text{Embed}(x_t) + \text{PosEmbed} + \text{TimeEmbed}(t)$
 
 - Transformer with **bidirectional attention** (no causal mask!)
 
@@ -292,7 +292,7 @@ We want parameters $\theta$ that maximize:
 
 ```
 
-**Problem:** Computing $p\_\theta(x\_0)$ requires intractable marginalization.
+**Problem:** Computing $p_\theta(x_0)$ requires intractable marginalization.
 
 **Solution:** Maximize a tractable lower bound (ELBO) instead.
 
@@ -314,7 +314,7 @@ We want parameters $\theta$ that maximize:
 
 **Step 3: Key simplification—the posterior is deterministic!**
 
-Since we know $x\_0$ exactly:
+Since we know $x_0$ exactly:
 
 ```math
 q(x_0^i \mid x_t^i, x_0^i) = \delta(\cdot, x_0^i)
@@ -330,9 +330,9 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 
 **Step 4: Only masked positions contribute**
 
-- If $x\_t^i \neq [\text{MASK}]$: no loss (already revealed)
+- If $x_t^i \neq [\text{MASK}]$: no loss (already revealed)
 
-- If $x\_t^i = [\text{MASK}]$: must predict $x\_0^i$
+- If $x_t^i = [\text{MASK}]$: must predict $x_0^i$
 
 ### 4.3 Final Training Objective
 
@@ -345,9 +345,9 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 
 1. Sample random time $t$ uniformly from $[0, 1]$
 
-2. Sample clean data $x\_0$ from training distribution
+2. Sample clean data $x_0$ from training distribution
 
-3. Create $x\_t$ by masking each token with probability $t$
+3. Create $x_t$ by masking each token with probability $t$
 
 4. Compute cross-entropy loss **only on masked positions**
 
@@ -576,16 +576,16 @@ On OpenWebText benchmark:
 
 | Concept | Equation |
 |---------|----------|
-| Forward marginal | $q(x\_t \mid x\_0) = \alpha\_t \cdot \delta(x\_t, x\_0) + (1-\alpha\_t) \cdot \delta(x\_t, [M])$ |
-| Survival probability | $\alpha\_t = 1 - t$ |
-| Unmasking probability | $\theta\_{t,s} = s/t$ |
-| Training loss | $L = \mathbb{E}\_{t,x\_0}\left[\sum\_{x\_t^i=[M]} -\log p\_\theta(x\_0^i \mid x\_t)\right]$ |
+| Forward marginal | $q(x_t \mid x_0) = \alpha_t \cdot \delta(x_t, x_0) + (1-\alpha_t) \cdot \delta(x_t, [M])$ |
+| Survival probability | $\alpha_t = 1 - t$ |
+| Unmasking probability | $\theta_{t,s} = s/t$ |
+| Training loss | $L = \mathbb{E}_{t,x_0}\left[\sum_{x_t^i=[M]} -\log p_\theta(x_0^i \mid x_t)\right]$ |
 
 ### Design Recommendations
 
 Based on MDLM's findings:
 
-1. ✅ Use linear schedule $\alpha\_t = 1-t$
+1. ✅ Use linear schedule $\alpha_t = 1-t$
 
 2. ✅ Add time embedding to model
 
@@ -616,13 +616,13 @@ The key insight: Masked language modeling with principled, time-varying masking 
 
 | Symbol | Meaning |
 |--------|---------|
-| $x\_0$ | Clean (original) sequence |
-| $x\_t$ | Noisy (partially masked) sequence at time $t$ |
+| $x_0$ | Clean (original) sequence |
+| $x_t$ | Noisy (partially masked) sequence at time $t$ |
 | $[M]$ | MASK token |
-| $\alpha\_t$ | Survival probability (prob of NOT being masked) |
-| $\theta\_{t,s}$ | Unmasking probability for step $t \rightarrow t-s$ |
-| $f\_\theta$ | Neural network (Transformer) |
-| $p\_\theta$ | Model distribution |
+| $\alpha_t$ | Survival probability (prob of NOT being masked) |
+| $\theta_{t,s}$ | Unmasking probability for step $t \rightarrow t-s$ |
+| $f_\theta$ | Neural network (Transformer) |
+| $p_\theta$ | Model distribution |
 | $q$ | Forward process distribution |
 | $t$ | Continuous time in $[0, 1]$ |
 | $T$ | Number of sampling steps |

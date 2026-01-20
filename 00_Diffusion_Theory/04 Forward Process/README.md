@@ -42,9 +42,9 @@ x_t = \sqrt{1-\beta_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t, \quad \e
 
 | Symbol | Definition | Typical Values |
 |:------:|------------|----------------|
-| $\beta\_t$ | Noise variance at step $t$ | $10^{-4}$ to $0.02$ |
-| $\alpha\_t$ | $1 - \beta\_t$ (signal retention) | $0.98$ to $0.9999$ |
-| $\bar{\alpha}\_t$ | $\prod\_{s=1}^{t} \alpha\_s$ (cumulative) | $1 \to 0$ |
+| $\beta_t$ | Noise variance at step $t$ | $10^{-4}$ to $0.02$ |
+| $\alpha_t$ | $1 - \beta_t$ (signal retention) | $0.98$ to $0.9999$ |
+| $\bar{\alpha}_t$ | $\prod_{s=1}^{t} \alpha_s$ (cumulative) | $1 \to 0$ |
 
 ### Why Small Steps?
 
@@ -74,13 +74,13 @@ q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})
 
 By Markov property and chain rule:
 
-1. $q(x\_{1:T} \mid x\_0) = q(x\_1 \mid x\_0) q(x\_2 \mid x\_1, x\_0) q(x\_3 \mid x\_2, x\_1, x\_0) \cdots$
+1. $q(x_{1:T} \mid x_0) = q(x_1 \mid x_0) q(x_2 \mid x_1, x_0) q(x_3 \mid x_2, x_1, x_0) \cdots$
 
-2. Apply Markov: $q(x\_t \mid x\_{t-1}, ..., x\_0) = q(x\_t \mid x\_{t-1})$
+2. Apply Markov: $q(x_t \mid x_{t-1}, ..., x_0) = q(x_t \mid x_{t-1})$
 
-3. Result: $q(x\_{1:T} \mid x\_0) = \prod\_{t=1}^{T} q(x\_t \mid x\_{t-1})$
+3. Result: $q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})$
 
-### Full Joint (Including $x\_0$)
+### Full Joint (Including $x_0$)
 
 ```math
 q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})
@@ -93,7 +93,7 @@ q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})
 
 ### Goal
 
-Find $q(x\_t \mid x\_0)$ directly — skip intermediate steps!
+Find $q(x_t \mid x_0)$ directly — skip intermediate steps!
 
 ### Derivation
 
@@ -105,7 +105,7 @@ x_2 = \sqrt{\alpha_2} x_1 + \sqrt{1-\alpha_2} \epsilon_2
 
 ```
 
-**Step 2**: Substitute $x\_1$ into $x\_2$:
+**Step 2**: Substitute $x_1$ into $x_2$:
 
 ```math
 x_2 = \sqrt{\alpha_2}(\sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1) + \sqrt{1-\alpha_2} \epsilon_2
@@ -127,7 +127,7 @@ x_2 = \sqrt{\alpha_2}(\sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1) + \sqr
 
 ```
 
-**Step 5**: Define $\bar{\alpha}\_2 = \alpha\_1 \alpha\_2$:
+**Step 5**: Define $\bar{\alpha}_2 = \alpha_1 \alpha_2$:
 
 ```math
 x_2 = \sqrt{\bar{\alpha}_2} x_0 + \sqrt{1-\bar{\alpha}_2} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
@@ -141,7 +141,7 @@ x_2 = \sqrt{\bar{\alpha}_2} x_0 + \sqrt{1-\bar{\alpha}_2} \epsilon, \quad \epsil
 
 ```
 
-where $\bar{\alpha}\_t = \prod\_{s=1}^{t} \alpha\_s$.
+where $\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s$.
 
 ---
 
@@ -158,8 +158,8 @@ where $\bar{\alpha}\_t = \prod\_{s=1}^{t} \alpha\_s$.
 
 | Component | Formula | Meaning |
 |-----------|---------|---------|
-| **Mean** | $\sqrt{\bar{\alpha}\_t} x\_0$ | Scaled original |
-| **Variance** | $(1-\bar{\alpha}\_t) I$ | Accumulated noise |
+| **Mean** | $\sqrt{\bar{\alpha}_t} x_0$ | Scaled original |
+| **Variance** | $(1-\bar{\alpha}_t) I$ | Accumulated noise |
 
 ### Visual Timeline
 
@@ -195,9 +195,9 @@ t=T:     x_T ≈ pure noise
 
 ```
 
-### Proof of $\bar{\alpha}\_T \to 0$
+### Proof of $\bar{\alpha}_T \to 0$
 
-For $\beta\_t = \beta$ constant:
+For $\beta_t = \beta$ constant:
 
 ```math
 \bar{\alpha}_T = (1-\beta)^T
@@ -236,7 +236,7 @@ For $\beta\_t = \beta$ constant:
 
 ### Interpretation
 
-| $t$ | $\bar{\alpha}\_t$ | SNR | Description |
+| $t$ | $\bar{\alpha}_t$ | SNR | Description |
 |:---:|:----------------:|:---:|-------------|
 | 0 | 1.0 | ∞ | Pure signal |
 | T/4 | ~0.8 | ~4 | Mostly signal |
@@ -261,10 +261,10 @@ Often use log-SNR for numerical stability:
 
 | Property | Formula |
 |----------|---------|
-| **Single step** | $x\_t = \sqrt{\alpha\_t} x\_{t-1} + \sqrt{\beta\_t} \epsilon\_t$ |
-| **Marginal** | $q(x\_t \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_t} x\_0, (1-\bar{\alpha}\_t)I)$ |
-| **Sampling** | $x\_t = \sqrt{\bar{\alpha}\_t} x\_0 + \sqrt{1-\bar{\alpha}\_t} \epsilon$ |
-| **Boundary** | $x\_0 = \text{data}$, $x\_T \approx \mathcal{N}(0, I)$ |
+| **Single step** | $x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \epsilon_t$ |
+| **Marginal** | $q(x_t \mid x_0) = \mathcal{N}(\sqrt{\bar{\alpha}_t} x_0, (1-\bar{\alpha}_t)I)$ |
+| **Sampling** | $x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon$ |
+| **Boundary** | $x_0 = \text{data}$, $x_T \approx \mathcal{N}(0, I)$ |
 
 </div>
 

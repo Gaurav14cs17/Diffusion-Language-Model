@@ -77,7 +77,7 @@ p_\theta(\mathbf{f}) \neq p_{\text{data}}(\mathbf{f})
 
 ```
 
-Generated features $\hat{\mathbf{f}} \sim p\_\theta$ often fall outside the valid manifold $\mathcal{M}$, causing:
+Generated features $\hat{\mathbf{f}} \sim p_\theta$ often fall outside the valid manifold $\mathcal{M}$, causing:
 
 ```math
 D(\hat{\mathbf{f}}) = \text{garbage}
@@ -187,7 +187,7 @@ where:
 
 | Loss Component | Formula | Weight |
 |----------------|---------|--------|
-| Semantic | $\text{MSE}(D\_{\text{sem}}(\mathbf{z}), E\_{\text{frozen}}(\mathbf{x}))$ | α = 1.0 |
+| Semantic | $\text{MSE}(D_{\text{sem}}(\mathbf{z}), E_{\text{frozen}}(\mathbf{x}))$ | α = 1.0 |
 | Pixel | $\frac{1}{2}\text{L1}(\hat{\mathbf{x}}, \mathbf{x}) + \frac{1}{2}\text{MSE}(\hat{\mathbf{x}}, \mathbf{x})$ | γ = 1.0 |
 | Perceptual | $\text{LPIPS}(\hat{\mathbf{x}}, \mathbf{x})$ | λ = 0.1 |
 | KL | $-\frac{1}{2}\sum(1 + \log\sigma^2 - \mu^2 - \sigma^2)$ | β = 10⁻⁴ |
@@ -250,17 +250,17 @@ where $s$ is the guidance scale (typically 7.5).
 
 ### DDIM Sampling Algorithm
 
-1. **Initialize**: $z\_T \sim \mathcal{N}(0, I)$
+1. **Initialize**: $z_T \sim \mathcal{N}(0, I)$
 
 2. **For** $t = T, T-1, \ldots, 1$:
    
-   a. Predict noise with CFG: $\tilde{\epsilon} = \text{CFG}(\epsilon\_\theta(z\_t, t, c), \epsilon\_\theta(z\_t, t, \varnothing), s)$
+   a. Predict noise with CFG: $\tilde{\epsilon} = \text{CFG}(\epsilon_\theta(z_t, t, c), \epsilon_\theta(z_t, t, \varnothing), s)$
    
-   b. Predict $z\_0$: $\hat{z}\_0 = (z\_t - \sqrt{1 - \bar{\alpha}\_t} \cdot \tilde{\epsilon}) / \sqrt{\bar{\alpha}\_t}$
+   b. Predict $z_0$: $\hat{z}_0 = (z_t - \sqrt{1 - \bar{\alpha}_t} \cdot \tilde{\epsilon}) / \sqrt{\bar{\alpha}_t}$
    
-   c. Compute $z\_{t-1}$: $z\_{t-1} = \sqrt{\bar{\alpha}\_{t-1}} \cdot \hat{z}\_0 + \sqrt{1 - \bar{\alpha}\_{t-1}} \cdot \tilde{\epsilon}$
+   c. Compute $z_{t-1}$: $z_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \cdot \hat{z}_0 + \sqrt{1 - \bar{\alpha}_{t-1}} \cdot \tilde{\epsilon}$
 
-3. **Decode**: $\text{image} = \text{PS-VAE.decode}(z\_0)$
+3. **Decode**: $\text{image} = \text{PS-VAE.decode}(z_0)$
 
 ---
 
@@ -270,11 +270,11 @@ where $s$ is the guidance scale (typically 7.5).
 
 1. **Encode** source image: $z = \text{PS-VAE.encode}(x)$
 
-2. **Add noise** to timestep $t$: $z\_t = \sqrt{\bar{\alpha}\_t} \cdot z + \sqrt{1-\bar{\alpha}\_t} \cdot \epsilon$
+2. **Add noise** to timestep $t$: $z_t = \sqrt{\bar{\alpha}_t} \cdot z + \sqrt{1-\bar{\alpha}_t} \cdot \epsilon$
 
-3. **Denoise** with new prompt: $z'\_0 = \text{DDIM}(z\_t, \text{new\_prompt})$
+3. **Denoise** with new prompt: $z'_0 = \text{DDIM}(z_t, \text{new_prompt})$
 
-4. **Decode**: $x' = \text{PS-VAE.decode}(z'\_0)$
+4. **Decode**: $x' = \text{PS-VAE.decode}(z'_0)$
 
 The edit strength is controlled by $t$:
 

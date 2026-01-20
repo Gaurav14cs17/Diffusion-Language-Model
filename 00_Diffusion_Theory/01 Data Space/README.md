@@ -28,13 +28,13 @@ The **data space** $\mathcal{X} \subseteq \mathbb{R}^d$ is the domain where real
 
 ### Statement
 
-Real-world data comes from an unknown **data distribution** $p\_{\text{data}}(x)$.
+Real-world data comes from an unknown **data distribution** $p_{\text{data}}(x)$.
 
 ### Derivation
 
 1. **Define the space**: Let $\mathcal{X} \subseteq \mathbb{R}^d$ be our data space
 
-2. **Define the distribution**: $p\_{\text{data}}: \mathcal{X} \to \mathbb{R}\_{\geq 0}$ is a probability density
+2. **Define the distribution**: $p_{\text{data}}: \mathcal{X} \to \mathbb{R}_{\geq 0}$ is a probability density
 
 3. **Normalization constraint**:
 
@@ -43,11 +43,11 @@ Real-world data comes from an unknown **data distribution** $p\_{\text{data}}(x)
 
 ```
 
-4. **Sampling notation**: We write $x \sim p\_{\text{data}}$ or $x\_0 \sim p\_{\text{data}}$
+4. **Sampling notation**: We write $x \sim p_{\text{data}}$ or $x_0 \sim p_{\text{data}}$
 
 ### Key Insight
 
-> 💡 We never know $p\_{\text{data}}$ exactly — we only have **samples** from it!
+> 💡 We never know $p_{\text{data}}$ exactly — we only have **samples** from it!
 
 ---
 
@@ -201,7 +201,7 @@ x = (x / 255.0) * 2 - 1  # [0, 255] → [-1, 1]
 | Concept | Key Point |
 |---------|-----------|
 | **Data Space** | $\mathcal{X} \subseteq \mathbb{R}^d$ |
-| **Distribution** | Unknown $p\_{\text{data}}(x)$ |
+| **Distribution** | Unknown $p_{\text{data}}(x)$ |
 | **Manifold** | Data lives on low-dim surface |
 | **Preprocessing** | Normalize to $[-1, 1]$ |
 

@@ -24,7 +24,7 @@ We derive the training loss, starting from the **Evidence Lower Bound (ELBO)** a
 
 ### Goal
 
-Maximize $\log p\_\theta(x\_0)$ — the likelihood of real data.
+Maximize $\log p_\theta(x_0)$ — the likelihood of real data.
 
 ### Problem
 
@@ -66,9 +66,9 @@ By Jensen's inequality:
 
 ### Factor Both Distributions
 
-**Forward:** $q(x\_{1:T}|x\_0) = \prod\_{t=1}^T q(x\_t|x\_{t-1})$
+**Forward:** $q(x_{1:T}|x_0) = \prod_{t=1}^T q(x_t|x_{t-1})$
 
-**Reverse:** $p\_\theta(x\_{0:T}) = p(x\_T) \prod\_{t=1}^T p\_\theta(x\_{t-1}|x\_t)$
+**Reverse:** $p_\theta(x_{0:T}) = p(x_T) \prod_{t=1}^T p_\theta(x_{t-1}|x_t)$
 
 ### Substitute and Expand
 
@@ -102,17 +102,17 @@ For $t > 1$:
 
 | Term | Formula | Meaning |
 |:----:|---------|---------|
-| $L\_T$ | $D\_{KL}(q(x\_T\|x\_0) \| p(x\_T))$ | Prior matching |
-| $L\_{t-1}$ | $D\_{KL}(q(x\_{t-1}\|x\_t,x\_0) \| p\_\theta(x\_{t-1}\|x\_t))$ | Denoising steps |
-| $L\_0$ | $-\log p\_\theta(x\_0\|x\_1)$ | Reconstruction |
+| $L_T$ | $D_{KL}(q(x_T\|x_0) \| p(x_T))$ | Prior matching |
+| $L_{t-1}$ | $D_{KL}(q(x_{t-1}\|x_t,x_0) \| p_\theta(x_{t-1}\|x_t))$ | Denoising steps |
+| $L_0$ | $-\log p_\theta(x_0\|x_1)$ | Reconstruction |
 
 ### Key Insight
 
-- **$L\_T$**: Constant (no learnable params)! Just measures how close $x\_T$ is to $\mathcal{N}(0,I)$
+- **$L_T$**: Constant (no learnable params)! Just measures how close $x_T$ is to $\mathcal{N}(0,I)$
 
-- **$L\_{t-1}$**: The main learning signal! Match reverse to true posterior
+- **$L_{t-1}$**: The main learning signal! Match reverse to true posterior
 
-- **$L\_0$**: Discretized decoder (often ignored or simplified)
+- **$L_0$**: Discretized decoder (often ignored or simplified)
 
 ---
 
@@ -120,11 +120,11 @@ For $t > 1$:
 
 ### Setup
 
-Both $q(x\_{t-1}|x\_t,x\_0)$ and $p\_\theta(x\_{t-1}|x\_t)$ are Gaussian!
+Both $q(x_{t-1}|x_t,x_0)$ and $p_\theta(x_{t-1}|x_t)$ are Gaussian!
 
-- True: $\mathcal{N}(\tilde{\mu}\_t, \tilde{\beta}\_t I)$
+- True: $\mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)$
 
-- Model: $\mathcal{N}(\mu\_\theta, \sigma\_t^2 I)$
+- Model: $\mathcal{N}(\mu_\theta, \sigma_t^2 I)$
 
 ### KL for Gaussians
 
@@ -195,7 +195,7 @@ Ho et al. found that **ignoring the coefficient** works better!
 
 ```
 
-where $x\_t = \sqrt{\bar{\alpha}\_t}x\_0 + \sqrt{1-\bar{\alpha}\_t}\epsilon$.
+where $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$.
 
 ---
 
@@ -203,9 +203,9 @@ where $x\_t = \sqrt{\bar{\alpha}\_t}x\_0 + \sqrt{1-\bar{\alpha}\_t}\epsilon$.
 
 ### The Weighting
 
-| Loss | Weight on $L\_t$ |
+| Loss | Weight on $L_t$ |
 |------|-----------------|
-| VLB | $\frac{\beta\_t^2}{\alpha\_t(1-\bar{\alpha}\_t)}$ |
+| VLB | $\frac{\beta_t^2}{\alpha_t(1-\bar{\alpha}_t)}$ |
 | Simple | $1$ (uniform) |
 
 ### Empirical Finding
@@ -277,7 +277,7 @@ for each training iteration:
 
 ### Time Conditioning
 
-The model $\epsilon\_\theta(x\_t, t)$ must know which timestep it's at!
+The model $\epsilon_\theta(x_t, t)$ must know which timestep it's at!
 
 Common approaches:
 

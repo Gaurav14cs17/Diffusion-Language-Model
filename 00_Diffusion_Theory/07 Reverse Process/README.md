@@ -24,7 +24,7 @@ The **reverse process** learns to undo the forward diffusion — gradually denoi
 
 ### What We Want
 
-Given $x\_t$ (noisy), generate $x\_{t-1}$ (less noisy).
+Given $x_t$ (noisy), generate $x_{t-1}$ (less noisy).
 
 ### The Problem
 
@@ -33,17 +33,17 @@ p(x_{t-1} \mid x_t) = \frac{p(x_t \mid x_{t-1}) p(x_{t-1})}{p(x_t)}
 
 ```
 
-We need $p(x\_{t-1})$ — the marginal distribution of data at step $t-1$!
+We need $p(x_{t-1})$ — the marginal distribution of data at step $t-1$!
 
 This is **intractable** because:
 
-1. $p(x\_0) = p\_{\text{data}}$ is unknown
+1. $p(x_0) = p_{\text{data}}$ is unknown
 
-2. $p(x\_t) = \int p(x\_t \mid x\_0) p(x\_0) dx\_0$ is intractable
+2. $p(x_t) = \int p(x_t \mid x_0) p(x_0) dx_0$ is intractable
 
 ### The Solution
 
-**Learn** $p\_\theta(x\_{t-1} \mid x\_t)$ with a neural network!
+**Learn** $p_\theta(x_{t-1} \mid x_t)$ with a neural network!
 
 ```
 +-------------------------------------------------------------+
@@ -60,7 +60,7 @@ This is **intractable** because:
 
 ### Key Insight
 
-For small $\beta\_t$, the reverse process is **also Gaussian**! (See Feller, 1949)
+For small $\beta_t$, the reverse process is **also Gaussian**! (See Feller, 1949)
 
 ### Parameterization
 
@@ -73,13 +73,13 @@ p_\theta(x_{t-1} \mid x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\th
 
 | Choice | Formula | Notes |
 |--------|---------|-------|
-| **Fixed (DDPM)** | $\sigma\_t^2 = \beta\_t$ | Simple, works well |
-| **Fixed (optimal)** | $\sigma\_t^2 = \tilde{\beta}\_t$ | Lower bound |
-| **Learned** | $\sigma\_t^2 = \exp(v \log\beta\_t + (1-v)\log\tilde{\beta}\_t)$ | Interpolate |
+| **Fixed (DDPM)** | $\sigma_t^2 = \beta_t$ | Simple, works well |
+| **Fixed (optimal)** | $\sigma_t^2 = \tilde{\beta}_t$ | Lower bound |
+| **Learned** | $\sigma_t^2 = \exp(v \log\beta_t + (1-v)\log\tilde{\beta}_t)$ | Interpolate |
 
 ### Focus: Learning the Mean
 
-The mean $\mu\_\theta(x\_t, t)$ is what the network must predict!
+The mean $\mu_\theta(x_t, t)$ is what the network must predict!
 
 ---
 
@@ -87,7 +87,7 @@ The mean $\mu\_\theta(x\_t, t)$ is what the network must predict!
 
 ### Target: The True Posterior
 
-If we knew $x\_0$, the optimal reverse step would be:
+If we knew $x_0$, the optimal reverse step would be:
 
 ```math
 q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)
@@ -103,24 +103,24 @@ where:
 
 ### The Problem
 
-We don't know $x\_0$ during generation!
+We don't know $x_0$ during generation!
 
 ### The Solution
 
-**Predict** $x\_0$ from $x\_t$:
+**Predict** $x_0$ from $x_t$:
 
 ```math
 \hat{x}_0 = f_\theta(x_t, t)
 
 ```
 
-Then substitute into $\tilde{\mu}\_t$!
+Then substitute into $\tilde{\mu}_t$!
 
 ---
 
 ## 📐 Step 4: Three Parameterizations
 
-### Option A: Predict $x\_0$ Directly
+### Option A: Predict $x_0$ Directly
 
 ```math
 \mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} \hat{x}_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
@@ -129,7 +129,7 @@ Then substitute into $\tilde{\mu}\_t$!
 
 ### Option B: Predict $\epsilon$ (Most Common!)
 
-Since $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\_t}}$:
+Since $x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}}$:
 
 ```math
 \boxed{\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x_t, t)\right)}
@@ -138,14 +138,14 @@ Since $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\
 
 ### Proof of Equivalence
 
-Start with $\mu\_\theta$ in terms of $x\_0$:
+Start with $\mu_\theta$ in terms of $x_0$:
 
 ```math
 \mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
 
 ```
 
-Substitute $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\_t}}$:
+Substitute $x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}}$:
 
 After algebraic simplification (tedious but straightforward):
 
@@ -156,9 +156,9 @@ After algebraic simplification (tedious but straightforward):
 
 ### Option C: Predict $v$ (Velocity)
 
-Define: $v\_t = \sqrt{\bar{\alpha}\_t}\epsilon - \sqrt{1-\bar{\alpha}\_t}x\_0$
+Define: $v_t = \sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0$
 
-Then: $\epsilon = \sqrt{\bar{\alpha}\_t}v\_t + \sqrt{1-\bar{\alpha}\_t}x\_t/\sqrt{\bar{\alpha}\_t}$
+Then: $\epsilon = \sqrt{\bar{\alpha}_t}v_t + \sqrt{1-\bar{\alpha}_t}x_t/\sqrt{\bar{\alpha}_t}$
 
 (See Parameterization chapter for details)
 
@@ -194,7 +194,7 @@ return x_0
 
 ### Why Add Noise?
 
-Even though we're denoising, we add small noise $\sigma\_t z$ because:
+Even though we're denoising, we add small noise $\sigma_t z$ because:
 
 1. Matches the true reverse posterior
 
@@ -234,7 +234,7 @@ Precision (inverse variance):
 
 ```
 
-Using $\alpha\_t + \beta\_t = 1$:
+Using $\alpha_t + \beta_t = 1$:
 
 ```math
 = \frac{\alpha_t - \alpha_t\bar{\alpha}_{t-1} + 1 - \alpha_t}{\beta_t(1-\bar{\alpha}_{t-1})}
@@ -251,10 +251,10 @@ Therefore:
 
 ### Two Common Choices
 
-| $\sigma\_t^2$ | Formula | When to Use |
+| $\sigma_t^2$ | Formula | When to Use |
 |:------------:|---------|-------------|
-| $\beta\_t$ | Fixed, simple | Default (DDPM) |
-| $\tilde{\beta}\_t$ | $\frac{(1-\bar{\alpha}\_{t-1})\beta\_t}{1-\bar{\alpha}\_t}$ | Theoretically optimal |
+| $\beta_t$ | Fixed, simple | Default (DDPM) |
+| $\tilde{\beta}_t$ | $\frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}$ | Theoretically optimal |
 
 Both give similar results for well-trained models!
 
@@ -266,9 +266,9 @@ Both give similar results for well-trained models!
 
 | Component | Formula |
 |-----------|---------|
-| **Reverse transition** | $p\_\theta(x\_{t-1} \mid x\_t) = \mathcal{N}(\mu\_\theta, \sigma\_t^2 I)$ |
-| **Mean (ε-pred)** | $\mu\_\theta = \frac{1}{\sqrt{\alpha\_t}}(x\_t - \frac{\beta\_t}{\sqrt{1-\bar{\alpha}\_t}}\epsilon\_\theta)$ |
-| **Variance** | $\sigma\_t^2 = \beta\_t$ or $\tilde{\beta}\_t$ |
+| **Reverse transition** | $p_\theta(x_{t-1} \mid x_t) = \mathcal{N}(\mu_\theta, \sigma_t^2 I)$ |
+| **Mean (ε-pred)** | $\mu_\theta = \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta)$ |
+| **Variance** | $\sigma_t^2 = \beta_t$ or $\tilde{\beta}_t$ |
 
 </div>
 

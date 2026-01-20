@@ -24,13 +24,13 @@ There are **three equivalent ways** to parameterize what the diffusion model pre
 
 | Prediction | Symbol | The Model Outputs |
 |:----------:|:------:|-------------------|
-| **Noise** | $\epsilon\_\theta$ | The noise that was added |
-| **Data** | $x\_{0,\theta}$ | The clean data directly |
-| **Velocity** | $v\_\theta$ | A combination of both |
+| **Noise** | $\epsilon_\theta$ | The noise that was added |
+| **Data** | $x_{0,\theta}$ | The clean data directly |
+| **Velocity** | $v_\theta$ | A combination of both |
 
 ### Relationship
 
-Given $x\_t = \sqrt{\bar{\alpha}\_t}x\_0 + \sqrt{1-\bar{\alpha}\_t}\epsilon$:
+Given $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$:
 
 ```math
 \boxed{v_t = \sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0}
@@ -65,7 +65,7 @@ x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}
 | ✅ Pros | ❌ Cons |
 |---------|---------|
 | Most studied | Numerically unstable at $t \to 0$ |
-| Works well for images | Division by small $\sqrt{\bar{\alpha}\_t}$ |
+| Works well for images | Division by small $\sqrt{\bar{\alpha}_t}$ |
 
 ---
 
@@ -136,11 +136,11 @@ All three losses are equivalent up to scaling.
 
 ### Conversion Table
 
-| Predict | Get $x\_0$ | Get $\epsilon$ |
+| Predict | Get $x_0$ | Get $\epsilon$ |
 |---------|-----------|----------------|
-| $\epsilon\_\theta$ | $\frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon\_\theta}{\sqrt{\bar{\alpha}\_t}}$ | $\epsilon\_\theta$ |
-| $x\_{0,\theta}$ | $x\_{0,\theta}$ | $\frac{x\_t - \sqrt{\bar{\alpha}\_t}x\_{0,\theta}}{\sqrt{1-\bar{\alpha}\_t}}$ |
-| $v\_\theta$ | $\sqrt{\bar{\alpha}\_t}x\_t - \sqrt{1-\bar{\alpha}\_t}v\_\theta$ | $\sqrt{1-\bar{\alpha}\_t}x\_t + \sqrt{\bar{\alpha}\_t}v\_\theta$ |
+| $\epsilon_\theta$ | $\frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}$ | $\epsilon_\theta$ |
+| $x_{0,\theta}$ | $x_{0,\theta}$ | $\frac{x_t - \sqrt{\bar{\alpha}_t}x_{0,\theta}}{\sqrt{1-\bar{\alpha}_t}}$ |
+| $v_\theta$ | $\sqrt{\bar{\alpha}_t}x_t - \sqrt{1-\bar{\alpha}_t}v_\theta$ | $\sqrt{1-\bar{\alpha}_t}x_t + \sqrt{\bar{\alpha}_t}v_\theta$ |
 
 ---
 
@@ -151,7 +151,7 @@ All three losses are equivalent up to scaling.
 | Standard image generation | $\epsilon$-prediction | Most tested |
 | High resolution | $v$-prediction | Better numerics |
 | Progressive distillation | $v$-prediction | Stable |
-| Conditional generation | $x\_0$-prediction | Direct control |
+| Conditional generation | $x_0$-prediction | Direct control |
 
 ---
 

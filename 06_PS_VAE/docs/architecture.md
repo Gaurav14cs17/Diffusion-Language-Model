@@ -50,16 +50,16 @@ PS-VAE bridges the gap between representation learning and image generation by c
 
 #### Problem 1: Off-Manifold Generation
 
-Given a pretrained representation encoder $E\_\phi: \mathbb{R}^{H \times W \times 3} \rightarrow \mathbb{R}^{h \times w \times d}$, the feature space lacks compact regularization.
+Given a pretrained representation encoder $E_\phi: \mathbb{R}^{H \times W \times 3} \rightarrow \mathbb{R}^{h \times w \times d}$, the feature space lacks compact regularization.
 
-**Mathematical Issue**: The representation features $\mathbf{f} = E\_\phi(\mathbf{x})$ lie in a high-dimensional space $\mathbb{R}^{h \times w \times d}$ (e.g., $d = 1024$), but the intrinsic dimensionality is much lower. Training a diffusion model directly on this space leads to:
+**Mathematical Issue**: The representation features $\mathbf{f} = E_\phi(\mathbf{x})$ lie in a high-dimensional space $\mathbb{R}^{h \times w \times d}$ (e.g., $d = 1024$), but the intrinsic dimensionality is much lower. Training a diffusion model directly on this space leads to:
 
 ```math
 p_\theta(\mathbf{f}) \neq p_{\text{data}}(\mathbf{f})
 
 ```
 
-The generated features $\hat{\mathbf{f}} \sim p\_\theta$ often fall outside the valid manifold $\mathcal{M} \subset \mathbb{R}^{h \times w \times d}$, causing decoding failures.
+The generated features $\hat{\mathbf{f}} \sim p_\theta$ often fall outside the valid manifold $\mathcal{M} \subset \mathbb{R}^{h \times w \times d}$, causing decoding failures.
 
 #### Problem 2: Weak Pixel Reconstruction
 
@@ -126,7 +126,7 @@ Projector: Linear(d, 512) → LayerNorm → GELU → Linear(512, 256) → LayerN
 
 ```
 
-where $z\_{\text{dim}} = 96$ (compact latent dimension).
+where $z_{\text{dim}} = 96$ (compact latent dimension).
 
 #### 3. Reparameterization Trick
 
@@ -298,7 +298,7 @@ where:
 
 ```
 
-where $\phi\_l$ are VGG features at layer $l$ and $\mathbf{w}\_l$ are learned weights.
+where $\phi_l$ are VGG features at layer $l$ and $\mathbf{w}_l$ are learned weights.
 
 #### KL Divergence Loss
 
@@ -337,7 +337,7 @@ Once PS-VAE is trained, we train a Diffusion Transformer to generate in the late
   <img src="./images/theory_diffusion_process.svg" alt="Diffusion Process" width="100%">
 </p>
 
-Given clean latent $\mathbf{z}\_0$, the forward process adds Gaussian noise:
+Given clean latent $\mathbf{z}_0$, the forward process adds Gaussian noise:
 
 ```math
 q(\mathbf{z}_t | \mathbf{z}_0) = \mathcal{N}\left( \mathbf{z}_t; \sqrt{\bar{\alpha}_t} \mathbf{z}_0, (1 - \bar{\alpha}_t) \mathbf{I} \right)
@@ -346,11 +346,11 @@ q(\mathbf{z}_t | \mathbf{z}_0) = \mathcal{N}\left( \mathbf{z}_t; \sqrt{\bar{\alp
 
 where:
 
-- $\bar{\alpha}\_t = \prod\_{s=1}^t \alpha\_s$
+- $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$
 
-- $\alpha\_t = 1 - \beta\_t$
+- $\alpha_t = 1 - \beta_t$
 
-- $\beta\_t$ follows a scaled linear schedule: $\beta\_t \in [10^{-4}, 0.02]$
+- $\beta_t$ follows a scaled linear schedule: $\beta_t \in [10^{-4}, 0.02]$
 
 Equivalently:
 
@@ -447,7 +447,7 @@ Each block consists of:
 
 where:
 
-- $\mathbf{z}\_0 = \text{PS-VAE.encode}(\mathbf{x})$
+- $\mathbf{z}_0 = \text{PS-VAE.encode}(\mathbf{x})$
 
 - $\boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$
 
@@ -595,7 +595,7 @@ image = psvae.decode(z_0)
 
 ```
 
-For deterministic sampling (DDIM), set $\sigma\_t = 0$.
+For deterministic sampling (DDIM), set $\sigma_t = 0$.
 
 ---
 
@@ -635,8 +635,8 @@ The PS-VAE framework provides:
 | Component | Equation |
 |-----------|----------|
 | Encoding | $\mathbf{z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}$ |
-| S-VAE Loss | $\mathcal{L} = \text{MSE}(\hat{\mathbf{f}}, \mathbf{f}) + \beta \cdot D\_{\text{KL}}$ |
-| PS-VAE Loss | $\mathcal{L} = \alpha \mathcal{L}\_{\text{sem}} + \gamma \mathcal{L}\_{\text{pix}} + \lambda \mathcal{L}\_{\text{perc}} + \beta \mathcal{L}\_{\text{KL}}$ |
-| Diffusion | $\mathbf{z}\_t = \sqrt{\bar{\alpha}\_t} \mathbf{z}\_0 + \sqrt{1-\bar{\alpha}\_t} \boldsymbol{\epsilon}$ |
-| DiT Loss | $\mathcal{L} = \mathbb{E}\left[\|\boldsymbol{\epsilon} - \boldsymbol{\epsilon}\_\theta(\mathbf{z}\_t, t, \mathbf{c})\|^2\right]$ |
-| CFG | $\tilde{\boldsymbol{\epsilon}} = \boldsymbol{\epsilon}\_\varnothing + s(\boldsymbol{\epsilon}\_\mathbf{c} - \boldsymbol{\epsilon}\_\varnothing)$ |
+| S-VAE Loss | $\mathcal{L} = \text{MSE}(\hat{\mathbf{f}}, \mathbf{f}) + \beta \cdot D_{\text{KL}}$ |
+| PS-VAE Loss | $\mathcal{L} = \alpha \mathcal{L}_{\text{sem}} + \gamma \mathcal{L}_{\text{pix}} + \lambda \mathcal{L}_{\text{perc}} + \beta \mathcal{L}_{\text{KL}}$ |
+| Diffusion | $\mathbf{z}_t = \sqrt{\bar{\alpha}_t} \mathbf{z}_0 + \sqrt{1-\bar{\alpha}_t} \boldsymbol{\epsilon}$ |
+| DiT Loss | $\mathcal{L} = \mathbb{E}\left[\|\boldsymbol{\epsilon} - \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \mathbf{c})\|^2\right]$ |
+| CFG | $\tilde{\boldsymbol{\epsilon}} = \boldsymbol{\epsilon}_\varnothing + s(\boldsymbol{\epsilon}_\mathbf{c} - \boldsymbol{\epsilon}_\varnothing)$ |

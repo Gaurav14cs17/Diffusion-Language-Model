@@ -96,17 +96,17 @@ x_t = \sqrt{\alpha_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t, \quad \ep
 
 ### Proof of Equivalence
 
-Let $x\_{t-1}$ be fixed, $\epsilon\_t \sim \mathcal{N}(0, I)$:
+Let $x_{t-1}$ be fixed, $\epsilon_t \sim \mathcal{N}(0, I)$:
 
-1. **Mean**: $\mathbb{E}[x\_t] = \sqrt{\alpha\_t} x\_{t-1} + \sqrt{\beta\_t} \cdot 0 = \sqrt{\alpha\_t} x\_{t-1}$
+1. **Mean**: $\mathbb{E}[x_t] = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \cdot 0 = \sqrt{\alpha_t} x_{t-1}$
 
-2. **Variance**: $\text{Var}[x\_t] = \beta\_t \cdot I$
+2. **Variance**: $\text{Var}[x_t] = \beta_t \cdot I$
 
-3. **Distribution**: $x\_t \sim \mathcal{N}(\sqrt{\alpha\_t} x\_{t-1}, \beta\_t I)$ ✓
+3. **Distribution**: $x_t \sim \mathcal{N}(\sqrt{\alpha_t} x_{t-1}, \beta_t I)$ ✓
 
 ---
 
-## 📐 Step 3: Variance Preservation ($\alpha\_t + \beta\_t = 1$)
+## 📐 Step 3: Variance Preservation ($\alpha_t + \beta_t = 1$)
 
 ### Statement
 
@@ -123,9 +123,9 @@ We require:
 
 ### Proof by Induction
 
-**Base case**: Assume $\text{Var}[x\_0] = I$
+**Base case**: Assume $\text{Var}[x_0] = I$
 
-**Inductive step**: If $\text{Var}[x\_{t-1}] = I$, then:
+**Inductive step**: If $\text{Var}[x_{t-1}] = I$, then:
 
 ```math
 \text{Var}[x_t] = \alpha_t \cdot \text{Var}[x_{t-1}] + \beta_t \cdot I
@@ -155,7 +155,7 @@ We require:
 
 ### Goal
 
-Find $q(x\_t \mid x\_0)$ without computing intermediate steps.
+Find $q(x_t \mid x_0)$ without computing intermediate steps.
 
 ### Recursive Expansion
 
@@ -175,7 +175,7 @@ x_t = \sqrt{\alpha_t}(\sqrt{\alpha_{t-1}} x_{t-2} + \sqrt{\beta_{t-1}} \epsilon_
 
 ### After Full Recursion
 
-Define $\bar{\alpha}\_t = \prod\_{s=1}^{t} \alpha\_s$:
+Define $\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s$:
 
 ```math
 \boxed{x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon}
@@ -190,7 +190,7 @@ where $\epsilon \sim \mathcal{N}(0, I)$.
 
 ### Goal
 
-Compute $q(x\_{t-1} \mid x\_t, x\_0)$ — needed for training!
+Compute $q(x_{t-1} \mid x_t, x_0)$ — needed for training!
 
 ### Using Bayes' Rule
 
@@ -224,9 +224,9 @@ q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)
 
 | Assumption | Mathematical Form | Purpose |
 |------------|------------------|---------|
-| **Markov** | $q(x\_t \mid x\_{0:t-1}) = q(x\_t \mid x\_{t-1})$ | Factorization |
-| **Gaussian** | $q(x\_t \mid x\_{t-1}) = \mathcal{N}(\cdot)$ | Tractable KL |
-| **Variance Preserving** | $\alpha\_t + \beta\_t = 1$ | Stability |
+| **Markov** | $q(x_t \mid x_{0:t-1}) = q(x_t \mid x_{t-1})$ | Factorization |
+| **Gaussian** | $q(x_t \mid x_{t-1}) = \mathcal{N}(\cdot)$ | Tractable KL |
+| **Variance Preserving** | $\alpha_t + \beta_t = 1$ | Stability |
 
 </div>
 

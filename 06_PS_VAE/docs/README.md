@@ -77,11 +77,11 @@ All diagrams are available as SVG files in the `images/` folder:
 | Component | Equation |
 |-----------|----------|
 | **Encoding** | $\mathbf{z} = \boldsymbol{\mu} + \boldsymbol{\sigma} \odot \boldsymbol{\epsilon}$ |
-| **S-VAE Loss** | $\mathcal{L} = \text{MSE}(\hat{\mathbf{f}}, \mathbf{f}) + \beta \cdot D\_{\text{KL}}$ |
-| **PS-VAE Loss** | $\mathcal{L} = \alpha \mathcal{L}\_{\text{sem}} + \gamma \mathcal{L}\_{\text{pix}} + \lambda \mathcal{L}\_{\text{perc}} + \beta \mathcal{L}\_{\text{KL}}$ |
-| **Diffusion** | $\mathbf{z}\_t = \sqrt{\bar{\alpha}\_t} \mathbf{z}\_0 + \sqrt{1-\bar{\alpha}\_t} \boldsymbol{\epsilon}$ |
-| **DiT Loss** | $\mathcal{L} = \mathbb{E}\left[\|\boldsymbol{\epsilon} - \boldsymbol{\epsilon}\_\theta(\mathbf{z}\_t, t, \mathbf{c})\|^2\right]$ |
-| **CFG** | $\tilde{\boldsymbol{\epsilon}} = \boldsymbol{\epsilon}\_\varnothing + s(\boldsymbol{\epsilon}\_\mathbf{c} - \boldsymbol{\epsilon}\_\varnothing)$ |
+| **S-VAE Loss** | $\mathcal{L} = \text{MSE}(\hat{\mathbf{f}}, \mathbf{f}) + \beta \cdot D_{\text{KL}}$ |
+| **PS-VAE Loss** | $\mathcal{L} = \alpha \mathcal{L}_{\text{sem}} + \gamma \mathcal{L}_{\text{pix}} + \lambda \mathcal{L}_{\text{perc}} + \beta \mathcal{L}_{\text{KL}}$ |
+| **Diffusion** | $\mathbf{z}_t = \sqrt{\bar{\alpha}_t} \mathbf{z}_0 + \sqrt{1-\bar{\alpha}_t} \boldsymbol{\epsilon}$ |
+| **DiT Loss** | $\mathcal{L} = \mathbb{E}\left[\|\boldsymbol{\epsilon} - \boldsymbol{\epsilon}_\theta(\mathbf{z}_t, t, \mathbf{c})\|^2\right]$ |
+| **CFG** | $\tilde{\boldsymbol{\epsilon}} = \boldsymbol{\epsilon}_\varnothing + s(\boldsymbol{\epsilon}_\mathbf{c} - \boldsymbol{\epsilon}_\varnothing)$ |
 
 ### Default Hyperparameters
 

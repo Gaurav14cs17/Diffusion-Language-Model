@@ -12,7 +12,7 @@
 
 ## 🎯 Overview
 
-The **marginal distribution** $q(x\_t \mid x\_0)$ lets us sample noisy data at **any timestep directly** — no need to simulate the entire forward chain!
+The **marginal distribution** $q(x_t \mid x_0)$ lets us sample noisy data at **any timestep directly** — no need to simulate the entire forward chain!
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/06%20Marginal%20Distributions/marginal_distributions.svg" alt="Marginal Distributions Diagram" width="100%">
@@ -40,7 +40,7 @@ The **marginal distribution** $q(x\_t \mid x\_0)$ lets us sample noisy data at *
 
 | Without Marginal | With Marginal |
 |:----------------:|:-------------:|
-| $x\_0 \to x\_1 \to x\_2 \to \cdots \to x\_t$ | $x\_0 \to x\_t$ directly! |
+| $x_0 \to x_1 \to x_2 \to \cdots \to x_t$ | $x_0 \to x_t$ directly! |
 | $O(t)$ operations | $O(1)$ operation |
 | Sequential | Parallelizable |
 
@@ -50,7 +50,7 @@ The **marginal distribution** $q(x\_t \mid x\_0)$ lets us sample noisy data at *
 
 ### Goal
 
-Derive $q(x\_t \mid x\_0)$ from the chain of Gaussian transitions.
+Derive $q(x_t \mid x_0)$ from the chain of Gaussian transitions.
 
 ### Step 1: Single Transition
 
@@ -69,7 +69,7 @@ x_2 = \sqrt{\alpha_2} x_1 + \sqrt{1-\alpha_2} \epsilon_2
 ```
 
 ### Step 3: Combine Noise Terms
-Let $\tilde{\epsilon} = \sqrt{\alpha\_2(1-\alpha\_1)} \epsilon\_1 + \sqrt{1-\alpha\_2} \epsilon\_2$
+Let $\tilde{\epsilon} = \sqrt{\alpha_2(1-\alpha_1)} \epsilon_1 + \sqrt{1-\alpha_2} \epsilon_2$
 
 **Variance of $\tilde{\epsilon}$:**
 
@@ -85,10 +85,10 @@ Let $\tilde{\epsilon} = \sqrt{\alpha\_2(1-\alpha\_1)} \epsilon\_1 + \sqrt{1-\alp
 
 ```
 
-So: $\tilde{\epsilon} = \sqrt{1-\alpha\_1\alpha\_2} \cdot \epsilon$ where $\epsilon \sim \mathcal{N}(0,I)$
+So: $\tilde{\epsilon} = \sqrt{1-\alpha_1\alpha_2} \cdot \epsilon$ where $\epsilon \sim \mathcal{N}(0,I)$
 
 ### Step 5: General Pattern
-Define $\bar{\alpha}\_t = \prod\_{s=1}^{t} \alpha\_s$
+Define $\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s$
 
 ```math
 x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon
@@ -97,7 +97,7 @@ x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon
 
 ### Step 6: Verify by Induction
 
-**Base:** $t=1$: $x\_1 = \sqrt{\alpha\_1}x\_0 + \sqrt{1-\alpha\_1}\epsilon$ ✓
+**Base:** $t=1$: $x_1 = \sqrt{\alpha_1}x_0 + \sqrt{1-\alpha_1}\epsilon$ ✓
 
 **Induction:** Assume true for $t-1$. Then:
 
@@ -107,7 +107,7 @@ x_t = \sqrt{\alpha_t}x_{t-1} + \sqrt{1-\alpha_t}\epsilon_t
 
 ```
 
-Combining noise (variance = $\alpha\_t(1-\bar{\alpha}\_{t-1}) + 1-\alpha\_t = 1-\bar{\alpha}\_t$):
+Combining noise (variance = $\alpha_t(1-\bar{\alpha}_{t-1}) + 1-\alpha_t = 1-\bar{\alpha}_t$):
 
 ```math
 x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon \quad \checkmark
@@ -120,7 +120,7 @@ x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon \quad \checkmar
 
 ### Goal
 
-Find $q(x\_{t-1} \mid x\_t, x\_0)$ — the "reverse" step given both endpoints.
+Find $q(x_{t-1} \mid x_t, x_0)$ — the "reverse" step given both endpoints.
 
 ### Why We Need This
 
@@ -133,7 +133,7 @@ q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}, x_0) \cdot q(x_{t-1} \mid x
 
 ```
 
-Since $q(x\_t \mid x\_{t-1}, x\_0) = q(x\_t \mid x\_{t-1})$ (Markov property):
+Since $q(x_t \mid x_{t-1}, x_0) = q(x_t \mid x_{t-1})$ (Markov property):
 
 ```math
 q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}) \cdot q(x_{t-1} \mid x_0)}{q(x_t \mid x_0)}
@@ -142,11 +142,11 @@ q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}) \cdot q(x_{t-1} \mid x_0)}{
 
 ### All Three Terms are Gaussian!
 
-1. $q(x\_t \mid x\_{t-1}) = \mathcal{N}(\sqrt{\alpha\_t}x\_{t-1}, \beta\_t I)$
+1. $q(x_t \mid x_{t-1}) = \mathcal{N}(\sqrt{\alpha_t}x_{t-1}, \beta_t I)$
 
-2. $q(x\_{t-1} \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_{t-1}}x\_0, (1-\bar{\alpha}\_{t-1})I)$
+2. $q(x_{t-1} \mid x_0) = \mathcal{N}(\sqrt{\bar{\alpha}_{t-1}}x_0, (1-\bar{\alpha}_{t-1})I)$
 
-3. $q(x\_t \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_t}x\_0, (1-\bar{\alpha}\_t)I)$
+3. $q(x_t \mid x_0) = \mathcal{N}(\sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I)$
 
 ### Result
 
@@ -193,9 +193,9 @@ For Gaussians, the posterior is found by completing the square in the exponent.
 
 ```
 
-### Collect Terms in $x\_{t-1}$
+### Collect Terms in $x_{t-1}$
 
-After expansion, group terms quadratic in $x\_{t-1}$:
+After expansion, group terms quadratic in $x_{t-1}$:
 
 ```math
 \propto -\frac{1}{2}\left[\left(\frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}\right)x_{t-1}^2 - 2\left(\frac{\sqrt{\alpha_t}x_t}{\beta_t} + \frac{\sqrt{\bar{\alpha}_{t-1}}x_0}{1-\bar{\alpha}_{t-1}}\right)x_{t-1}\right]
@@ -220,7 +220,7 @@ After expansion, group terms quadratic in $x\_{t-1}$:
 
 ### Final Simplification
 
-After algebra (using $\beta\_t = 1-\alpha\_t$ and $1-\bar{\alpha}\_t = 1-\alpha\_t\bar{\alpha}\_{t-1}$):
+After algebra (using $\beta_t = 1-\alpha_t$ and $1-\bar{\alpha}_t = 1-\alpha_t\bar{\alpha}_{t-1}$):
 
 ```math
 \tilde{\beta}_t = \frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}
@@ -234,14 +234,14 @@ After algebra (using $\beta\_t = 1-\alpha\_t$ and $1-\bar{\alpha}\_t = 1-\alpha\
 
 ### Express in Terms of $\epsilon$
 
-Since $x\_t = \sqrt{\bar{\alpha}\_t}x\_0 + \sqrt{1-\bar{\alpha}\_t}\epsilon$, we can write:
+Since $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$, we can write:
 
 ```math
 x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}}
 
 ```
 
-### Substitute into $\tilde{\mu}\_t$
+### Substitute into $\tilde{\mu}_t$
 
 ```math
 \tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} \cdot \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}} + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
@@ -259,8 +259,8 @@ x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}}
 
 | Form | Useful When |
 |------|-------------|
-| $\tilde{\mu}\_t(x\_0, x\_t)$ | You know $x\_0$ |
-| $\tilde{\mu}\_t(x\_t, \epsilon)$ | You predict $\epsilon$ (training!) |
+| $\tilde{\mu}_t(x_0, x_t)$ | You know $x_0$ |
+| $\tilde{\mu}_t(x_t, \epsilon)$ | You predict $\epsilon$ (training!) |
 
 ---
 
@@ -290,7 +290,7 @@ q(x_t \mid x_0) = \mathcal{N}(\sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I)
 
 ```
 
-### Use $x\_t = \sqrt{\bar{\alpha}\_t}x\_0 + \sqrt{1-\bar{\alpha}\_t}\epsilon$
+### Use $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$
 
 ```math
 = -\frac{\sqrt{1-\bar{\alpha}_t}\epsilon}{1-\bar{\alpha}_t} = -\frac{\epsilon}{\sqrt{1-\bar{\alpha}_t}}
@@ -316,9 +316,9 @@ Predicting $\epsilon$ is equivalent to estimating the score! This is why **score
 
 | Distribution | Formula |
 |--------------|---------|
-| **Marginal** | $q(x\_t \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_t}x\_0, (1-\bar{\alpha}\_t)I)$ |
-| **Posterior** | $q(x\_{t-1} \mid x\_t, x\_0) = \mathcal{N}(\tilde{\mu}\_t, \tilde{\beta}\_t I)$ |
-| **Score** | $\nabla \log q = -\epsilon / \sqrt{1-\bar{\alpha}\_t}$ |
+| **Marginal** | $q(x_t \mid x_0) = \mathcal{N}(\sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I)$ |
+| **Posterior** | $q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)$ |
+| **Score** | $\nabla \log q = -\epsilon / \sqrt{1-\bar{\alpha}_t}$ |
 
 </div>
 

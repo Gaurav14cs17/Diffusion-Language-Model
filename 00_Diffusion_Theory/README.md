@@ -78,14 +78,14 @@
 
 | # | Topic | Description | Key Equation |
 |:-:|-------|-------------|:------------:|
-| 📂 | [**01 Data Space**](./01%20Data%20Space/) | The manifold where data lives | $p\_{\text{data}}(x)$ |
-| 📂 | [**02 Probability Assumptions**](./02%20Probability%20Assumptions/) | Markov + Gaussian foundations | $q(x\_t \mid x\_{t-1})$ |
-| 📂 | [**03 Gaussian Transition**](./03%20Gaussian%20Transition%20Derivation/) | Step-by-step derivation | $x\_t = \sqrt{\alpha\_t} x\_{t-1} + \sqrt{\beta\_t} \epsilon$ |
-| 📂 | [**04 Forward Process**](./04%20Forward%20Process/) | How noise destroys data | $x\_t = \sqrt{\bar{\alpha}\_t} x\_0 + \sqrt{1-\bar{\alpha}\_t} \epsilon$ |
-| 📂 | [**05 Noise Schedule**](./05%20Noise%20Schedule/) | Linear, cosine, learned | $\beta\_t \in [\beta\_{\min}, \beta\_{\max}]$ |
-| 📂 | [**06 Marginal Distributions**](./06%20Marginal%20Distributions/) | Skip steps, train efficiently | $q(x\_t \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_t} x\_0, (1-\bar{\alpha}\_t) I)$ |
-| 📂 | [**07 Reverse Process**](./07%20Reverse%20Process/) | Learn to denoise | $p\_\theta(x\_{t-1} \mid x\_t)$ |
-| 📂 | [**08 Training Objective**](./08%20Training%20Objective/) | ELBO → Simple MSE | $\mathcal{L} = \mathbb{E}[\|\epsilon - \epsilon\_\theta\|^2]$ |
+| 📂 | [**01 Data Space**](./01%20Data%20Space/) | The manifold where data lives | $p_{\text{data}}(x)$ |
+| 📂 | [**02 Probability Assumptions**](./02%20Probability%20Assumptions/) | Markov + Gaussian foundations | $q(x_t \mid x_{t-1})$ |
+| 📂 | [**03 Gaussian Transition**](./03%20Gaussian%20Transition%20Derivation/) | Step-by-step derivation | $x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \epsilon$ |
+| 📂 | [**04 Forward Process**](./04%20Forward%20Process/) | How noise destroys data | $x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon$ |
+| 📂 | [**05 Noise Schedule**](./05%20Noise%20Schedule/) | Linear, cosine, learned | $\beta_t \in [\beta_{\min}, \beta_{\max}]$ |
+| 📂 | [**06 Marginal Distributions**](./06%20Marginal%20Distributions/) | Skip steps, train efficiently | $q(x_t \mid x_0) = \mathcal{N}(\sqrt{\bar{\alpha}_t} x_0, (1-\bar{\alpha}_t) I)$ |
+| 📂 | [**07 Reverse Process**](./07%20Reverse%20Process/) | Learn to denoise | $p_\theta(x_{t-1} \mid x_t)$ |
+| 📂 | [**08 Training Objective**](./08%20Training%20Objective/) | ELBO → Simple MSE | $\mathcal{L} = \mathbb{E}[\|\epsilon - \epsilon_\theta\|^2]$ |
 | 📂 | [**09 Parameterization**](./09%20Parameterization/) | ε, x₀, or v prediction | All equivalent! |
 | 📂 | [**10 Sampling**](./10%20Sampling/) | DDPM, DDIM, DPM-Solver | Fast generation |
 
@@ -201,11 +201,11 @@ graph LR
 
 | Symbol | Meaning | Symbol | Meaning |
 |:------:|---------|:------:|---------|
-| $x\_0$ | Clean data | $\epsilon$ | Standard Gaussian noise |
-| $x\_t$ | Noisy data at step $t$ | $\epsilon\_\theta$ | Predicted noise |
-| $x\_T$ | Pure noise | $q(\cdot)$ | Forward process |
-| $\alpha\_t$ | Signal retention | $p\_\theta(\cdot)$ | Reverse process |
-| $\beta\_t$ | Noise variance | $\bar{\alpha}\_t$ | Cumulative $\prod \alpha\_s$ |
+| $x_0$ | Clean data | $\epsilon$ | Standard Gaussian noise |
+| $x_t$ | Noisy data at step $t$ | $\epsilon_\theta$ | Predicted noise |
+| $x_T$ | Pure noise | $q(\cdot)$ | Forward process |
+| $\alpha_t$ | Signal retention | $p_\theta(\cdot)$ | Reverse process |
+| $\beta_t$ | Noise variance | $\bar{\alpha}_t$ | Cumulative $\prod \alpha_s$ |
 
 </div>
 

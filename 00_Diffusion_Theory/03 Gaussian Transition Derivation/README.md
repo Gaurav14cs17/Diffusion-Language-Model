@@ -19,7 +19,7 @@ Derive and prove the Gaussian transition formula:
 
 ```
 
-where $\epsilon\_t \sim \mathcal{N}(0, I)$ and $\alpha\_t + \beta\_t = 1$.
+where $\epsilon_t \sim \mathcal{N}(0, I)$ and $\alpha_t + \beta_t = 1$.
 
 ---
 
@@ -38,17 +38,17 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \mu_t, \sigma_t^2 I)
 
 We choose:
 
-- **Mean**: $\mu\_t = \sqrt{\alpha\_t} \cdot x\_{t-1}$ (scaled previous state)
+- **Mean**: $\mu_t = \sqrt{\alpha_t} \cdot x_{t-1}$ (scaled previous state)
 
-- **Variance**: $\sigma\_t^2 = \beta\_t$ (added noise)
+- **Variance**: $\sigma_t^2 = \beta_t$ (added noise)
 
 ### Why This Design?
 
 | Choice | Reason |
 |--------|--------|
-| Scale by $\sqrt{\alpha\_t}$ | Preserve signal power |
-| Add variance $\beta\_t$ | Gradual noise injection |
-| $\alpha\_t + \beta\_t = 1$ | Variance preservation |
+| Scale by $\sqrt{\alpha_t}$ | Preserve signal power |
+| Add variance $\beta_t$ | Gradual noise injection |
+| $\alpha_t + \beta_t = 1$ | Variance preservation |
 
 ### Resulting Transition
 
@@ -63,7 +63,7 @@ We choose:
 
 ### The Problem
 
-Sampling $x\_t \sim \mathcal{N}(\mu, \sigma^2 I)$ is not differentiable!
+Sampling $x_t \sim \mathcal{N}(\mu, \sigma^2 I)$ is not differentiable!
 
 ### The Solution
 
@@ -122,11 +122,11 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
 
 ### Apply Reparameterization
 
-- Mean: $\mu = \sqrt{\alpha\_t} x\_{t-1}$
+- Mean: $\mu = \sqrt{\alpha_t} x_{t-1}$
 
-- Std: $\sigma = \sqrt{\beta\_t}$
+- Std: $\sigma = \sqrt{\beta_t}$
 
-- Noise: $\epsilon\_t \sim \mathcal{N}(0, I)$
+- Noise: $\epsilon_t \sim \mathcal{N}(0, I)$
 
 ### Result
 
@@ -155,7 +155,7 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
 
 ### The Question
 
-Why $\sqrt{\alpha\_t}$ and $\sqrt{\beta\_t}$, not $\alpha\_t$ and $\beta\_t$?
+Why $\sqrt{\alpha_t}$ and $\sqrt{\beta_t}$, not $\alpha_t$ and $\beta_t$?
 
 ### Answer: Variance Additivity
 
@@ -190,7 +190,7 @@ This would **not** preserve variance! ❌
 
 ### Goal
 
-Prove that if $\text{Var}[x\_0] = I$ and $\alpha\_t + \beta\_t = 1$, then $\text{Var}[x\_t] = I$ for all $t$.
+Prove that if $\text{Var}[x_0] = I$ and $\alpha_t + \beta_t = 1$, then $\text{Var}[x_t] = I$ for all $t$.
 
 ### Proof by Strong Induction
 
@@ -202,7 +202,7 @@ Prove that if $\text{Var}[x\_0] = I$ and $\alpha\_t + \beta\_t = 1$, then $\text
 ```
 
 **Inductive Hypothesis:**
-Assume $\text{Var}[x\_{t-1}] = I$.
+Assume $\text{Var}[x_{t-1}] = I$.
 
 **Inductive Step:**
 
@@ -255,9 +255,9 @@ x_t = (1 - \frac{1}{2}\beta_t) x_{t-1} + \sqrt{\beta_t} \epsilon_t
 
 ```
 
-### With $\alpha\_t = 1 - \beta\_t$
+### With $\alpha_t = 1 - \beta_t$
 
-For small $\beta\_t$: $\sqrt{\alpha\_t} \approx 1 - \frac{1}{2}\beta\_t$
+For small $\beta_t$: $\sqrt{\alpha_t} \approx 1 - \frac{1}{2}\beta_t$
 
 This recovers our formula! ✓
 
@@ -269,11 +269,11 @@ This recovers our formula! ✓
 
 | Step | Result |
 |------|--------|
-| **1. Assumption** | $q(x\_t \mid x\_{t-1}) = \mathcal{N}(\sqrt{\alpha\_t}x\_{t-1}, \beta\_t I)$ |
+| **1. Assumption** | $q(x_t \mid x_{t-1}) = \mathcal{N}(\sqrt{\alpha_t}x_{t-1}, \beta_t I)$ |
 | **2. Reparameterize** | $x = \mu + \sigma \epsilon$ |
-| **3. Combine** | $x\_t = \sqrt{\alpha\_t}x\_{t-1} + \sqrt{\beta\_t}\epsilon\_t$ |
+| **3. Combine** | $x_t = \sqrt{\alpha_t}x_{t-1} + \sqrt{\beta_t}\epsilon_t$ |
 | **4. Square roots** | Needed for variance additivity |
-| **5. Preservation** | $\alpha\_t + \beta\_t = 1 \Rightarrow \text{Var}[x\_t] = I$ |
+| **5. Preservation** | $\alpha_t + \beta_t = 1 \Rightarrow \text{Var}[x_t] = I$ |
 
 </div>
 

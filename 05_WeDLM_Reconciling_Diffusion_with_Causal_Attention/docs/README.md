@@ -112,7 +112,7 @@ This mask ensures position $i$ can only attend to positions $\leq i$:
 
 ```
 
-**KV Cache**: Since $K\_{1:i-1}$ and $V\_{1:i-1}$ are computed once and never change, we cache them:
+**KV Cache**: Since $K_{1:i-1}$ and $V_{1:i-1}$ are computed once and never change, we cache them:
 
 ```
 Step 1: Compute K₁, V₁, cache them
@@ -132,7 +132,7 @@ q(x_t \mid x_0) = \text{Categorical}(x_t; p = (1-\beta_t)x_0 + \beta_t \cdot \ma
 
 ```
 
-Where $\mathbf{u} = [0, \ldots, 0, 1]$ is the one-hot vector for `[MASK]`, and $\beta\_t$ is a noise schedule.
+Where $\mathbf{u} = [0, \ldots, 0, 1]$ is the one-hot vector for `[MASK]`, and $\beta_t$ is a noise schedule.
 
 **Reverse Process**:
 
@@ -256,17 +256,17 @@ Each mask position:
 
 ### Formal Definition
 
-Let $S = (x\_1, x\_2, \ldots, x\_L)$ be a sequence where:
+Let $S = (x_1, x_2, \ldots, x_L)$ be a sequence where:
 
-- $x\_i \in V$ (vocabulary) for committed tokens
+- $x_i \in V$ (vocabulary) for committed tokens
 
-- $x\_i = \text{[MASK]}$ for mask tokens
+- $x_i = \text{[MASK]}$ for mask tokens
 
 Define:
 
-- $\mathcal{P} = \{i : x\_i \neq \text{[MASK]}\}$ - indices of committed (prefix) tokens
+- $\mathcal{P} = \{i : x_i \neq \text{[MASK]}\}$ - indices of committed (prefix) tokens
 
-- $\mathcal{M} = \{i : x\_i = \text{[MASK]}\}$ - indices of mask tokens
+- $\mathcal{M} = \{i : x_i = \text{[MASK]}\}$ - indices of mask tokens
 
 ### The WeDLM Objective
 
@@ -312,13 +312,13 @@ holds because future context (positions $> j$) provides redundant information th
 
 ### The Attention Mask Formulation
 
-For a window of size $W$ with positions $p\_1, p\_2, \ldots, p\_W$ where:
+For a window of size $W$ with positions $p_1, p_2, \ldots, p_W$ where:
 
-- Positions $p\_1, \ldots, p\_k$ are non-mask
+- Positions $p_1, \ldots, p_k$ are non-mask
 
-- Positions $p\_{k+1}, \ldots, p\_W$ are mask
+- Positions $p_{k+1}, \ldots, p_W$ are mask
 
-The attention mask $A \in \mathbb{R}^{W \times (L\_{\text{prefix}} + W)}$:
+The attention mask $A \in \mathbb{R}^{W \times (L_{\text{prefix}} + W)}$:
 
 ```math
 A_{ij} = \begin{cases}
@@ -342,7 +342,7 @@ x_m^{(1)} \sin(m\theta_1) + x_m^{(2)} \cos(m\theta_1) \\
 
 ```
 
-Where $\theta\_k = 10000^{-2k/d}$.
+Where $\theta_k = 10000^{-2k/d}$.
 
 **Critical**: Each mask token gets its **true** position index, not a shifted one. This maintains positional consistency with the AR base model.
 
@@ -474,19 +474,19 @@ Committable: [quick]  (only the first consecutive non-mask run)
 
 **Proof**:
 
-Let $C = (c\_1, \ldots, c\_k)$ be committed tokens at positions $p\_1, \ldots, p\_k$.
-Let $M = (m\_1, \ldots, m\_j)$ be remaining mask positions at $q\_1, \ldots, q\_j$.
+Let $C = (c_1, \ldots, c_k)$ be committed tokens at positions $p_1, \ldots, p_k$.
+Let $M = (m_1, \ldots, m_j)$ be remaining mask positions at $q_1, \ldots, q_j$.
 
-Since $C$ are consecutive from window start: $p\_k < q\_1$ (all committed positions precede all mask positions).
+Since $C$ are consecutive from window start: $p_k < q_1$ (all committed positions precede all mask positions).
 
-For causal attention at any mask position $q\_i$:
+For causal attention at any mask position $q_i$:
 
 ```math
 \text{Attention}(q_i) = f\left(\{x_\ell : \ell < q_i\}\right)
 
 ```
 
-Since $p\_k < q\_i$ for all $i$:
+Since $p_k < q_i$ for all $i$:
 
 1. All committed tokens $C$ are visible to all masks $M$
 
@@ -514,7 +514,7 @@ At each step, we have mask positions with predicted distributions. We must decid
 
 ### Entropy as Confidence Measure
 
-For a probability distribution $P = (p\_1, \ldots, p\_V)$ over vocabulary $V$:
+For a probability distribution $P = (p_1, \ldots, p_V)$ over vocabulary $V$:
 
 ```math
 H(P) = -\sum_{i=1}^{V} p_i \log p_i
@@ -540,11 +540,11 @@ WeDLM adds a **position penalty** to encourage left-to-right generation:
 
 Where:
 
-- $H(P\_j)$ = raw entropy at position $j$
+- $H(P_j)$ = raw entropy at position $j$
 
 - $\lambda$ = position penalty factor (default: 0.02)
 
-- $j\_{\min}$ = first mask position in window
+- $j_{\min}$ = first mask position in window
 
 **Effect**: Earlier positions are favored when entropies are similar.
 
@@ -570,7 +570,7 @@ j^* = \arg\min_j \tilde{H}_j
 
 **Theorem 3**: *Under mild assumptions, entropy-based selection minimizes expected prediction error.*
 
-**Setup**: Let $e\_j = \mathbb{1}[\hat{x}\_j \neq x\_j^*]$ be the error indicator for position $j$.
+**Setup**: Let $e_j = \mathbb{1}[\hat{x}_j \neq x_j^*]$ be the error indicator for position $j$.
 
 **Assumption** (Calibration): The model's predictive probability reflects true accuracy:
 
@@ -601,14 +601,14 @@ Therefore:
 
 ```
 
-**Corollary**: Selecting positions with $H(P\_j) < \tau$ ensures:
+**Corollary**: Selecting positions with $H(P_j) < \tau$ ensures:
 
 ```math
 \mathbb{E}[e_j] \leq 1 - \exp(-\tau)
 
 ```
 
-For $\tau = 0.4$: $\mathbb{E}[e\_j] \leq 0.33$
+For $\tau = 0.4$: $\mathbb{E}[e_j] \leq 0.33$
 
 $\square$
 
@@ -809,9 +809,9 @@ r_t = r_{\min} + (r_{\max} - r_{\min}) \cdot \frac{t}{T}
 
 Where:
 
-- $r\_{\min} = 0.1$ (10% masking)
+- $r_{\min} = 0.1$ (10% masking)
 
-- $r\_{\max} = 0.5$ (50% masking)
+- $r_{\max} = 0.5$ (50% masking)
 
 - $t$ = training step, $T$ = total steps
 
@@ -877,7 +877,7 @@ def compute_cmlm_loss(model, input_ids, labels, mask_flags):
 
 **Theorem 5** (Sufficient Statistics): *For left-to-right text generation, the left context provides sufficient information for predicting masked positions.*
 
-**Formal Statement**: Let $x\_j$ be a token at position $j$. Under the assumption of left-to-right language structure:
+**Formal Statement**: Let $x_j$ be a token at position $j$. Under the assumption of left-to-right language structure:
 
 ```math
 I(x_j ; x_{j+1:} \mid x_{1:j-1}) \approx 0
@@ -957,10 +957,10 @@ Let $\tau$ be the entropy threshold. Define:
 
 | Concept | Formulation |
 |---------|-------------|
-| Objective | $\mathcal{L} = -\sum\_{j \in \mathcal{M}} \log P\_\theta(x\_j \mid x\_{1:j-1} \cap \mathcal{M}^c)$ |
-| Entropy | $H(P) = -\sum\_i p\_i \log p\_i$ |
-| Adjusted Entropy | $\tilde{H}\_j = H(P\_j) + \lambda(j - j\_{\min})$ |
-| Selection | $\text{Fill}(j) = \mathbb{1}[\tilde{H}\_j < \tau]$ |
+| Objective | $\mathcal{L} = -\sum_{j \in \mathcal{M}} \log P_\theta(x_j \mid x_{1:j-1} \cap \mathcal{M}^c)$ |
+| Entropy | $H(P) = -\sum_i p_i \log p_i$ |
+| Adjusted Entropy | $\tilde{H}_j = H(P_j) + \lambda(j - j_{\min})$ |
+| Selection | $\text{Fill}(j) = \mathbb{1}[\tilde{H}_j < \tau]$ |
 | Speedup | $S = \mathbb{E}[\text{tokens per step}]$ |
 
 ### Why WeDLM Matters

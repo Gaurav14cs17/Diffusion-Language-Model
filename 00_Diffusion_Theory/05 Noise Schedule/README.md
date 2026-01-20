@@ -12,7 +12,7 @@
 
 ## 🎯 Overview
 
-The **noise schedule** $\{\beta\_t\}\_{t=1}^{T}$ controls how quickly noise is added. Different schedules lead to different training dynamics and sample quality.
+The **noise schedule** $\{\beta_t\}_{t=1}^{T}$ controls how quickly noise is added. Different schedules lead to different training dynamics and sample quality.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/00_Diffusion_Theory/05%20Noise%20Schedule/noise_schedule.svg" alt="Noise Schedule Diagram" width="100%">
@@ -33,11 +33,11 @@ The **noise schedule** $\{\beta\_t\}\_{t=1}^{T}$ controls how quickly noise is a
 
 | Parameter | Value |
 |:---------:|:-----:|
-| $\beta\_{\min}$ | $10^{-4}$ |
-| $\beta\_{\max}$ | $0.02$ |
+| $\beta_{\min}$ | $10^{-4}$ |
+| $\beta_{\max}$ | $0.02$ |
 | $T$ | 1000 |
 
-### Derivation of $\bar{\alpha}\_t$
+### Derivation of $\bar{\alpha}_t$
 
 ```math
 \alpha_t = 1 - \beta_t
@@ -73,7 +73,7 @@ The **noise schedule** $\{\beta\_t\}\_{t=1}^{T}$ controls how quickly noise is a
 
 ### Motivation
 
-Design $\bar{\alpha}\_t$ directly for **smoother** information destruction.
+Design $\bar{\alpha}_t$ directly for **smoother** information destruction.
 
 ### Definition
 
@@ -82,9 +82,9 @@ Design $\bar{\alpha}\_t$ directly for **smoother** information destruction.
 
 ```
 
-where $s = 0.008$ is a small offset to prevent $\beta\_t$ from being too small at $t=0$.
+where $s = 0.008$ is a small offset to prevent $\beta_t$ from being too small at $t=0$.
 
-### Derived $\beta\_t$
+### Derived $\beta_t$
 
 ```math
 \beta_t = 1 - \frac{\bar{\alpha}_t}{\bar{\alpha}_{t-1}} = 1 - \frac{f(t)}{f(t-1)}
@@ -95,9 +95,9 @@ where $s = 0.008$ is a small offset to prevent $\beta\_t$ from being too small a
 
 The cosine function provides:
 
-1. $\bar{\alpha}\_0 \approx 1$ (starts at pure signal)
+1. $\bar{\alpha}_0 \approx 1$ (starts at pure signal)
 
-2. $\bar{\alpha}\_T \approx 0$ (ends at pure noise)
+2. $\bar{\alpha}_T \approx 0$ (ends at pure noise)
 
 3. Smooth S-curve transition (no sudden jumps)
 
@@ -135,11 +135,11 @@ The cosine function provides:
 ### Key Requirements
 
 1. **Boundary conditions**:
-   - $\bar{\alpha}\_0 \approx 1$ (start with data)
-   - $\bar{\alpha}\_T \approx 0$ (end with noise)
+   - $\bar{\alpha}_0 \approx 1$ (start with data)
+   - $\bar{\alpha}_T \approx 0$ (end with noise)
 
 2. **Smoothness**:
-   - No sudden jumps in $\beta\_t$
+   - No sudden jumps in $\beta_t$
    - Gradual information destruction
 
 3. **Efficiency**:
@@ -163,7 +163,7 @@ For the process to destroy information:
 
 ```
 
-Using $\ln(1-x) \leq -x$. So if $\sum\_t \beta\_t \gg 1$, then $\bar{\alpha}\_T \approx 0$. ✓
+Using $\ln(1-x) \leq -x$. So if $\sum_t \beta_t \gg 1$, then $\bar{\alpha}_T \approx 0$. ✓
 
 ---
 
@@ -185,7 +185,7 @@ Using $\ln(1-x) \leq -x$. So if $\sum\_t \beta\_t \gg 1$, then $\bar{\alpha}\_T 
 
 ### Learned Schedule
 
-Train $\beta\_t$ as neural network parameters! (Kingma et al., VDM)
+Train $\beta_t$ as neural network parameters! (Kingma et al., VDM)
 
 ### Comparison Table
 
@@ -250,11 +250,11 @@ log SNR
 
 ---
 
-## 📐 Step 6: Computing $\beta\_t$ from $\bar{\alpha}\_t$
+## 📐 Step 6: Computing $\beta_t$ from $\bar{\alpha}_t$
 
 ### Problem
 
-Given a desired $\bar{\alpha}\_t$ schedule, find $\beta\_t$.
+Given a desired $\bar{\alpha}_t$ schedule, find $\beta_t$.
 
 ### Derivation
 
@@ -263,7 +263,7 @@ Given a desired $\bar{\alpha}\_t$ schedule, find $\beta\_t$.
 
 ```
 
-Solving for $\beta\_t$:
+Solving for $\beta_t$:
 
 ```math
 1-\beta_t = \frac{\bar{\alpha}_t}{\bar{\alpha}_{t-1}}
@@ -273,7 +273,7 @@ Solving for $\beta\_t$:
 
 ### Clipping
 
-In practice, clip $\beta\_t$ to avoid numerical issues:
+In practice, clip $\beta_t$ to avoid numerical issues:
 
 ```math
 \beta_t = \text{clip}\left(1 - \frac{\bar{\alpha}_t}{\bar{\alpha}_{t-1}}, 0, 0.999\right)
@@ -286,9 +286,9 @@ In practice, clip $\beta\_t$ to avoid numerical issues:
 
 <div align="center">
 
-| Schedule | Formula for $\bar{\alpha}\_t$ | Best For |
+| Schedule | Formula for $\bar{\alpha}_t$ | Best For |
 |----------|------------------------------|----------|
-| **Linear** | $\prod(1-\beta\_{\text{lin}})$ | Baseline |
+| **Linear** | $\prod(1-\beta_{\text{lin}})$ | Baseline |
 | **Cosine** | $\cos^2(\frac{\pi t}{2T})$ | High quality images |
 | **Learned** | Neural network | Task-specific |
 

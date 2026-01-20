@@ -41,7 +41,7 @@ While incredibly successful, this approach has fundamental limitations:
 
 1. **Sequential Generation**: Each token must wait for all previous tokens, making generation inherently slow.
 
-2. **Unidirectional Context**: When generating token $x\_i$, the model can only see tokens $x\_1, \ldots, x\_{i-1}$, not future tokens.
+2. **Unidirectional Context**: When generating token $x_i$, the model can only see tokens $x_1, \ldots, x_{i-1}$, not future tokens.
 
 3. **No Revision**: Once a token is generated, it cannot be revised based on later context.
 
@@ -80,7 +80,7 @@ This is formalized as a **Markov chain** over discrete states, which we'll explo
   <img src="https://raw.githubusercontent.com/Gaurav14cs17/Diffusion-Language-Model/main/03_Dream_7B_Diffusion_Large_Language_Models/svg_diagrams/02_forward_diffusion_process.svg" alt="Forward Diffusion Process" width="100%">
 </p>
 
-The forward diffusion process defines how we **corrupt** clean data $x\_0$ into progressively noisier versions $x\_1, x\_2, \ldots, x\_T$, until we reach a fully masked sequence $x\_T$.
+The forward diffusion process defines how we **corrupt** clean data $x_0$ into progressively noisier versions $x_1, x_2, \ldots, x_T$, until we reach a fully masked sequence $x_T$.
 
 ### 2.1 Markov Chain Formulation
 
@@ -91,7 +91,7 @@ q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})
 
 ```
 
-Each transition is defined by a **transition matrix** $Q\_t$:
+Each transition is defined by a **transition matrix** $Q_t$:
 
 ```math
 q(x_t \mid x_{t-1}) = \text{Cat}(x_t; x_{t-1} \cdot Q_t)
@@ -111,9 +111,9 @@ Q_t[i, j] = (1 - \beta_t) \cdot \delta_{ij} + \beta_t \cdot \delta_{j, [M]}
 
 Where:
 
-- $\beta\_t$ is the **masking probability** at step $t$
+- $\beta_t$ is the **masking probability** at step $t$
 
-- $\delta\_{ij}$ is the Kronecker delta (1 if $i=j$, 0 otherwise)
+- $\delta_{ij}$ is the Kronecker delta (1 if $i=j$, 0 otherwise)
 
 - $[M]$ is the index of the `[MASK]` token
 
@@ -121,20 +121,20 @@ Where:
 
 | Entry | Meaning |
 |-------|---------|
-| Diagonal $(1 - \beta\_t)$ | Token stays the same |
-| Last column $(\beta\_t)$ | Token becomes `[MASK]` |
+| Diagonal $(1 - \beta_t)$ | Token stays the same |
+| Last column $(\beta_t)$ | Token becomes `[MASK]` |
 | Last row (absorbing) | Once masked, stays masked (probability 1) |
 
 ### 2.3 Marginal Distribution: The Key Theorem
 
-**Theorem (Closed-Form Marginal):** The marginal distribution at time $t$ given $x\_0$ is:
+**Theorem (Closed-Form Marginal):** The marginal distribution at time $t$ given $x_0$ is:
 
 ```math
 q(x_t \mid x_0) = \text{Cat}(x_t; x_0 \cdot \bar{Q}_t)
 
 ```
 
-where $\bar{Q}\_t = Q\_1 \cdot Q\_2 \cdots Q\_t$ is the cumulative transition matrix.
+where $\bar{Q}_t = Q_1 \cdot Q_2 \cdots Q_t$ is the cumulative transition matrix.
 
 **Proof:**
 
@@ -152,14 +152,14 @@ q(x_t \mid x_0) = (x_0 \cdot Q_1) \cdot Q_2 \cdots Q_t = x_0 \cdot (Q_1 \cdot Q_
 
 ```
 
-*Step 3:* For absorbing-state diffusion, $\bar{Q}\_t$ simplifies to:
+*Step 3:* For absorbing-state diffusion, $\bar{Q}_t$ simplifies to:
 
 ```math
 \bar{Q}_t[i, j] = \alpha_t \cdot \delta_{ij} + (1 - \alpha_t) \cdot \delta_{j, [M]}
 
 ```
 
-where $\alpha\_t = \prod\_{s=1}^{t} (1 - \beta\_s)$ is the **cumulative survival probability**.
+where $\alpha_t = \prod_{s=1}^{t} (1 - \beta_s)$ is the **cumulative survival probability**.
 
 ### 2.4 Practical Interpretation
 
@@ -175,19 +175,19 @@ This gives us a simple sampling procedure:
 
 1. Sample $t \sim \text{Uniform}(0, 1)$ in continuous time
 
-2. Compute $\alpha\_t = 1 - t$ (linear schedule)
+2. Compute $\alpha_t = 1 - t$ (linear schedule)
 
-3. Independently mask each token with probability $1 - \alpha\_t$
+3. Independently mask each token with probability $1 - \alpha_t$
 
 ### 2.5 Noise Schedules
 
-The choice of $\beta\_t$ (or equivalently $\alpha\_t$) significantly impacts training:
+The choice of $\beta_t$ (or equivalently $\alpha_t$) significantly impacts training:
 
 | Schedule | Formula | Properties |
 |----------|---------|------------|
-| Linear | $\beta\_t = \beta\_1 + \frac{t-1}{T-1}(\beta\_T - \beta\_1)$ | Simple, but can be suboptimal |
-| Cosine | $\alpha\_t = \cos^2\left(\frac{\pi t}{2T} + \text{offset}\right)$ | Smoother corruption |
-| MDLM/Dream | $\alpha\_t = 1 - t$ for $t \in [0, 1]$ | Simple continuous-time formulation |
+| Linear | $\beta_t = \beta_1 + \frac{t-1}{T-1}(\beta_T - \beta_1)$ | Simple, but can be suboptimal |
+| Cosine | $\alpha_t = \cos^2\left(\frac{\pi t}{2T} + \text{offset}\right)$ | Smoother corruption |
+| MDLM/Dream | $\alpha_t = 1 - t$ for $t \in [0, 1]$ | Simple continuous-time formulation |
 
 ---
 
@@ -201,18 +201,18 @@ The reverse process is where the magic happens: we learn to **undo** the corrupt
 
 ### 3.1 The Goal
 
-We want to learn $p\_\theta(x\_{t-1} \mid x\_t)$ that approximates the true reverse:
+We want to learn $p_\theta(x_{t-1} \mid x_t)$ that approximates the true reverse:
 
 ```math
 p(x_{t-1} \mid x_t) = \int q(x_{t-1} \mid x_t, x_0) \, p(x_0 \mid x_t) \, dx_0
 
 ```
 
-This integral is intractable because it requires marginalizing over all possible clean sequences $x\_0$.
+This integral is intractable because it requires marginalizing over all possible clean sequences $x_0$.
 
 ### 3.2 The Posterior Distribution
 
-**Key Insight:** Given both $x\_t$ and $x\_0$, the posterior $q(x\_{t-1} \mid x\_t, x\_0)$ is **tractable**!
+**Key Insight:** Given both $x_t$ and $x_0$, the posterior $q(x_{t-1} \mid x_t, x_0)$ is **tractable**!
 
 **Derivation using Bayes' Rule:**
 
@@ -221,21 +221,21 @@ q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}, x_0) \cdot q(x_{t-1} \mid x
 
 ```
 
-By the Markov property: $q(x\_t \mid x\_{t-1}, x\_0) = q(x\_t \mid x\_{t-1})$
+By the Markov property: $q(x_t \mid x_{t-1}, x_0) = q(x_t \mid x_{t-1})$
 
 Substituting the known distributions:
 
-- $q(x\_t \mid x\_{t-1}) = \text{Cat}(x\_t; x\_{t-1} \cdot Q\_t)$
+- $q(x_t \mid x_{t-1}) = \text{Cat}(x_t; x_{t-1} \cdot Q_t)$
 
-- $q(x\_{t-1} \mid x\_0) = \text{Cat}(x\_{t-1}; x\_0 \cdot \bar{Q}\_{t-1})$
+- $q(x_{t-1} \mid x_0) = \text{Cat}(x_{t-1}; x_0 \cdot \bar{Q}_{t-1})$
 
-- $q(x\_t \mid x\_0) = \text{Cat}(x\_t; x\_0 \cdot \bar{Q}\_t)$
+- $q(x_t \mid x_0) = \text{Cat}(x_t; x_0 \cdot \bar{Q}_t)$
 
 ### 3.3 Posterior for Absorbing-State Diffusion
 
 For masked diffusion, the posterior has a simple closed form:
 
-**Case 1: $x\_t$ is NOT `[MASK]`** (meaning $x\_t = x\_0$)
+**Case 1: $x_t$ is NOT `[MASK]`** (meaning $x_t = x_0$)
 
 ```math
 q(x_{t-1} \mid x_t, x_0) = \delta(x_{t-1}, x_t)
@@ -244,14 +244,14 @@ q(x_{t-1} \mid x_t, x_0) = \delta(x_{t-1}, x_t)
 
 The token hasn't been masked yet, so it must stay as the original.
 
-**Case 2: $x\_t$ IS `[MASK]`**
+**Case 2: $x_t$ IS `[MASK]`**
 
 ```math
 q(x_{t-1} \mid x_t = [M], x_0) = \theta_t \cdot \delta(x_{t-1}, x_0) + (1 - \theta_t) \cdot \delta(x_{t-1}, [M])
 
 ```
 
-With probability $\theta\_t$, we "unmask" to the original token; otherwise, we stay masked.
+With probability $\theta_t$, we "unmask" to the original token; otherwise, we stay masked.
 
 **The unmasking probability:**
 
@@ -262,11 +262,11 @@ With probability $\theta\_t$, we "unmask" to the original token; otherwise, we s
 
 ### 3.4 Neural Network Parameterization
 
-We use a neural network $f\_\theta$ to approximate the reverse process.
+We use a neural network $f_\theta$ to approximate the reverse process.
 
-**$x\_0$-Parameterization (used in Dream):**
+**$x_0$-Parameterization (used in Dream):**
 
-Instead of directly predicting $x\_{t-1}$, we predict the clean data $x\_0$:
+Instead of directly predicting $x_{t-1}$, we predict the clean data $x_0$:
 
 ```math
 \hat{x}_0 = f_\theta(x_t, t)
@@ -315,7 +315,7 @@ We want to find parameters $\theta$ that maximize the log-likelihood of observed
 
 ```
 
-**The Problem:** Computing $p\_\theta(x\_0)$ requires integrating over all possible latent paths:
+**The Problem:** Computing $p_\theta(x_0)$ requires integrating over all possible latent paths:
 
 ```math
 p_\theta(x_0) = \int p_\theta(x_{0:T}) \, dx_{1:T}
@@ -328,7 +328,7 @@ This is intractable for high-dimensional data.
 
 **Step 1: Introduce variational distribution**
 
-We introduce the forward process $q(x\_{1:T} \mid x\_0)$ as our variational distribution:
+We introduce the forward process $q(x_{1:T} \mid x_0)$ as our variational distribution:
 
 ```math
 \log p_\theta(x_0) = \log \int p_\theta(x_{0:T}) \, dx_{1:T} = \log \int p_\theta(x_{0:T}) \cdot \frac{q(x_{1:T} \mid x_0)}{q(x_{1:T} \mid x_0)} \, dx_{1:T}
@@ -370,9 +370,9 @@ The ELBO decomposes into three interpretable terms:
 
 | Term | Formula | Interpretation |
 |------|---------|----------------|
-| $L\_T$ | $D\_{KL}(q(x\_T \mid x\_0) \| p(x\_T))$ | Prior matching loss |
-| $L\_{t-1}$ | $\mathbb{E}\_q[D\_{KL}(q(x\_{t-1} \mid x\_t, x\_0) \| p\_\theta(x\_{t-1} \mid x\_t))]$ | Denoising loss |
-| $L\_0$ | $-\mathbb{E}\_q[\log p\_\theta(x\_0 \mid x\_1)]$ | Reconstruction loss |
+| $L_T$ | $D_{KL}(q(x_T \mid x_0) \| p(x_T))$ | Prior matching loss |
+| $L_{t-1}$ | $\mathbb{E}_q[D_{KL}(q(x_{t-1} \mid x_t, x_0) \| p_\theta(x_{t-1} \mid x_t))]$ | Denoising loss |
+| $L_0$ | $-\mathbb{E}_q[\log p_\theta(x_0 \mid x_1)]$ | Reconstruction loss |
 
 **Key Insight:** For discrete diffusion, KL divergence simplifies to cross-entropy:
 
@@ -394,9 +394,9 @@ For masked (absorbing-state) diffusion, the ELBO simplifies beautifully:
 
 1. Sample random time $t$ uniformly from $[0, 1]$
 
-2. Sample clean data $x\_0$ from training set
+2. Sample clean data $x_0$ from training set
 
-3. Corrupt $x\_0$ to get $x\_t$ by masking $\sim(1-\alpha\_t)$ fraction of tokens
+3. Corrupt $x_0$ to get $x_t$ by masking $\sim(1-\alpha_t)$ fraction of tokens
 
 4. **Train to predict the original tokens at masked positions only**
 
@@ -415,7 +415,7 @@ L = \int_0^1 \mathbb{E}_{x_0, x_t}\left[-\lambda(t) \cdot \log p_\theta(x_0 \mid
 
 ```
 
-where $\lambda(t) = \frac{d}{dt}(1 - \alpha\_t) = -\alpha'\_t$ is the weighting function.
+where $\lambda(t) = \frac{d}{dt}(1 - \alpha_t) = -\alpha'_t$ is the weighting function.
 
 In practice, we use Monte Carlo estimation with $t \sim \text{Uniform}(0, 1)$.
 
@@ -483,7 +483,7 @@ D_{KL}(q(x_{t-1} \mid x_t, x_0) \| p_\theta(x_{t-1} \mid x_t)) = \sum_v q(v) \lo
 
 ```
 
-*Step 4:* For masked diffusion with known $x\_0$:
+*Step 4:* For masked diffusion with known $x_0$:
 
 ```math
 L = -\log p_\theta(x_0 \mid x_t) = \text{CrossEntropy}(\text{one-hot}(x_0), p_\theta(\cdot \mid x_t))
@@ -501,9 +501,9 @@ L = \sum_{i=1}^{n} \mathbb{1}[x_t^i = [M]] \cdot \left(-\log p_\theta(x_0^i \mid
 
 **Key Insight:** We only compute loss on **masked positions**!
 
-- If $x\_t^i \neq [M]$: No loss (position already correct)
+- If $x_t^i \neq [M]$: No loss (position already correct)
 
-- If $x\_t^i = [M]$: Compute cross-entropy between prediction and true $x\_0^i$
+- If $x_t^i = [M]$: Compute cross-entropy between prediction and true $x_0^i$
 
 ### 5.5 Loss Weighting Strategies
 
@@ -750,17 +750,17 @@ Dream 7B represents a significant step toward **non-autoregressive language mode
 
 | Symbol | Meaning |
 |--------|---------|
-| $x\_0$ | Clean (original) data |
-| $x\_t$ | Noisy data at time $t$ |
-| $x\_T$ | Fully noisy (all masked) data |
+| $x_0$ | Clean (original) data |
+| $x_t$ | Noisy data at time $t$ |
+| $x_T$ | Fully noisy (all masked) data |
 | $[M]$ | MASK token |
-| $Q\_t$ | Transition matrix at step $t$ |
-| $\bar{Q}\_t$ | Cumulative transition matrix |
-| $\beta\_t$ | Per-step masking probability |
-| $\alpha\_t$ | Cumulative survival probability |
-| $\theta\_t$ | Unmasking probability |
-| $f\_\theta$ | Neural network (Transformer) |
-| $p\_\theta$ | Model distribution |
+| $Q_t$ | Transition matrix at step $t$ |
+| $\bar{Q}_t$ | Cumulative transition matrix |
+| $\beta_t$ | Per-step masking probability |
+| $\alpha_t$ | Cumulative survival probability |
+| $\theta_t$ | Unmasking probability |
+| $f_\theta$ | Neural network (Transformer) |
+| $p_\theta$ | Model distribution |
 | $q$ | Forward process distribution |
 
 ---

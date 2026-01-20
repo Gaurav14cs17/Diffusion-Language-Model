@@ -65,7 +65,7 @@ x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \hat{x}_0 + \sqrt{1-\bar{\alpha}_{t-1} - \si
 
 ```
 
-where $\hat{x}\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon\_\theta}{\sqrt{\bar{\alpha}\_t}}$
+where $\hat{x}_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}$
 
 ### The η Parameter
 
@@ -169,9 +169,9 @@ def sample_ddim(model, timesteps, guidance_scale):
 
 | Algorithm | Key Formula |
 |-----------|-------------|
-| **DDPM** | $x\_{t-1} = \mu\_\theta + \sigma\_t z$ |
-| **DDIM** | $x\_{t-1} = \sqrt{\bar{\alpha}\_{t-1}}\hat{x}\_0 + \sqrt{1-\bar{\alpha}\_{t-1}}\epsilon\_\theta$ |
-| **CFG** | $\tilde{\epsilon} = \epsilon\_\varnothing + w(\epsilon\_c - \epsilon\_\varnothing)$ |
+| **DDPM** | $x_{t-1} = \mu_\theta + \sigma_t z$ |
+| **DDIM** | $x_{t-1} = \sqrt{\bar{\alpha}_{t-1}}\hat{x}_0 + \sqrt{1-\bar{\alpha}_{t-1}}\epsilon_\theta$ |
+| **CFG** | $\tilde{\epsilon} = \epsilon_\varnothing + w(\epsilon_c - \epsilon_\varnothing)$ |
 
 </div>
 
