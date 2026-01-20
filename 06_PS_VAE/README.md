@@ -86,7 +86,6 @@
 ### Installation
 
 ```bash
-
 # Clone the repository
 git clone https://github.com/Gaurav14cs17/PS-VAE.git
 cd PS-VAE
@@ -123,7 +122,6 @@ reconstructed = model.decode_to_image(latent)  # [1, 3, 256, 256]
 ### Training
 
 ```bash
-
 # Stage 1: Train S-VAE
 python scripts/train_psvae.py --config configs/default.yaml --stage svae
 
@@ -137,7 +135,6 @@ python scripts/train_dit.py --config configs/default.yaml
 ### Generation
 
 ```bash
-
 # Generate images from text
 python scripts/generate.py \
     --prompt "A beautiful sunset over mountains" \

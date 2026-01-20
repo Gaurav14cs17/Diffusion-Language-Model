@@ -24,9 +24,9 @@
 
 The field of large language models (LLMs) has been dominated by **autoregressive models** like GPT, LLaMA, and Claude. These models generate text one token at a time, left-to-right, using the factorization:
 
-$$
+```math
 P(x) = \prod_{i=1}^{n} P(x_i \mid x_1, x_2, \ldots, x_{i-1})
-$$
+```
 
 While incredibly successful, this approach has fundamental limitations:
 
@@ -74,15 +74,15 @@ The forward diffusion process defines how we **corrupt** clean data $x\_0$ into 
 
 The forward process is defined as a Markov chain:
 
-$$
+```math
 q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})
-$$
+```
 
 Each transition is defined by a **transition matrix** $Q\_t$:
 
-$$
+```math
 q(x_t \mid x_{t-1}) = \text{Cat}(x_t; x_{t-1} \cdot Q_t)
-$$
+```
 
 where $\text{Cat}$ denotes a categorical distribution.
 
@@ -90,9 +90,9 @@ where $\text{Cat}$ denotes a categorical distribution.
 
 For masked diffusion with `[MASK]` as the absorbing state, the transition matrix has a specific structure:
 
-$$
+```math
 Q_t[i, j] = (1 - \beta_t) \cdot \delta_{ij} + \beta_t \cdot \delta_{j, [M]}
-$$
+```
 
 Where:
 - $\beta\_t$ is the **masking probability** at step $t$
@@ -111,9 +111,9 @@ Where:
 
 **Theorem (Closed-Form Marginal):** The marginal distribution at time $t$ given $x\_0$ is:
 
-$$
+```math
 q(x_t \mid x_0) = \text{Cat}(x_t; x_0 \cdot \bar{Q}_t)
-$$
+```
 
 where $\bar{Q}\_t = Q\_1 \cdot Q\_2 \cdots Q\_t$ is the cumulative transition matrix.
 
@@ -121,21 +121,21 @@ where $\bar{Q}\_t = Q\_1 \cdot Q\_2 \cdots Q\_t$ is the cumulative transition ma
 
 *Step 1:* By the chain rule of probability:
 
-$$
+```math
 q(x_t \mid x_0) = \sum_{x_1, \ldots, x_{t-1}} q(x_1 \mid x_0) \cdot q(x_2 \mid x_1) \cdots q(x_t \mid x_{t-1})
-$$
+```
 
 *Step 2:* Using the matrix multiplication property:
 
-$$
+```math
 q(x_t \mid x_0) = (x_0 \cdot Q_1) \cdot Q_2 \cdots Q_t = x_0 \cdot (Q_1 \cdot Q_2 \cdots Q_t) = x_0 \cdot \bar{Q}_t
-$$
+```
 
 *Step 3:* For absorbing-state diffusion, $\bar{Q}\_t$ simplifies to:
 
-$$
+```math
 \bar{Q}_t[i, j] = \alpha_t \cdot \delta_{ij} + (1 - \alpha_t) \cdot \delta_{j, [M]}
-$$
+```
 
 where $\alpha\_t = \prod\_{s=1}^{t} (1 - \beta\_s)$ is the **cumulative survival probability**.
 
@@ -143,10 +143,10 @@ where $\alpha\_t = \prod\_{s=1}^{t} (1 - \beta\_s)$ is the **cumulative survival
 
 For any token at position $i$:
 
-$$
+```math
 P(x_t^i = x_0^i) = \alpha_t \quad \text{(token survives unmasked)}
 P(x_t^i = [M]) = 1 - \alpha_t \quad \text{(token is masked)}
-$$
+```
 
 This gives us a simple sampling procedure:
 1. Sample $t \sim \text{Uniform}(0, 1)$ in continuous time
@@ -177,9 +177,9 @@ The reverse process is where the magic happens: we learn to **undo** the corrupt
 
 We want to learn $p\_\theta(x\_{t-1} \mid x\_t)$ that approximates the true reverse:
 
-$$
+```math
 p(x_{t-1} \mid x_t) = \int q(x_{t-1} \mid x_t, x_0) \, p(x_0 \mid x_t) \, dx_0
-$$
+```
 
 This integral is intractable because it requires marginalizing over all possible clean sequences $x\_0$.
 
@@ -189,9 +189,9 @@ This integral is intractable because it requires marginalizing over all possible
 
 **Derivation using Bayes' Rule:**
 
-$$
+```math
 q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}, x_0) \cdot q(x_{t-1} \mid x_0)}{q(x_t \mid x_0)}
-$$
+```
 
 By the Markov property: $q(x\_t \mid x\_{t-1}, x\_0) = q(x\_t \mid x\_{t-1})$
 
@@ -206,25 +206,25 @@ For masked diffusion, the posterior has a simple closed form:
 
 **Case 1: $x\_t$ is NOT `[MASK]`** (meaning $x\_t = x\_0$)
 
-$$
+```math
 q(x_{t-1} \mid x_t, x_0) = \delta(x_{t-1}, x_t)
-$$
+```
 
 The token hasn't been masked yet, so it must stay as the original.
 
 **Case 2: $x\_t$ IS `[MASK]`**
 
-$$
+```math
 q(x_{t-1} \mid x_t = [M], x_0) = \theta_t \cdot \delta(x_{t-1}, x_0) + (1 - \theta_t) \cdot \delta(x_{t-1}, [M])
-$$
+```
 
 With probability $\theta\_t$, we "unmask" to the original token; otherwise, we stay masked.
 
 **The unmasking probability:**
 
-$$
+```math
 \theta_t = \frac{\alpha_{t-1} - \alpha_t}{1 - \alpha_t} = \frac{\beta_t \cdot \alpha_{t-1}}{1 - \alpha_t}
-$$
+```
 
 ### 3.4 Neural Network Parameterization
 
@@ -234,21 +234,21 @@ We use a neural network $f\_\theta$ to approximate the reverse process.
 
 Instead of directly predicting $x\_{t-1}$, we predict the clean data $x\_0$:
 
-$$
+```math
 \hat{x}_0 = f_\theta(x_t, t)
-$$
+```
 
 The network outputs logits over the vocabulary for each position:
 
-$$
+```math
 p_\theta(x_0^i \mid x_t) = \text{softmax}(f_\theta(x_t, t))^i
-$$
+```
 
 The reverse transition is then computed as:
 
-$$
+```math
 p_\theta(x_{t-1} \mid x_t) = \sum_{x_0} q(x_{t-1} \mid x_t, x_0) \cdot p_\theta(x_0 \mid x_t)
-$$
+```
 
 ### 3.5 Architecture Differences from Autoregressive Models
 
@@ -273,15 +273,15 @@ The training objective is derived from the **Evidence Lower Bound (ELBO)**, a fu
 
 We want to find parameters $\theta$ that maximize the log-likelihood of observed data:
 
-$$
+```math
 \max_\theta \mathbb{E}_{x_0 \sim p_{\text{data}}}[\log p_\theta(x_0)]
-$$
+```
 
 **The Problem:** Computing $p\_\theta(x\_0)$ requires integrating over all possible latent paths:
 
-$$
+```math
 p_\theta(x_0) = \int p_\theta(x_{0:T}) \, dx_{1:T}
-$$
+```
 
 This is intractable for high-dimensional data.
 
@@ -291,38 +291,38 @@ This is intractable for high-dimensional data.
 
 We introduce the forward process $q(x\_{1:T} \mid x\_0)$ as our variational distribution:
 
-$$
+```math
 \log p_\theta(x_0) = \log \int p_\theta(x_{0:T}) \, dx_{1:T} = \log \int p_\theta(x_{0:T}) \cdot \frac{q(x_{1:T} \mid x_0)}{q(x_{1:T} \mid x_0)} \, dx_{1:T}
-$$
+```
 
 **Step 2: Apply Jensen's inequality**
 
 Since $\log$ is concave:
 
-$$
+```math
 \log p_\theta(x_0) = \log \mathbb{E}_q\left[\frac{p_\theta(x_{0:T})}{q(x_{1:T} \mid x_0)}\right] \geq \mathbb{E}_q\left[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T} \mid x_0)}\right]
-$$
+```
 
 This gives us the **ELBO**:
 
-$$
+```math
 \log p_\theta(x_0) \geq \text{ELBO} = \mathbb{E}_q\left[\log p_\theta(x_{0:T}) - \log q(x_{1:T} \mid x_0)\right]
-$$
+```
 
 **Step 3: Factor the joint distributions**
 
-$$
+```math
 p_\theta(x_{0:T}) = p(x_T) \cdot \prod_{t=1}^{T} p_\theta(x_{t-1} \mid x_t)
 q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})
-$$
+```
 
 ### 4.3 ELBO Decomposition into KL Divergences
 
 The ELBO decomposes into three interpretable terms:
 
-$$
+```math
 -\text{ELBO} = L_T + \sum_{t=2}^{T} L_{t-1} + L_0
-$$
+```
 
 | Term | Formula | Interpretation |
 |------|---------|----------------|
@@ -332,17 +332,17 @@ $$
 
 **Key Insight:** For discrete diffusion, KL divergence simplifies to cross-entropy:
 
-$$
+```math
 D_{KL}(q \| p_\theta) = -\sum_x q(x) \log p_\theta(x) + \text{const} = H(q, p_\theta) - H(q)
-$$
+```
 
 ### 4.4 Simplified MDLM Training Objective
 
 For masked (absorbing-state) diffusion, the ELBO simplifies beautifully:
 
-$$
+```math
 \boxed{L_{\text{MDLM}} = \mathbb{E}_{t \sim U(0,1), x_0, x_t \sim q(\cdot \mid x_0)}\left[-\sum_{i: x_t^i = [M]} \log p_\theta(x_0^i \mid x_t)\right]}
-$$
+```
 
 **In plain English:**
 1. Sample random time $t$ uniformly from $[0, 1]$
@@ -358,9 +358,9 @@ This is remarkably similar to **BERT's masked language modeling (MLM)** objectiv
 
 As $T \to \infty$, the discrete ELBO becomes an integral:
 
-$$
+```math
 L = \int_0^1 \mathbb{E}_{x_0, x_t}\left[-\lambda(t) \cdot \log p_\theta(x_0 \mid x_t)\right] dt
-$$
+```
 
 where $\lambda(t) = \frac{d}{dt}(1 - \alpha\_t) = -\alpha'\_t$ is the weighting function.
 
@@ -378,9 +378,9 @@ In practice, we use Monte Carlo estimation with $t \sim \text{Uniform}(0, 1)$.
 
 In continuous diffusion (for images), the **score function** is central:
 
-$$
+```math
 s(x, t) = \nabla_x \log p(x \mid t)
-$$
+```
 
 This is the gradient of the log-density with respect to the data $x$.
 
@@ -390,17 +390,17 @@ This is the gradient of the log-density with respect to the data $x$.
 
 For discrete diffusion, we instead work with **probability ratios**:
 
-$$
+```math
 \text{score}(x_t, t) = \frac{p(x_0 \mid x_t)}{p([M] \mid x_t)}
-$$
+```
 
 **Interpretation:** How much more likely is a real token compared to `[MASK]`?
 
 In practice, we work with log-probabilities (logits) directly:
 
-$$
+```math
 p_\theta(x_0 \mid x_t) = \text{softmax}(f_\theta(x_t, t))
-$$
+```
 
 ### 5.3 Cross-Entropy Loss Derivation
 
@@ -408,35 +408,35 @@ $$
 
 *Step 1:* KL divergence for discrete distributions:
 
-$$
+```math
 D_{KL}(q(x_{t-1} \mid x_t, x_0) \| p_\theta(x_{t-1} \mid x_t)) = \sum_v q(v) \log \frac{q(v)}{p_\theta(v)}
-$$
+```
 
 *Step 2:* Expand and separate:
 
-$$
+```math
 = \sum_v q(v) \log q(v) - \sum_v q(v) \log p_\theta(v) = -H(q) + H(q, p_\theta)
-$$
+```
 
 *Step 3:* For optimization, $H(q)$ is constant with respect to $\theta$:
 
-$$
+```math
 \nabla_\theta D_{KL} = \nabla_\theta H(q, p_\theta) = -\nabla_\theta \sum_v q(v) \log p_\theta(v)
-$$
+```
 
 *Step 4:* For masked diffusion with known $x\_0$:
 
-$$
+```math
 L = -\log p_\theta(x_0 \mid x_t) = \text{CrossEntropy}(\text{one-hot}(x_0), p_\theta(\cdot \mid x_t))
-$$
+```
 
 ### 5.4 Position-Wise Loss
 
 For a sequence of length $n$:
 
-$$
+```math
 L = \sum_{i=1}^{n} \mathbb{1}[x_t^i = [M]] \cdot \left(-\log p_\theta(x_0^i \mid x_t, t)\right)
-$$
+```
 
 **Key Insight:** We only compute loss on **masked positions**!
 - If $x\_t^i \neq [M]$: No loss (position already correct)
@@ -454,9 +454,9 @@ Different weighting schemes trade off likelihood vs sample quality:
 
 ### 5.6 Complete Training Loss
 
-$$
+```math
 \boxed{L_\theta = \mathbb{E}_{x_0 \sim p_{\text{data}}, t \sim U(0,1), x_t \sim q(\cdot \mid x_0, t)}\left[\sum_{i: x_t^i = [M]} -\log \text{softmax}(f_\theta(x_t, t))_{x_0^i}\right]}
-$$
+```
 
 **Training Algorithm:**
 ```
@@ -483,15 +483,15 @@ Now for the exciting part: **generating text** from a trained model!
 
 **Starting Point:** All tokens are `[MASK]`
 
-$$
+```math
 x_T = [\text{M}, \text{M}, \text{M}, \ldots, \text{M}]
-$$
+```
 
 **End Point:** Coherent generated text
 
-$$
+```math
 x_0 = \text{"The cat sat on the mat"}
-$$
+```
 
 ### 6.2 Basic Sampling Algorithm
 
@@ -536,9 +536,9 @@ Generating "The cat sat on mat" with $T=5$ steps:
 
 #### Temperature Sampling
 
-$$
+```math
 p'(v) \propto p(v)^{1/\tau}
-$$
+```
 
 - $\tau < 1$: Sharper distribution (more deterministic)
 - $\tau > 1$: Flatter distribution (more random)
@@ -587,9 +587,9 @@ Set prefix as unmasked, append masked tokens, generate.
 #### Classifier-Free Guidance
 Scale logits based on conditional vs unconditional predictions:
 
-$$
+```math
 \tilde{\epsilon} = \epsilon_{\text{uncond}} + w(\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
-$$
+```
 
 where $w > 1$ strengthens conditioning (typical: $w = 3-7$).
 
@@ -613,9 +613,9 @@ where $w > 1$ strengthens conditioning (typical: $w = 3-7$).
 
 1. **Forward Process:** Markov chain that gradually masks tokens
 
-$$
+```math
 q(x_t \mid x_0) = \alpha_t \cdot \delta(x_t, x_0) + (1-\alpha_t) \cdot \delta(x_t, [M])
-$$math
+```math
 2. **Reverse Process:** Neural network learns to unmask
 ```
 
@@ -624,9 +624,9 @@ p_\theta(x_{t-1} \mid x_t) \approx \sum_{x_0} q(x_{t-1} \mid x_t, x_0) \cdot p_\
 
 3. **Training Objective:** Cross-entropy on masked positions
 
-$$
+```math
 L = -\sum_{i: x_t^i = [M]} \log p_\theta(x_0^i \mid x_t)
-$$math
+```math
 4. **Sampling:** Iterative unmasking from full masks to text
 ```
 

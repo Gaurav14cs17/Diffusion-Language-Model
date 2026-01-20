@@ -26,15 +26,15 @@ The forward process **gradually adds noise** to data over $T$ timesteps, transfo
 
 Each step adds a small amount of Gaussian noise:
 
-$$
+```math
 q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t} x_{t-1}, \beta_t I)
-$$
+```
 
 ### Equivalent Sampling Form
 
-$$
+```math
 x_t = \sqrt{1-\beta_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t, \quad \epsilon_t \sim \mathcal{N}(0, I)
-$$
+```
 
 ### Notation
 
@@ -62,9 +62,9 @@ Small β (small steps): x₀ -·-·-·-·-·-·-·-·-·-·-▶ x_T
 
 The complete forward trajectory:
 
-$$
+```math
 q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})
-$$
+```
 
 ### Proof
 
@@ -78,9 +78,9 @@ By Markov property and chain rule:
 
 ### Full Joint (Including $x\_0$)
 
-$$
+```math
 q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})
-$$
+```
 
 ---
 
@@ -94,41 +94,41 @@ Find $q(x\_t \mid x\_0)$ directly — skip intermediate steps!
 
 **Step 1**: Write two consecutive steps:
 
-$$
+```math
 x_1 = \sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1
 x_2 = \sqrt{\alpha_2} x_1 + \sqrt{1-\alpha_2} \epsilon_2
-$$
+```
 
 **Step 2**: Substitute $x\_1$ into $x\_2$:
 
-$$
+```math
 x_2 = \sqrt{\alpha_2}(\sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1) + \sqrt{1-\alpha_2} \epsilon_2
 = \sqrt{\alpha_1 \alpha_2} x_0 + \sqrt{\alpha_2(1-\alpha_1)} \epsilon_1 + \sqrt{1-\alpha_2} \epsilon_2
-$$
+```
 
 **Step 3**: Combine noise terms (sum of Gaussians):
 
-$$
+```math
 \sqrt{\alpha_2(1-\alpha_1)} \epsilon_1 + \sqrt{1-\alpha_2} \epsilon_2 \sim \mathcal{N}(0, [\alpha_2(1-\alpha_1) + 1-\alpha_2]I)
-$$
+```
 
 **Step 4**: Simplify variance:
 
-$$
+```math
 \alpha_2(1-\alpha_1) + 1-\alpha_2 = \alpha_2 - \alpha_1\alpha_2 + 1 - \alpha_2 = 1 - \alpha_1\alpha_2
-$$
+```
 
 **Step 5**: Define $\bar{\alpha}\_2 = \alpha\_1 \alpha\_2$:
 
-$$
+```math
 x_2 = \sqrt{\bar{\alpha}_2} x_0 + \sqrt{1-\bar{\alpha}_2} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
-$$
+```
 
 **Step 6**: By induction, for any $t$:
 
-$$
+```math
 \boxed{x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon}
-$$
+```
 
 where $\bar{\alpha}\_t = \prod\_{s=1}^{t} \alpha\_s$.
 
@@ -138,9 +138,9 @@ where $\bar{\alpha}\_t = \prod\_{s=1}^{t} \alpha\_s$.
 
 ### Marginal Distribution
 
-$$
+```math
 \boxed{q(x_t \mid x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t} x_0, (1-\bar{\alpha}_t) I)}
-$$
+```
 
 ### Interpretation
 
@@ -169,25 +169,25 @@ t=T:     x_T ≈ pure noise
 
 ### At $t = 0$
 
-$$
+```math
 \bar{\alpha}_0 = 1 \implies x_0 = 1 \cdot x_0 + 0 \cdot \epsilon = x_0 \quad \checkmark
-$$
+```
 
 ### At $t = T$ (Large T)
 
-$$
+```math
 \bar{\alpha}_T = \prod_{t=1}^{T}(1-\beta_t) \approx 0 \quad \text{(for appropriate } \beta_t \text{)}
 \implies x_T \approx 0 \cdot x_0 + 1 \cdot \epsilon = \epsilon \sim \mathcal{N}(0, I) \quad \checkmark
-$$
+```
 
 ### Proof of $\bar{\alpha}\_T \to 0$
 
 For $\beta\_t = \beta$ constant:
 
-$$
+```math
 \bar{\alpha}_T = (1-\beta)^T
 \lim_{T \to \infty} (1-\beta)^T = 0 \quad \text{for } \beta \in (0,1)
-$$
+```
 
 ### Visual
 
@@ -211,9 +211,9 @@ $$
 
 ### Definition
 
-$$
+```math
 \text{SNR}(t) = \frac{\bar{\alpha}_t}{1 - \bar{\alpha}_t}
-$$
+```
 
 ### Interpretation
 
@@ -229,9 +229,9 @@ $$
 
 Often use log-SNR for numerical stability:
 
-$$
+```math
 \log \text{SNR}(t) = \log \bar{\alpha}_t - \log(1 - \bar{\alpha}_t)
-$$
+```
 
 ---
 

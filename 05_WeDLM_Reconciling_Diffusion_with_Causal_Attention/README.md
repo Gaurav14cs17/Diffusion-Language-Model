@@ -193,9 +193,9 @@ python scripts/train.py \
 
 **Key Formula — Adjusted Entropy:**
 
-$$
+```math
 \tilde{H}_j = H(P_j) + \lambda(j - j_{\min}), \quad \text{Fill if } \tilde{H}_j < \tau
-$$
+```
 
 ---
 
