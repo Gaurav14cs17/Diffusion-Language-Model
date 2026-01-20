@@ -7,11 +7,17 @@
 ## Table of Contents
 
 1. [Introduction: Why Diffusion for Language?](#1-introduction-why-diffusion-for-language)
+
 2. [The Forward Diffusion Process](#2-the-forward-diffusion-process)
+
 3. [The Reverse Denoising Process](#3-the-reverse-denoising-process)
+
 4. [Training Objective: ELBO Derivation](#4-training-objective-elbo-derivation)
+
 5. [Score Matching and Loss Functions](#5-score-matching-and-loss-functions)
+
 6. [Sampling and Generation](#6-sampling-and-generation)
+
 7. [Conclusion](#7-conclusion)
 
 ---
@@ -46,8 +52,11 @@ While incredibly successful, this approach has fundamental limitations:
 **Dream 7B** and similar diffusion-based language models offer a fundamentally different approach. Instead of generating sequentially, they:
 
 1. Start with a fully "noisy" (masked) sequence
+
 2. Iteratively denoise to reveal the final text
+
 3. Generate all positions in parallel
+
 4. Allow bidirectional context at every step
 
 The key mathematical insight is adapting continuous diffusion (used for images) to the **discrete domain** of text tokens.
@@ -163,8 +172,11 @@ P(x_t^i = [M]) = 1 - \alpha_t \quad \text{(token is masked)}
 ```
 
 This gives us a simple sampling procedure:
+
 1. Sample $t \sim \text{Uniform}(0, 1)$ in continuous time
+
 2. Compute $\alpha\_t = 1 - t$ (linear schedule)
+
 3. Independently mask each token with probability $1 - \alpha\_t$
 
 ### 2.5 Noise Schedules
@@ -379,9 +391,13 @@ For masked (absorbing-state) diffusion, the ELBO simplifies beautifully:
 ```
 
 **In plain English:**
+
 1. Sample random time $t$ uniformly from $[0, 1]$
+
 2. Sample clean data $x\_0$ from training set
+
 3. Corrupt $x\_0$ to get $x\_t$ by masking $\sim(1-\alpha\_t)$ fraction of tokens
+
 4. **Train to predict the original tokens at masked positions only**
 
 This is remarkably similar to **BERT's masked language modeling (MLM)** objective, but with:
@@ -682,6 +698,7 @@ where $w > 1$ strengthens conditioning (typical: $w = 3-7$).
 q(x_t \mid x_0) = \alpha_t \cdot \delta(x_t, x_0) + (1-\alpha_t) \cdot \delta(x_t, [M])
 
 ```math
+
 2. **Reverse Process:** Neural network learns to unmask
 
 ```
@@ -696,6 +713,7 @@ p_\theta(x_{t-1} \mid x_t) \approx \sum_{x_0} q(x_{t-1} \mid x_t, x_0) \cdot p_\
 L = -\sum_{i: x_t^i = [M]} \log p_\theta(x_0^i \mid x_t)
 
 ```math
+
 4. **Sampling:** Iterative unmasking from full masks to text
 
 ```

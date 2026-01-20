@@ -166,14 +166,18 @@ PS-VAE converges **2× faster** due to semantic-rich latent space!
 ### Text-to-Image Generation
 
 1. **Encode text** → T5-XXL embeddings
+
 2. **Sample noise** → z_T ~ N(0, I)
+
 3. **Denoise with DiT** → z_0
 4. **Decode with PS-VAE** → Image
 
 ### Image Editing
 
 1. **Encode source** → z = PS-VAE.encode(x)
+
 2. **Add noise** → z_t (controls edit strength)
+
 3. **Denoise with new prompt** → z'_0
 4. **Decode** → Edited image
 
@@ -195,9 +199,13 @@ Edit strength controlled by noise level t!
 ## 🔮 Future Directions
 
 1. **Higher Resolution**: Extend to 512×512 and beyond
+
 2. **Video Generation**: Apply to video latent spaces
+
 3. **Multi-modal**: Combine with audio/text generation
+
 4. **Efficient Training**: Reduce computational requirements
+
 5. **Better Encoders**: Explore newer representation models
 
 ---

@@ -5,11 +5,17 @@ This document provides a comprehensive mathematical and architectural explanatio
 ## Table of Contents
 
 1. [Overview](#overview)
+
 2. [Problem Formulation](#problem-formulation)
+
 3. [S-VAE: Semantic VAE](#s-vae-semantic-vae)
+
 4. [PS-VAE: Pixel-Semantic VAE](#ps-vae-pixel-semantic-vae)
+
 5. [Diffusion Transformer (DiT)](#diffusion-transformer-dit)
+
 6. [Training Procedures](#training-procedures)
+
 7. [Inference](#inference)
 
 ---
@@ -25,8 +31,11 @@ PS-VAE bridges the gap between representation learning and image generation by c
 ### Key Contributions
 
 1. **Compact Latent Space**: 96 channels with 16×16 spatial resolution
+
 2. **KL Regularization**: Prevents off-manifold generation
+
 3. **Dual Reconstruction**: Joint semantic + pixel reconstruction objectives
+
 4. **Unified T2I & Editing**: Single model for generation and editing tasks
 
 ---
@@ -405,6 +414,7 @@ Each block consists of:
 \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left( \frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}} \right) \mathbf{V}
 
 ```math
+
 3. **Cross-Attention** (with text):
 
 ```
@@ -419,6 +429,7 @@ Each block consists of:
 \text{FFN}(\mathbf{h}) = \text{GELU}(\mathbf{h} \mathbf{W}_1) \mathbf{W}_2
 
 ```math
+
 5. **Gated Residual**:
 
 ```
@@ -610,9 +621,13 @@ For deterministic sampling (DDIM), set $\sigma\_t = 0$.
 The PS-VAE framework provides:
 
 1. **Compact Representation**: 96 channels vs 1024+ in RAE
+
 2. **KL Regularization**: Ensures on-manifold generation
+
 3. **Dual Reconstruction**: Semantic + Pixel for best of both worlds
+
 4. **Fast Convergence**: Semantic features accelerate diffusion training
+
 5. **High Quality**: State-of-the-art reconstruction and generation
 
 ### Key Equations

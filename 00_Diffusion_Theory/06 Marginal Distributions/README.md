@@ -143,7 +143,9 @@ q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}) \cdot q(x_{t-1} \mid x_0)}{
 ### All Three Terms are Gaussian!
 
 1. $q(x\_t \mid x\_{t-1}) = \mathcal{N}(\sqrt{\alpha\_t}x\_{t-1}, \beta\_t I)$
+
 2. $q(x\_{t-1} \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_{t-1}}x\_0, (1-\bar{\alpha}\_{t-1})I)$
+
 3. $q(x\_t \mid x\_0) = \mathcal{N}(\sqrt{\bar{\alpha}\_t}x\_0, (1-\bar{\alpha}\_t)I)$
 
 ### Result

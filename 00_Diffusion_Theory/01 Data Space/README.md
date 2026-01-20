@@ -33,7 +33,9 @@ Real-world data comes from an unknown **data distribution** $p\_{\text{data}}(x)
 ### Derivation
 
 1. **Define the space**: Let $\mathcal{X} \subseteq \mathbb{R}^d$ be our data space
+
 2. **Define the distribution**: $p\_{\text{data}}: \mathcal{X} \to \mathbb{R}\_{\geq 0}$ is a probability density
+
 3. **Normalization constraint**:
 
 ```math
@@ -94,7 +96,9 @@ Real data lies on a **low-dimensional manifold** $\mathcal{M} \subset \mathbb{R}
 ### Intuition
 
 1. **High ambient dimension**: Images are $256 \times 256 \times 3 = 196,608$ dimensions
+
 2. **Low intrinsic dimension**: Most random vectors don't look like real images
+
 3. **Manifold structure**: Real images form a thin "sheet" in high-dimensional space
 
 ### Formal Statement

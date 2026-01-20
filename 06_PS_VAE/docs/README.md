@@ -113,8 +113,11 @@ All diagrams are available as SVG files in the `images/` folder:
 We welcome documentation improvements! Please:
 
 1. Use the existing SVG diagram style for new visualizations
+
 2. Include mathematical notation where appropriate
+
 3. Add visual examples when possible
+
 4. Keep explanations accessible to newcomers
 
 ---

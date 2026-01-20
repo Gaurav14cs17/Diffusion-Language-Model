@@ -270,7 +270,9 @@ for each training iteration:
 ### Key Points
 
 1. **Random $t$**: Train on all timesteps equally
+
 2. **Simple MSE**: Just match the noise!
+
 3. **Efficient**: One forward pass per iteration
 
 ### Time Conditioning

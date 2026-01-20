@@ -76,9 +76,13 @@ This elegant parameterization allows us to trade off between quality and paralle
 The training algorithm is surprisingly efficient, requiring only **two forward passes** through the model:
 
 1. **Sample noise levels** t₁, ..., t_B for each block
+
 2. **Apply noise** to each block according to its noise level
+
 3. **Compute KV cache** for the clean sequence (first forward pass)
+
 4. **Compute predictions** for all blocks using cached KVs (second forward pass)
+
 5. **Take gradient step** on the block diffusion loss
 
 The key insight is using a **vectorized implementation** that processes all blocks in parallel, computing the loss for the entire sequence in one batched forward pass.

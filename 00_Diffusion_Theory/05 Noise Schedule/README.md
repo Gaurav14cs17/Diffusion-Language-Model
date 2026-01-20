@@ -96,7 +96,9 @@ where $s = 0.008$ is a small offset to prevent $\beta\_t$ from being too small a
 The cosine function provides:
 
 1. $\bar{\alpha}\_0 \approx 1$ (starts at pure signal)
+
 2. $\bar{\alpha}\_T \approx 0$ (ends at pure noise)
+
 3. Smooth S-curve transition (no sudden jumps)
 
 ### Comparison with Linear

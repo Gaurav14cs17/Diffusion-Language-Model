@@ -7,11 +7,17 @@
 ## Table of Contents
 
 1. [Introduction: What is MDLM?](#1-introduction-what-is-mdlm)
+
 2. [The Forward Masking Process](#2-the-forward-masking-process)
+
 3. [The Reverse Denoising Process](#3-the-reverse-denoising-process)
+
 4. [Training Objective: ELBO Derivation](#4-training-objective-elbo-derivation)
+
 5. [Sampling Algorithms](#5-sampling-algorithms)
+
 6. [Experimental Results](#6-experimental-results)
+
 7. [Conclusion](#7-conclusion)
 
 ---
@@ -25,6 +31,7 @@
 ### The Core Insight
 
 MDLM treats text generation as a **denoising problem**:
+
 1. **Forward process**: Gradually corrupt text by replacing tokens with `[MASK]`
 2. **Reverse process**: Learn to recover original tokens from masked context
 
@@ -144,10 +151,12 @@ Input: clean sequence x₀ = (x₀¹, ..., x₀ⁿ)
 Output: corrupted sequence xₜ
 
 1. Sample t ~ Uniform(0, 1)
+
 2. For each position i = 1, ..., n:
    Sample uⁱ ~ Uniform(0, 1)
    If uⁱ < 1-t: xₜⁱ = x₀ⁱ (keep original)
    Else: xₜⁱ = [MASK]
+
 3. Return xₜ
 
 ```
@@ -239,7 +248,9 @@ p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
 
 ```
 1. Get predictions: logits = f_θ(xₜ, t), probs = softmax(logits)
+
 2. Compute unmasking probability: θ = s/t
+
 3. For each position i:
    If xₜⁱ ≠ [M]: xₜ₋ₛⁱ = xₜⁱ  (already revealed, keep it)
    If xₜⁱ = [M]:
@@ -331,9 +342,13 @@ D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 ```
 
 **In words:**
+
 1. Sample random time $t$ uniformly from $[0, 1]$
+
 2. Sample clean data $x\_0$ from training distribution
+
 3. Create $x\_t$ by masking each token with probability $t$
+
 4. Compute cross-entropy loss **only on masked positions**
 
 ### 4.4 Weighting Function
@@ -571,10 +586,15 @@ On OpenWebText benchmark:
 Based on MDLM's findings:
 
 1. ✅ Use linear schedule $\alpha\_t = 1-t$
+
 2. ✅ Add time embedding to model
+
 3. ✅ Use uniform time sampling
+
 4. ✅ Use x₀-parameterization
+
 5. ✅ Cross-entropy on masked positions only
+
 6. ✅ **Keep it simple!**
 
 ### Why MDLM Matters

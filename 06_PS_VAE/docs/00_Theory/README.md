@@ -269,8 +269,11 @@ where $s$ is the guidance scale (typically 7.5).
 ### Image Editing
 
 1. **Encode** source image: $z = \text{PS-VAE.encode}(x)$
+
 2. **Add noise** to timestep $t$: $z\_t = \sqrt{\bar{\alpha}\_t} \cdot z + \sqrt{1-\bar{\alpha}\_t} \cdot \epsilon$
+
 3. **Denoise** with new prompt: $z'\_0 = \text{DDIM}(z\_t, \text{new\_prompt})$
+
 4. **Decode**: $x' = \text{PS-VAE.decode}(z'\_0)$
 
 The edit strength is controlled by $t$:

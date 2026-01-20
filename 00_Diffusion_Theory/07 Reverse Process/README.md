@@ -36,7 +36,9 @@ p(x_{t-1} \mid x_t) = \frac{p(x_t \mid x_{t-1}) p(x_{t-1})}{p(x_t)}
 We need $p(x\_{t-1})$ — the marginal distribution of data at step $t-1$!
 
 This is **intractable** because:
+
 1. $p(x\_0) = p\_{\text{data}}$ is unknown
+
 2. $p(x\_t) = \int p(x\_t \mid x\_0) p(x\_0) dx\_0$ is intractable
 
 ### The Solution
@@ -193,8 +195,11 @@ return x_0
 ### Why Add Noise?
 
 Even though we're denoising, we add small noise $\sigma\_t z$ because:
+
 1. Matches the true reverse posterior
+
 2. Helps exploration / diversity
+
 3. Only skip at $t=1$ to get clean final sample
 
 ### Visual

@@ -10,14 +10,23 @@
 ## 📋 Table of Contents
 
 1. [Introduction: The Speed Problem in Language Models](#1-introduction-the-speed-problem-in-language-models)
+
 2. [Background: Autoregressive vs Diffusion Models](#2-background-autoregressive-vs-diffusion-models)
+
 3. [The Core Innovation: Topological Reordering](#3-the-core-innovation-topological-reordering)
+
 4. [Mathematical Formulation](#4-mathematical-formulation)
+
 5. [Streaming Parallel Decoding](#5-streaming-parallel-decoding)
+
 6. [Entropy-Based Position Selection](#6-entropy-based-position-selection)
+
 7. [The Complete WeDLM Algorithm](#7-the-complete-wedlm-algorithm)
+
 8. [Training Methodology](#8-training-methodology)
+
 9. [Theoretical Analysis: Why This Works](#9-theoretical-analysis-why-this-works)
+
 10. [Conclusion](#10-conclusion)
 
 ---
@@ -212,8 +221,11 @@ WeDLM maintains causal attention but processes multiple masks in one forward pas
 - **Window**: Current mask tokens being processed
 
 **Key Innovation**: Arrange the window so:
+
 1. Non-mask tokens in window come first
+
 2. Mask tokens in window come last
+
 3. Causal attention naturally gives correct dependencies
 
 ```
@@ -370,36 +382,65 @@ Input: prompt tokens x₁, ..., xₚ, window size W
 Output: generated tokens
 
 1. Initialize KV cache with prompt
+
 2. Initialize window: [MASK]₁, [MASK]₂, ..., [MASK]_W
+
 3. Set prefix_len = p
 
 4. while not finished:
+
 5.     # Reorder window: non-masks first, then masks
+
 6.     reordered_window = sort(window, key=is_mask)
+
 7.     
+
 8.     # Single forward pass with KV cache
+
 9.     logits = model.forward(reordered_window, kv_cache)
+
 10.    
+
 11.    # Process mask positions
+
 12.    for each mask position j in window:
+
 13.        entropy_j = compute_entropy(logits[j])
+
 14.        if should_fill(entropy_j):
+
 15.            window[j] = sample(logits[j])
+
 16.            mark_as_non_mask(j)
+
 17.    
+
 18.    # Find committed prefix (consecutive non-masks from start)
+
 19.    committed = longest_non_mask_prefix(window)
+
 20.    
+
 21.    # Commit prefix to KV cache
+
 22.    append_to_output(committed)
+
 23.    kv_cache.append(committed)
+
 24.    prefix_len += len(committed)
+
 25.    
+
 26.    # Slide window
+
 27.    window = window[len(committed):] + new_masks(len(committed))
+
 28.    
+
 29.    # Check stopping condition
+
 30.    if stop_token in committed:
+
 31.        finished = True
 
 32. return output
@@ -446,11 +487,15 @@ For causal attention at any mask position $q\_i$:
 ```
 
 Since $p\_k < q\_i$ for all $i$:
+
 1. All committed tokens $C$ are visible to all masks $M$
+
 2. No mask token is visible to any committed token (causal mask)
 
 Therefore:
+
 1. Committed tokens are computed only from their left context → stable
+
 2. Future mask predictions use committed tokens but don't modify them → consistent
 
 $\square$
@@ -462,7 +507,9 @@ $\square$
 ### The Decision Problem
 
 At each step, we have mask positions with predicted distributions. We must decide:
+
 1. **Which masks to fill?** (Position selection)
+
 2. **What tokens to use?** (Token sampling)
 
 ### Entropy as Confidence Measure
@@ -746,8 +793,11 @@ Where:
 **Random Span Masking**: Sample spans rather than individual tokens:
 
 1. Sample span length $\ell \sim \text{Geometric}(p=0.2)$
+
 2. Sample start position uniformly
+
 3. Mask positions in span
+
 4. Repeat until target mask ratio reached
 
 **Mask Ratio Schedule**:
@@ -770,13 +820,19 @@ Where:
 **Key Advantage**: WeDLM can be initialized from pretrained AR models!
 
 **Why?** 
+
 1. Same architecture (causal attention)
+
 2. Same position encoding (RoPE)
+
 3. Compatible objective (next token prediction is a special case)
 
 **Procedure**:
+
 1. Load pretrained AR model weights
+
 2. Add `[MASK]` token to vocabulary (use embedding of rare token)
+
 3. Fine-tune with CMLM objective
 
 **Training Efficiency**:
@@ -829,8 +885,11 @@ I(x_j ; x_{j+1:} \mid x_{1:j-1}) \approx 0
 ```
 
 **Proof Sketch**:
+
 1. Natural language follows left-to-right dependencies (subject before verb before object)
+
 2. Information flows causally: earlier tokens constrain later tokens
+
 3. Given complete left context, right context provides minimal additional information about the current position
 $\square$
 
@@ -846,8 +905,11 @@ P(x_i, x_j \mid \text{prefix}) = P(x_i \mid \text{prefix}) \cdot P(x_j \mid \tex
 ```
 
 **This holds because**:
+
 1. Causal attention ensures each mask only sees the prefix
+
 2. Positions are processed independently in the model
+
 3. Sampling is done independently per position
 
 **Corollary**: For structured outputs (math, code), where tokens are often deterministic given context, WeDLM's independence assumption is nearly exact.
@@ -884,8 +946,11 @@ Let $\tau$ be the entropy threshold. Define:
 ### Summary of Key Innovations
 
 1. **Topological Reordering**: Arrange mask and non-mask tokens to work with causal attention
+
 2. **KV Cache Compatibility**: First diffusion LM to fully utilize production optimizations
+
 3. **Streaming Parallel Decoding**: Commit prefixes continuously for efficiency
+
 4. **Entropy-Based Selection**: Smart position selection for optimal speed-quality balance
 
 ### Mathematical Foundations
