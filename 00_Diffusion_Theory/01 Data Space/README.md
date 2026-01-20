@@ -163,6 +163,7 @@ x_{\text{norm}} = 2 \cdot \frac{x - x_{\min}}{x_{\max} - x_{\min}} - 1
 ### For Images
 
 ```python
+
 # Common preprocessing
 x = (x / 255.0) * 2 - 1  # [0, 255] → [-1, 1]
 ```

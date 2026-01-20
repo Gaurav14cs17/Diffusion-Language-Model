@@ -43,16 +43,19 @@ q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})
 ### Proof of Factorization
 
 1. Start with chain rule:
+
 ```math
 q(x_{0:T}) = q(x_0) q(x_1 \mid x_0) q(x_2 \mid x_0, x_1) \cdots
 ```
 
 2. Apply Markov property:
+
 ```math
 q(x_2 \mid x_0, x_1) = q(x_2 \mid x_1)
 ```
 
 3. Result:
+
 ```math
 \boxed{q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})}
 ```
@@ -101,6 +104,7 @@ Let $x\_{t-1}$ be fixed, $\epsilon\_t \sim \mathcal{N}(0, I)$:
 ### Statement
 
 We require:
+
 ```math
 \alpha_t + \beta_t = 1 \quad \text{for all } t
 ```

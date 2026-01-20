@@ -280,6 +280,7 @@ Full context, full power...
 ## 🚀 Quick Start
 
 ```bash
+
 # Start with the theory
 cd "00_Diffusion_Theory"
 cat README.md

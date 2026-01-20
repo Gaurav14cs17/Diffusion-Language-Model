@@ -110,6 +110,7 @@ Step 3: Load K₁, K₂, V₁, V₂ from cache, compute K₃, V₃...
 Discrete diffusion models define a forward process that corrupts data into noise (masks):
 
 **Forward Process**:
+
 ```math
 q(x_t \mid x_0) = \text{Categorical}(x_t; p = (1-\beta_t)x_0 + \beta_t \cdot \mathbf{u})
 ```
@@ -117,6 +118,7 @@ q(x_t \mid x_0) = \text{Categorical}(x_t; p = (1-\beta_t)x_0 + \beta_t \cdot \ma
 Where $\mathbf{u} = [0, \ldots, 0, 1]$ is the one-hot vector for `[MASK]`, and $\beta\_t$ is a noise schedule.
 
 **Reverse Process**:
+
 ```math
 p_\theta(x_{t-1} \mid x_t) = \prod_{i: x_t^{(i)} = \text{MASK}} P_\theta(x_{t-1}^{(i)} \mid x_t)
 ```
@@ -240,6 +242,7 @@ P_\theta(x_j \mid \{x_i : i \in \mathcal{P}, i < j\})
 **Proof**:
 
 Standard masked LM objective:
+
 ```math
 \mathcal{L}_{\text{MLM}} = -\mathbb{E}_{x \sim p_{\text{data}}}\left[\sum_{j \in \mathcal{M}} \log P_\theta(x_j \mid x_{\mathcal{M}^c})\right]
 ```
@@ -247,11 +250,13 @@ Standard masked LM objective:
 Where $\mathcal{M}^c$ is the set of non-masked positions.
 
 WeDLM's causal MLM objective:
+
 ```math
 \mathcal{L}_{\text{CMLM}} = -\mathbb{E}_{x \sim p_{\text{data}}}\left[\sum_{j \in \mathcal{M}} \log P_\theta(x_j \mid x_{1:j-1} \cap \mathcal{M}^c)\right]
 ```
 
 For left-to-right languages, the conditional independence assumption:
+
 ```math
 P(x_j \mid x_{\mathcal{M}^c}) \approx P(x_j \mid x_{1:j-1} \cap \mathcal{M}^c)
 ```
@@ -389,6 +394,7 @@ Let $M = (m\_1, \ldots, m\_j)$ be remaining mask positions at $q\_1, \ldots, q\_
 Since $C$ are consecutive from window start: $p\_k < q\_1$ (all committed positions precede all mask positions).
 
 For causal attention at any mask position $q\_i$:
+
 ```math
 \text{Attention}(q_i) = f\left(\{x_\ell : \ell < q_i\}\right)
 ```
@@ -453,6 +459,7 @@ Where:
 Where $\tau$ is the entropy threshold (default: 0.4).
 
 **Fallback**: If no position satisfies the threshold:
+
 ```math
 j^* = \arg\min_j \tilde{H}_j
 ```
@@ -464,6 +471,7 @@ j^* = \arg\min_j \tilde{H}_j
 **Setup**: Let $e\_j = \mathbb{1}[\hat{x}\_j \neq x\_j^*]$ be the error indicator for position $j$.
 
 **Assumption** (Calibration): The model's predictive probability reflects true accuracy:
+
 ```math
 P(\hat{x}_j = x_j^*) \approx \max_k p_{j,k}
 ```
@@ -476,16 +484,19 @@ P(\hat{x}_j = x_j^*) \approx \max_k p_{j,k}
 
 **Proof of bound**:
 Using the relationship between entropy and max probability:
+
 ```math
 H(P) \geq -\log(\max_k p_k) \implies \max_k p_k \geq \exp(-H(P))
 ```
 
 Therefore:
+
 ```math
 \mathbb{E}[e_j] = 1 - \max_k p_{j,k} \leq 1 - \exp(-H(P_j))
 ```
 
 **Corollary**: Selecting positions with $H(P\_j) < \tau$ ensures:
+
 ```math
 \mathbb{E}[e_j] \leq 1 - \exp(-\tau)
 ```
@@ -510,6 +521,7 @@ def select_positions_to_fill(
     entropy_threshold: Optional[float],
     pos_penalty_factor: float
 ) -> List[int]:
+
     # Compute position-based penalty
     mask_indices_tensor = torch.tensor(remaining_mask_indices)
     base_pos = mask_indices_tensor[0]
@@ -664,6 +676,7 @@ Where:
 4. Repeat until target mask ratio reached
 
 **Mask Ratio Schedule**:
+
 ```math
 r_t = r_{\min} + (r_{\max} - r_{\min}) \cdot \frac{t}{T}
 ```
@@ -704,6 +717,7 @@ def compute_cmlm_loss(model, input_ids, labels, mask_flags):
         labels: [B, L] - ground truth tokens
         mask_flags: [B, L] - True where input is [MASK]
     """
+
     # Forward pass with causal attention
     logits = model(input_ids)  # [B, L, V]
     
@@ -742,6 +756,7 @@ $\square$
 **Theorem 6** (Marginal Consistency): *WeDLM's parallel generation produces the same marginal distributions as AR generation under sufficient conditions.*
 
 **Condition**: All masked positions are conditionally independent given the prefix:
+
 ```math
 P(x_i, x_j \mid \text{prefix}) = P(x_i \mid \text{prefix}) \cdot P(x_j \mid \text{prefix})
 ```
@@ -762,12 +777,14 @@ Let $\tau$ be the entropy threshold. Define:
 - $\epsilon(\tau)$ = expected error rate
 
 **Relation**:
+
 ```math
 \bar{k}(\tau) \approx \sum_{j=1}^{W} P(H_j < \tau)
 \epsilon(\tau) \approx \sum_{j=1}^{W} P(H_j < \tau) \cdot (1 - \exp(-\tau))
 ```
 
 **Optimal Threshold**: Minimize combined cost:
+
 ```math
 \tau^* = \arg\min_\tau \left[\frac{n}{\bar{k}(\tau)} \cdot c_{\text{time}} + \epsilon(\tau) \cdot n \cdot c_{\text{error}}\right]
 ```

@@ -136,6 +136,7 @@ def sample_ddim(model, timesteps, guidance_scale):
     x = torch.randn(shape)
     
     for t, t_prev in zip(timesteps[:-1], timesteps[1:]):
+
         # CFG
         eps_uncond = model(x, t, null)
         eps_cond = model(x, t, condition)

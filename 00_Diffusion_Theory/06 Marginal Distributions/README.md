@@ -51,11 +51,13 @@ The **marginal distribution** $q(x\_t \mid x\_0)$ lets us sample noisy data at *
 Derive $q(x\_t \mid x\_0)$ from the chain of Gaussian transitions.
 
 ### Step 1: Single Transition
+
 ```math
 x_1 = \sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1
 ```
 
 ### Step 2: Two Transitions
+
 ```math
 x_2 = \sqrt{\alpha_2} x_1 + \sqrt{1-\alpha_2} \epsilon_2
 = \sqrt{\alpha_2}(\sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1) + \sqrt{1-\alpha_2} \epsilon_2
@@ -66,11 +68,13 @@ x_2 = \sqrt{\alpha_2} x_1 + \sqrt{1-\alpha_2} \epsilon_2
 Let $\tilde{\epsilon} = \sqrt{\alpha\_2(1-\alpha\_1)} \epsilon\_1 + \sqrt{1-\alpha\_2} \epsilon\_2$
 
 **Variance of $\tilde{\epsilon}$:**
+
 ```math
 \text{Var}[\tilde{\epsilon}] = \alpha_2(1-\alpha_1) + (1-\alpha_2) = \alpha_2 - \alpha_1\alpha_2 + 1 - \alpha_2 = 1 - \alpha_1\alpha_2
 ```
 
 ### Step 4: Standardize
+
 ```math
 \tilde{\epsilon} \sim \mathcal{N}(0, (1-\alpha_1\alpha_2)I)
 ```
@@ -89,12 +93,14 @@ x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon
 **Base:** $t=1$: $x\_1 = \sqrt{\alpha\_1}x\_0 + \sqrt{1-\alpha\_1}\epsilon$ ✓
 
 **Induction:** Assume true for $t-1$. Then:
+
 ```math
 x_t = \sqrt{\alpha_t}x_{t-1} + \sqrt{1-\alpha_t}\epsilon_t
 = \sqrt{\alpha_t}(\sqrt{\bar{\alpha}_{t-1}}x_0 + \sqrt{1-\bar{\alpha}_{t-1}}\epsilon') + \sqrt{1-\alpha_t}\epsilon_t
 ```
 
 Combining noise (variance = $\alpha\_t(1-\bar{\alpha}\_{t-1}) + 1-\alpha\_t = 1-\bar{\alpha}\_t$):
+
 ```math
 x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon \quad \checkmark
 ```
@@ -180,11 +186,13 @@ After expansion, group terms quadratic in $x\_{t-1}$:
 ### Read Off Parameters
 
 **Precision (inverse variance):**
+
 ```math
 \tilde{\beta}_t^{-1} = \frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}
 ```
 
 **Mean times precision:**
+
 ```math
 \tilde{\beta}_t^{-1} \tilde{\mu}_t = \frac{\sqrt{\alpha_t}x_t}{\beta_t} + \frac{\sqrt{\bar{\alpha}_{t-1}}x_0}{1-\bar{\alpha}_{t-1}}
 ```

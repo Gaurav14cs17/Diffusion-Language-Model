@@ -128,6 +128,7 @@ Since $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\
 ### Proof of Equivalence
 
 Start with $\mu\_\theta$ in terms of $x\_0$:
+
 ```math
 \mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
 ```
@@ -135,6 +136,7 @@ Start with $\mu\_\theta$ in terms of $x\_0$:
 Substitute $x\_0 = \frac{x\_t - \sqrt{1-\bar{\alpha}\_t}\epsilon}{\sqrt{\bar{\alpha}\_t}}$:
 
 After algebraic simplification (tedious but straightforward):
+
 ```math
 \mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon\right) \quad \checkmark
 ```
@@ -154,12 +156,14 @@ Then: $\epsilon = \sqrt{\bar{\alpha}\_t}v\_t + \sqrt{1-\bar{\alpha}\_t}x\_t/\sqr
 ### DDPM Sampling (Algorithm)
 
 ```python
+
 # Input: Trained noise predictor ε_θ
 # Output: Generated sample x_0
 
 x_T ~ N(0, I)  # Start from pure noise
 
 for t in [T, T-1, ..., 1]:
+
     # Predict noise
     ε = ε_θ(x_t, t)
     
@@ -206,18 +210,21 @@ noise    denoise   denoise            denoise   clean!
 From completing the square in the posterior derivation:
 
 Precision (inverse variance):
+
 ```math
 \tilde{\beta}_t^{-1} = \frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}
 = \frac{\alpha_t(1-\bar{\alpha}_{t-1}) + \beta_t}{\beta_t(1-\bar{\alpha}_{t-1})}
 ```
 
 Using $\alpha\_t + \beta\_t = 1$:
+
 ```math
 = \frac{\alpha_t - \alpha_t\bar{\alpha}_{t-1} + 1 - \alpha_t}{\beta_t(1-\bar{\alpha}_{t-1})}
 = \frac{1 - \bar{\alpha}_t}{\beta_t(1-\bar{\alpha}_{t-1})}
 ```
 
 Therefore:
+
 ```math
 \tilde{\beta}_t = \frac{\beta_t(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} \quad \checkmark
 ```

@@ -120,16 +120,19 @@ where $\bar{Q}\_t = Q\_1 \cdot Q\_2 \cdots Q\_t$ is the cumulative transition ma
 **Proof:**
 
 *Step 1:* By the chain rule of probability:
+
 ```math
 q(x_t \mid x_0) = \sum_{x_1, \ldots, x_{t-1}} q(x_1 \mid x_0) \cdot q(x_2 \mid x_1) \cdots q(x_t \mid x_{t-1})
 ```
 
 *Step 2:* Using the matrix multiplication property:
+
 ```math
 q(x_t \mid x_0) = (x_0 \cdot Q_1) \cdot Q_2 \cdots Q_t = x_0 \cdot (Q_1 \cdot Q_2 \cdots Q_t) = x_0 \cdot \bar{Q}_t
 ```
 
 *Step 3:* For absorbing-state diffusion, $\bar{Q}\_t$ simplifies to:
+
 ```math
 \bar{Q}_t[i, j] = \alpha_t \cdot \delta_{ij} + (1 - \alpha_t) \cdot \delta_{j, [M]}
 ```
@@ -202,6 +205,7 @@ Substituting the known distributions:
 For masked diffusion, the posterior has a simple closed form:
 
 **Case 1: $x\_t$ is NOT `[MASK]`** (meaning $x\_t = x\_0$)
+
 ```math
 q(x_{t-1} \mid x_t, x_0) = \delta(x_{t-1}, x_t)
 ```
@@ -209,6 +213,7 @@ q(x_{t-1} \mid x_t, x_0) = \delta(x_{t-1}, x_t)
 The token hasn't been masked yet, so it must stay as the original.
 
 **Case 2: $x\_t$ IS `[MASK]`**
+
 ```math
 q(x_{t-1} \mid x_t = [M], x_0) = \theta_t \cdot \delta(x_{t-1}, x_0) + (1 - \theta_t) \cdot \delta(x_{t-1}, [M])
 ```
@@ -216,6 +221,7 @@ q(x_{t-1} \mid x_t = [M], x_0) = \theta_t \cdot \delta(x_{t-1}, x_0) + (1 - \the
 With probability $\theta\_t$, we "unmask" to the original token; otherwise, we stay masked.
 
 **The unmasking probability:**
+
 ```math
 \theta_t = \frac{\alpha_{t-1} - \alpha_t}{1 - \alpha_t} = \frac{\beta_t \cdot \alpha_{t-1}}{1 - \alpha_t}
 ```
@@ -233,11 +239,13 @@ Instead of directly predicting $x\_{t-1}$, we predict the clean data $x\_0$:
 ```
 
 The network outputs logits over the vocabulary for each position:
+
 ```math
 p_\theta(x_0^i \mid x_t) = \text{softmax}(f_\theta(x_t, t))^i
 ```
 
 The reverse transition is then computed as:
+
 ```math
 p_\theta(x_{t-1} \mid x_t) = \sum_{x_0} q(x_{t-1} \mid x_t, x_0) \cdot p_\theta(x_0 \mid x_t)
 ```
@@ -296,6 +304,7 @@ Since $\log$ is concave:
 ```
 
 This gives us the **ELBO**:
+
 ```math
 \log p_\theta(x_0) \geq \text{ELBO} = \mathbb{E}_q\left[\log p_\theta(x_{0:T}) - \log q(x_{1:T} \mid x_0)\right]
 ```
@@ -388,6 +397,7 @@ For discrete diffusion, we instead work with **probability ratios**:
 **Interpretation:** How much more likely is a real token compared to `[MASK]`?
 
 In practice, we work with log-probabilities (logits) directly:
+
 ```math
 p_\theta(x_0 \mid x_t) = \text{softmax}(f_\theta(x_t, t))
 ```
@@ -397,21 +407,25 @@ p_\theta(x_0 \mid x_t) = \text{softmax}(f_\theta(x_t, t))
 **From KL to Cross-Entropy:**
 
 *Step 1:* KL divergence for discrete distributions:
+
 ```math
 D_{KL}(q(x_{t-1} \mid x_t, x_0) \| p_\theta(x_{t-1} \mid x_t)) = \sum_v q(v) \log \frac{q(v)}{p_\theta(v)}
 ```
 
 *Step 2:* Expand and separate:
+
 ```math
 = \sum_v q(v) \log q(v) - \sum_v q(v) \log p_\theta(v) = -H(q) + H(q, p_\theta)
 ```
 
 *Step 3:* For optimization, $H(q)$ is constant with respect to $\theta$:
+
 ```math
 \nabla_\theta D_{KL} = \nabla_\theta H(q, p_\theta) = -\nabla_\theta \sum_v q(v) \log p_\theta(v)
 ```
 
 *Step 4:* For masked diffusion with known $x\_0$:
+
 ```math
 L = -\log p_\theta(x_0 \mid x_t) = \text{CrossEntropy}(\text{one-hot}(x_0), p_\theta(\cdot \mid x_t))
 ```
@@ -468,11 +482,13 @@ Now for the exciting part: **generating text** from a trained model!
 ### 6.1 Sampling Overview
 
 **Starting Point:** All tokens are `[MASK]`
+
 ```math
 x_T = [\text{M}, \text{M}, \text{M}, \ldots, \text{M}]
 ```
 
 **End Point:** Coherent generated text
+
 ```math
 x_0 = \text{"The cat sat on the mat"}
 ```
@@ -519,6 +535,7 @@ Generating "The cat sat on mat" with $T=5$ steps:
 ### 6.4 Advanced Sampling Strategies
 
 #### Temperature Sampling
+
 ```math
 p'(v) \propto p(v)^{1/\tau}
 ```
@@ -569,6 +586,7 @@ Set prefix as unmasked, append masked tokens, generate.
 
 #### Classifier-Free Guidance
 Scale logits based on conditional vs unconditional predictions:
+
 ```math
 \tilde{\epsilon} = \epsilon_{\text{uncond}} + w(\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
 ```
@@ -594,20 +612,24 @@ where $w > 1$ strengthens conditioning (typical: $w = 3-7$).
 ### Summary of Key Mathematical Concepts
 
 1. **Forward Process:** Markov chain that gradually masks tokens
+
 ```math
 q(x_t \mid x_0) = \alpha_t \cdot \delta(x_t, x_0) + (1-\alpha_t) \cdot \delta(x_t, [M])
 ```math
 2. **Reverse Process:** Neural network learns to unmask
 ```
+
 p_\theta(x_{t-1} \mid x_t) \approx \sum_{x_0} q(x_{t-1} \mid x_t, x_0) \cdot p_\theta(x_0 \mid x_t)
 ```
 
 3. **Training Objective:** Cross-entropy on masked positions
+
 ```math
 L = -\sum_{i: x_t^i = [M]} \log p_\theta(x_0^i \mid x_t)
 ```math
 4. **Sampling:** Iterative unmasking from full masks to text
 ```
+
 x_T \to x_{T-1} \to \cdots \to x_1 \to x_0
 ```
 

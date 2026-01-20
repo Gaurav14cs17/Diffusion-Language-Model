@@ -63,11 +63,13 @@ These features are **semantically meaningful** - they encode high-level understa
 **Mathematical Formulation:**
 
 Without regularization, the diffusion model learns:
+
 ```math
 p_\theta(\mathbf{f}) \neq p_{\text{data}}(\mathbf{f})
 ```
 
 Generated features $\hat{\mathbf{f}} \sim p\_\theta$ often fall outside the valid manifold $\mathcal{M}$, causing:
+
 ```math
 D(\hat{\mathbf{f}}) = \text{garbage}
 ```

@@ -43,6 +43,7 @@ This integral is intractable!
 ### Proof
 
 By Jensen's inequality:
+
 ```math
 \log p_\theta(x_0) = \log \int q(x_{1:T}|x_0) \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} dx_{1:T}
 \geq \int q(x_{1:T}|x_0) \log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} dx_{1:T}
@@ -75,6 +76,7 @@ By Jensen's inequality:
 ### Rewrite Using Posterior
 
 For $t > 1$:
+
 ```math
 \log \frac{q(x_t|x_{t-1})}{p_\theta(x_{t-1}|x_t)} = \log \frac{q(x_{t-1}|x_t, x_0)}{p_\theta(x_{t-1}|x_t)} + \log \frac{q(x_t|x_0)}{q(x_{t-1}|x_0)}
 ```
@@ -143,11 +145,13 @@ We just need to **match the means**!
 ### Recall the Means
 
 **True posterior mean:**
+
 ```math
 \tilde{\mu}_t = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon\right)
 ```
 
 **Model mean (ε-prediction):**
+
 ```math
 \mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta(x_t, t)\right)
 ```
@@ -216,10 +220,12 @@ Simple (uniform):
 ### Training Loop
 
 ```python
+
 # Initialize model ε_θ with random weights
 # Set noise schedule {β_t}, compute {ᾱ_t}
 
 for each training iteration:
+
     # 1. Sample data
     x_0 ~ p_data
     

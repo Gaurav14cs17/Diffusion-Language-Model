@@ -203,11 +203,13 @@ Train $\beta\_t$ as neural network parameters! (Kingma et al., VDM)
 ### Derivation from Schedule
 
 For linear schedule:
+
 ```math
 \log\text{SNR}(t) \approx \log(1-\frac{t}{T}) - \log(\frac{t}{T})
 ```
 
 For cosine schedule:
+
 ```math
 \log\text{SNR}(t) = 2\log\cos\left(\frac{\pi t}{2T}\right) - 2\log\sin\left(\frac{\pi t}{2T}\right)
 ```

@@ -249,6 +249,7 @@ Combined L1 and L2 losses:
 ```
 
 where:
+
 ```math
 \text{L1}(\hat{\mathbf{x}}, \mathbf{x}) = \frac{1}{HWC} \sum_{i,j,c} |\hat{x}_{ijc} - x_{ijc}|
 ```
@@ -264,6 +265,7 @@ where $\phi\_l$ are VGG features at layer $l$ and $\mathbf{w}\_l$ are learned we
 #### KL Divergence Loss
 
 Same as S-VAE:
+
 ```math
 \mathcal{L}_{\text{KL}} = -\frac{1}{2} \sum_{i=1}^{z_{\text{dim}}} \left( 1 + \log \sigma_i^2 - \mu_i^2 - \sigma_i^2 \right)
 ```
@@ -304,6 +306,7 @@ where:
 - $\beta\_t$ follows a scaled linear schedule: $\beta\_t \in [10^{-4}, 0.02]$
 
 Equivalently:
+
 ```math
 \mathbf{z}_t = \sqrt{\bar{\alpha}_t} \mathbf{z}_0 + \sqrt{1 - \bar{\alpha}_t} \boldsymbol{\epsilon}, \quad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})
 ```
@@ -321,6 +324,7 @@ p_\theta(\mathbf{z}_{t-1} | \mathbf{z}_t) = \mathcal{N}\left( \mathbf{z}_{t-1}; 
 #### Input Processing
 
 1. **Patch Embedding**: Each spatial location is treated as a patch
+
 ```math
 \mathbf{h}_0 = \text{Linear}(\mathbf{z}_t) + \mathbf{PE}
 ```math
@@ -328,10 +332,12 @@ where $\mathbf{PE}$ is learnable positional embedding.
 
 2. **Timestep Embedding**: Sinusoidal encoding + MLP
 ```
+
 \mathbf{t}_{\text{emb}} = \text{MLP}\left( \left[ \sin\left(\frac{t}{10000^{2i/d}}\right), \cos\left(\frac{t}{10000^{2i/d}}\right) \right]_{i=0}^{d/2} \right)
 ```
 
 3. **Text Embedding**: From T5-XXL encoder
+
 ```math
 \mathbf{c} = \text{TextEncoder}(\text{prompt}) \in \mathbb{R}^{L \times d_{\text{text}}}
 ```math
@@ -341,26 +347,31 @@ Each block consists of:
 
 1. **Adaptive Layer Norm (AdaLN)**:
 ```
+
 \gamma, \beta = \text{MLP}(\mathbf{t}_{\text{emb}})
 \text{AdaLN}(\mathbf{h}) = \gamma \odot \text{LayerNorm}(\mathbf{h}) + \beta
 ```
 
 2. **Self-Attention**:
+
 ```math
 \mathbf{Q}, \mathbf{K}, \mathbf{V} = \mathbf{h} \mathbf{W}_Q, \mathbf{h} \mathbf{W}_K, \mathbf{h} \mathbf{W}_V
 \text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left( \frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}} \right) \mathbf{V}
 ```math
 3. **Cross-Attention** (with text):
 ```
+
 \mathbf{Q} = \mathbf{h} \mathbf{W}_Q, \quad \mathbf{K}, \mathbf{V} = \mathbf{c} \mathbf{W}_K, \mathbf{c} \mathbf{W}_V
 ```
 
 4. **Feed-Forward Network**:
+
 ```math
 \text{FFN}(\mathbf{h}) = \text{GELU}(\mathbf{h} \mathbf{W}_1) \mathbf{W}_2
 ```math
 5. **Gated Residual**:
 ```
+
 \mathbf{h} = \mathbf{h} + \text{gate} \odot \text{Block}(\mathbf{h})
 ```
 
@@ -401,6 +412,7 @@ where:
 **Objective**: Learn compact, regularized latent space
 
 ```python
+
 # Freeze encoder
 encoder.requires_grad_(False)
 
@@ -423,6 +435,7 @@ for x in dataloader:
 **Objective**: Add pixel reconstruction with trainable encoder
 
 ```python
+
 # Unfreeze encoder
 encoder.requires_grad_(True)
 
@@ -456,6 +469,7 @@ for x in dataloader:
 **Objective**: Learn to generate in PS-VAE latent space
 
 ```python
+
 # Freeze PS-VAE
 psvae.requires_grad_(False)
 
@@ -481,6 +495,7 @@ for x, text in dataloader:
 ### Text-to-Image Generation
 
 ```python
+
 # 1. Encode text
 text_emb = text_encoder(prompt)
 
@@ -489,6 +504,7 @@ z_T = randn(1, 16, 16, 96)
 
 # 3. DDIM sampling
 for t in reversed(range(T)):
+
     # Predict noise with CFG
     ε_uncond = dit(z_t, t, null_emb)
     ε_cond = dit(z_t, t, text_emb)

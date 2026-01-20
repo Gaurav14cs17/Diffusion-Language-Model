@@ -73,16 +73,19 @@ x = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
 Let $\epsilon \sim \mathcal{N}(0, I)$. Define $x = \mu + \sigma \epsilon$.
 
 **Mean:**
+
 ```math
 \mathbb{E}[x] = \mathbb{E}[\mu + \sigma \epsilon] = \mu + \sigma \cdot 0 = \mu \quad \checkmark
 ```
 
 **Variance:**
+
 ```math
 \text{Var}[x] = \text{Var}[\sigma \epsilon] = \sigma^2 \text{Var}[\epsilon] = \sigma^2 I \quad \checkmark
 ```
 
 **Distribution:**
+
 ```math
 x \sim \mathcal{N}(\mu, \sigma^2 I) \quad \checkmark
 ```
@@ -173,6 +176,7 @@ Prove that if $\text{Var}[x\_0] = I$ and $\alpha\_t + \beta\_t = 1$, then $\text
 ### Proof by Strong Induction
 
 **Base Case ($t = 0$):**
+
 ```math
 \text{Var}[x_0] = I \quad \checkmark
 ```

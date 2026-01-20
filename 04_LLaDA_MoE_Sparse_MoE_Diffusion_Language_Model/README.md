@@ -166,11 +166,13 @@ Example:
 The forward process defines how clean data is corrupted by adding noise (masking):
 
 **Joint Distribution**:
+
 ```math
 q(y_t | t, y) = \prod_{i=1}^{L} q(y_t^i | t, y^i)
 ```
 
 **Per-Token Distribution**:
+
 ```math
 q(y_t^i | t, y^i) = \begin{cases}
 1-t & \text{if } y_t^i = y^i \text{ (keep original token)} \\
@@ -201,6 +203,7 @@ t & \text{if } y_t^i = M \text{ (replace with mask)} \\
 ### 05.4 Key Property
 
 **Expected number of masked tokens**:
+
 ```math
 \mathbb{E}[\text{\# masked}] = t \cdot L
 ```
@@ -266,11 +269,13 @@ Step 7: Backpropagate and update θ
 ### 07.1 The Routing Equations
 
 **Step 1 - Compute Probabilities**:
+
 ```math
 p_t = \text{Softmax}(\text{Router}(h_t))
 ```
 
 **Step 2 - Weighted Expert Combination**:
+
 ```math
 o_t = \sum_{i \in \text{TopK}(p_t)} p_{t,i} \cdot E_i(h_t)
 ```
@@ -377,6 +382,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 | 3 | L_Z | 0.001 | Logit regularization |
 
 **Total Loss**:
+
 ```math
 \mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Pretrain}} + 0.01 \cdot \mathcal{L}_{\text{LB}} + 0.001 \cdot \mathcal{L}_{Z}
 ```
@@ -441,6 +447,7 @@ Step 7: Apply 1/t weight and backpropagate
 ### 10.1 Goal
 
 Maximize the log-likelihood of data:
+
 ```math
 \max_\theta \mathbb{E}_{y \sim p_{\text{data}}} [\log p_\theta(y)]
 ```
@@ -448,6 +455,7 @@ Maximize the log-likelihood of data:
 ### 10.2 Problem
 
 Direct computation is intractable:
+
 ```math
 p_\theta(y) = \int p_\theta(y | y_t) p(y_t) dy_t
 ```
@@ -466,11 +474,13 @@ p_\theta(y) = \int p_\theta(y | y_t) p(y_t) dy_t
 ### 10.4 Jensen's Inequality Proof
 
 For concave function f (like log):
+
 ```math
 f(\mathbb{E}[X]) \geq \mathbb{E}[f(X)]
 ```
 
 Therefore:
+
 ```math
 \log \mathbb{E}[X] \geq \mathbb{E}[\log X]
 ```

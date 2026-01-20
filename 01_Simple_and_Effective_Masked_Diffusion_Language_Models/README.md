@@ -62,6 +62,7 @@ The forward process defines how we corrupt clean data $x\_0$ into progressively 
 MDLM uses **continuous time** $t \in [0, 1]$ rather than discrete steps $t \in \{0, 1, ..., T\}$.
 
 **Definition (Continuous-Time Markov Process):**
+
 ```math
 \frac{dx}{dt} = x \cdot R_t
 ```
@@ -156,6 +157,7 @@ We train a neural network to approximate this distribution.
 **Theorem (Tractable Posterior):** Given both $x\_t$ and $x\_0$, the posterior is tractable:
 
 **Case 1:** If $x\_t^i \neq [\text{MASK}]$ (token is visible):
+
 ```math
 q(x_{t-s}^i \mid x_t^i, x_0^i) = \delta(x_{t-s}^i, x_t^i) = \delta(x_{t-s}^i, x_0^i)
 ```
@@ -163,6 +165,7 @@ q(x_{t-s}^i \mid x_t^i, x_0^i) = \delta(x_{t-s}^i, x_t^i) = \delta(x_{t-s}^i, x_
 Token was never masked → stays as original.
 
 **Case 2:** If $x\_t^i = [\text{MASK}]$ (token is masked):
+
 ```math
 q(x_{t-s}^i \mid x_t^i = [M], x_0^i) = \theta_{t,s} \cdot \delta(x_{t-s}^i, x_0^i) + (1-\theta_{t,s}) \cdot \delta(x_{t-s}^i, [M])
 ```
@@ -192,6 +195,7 @@ f_\theta(x_t, t) \rightarrow \text{logits} \in \mathbb{R}^{n \times |V|}
 ```
 
 For each position:
+
 ```math
 p_\theta(x_0^i = v \mid x_t) = \text{softmax}(f_\theta(x_t, t)^i)_v
 ```
@@ -267,11 +271,13 @@ We want parameters $\theta$ that maximize:
 **Step 3: Key simplification—the posterior is deterministic!**
 
 Since we know $x\_0$ exactly:
+
 ```math
 q(x_0^i \mid x_t^i, x_0^i) = \delta(\cdot, x_0^i)
 ```
 
 So the KL divergence becomes cross-entropy:
+
 ```math
 D_{KL}(q \| p_\theta) = -\log p_\theta(x_0^i \mid x_t)
 ```
@@ -322,6 +328,7 @@ This means:
 
 ```python
 def train_step(model, batch_x0, optimizer):
+
     # 1. Sample random times
     t = torch.rand(batch_size)  # t ~ U(0, 1)
     
@@ -359,6 +366,7 @@ Sampling generates text by iteratively unmasking from a fully masked sequence.
 
 ```python
 def sample(model, length, num_steps, temperature=1.0):
+
     # 1. Initialize with all masks
     x = torch.full((length,), MASK_TOKEN)
     
@@ -404,6 +412,7 @@ Generating "The quick brown fox" with $T=4$ steps:
 ### 5.3 Sampling Strategies
 
 **Temperature Sampling:**
+
 ```math
 p'(v) \propto p(v)^{1/\tau}
 ```

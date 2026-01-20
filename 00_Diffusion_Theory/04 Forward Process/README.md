@@ -93,28 +93,33 @@ Find $q(x\_t \mid x\_0)$ directly — skip intermediate steps!
 ### Derivation
 
 **Step 1**: Write two consecutive steps:
+
 ```math
 x_1 = \sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1
 x_2 = \sqrt{\alpha_2} x_1 + \sqrt{1-\alpha_2} \epsilon_2
 ```
 
 **Step 2**: Substitute $x\_1$ into $x\_2$:
+
 ```math
 x_2 = \sqrt{\alpha_2}(\sqrt{\alpha_1} x_0 + \sqrt{1-\alpha_1} \epsilon_1) + \sqrt{1-\alpha_2} \epsilon_2
 = \sqrt{\alpha_1 \alpha_2} x_0 + \sqrt{\alpha_2(1-\alpha_1)} \epsilon_1 + \sqrt{1-\alpha_2} \epsilon_2
 ```
 
 **Step 3**: Combine noise terms (sum of Gaussians):
+
 ```math
 \sqrt{\alpha_2(1-\alpha_1)} \epsilon_1 + \sqrt{1-\alpha_2} \epsilon_2 \sim \mathcal{N}(0, [\alpha_2(1-\alpha_1) + 1-\alpha_2]I)
 ```
 
 **Step 4**: Simplify variance:
+
 ```math
 \alpha_2(1-\alpha_1) + 1-\alpha_2 = \alpha_2 - \alpha_1\alpha_2 + 1 - \alpha_2 = 1 - \alpha_1\alpha_2
 ```
 
 **Step 5**: Define $\bar{\alpha}\_2 = \alpha\_1 \alpha\_2$:
+
 ```math
 x_2 = \sqrt{\bar{\alpha}_2} x_0 + \sqrt{1-\bar{\alpha}_2} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
 ```
@@ -178,6 +183,7 @@ t=T:     x_T ≈ pure noise
 ### Proof of $\bar{\alpha}\_T \to 0$
 
 For $\beta\_t = \beta$ constant:
+
 ```math
 \bar{\alpha}_T = (1-\beta)^T
 \lim_{T \to \infty} (1-\beta)^T = 0 \quad \text{for } \beta \in (0,1)
