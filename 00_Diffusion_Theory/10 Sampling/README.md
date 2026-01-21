@@ -40,10 +40,7 @@ for t in [T, T-1, ..., 1]:
 
 ### Mean Formula
 
-```math
-\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta\right)
-
-```
+$$\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta\right)$$
 
 | ✅ Pros | ❌ Cons |
 |---------|---------|
@@ -60,10 +57,7 @@ DDPM's stochasticity is optional! We can make sampling **deterministic**.
 
 ### Update Rule
 
-```math
-x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \hat{x}_0 + \sqrt{1-\bar{\alpha}_{t-1} - \sigma_t^2} \cdot \epsilon_\theta + \sigma_t \epsilon_t
-
-```
+$$x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \hat{x}_0 + \sqrt{1-\bar{\alpha}_{t-1} - \sigma_t^2} \cdot \epsilon_\theta + \sigma_t \epsilon_t$$
 
 where $\hat{x}_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}$
 
@@ -117,10 +111,7 @@ Uses higher-order ODE solvers:
 
 ### Formula
 
-```math
-\tilde{\epsilon}_\theta = \epsilon_\theta(x_t, \varnothing) + w \cdot (\epsilon_\theta(x_t, c) - \epsilon_\theta(x_t, \varnothing))
-
-```
+$$\tilde{\epsilon}_\theta = \epsilon_\theta(x_t, \varnothing) + w \cdot (\epsilon_\theta(x_t, c) - \epsilon_\theta(x_t, \varnothing))$$
 
 ### Effect of Guidance Scale
 

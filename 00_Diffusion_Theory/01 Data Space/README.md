@@ -38,10 +38,7 @@ Real-world data comes from an unknown **data distribution** $p_{\text{data}}(x)$
 
 3. **Normalization constraint**:
 
-```math
-\int_{\mathcal{X}} p_{\text{data}}(x) \, dx = 1
-
-```
+$$\int_{\mathcal{X}} p_{\text{data}}(x) \, dx = 1$$
 
 4. **Sampling notation**: We write $x \sim p_{\text{data}}$ or $x_0 \sim p_{\text{data}}$
 
@@ -63,10 +60,7 @@ Real-world data comes from an unknown **data distribution** $p_{\text{data}}(x)$
 
 ### For Images
 
-```math
-x \in [0, 1]^{H \times W \times C}
-
-```
+$$x \in [0, 1]^{H \times W \times C}$$
 
 where:
 
@@ -78,10 +72,7 @@ where:
 
 ### For Latent Diffusion
 
-```math
-z = \text{Encoder}(x), \quad z \in \mathbb{R}^{h \times w \times c}
-
-```
+$$z = \text{Encoder}(x), \quad z \in \mathbb{R}^{h \times w \times c}$$
 
 Latent space is typically **8× compressed** per dimension.
 
@@ -103,11 +94,8 @@ Real data lies on a **low-dimensional manifold** $\mathcal{M} \subset \mathbb{R}
 
 ### Formal Statement
 
-```math
-\dim(\mathcal{M}) \ll d
-p_{\text{data}}(x) \approx 0 \text{ for } x \notin \mathcal{M}
-
-```
+$$\dim(\mathcal{M}) \ll d
+p_{\text{data}}(x) \approx 0 \text{ for } x \notin \mathcal{M}$$
 
 ### Why This Matters
 
@@ -123,19 +111,13 @@ p_{\text{data}}(x) \approx 0 \text{ for } x \notin \mathcal{M}
 
 ### At $t = 0$ (Start)
 
-```math
-x_0 \sim p_{\text{data}}(x)
-
-```
+$$x_0 \sim p_{\text{data}}(x)$$
 
 This is our **clean data**.
 
 ### At $t = T$ (End)
 
-```math
-x_T \sim \mathcal{N}(0, I)
-
-```
+$$x_T \sim \mathcal{N}(0, I)$$
 
 This is **pure noise** — data has been completely destroyed.
 
@@ -143,11 +125,8 @@ This is **pure noise** — data has been completely destroyed.
 
 The diffusion process must satisfy:
 
-```math
-\lim_{t \to 0} q(x_t) = p_{\text{data}}(x)
-\lim_{t \to T} q(x_t) \approx \mathcal{N}(0, I)
-
-```
+$$\lim_{t \to 0} q(x_t) = p_{\text{data}}(x)
+\lim_{t \to T} q(x_t) \approx \mathcal{N}(0, I)$$
 
 ### Visual
 
@@ -166,10 +145,7 @@ Data         Some noise    Half noise    Mostly noise  Pure noise
 
 1. **Normalize to [-1, 1]**:
 
-```math
-x_{\text{norm}} = 2 \cdot \frac{x - x_{\min}}{x_{\max} - x_{\min}} - 1
-
-```
+$$x_{\text{norm}} = 2 \cdot \frac{x - x_{\min}}{x_{\max} - x_{\min}} - 1$$
 
 2. **Why this range?**
    - Matches standard Gaussian noise range

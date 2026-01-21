@@ -28,30 +28,21 @@ Maximize $\log p_\theta(x_0)$ — the likelihood of real data.
 
 ### Problem
 
-```math
-\log p_\theta(x_0) = \log \int p_\theta(x_{0:T}) dx_{1:T}
-
-```
+$$\log p_\theta(x_0) = \log \int p_\theta(x_{0:T}) dx_{1:T}$$
 
 This integral is intractable!
 
 ### Solution: Variational Bound
 
-```math
-\log p_\theta(x_0) \geq \mathbb{E}_{q(x_{1:T}|x_0)}\left[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)}\right]
-
-```
+$$\log p_\theta(x_0) \geq \mathbb{E}_{q(x_{1:T}|x_0)}\left[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)}\right]$$
 
 ### Proof
 
 By Jensen's inequality:
 
-```math
-\log p_\theta(x_0) = \log \int q(x_{1:T}|x_0) \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} dx_{1:T}
+$$\log p_\theta(x_0) = \log \int q(x_{1:T}|x_0) \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} dx_{1:T}
 \geq \int q(x_{1:T}|x_0) \log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} dx_{1:T}
-= \mathbb{E}_q\left[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)}\right] = -\mathcal{L}_{\text{VLB}}
-
-```
+= \mathbb{E}_q\left[\log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)}\right] = -\mathcal{L}_{\text{VLB}}$$
 
 ---
 
@@ -59,10 +50,7 @@ By Jensen's inequality:
 
 ### Expand the Ratio
 
-```math
-\mathcal{L}_{\text{VLB}} = \mathbb{E}_q\left[\log \frac{q(x_{1:T}|x_0)}{p_\theta(x_{0:T})}\right]
-
-```
+$$\mathcal{L}_{\text{VLB}} = \mathbb{E}_q\left[\log \frac{q(x_{1:T}|x_0)}{p_\theta(x_{0:T})}\right]$$
 
 ### Factor Both Distributions
 
@@ -72,27 +60,18 @@ By Jensen's inequality:
 
 ### Substitute and Expand
 
-```math
-\mathcal{L}_{\text{VLB}} = \mathbb{E}_q\left[\log \frac{\prod_{t=1}^T q(x_t|x_{t-1})}{p(x_T) \prod_{t=1}^T p_\theta(x_{t-1}|x_t)}\right]
-= \mathbb{E}_q\left[-\log p(x_T) + \sum_{t=1}^T \log \frac{q(x_t|x_{t-1})}{p_\theta(x_{t-1}|x_t)}\right]
-
-```
+$$\mathcal{L}_{\text{VLB}} = \mathbb{E}_q\left[\log \frac{\prod_{t=1}^T q(x_t|x_{t-1})}{p(x_T) \prod_{t=1}^T p_\theta(x_{t-1}|x_t)}\right]
+= \mathbb{E}_q\left[-\log p(x_T) + \sum_{t=1}^T \log \frac{q(x_t|x_{t-1})}{p_\theta(x_{t-1}|x_t)}\right]$$
 
 ### Rewrite Using Posterior
 
 For $t > 1$:
 
-```math
-\log \frac{q(x_t|x_{t-1})}{p_\theta(x_{t-1}|x_t)} = \log \frac{q(x_{t-1}|x_t, x_0)}{p_\theta(x_{t-1}|x_t)} + \log \frac{q(x_t|x_0)}{q(x_{t-1}|x_0)}
-
-```
+$$\log \frac{q(x_t|x_{t-1})}{p_\theta(x_{t-1}|x_t)} = \log \frac{q(x_{t-1}|x_t, x_0)}{p_\theta(x_{t-1}|x_t)} + \log \frac{q(x_t|x_0)}{q(x_{t-1}|x_0)}$$
 
 ### Final Decomposition
 
-```math
-\boxed{\mathcal{L}_{\text{VLB}} = \underbrace{D_{KL}(q(x_T|x_0) \| p(x_T))}_{L_T} + \sum_{t=2}^T \underbrace{D_{KL}(q(x_{t-1}|x_t,x_0) \| p_\theta(x_{t-1}|x_t))}_{L_{t-1}} - \underbrace{\log p_\theta(x_0|x_1)}_{L_0}}
-
-```
+$$\boxed{\mathcal{L}_{\text{VLB}} = \underbrace{D_{KL}(q(x_T|x_0) \| p(x_T))}_{L_T} + \sum_{t=2}^T \underbrace{D_{KL}(q(x_{t-1}|x_t,x_0) \| p_\theta(x_{t-1}|x_t))}_{L_{t-1}} - \underbrace{\log p_\theta(x_0|x_1)}_{L_0}}$$
 
 ---
 
@@ -128,26 +107,17 @@ Both $q(x_{t-1}|x_t,x_0)$ and $p_\theta(x_{t-1}|x_t)$ are Gaussian!
 
 ### KL for Gaussians
 
-```math
-D_{KL}(\mathcal{N}(\mu_1, \sigma_1^2 I) \| \mathcal{N}(\mu_2, \sigma_2^2 I)) = \frac{1}{2\sigma_2^2}\|\mu_1 - \mu_2\|^2 + \text{const}
-
-```
+$$D_{KL}(\mathcal{N}(\mu_1, \sigma_1^2 I) \| \mathcal{N}(\mu_2, \sigma_2^2 I)) = \frac{1}{2\sigma_2^2}\|\mu_1 - \mu_2\|^2 + \text{const}$$
 
 (when variances are fixed)
 
 ### Apply to Our Case
 
-```math
-L_{t-1} = \frac{1}{2\sigma_t^2}\|\tilde{\mu}_t - \mu_\theta\|^2 + C
-
-```
+$$L_{t-1} = \frac{1}{2\sigma_t^2}\|\tilde{\mu}_t - \mu_\theta\|^2 + C$$
 
 ### The Key Result
 
-```math
-\boxed{L_{t-1} \propto \|\tilde{\mu}_t(x_t, x_0) - \mu_\theta(x_t, t)\|^2}
-
-```
+$$\boxed{L_{t-1} \propto \|\tilde{\mu}_t(x_t, x_0) - \mu_\theta(x_t, t)\|^2}$$
 
 We just need to **match the means**!
 
@@ -159,41 +129,26 @@ We just need to **match the means**!
 
 **True posterior mean:**
 
-```math
-\tilde{\mu}_t = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon\right)
-
-```
+$$\tilde{\mu}_t = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon\right)$$
 
 **Model mean (ε-prediction):**
 
-```math
-\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta(x_t, t)\right)
-
-```
+$$\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta(x_t, t)\right)$$
 
 ### Compute the Difference
 
-```math
-\tilde{\mu}_t - \mu_\theta = \frac{1}{\sqrt{\alpha_t}} \cdot \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}(\epsilon_\theta - \epsilon)
-
-```
+$$\tilde{\mu}_t - \mu_\theta = \frac{1}{\sqrt{\alpha_t}} \cdot \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}(\epsilon_\theta - \epsilon)$$
 
 ### Substitute into Loss
 
-```math
-L_{t-1} \propto \left\|\frac{\beta_t}{\sqrt{\alpha_t}\sqrt{1-\bar{\alpha}_t}}(\epsilon_\theta - \epsilon)\right\|^2
-= \frac{\beta_t^2}{\alpha_t(1-\bar{\alpha}_t)}\|\epsilon - \epsilon_\theta(x_t, t)\|^2
-
-```
+$$L_{t-1} \propto \left\|\frac{\beta_t}{\sqrt{\alpha_t}\sqrt{1-\bar{\alpha}_t}}(\epsilon_\theta - \epsilon)\right\|^2
+= \frac{\beta_t^2}{\alpha_t(1-\bar{\alpha}_t)}\|\epsilon - \epsilon_\theta(x_t, t)\|^2$$
 
 ### The Simplified Loss (DDPM)
 
 Ho et al. found that **ignoring the coefficient** works better!
 
-```math
-\boxed{\mathcal{L}_{\text{simple}} = \mathbb{E}_{t, x_0, \epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]}
-
-```
+$$\boxed{\mathcal{L}_{\text{simple}} = \mathbb{E}_{t, x_0, \epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]}$$
 
 where $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$.
 
@@ -303,10 +258,7 @@ Common approaches:
 
 ### Final Training Loss
 
-```math
-\boxed{\mathcal{L} = \mathbb{E}_{t \sim U[1,T], x_0, \epsilon \sim \mathcal{N}(0,I)}\left[\|\epsilon - \epsilon_\theta(\sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon, t)\|^2\right]}
-
-```
+$$\boxed{\mathcal{L} = \mathbb{E}_{t \sim U[1,T], x_0, \epsilon \sim \mathcal{N}(0,I)}\left[\|\epsilon - \epsilon_\theta(\sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon, t)\|^2\right]}$$
 
 </div>
 

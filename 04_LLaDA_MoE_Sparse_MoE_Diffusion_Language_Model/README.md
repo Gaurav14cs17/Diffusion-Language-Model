@@ -170,21 +170,15 @@ The forward process defines how clean data is corrupted by adding noise (masking
 
 **Joint Distribution**:
 
-```math
-q(y_t | t, y) = \prod_{i=1}^{L} q(y_t^i | t, y^i)
-
-```
+$$q(y_t | t, y) = \prod_{i=1}^{L} q(y_t^i | t, y^i)$$
 
 **Per-Token Distribution**:
 
-```math
-q(y_t^i | t, y^i) = \begin{cases}
+$$q(y_t^i | t, y^i) = \begin{cases}
 1-t & \text{if } y_t^i = y^i \text{ (keep original token)} \\
 t & \text{if } y_t^i = M \text{ (replace with mask)} \\
 0 & \text{otherwise}
-\end{cases}
-
-```
+\end{cases}$$
 
 ### 05.2 Step-by-Step Interpretation
 
@@ -209,10 +203,7 @@ t & \text{if } y_t^i = M \text{ (replace with mask)} \\
 
 **Expected number of masked tokens**:
 
-```math
-\mathbb{E}[\text{\# masked}] = t \cdot L
-
-```
+$$\mathbb{E}[\text{\# masked}] = t \cdot L$$
 
 This linear relationship is crucial for the 1/t weighting in the training objective.
 
@@ -222,10 +213,7 @@ This linear relationship is crucial for the 1/t weighting in the training object
 
 ### 06.1 The Loss Function
 
-```math
-\mathcal{L}_{\text{Pretrain}}(\theta) = -\mathbb{E}_{y \sim p_{\text{data}}} \mathbb{E}_{t \sim U[0,1]} \mathbb{E}_{y_t \sim q(y_t|t,y)} \left[ \frac{1}{t} \sum_{i=1}^{L} \mathbb{1}[y_t^i = M] \log p_\theta(y^i | y_t) \right]
-
-```
+$$\mathcal{L}_{\text{Pretrain}}(\theta) = -\mathbb{E}_{y \sim p_{\text{data}}} \mathbb{E}_{t \sim U[0,1]} \mathbb{E}_{y_t \sim q(y_t|t,y)} \left[ \frac{1}{t} \sum_{i=1}^{L} \mathbb{1}[y_t^i = M] \log p_\theta(y^i | y_t) \right]$$
 
 ### 06.2 Breaking Down the Components
 
@@ -250,10 +238,7 @@ This linear relationship is crucial for the 1/t weighting in the training object
 
 Since E[# masked] = t · L:
 
-```math
-\frac{1}{t} \cdot \mathbb{E}[\text{\# masked}] = \frac{1}{t} \cdot tL = L \text{ (constant!)}
-
-```
+$$\frac{1}{t} \cdot \mathbb{E}[\text{\# masked}] = \frac{1}{t} \cdot tL = L \text{ (constant!)}$$
 
 ### 06.4 Training Algorithm
 
@@ -279,17 +264,11 @@ Step 7: Backpropagate and update θ
 
 **Step 1 - Compute Probabilities**:
 
-```math
-p_t = \text{Softmax}(\text{Router}(h_t))
-
-```
+$$p_t = \text{Softmax}(\text{Router}(h_t))$$
 
 **Step 2 - Weighted Expert Combination**:
 
-```math
-o_t = \sum_{i \in \text{TopK}(p_t)} p_{t,i} \cdot E_i(h_t)
-
-```
+$$o_t = \sum_{i \in \text{TopK}(p_t)} p_{t,i} \cdot E_i(h_t)$$
 
 ### 07.2 Component Breakdown
 
@@ -345,10 +324,7 @@ Output: o_t ∈ ℝ^2048
 
 Selected weights are renormalized to sum to 1:
 
-```math
-\tilde{p}_{t,i} = \frac{p_{t,i}}{\sum_{j \in \text{TopK}(p_t)} p_{t,j}}
-
-```
+$$\tilde{p}_{t,i} = \frac{p_{t,i}}{\sum_{j \in \text{TopK}(p_t)} p_{t,j}}$$
 
 ---
 
@@ -358,10 +334,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ### 08.1 Load Balancing Loss (L_LB)
 
-```math
-\mathcal{L}_{\text{LB}} = N \cdot \sum_{i=1}^{N} f_i \cdot P_i
-
-```
+$$\mathcal{L}_{\text{LB}} = N \cdot \sum_{i=1}^{N} f_i \cdot P_i$$
 
 | # | Symbol | Definition | Formula |
 |---|--------|------------|---------|
@@ -382,10 +355,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ### 08.3 Router Z-Loss (L_Z)
 
-```math
-\mathcal{L}_{Z} = \frac{1}{T} \sum_{t=1}^{T} \left( \log \sum_{j=1}^{N} e^{z_{t,j}} \right)^2
-
-```
+$$\mathcal{L}_{Z} = \frac{1}{T} \sum_{t=1}^{T} \left( \log \sum_{j=1}^{N} e^{z_{t,j}} \right)^2$$
 
 | # | Purpose | Effect |
 |---|---------|--------|
@@ -403,10 +373,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 **Total Loss**:
 
-```math
-\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Pretrain}} + 0.01 \cdot \mathcal{L}_{\text{LB}} + 0.001 \cdot \mathcal{L}_{Z}
-
-```
+$$\mathcal{L}_{\text{Total}} = \mathcal{L}_{\text{Pretrain}} + 0.01 \cdot \mathcal{L}_{\text{LB}} + 0.001 \cdot \mathcal{L}_{Z}$$
 
 ---
 
@@ -414,10 +381,7 @@ Without regularization, routing collapses to using only a few experts. Two losse
 
 ### 09.1 The SFT Loss
 
-```math
-\mathcal{L}_{\text{SFT}}(\theta) = -\mathbb{E}_{(x,y) \sim p_{\text{data}}} \mathbb{E}_{t \sim U[0,1]} \mathbb{E}_{y_t \sim q(y_t|t,y)} \left[ \frac{1}{t} \sum_{i=1}^{|y|} \mathbb{1}[y_t^i = M] \log p_\theta(y^i | x, y_t) \right]
-
-```
+$$\mathcal{L}_{\text{SFT}}(\theta) = -\mathbb{E}_{(x,y) \sim p_{\text{data}}} \mathbb{E}_{t \sim U[0,1]} \mathbb{E}_{y_t \sim q(y_t|t,y)} \left[ \frac{1}{t} \sum_{i=1}^{|y|} \mathbb{1}[y_t^i = M] \log p_\theta(y^i | x, y_t) \right]$$
 
 ### 09.2 Key Difference from Pretraining
 
@@ -472,19 +436,13 @@ Step 7: Apply 1/t weight and backpropagate
 
 Maximize the log-likelihood of data:
 
-```math
-\max_\theta \mathbb{E}_{y \sim p_{\text{data}}} [\log p_\theta(y)]
-
-```
+$$\max_\theta \mathbb{E}_{y \sim p_{\text{data}}} [\log p_\theta(y)]$$
 
 ### 10.2 Problem
 
 Direct computation is intractable:
 
-```math
-p_\theta(y) = \int p_\theta(y | y_t) p(y_t) dy_t
-
-```
+$$p_\theta(y) = \int p_\theta(y | y_t) p(y_t) dy_t$$
 
 ### 10.3 Solution: ELBO Derivation (Step-by-Step)
 
@@ -501,17 +459,11 @@ p_\theta(y) = \int p_\theta(y | y_t) p(y_t) dy_t
 
 For concave function f (like log):
 
-```math
-f(\mathbb{E}[X]) \geq \mathbb{E}[f(X)]
-
-```
+$$f(\mathbb{E}[X]) \geq \mathbb{E}[f(X)]$$
 
 Therefore:
 
-```math
-\log \mathbb{E}[X] \geq \mathbb{E}[\log X]
-
-```
+$$\log \mathbb{E}[X] \geq \mathbb{E}[\log X]$$
 
 ### 10.5 Theoretical Properties
 

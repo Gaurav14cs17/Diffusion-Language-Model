@@ -32,10 +32,7 @@ There are **three equivalent ways** to parameterize what the diffusion model pre
 
 Given $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$:
 
-```math
-\boxed{v_t = \sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0}
-
-```
+$$\boxed{v_t = \sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0}$$
 
 ---
 
@@ -43,24 +40,15 @@ Given $x_t = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{1-\bar{\alpha}_t}\epsilon$:
 
 ### What We Predict
 
-```math
-\epsilon_\theta(x_t, t) \approx \epsilon
-
-```
+$$\epsilon_\theta(x_t, t) \approx \epsilon$$
 
 ### Loss Function
 
-```math
-\mathcal{L}_\epsilon = \mathbb{E}_{t,x_0,\epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]
-
-```
+$$\mathcal{L}_\epsilon = \mathbb{E}_{t,x_0,\epsilon}\left[\|\epsilon - \epsilon_\theta(x_t, t)\|^2\right]$$
 
 ### Recovery Formula
 
-```math
-x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}
-
-```
+$$x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}$$
 
 | ✅ Pros | ❌ Cons |
 |---------|---------|
@@ -73,24 +61,15 @@ x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon_\theta}{\sqrt{\bar{\alpha}_t}}
 
 ### What We Predict
 
-```math
-x_{0,\theta}(x_t, t) \approx x_0
-
-```
+$$x_{0,\theta}(x_t, t) \approx x_0$$
 
 ### Loss Function
 
-```math
-\mathcal{L}_{x_0} = \mathbb{E}_{t,x_0,\epsilon}\left[\|x_0 - x_{0,\theta}(x_t, t)\|^2\right]
-
-```
+$$\mathcal{L}_{x_0} = \mathbb{E}_{t,x_0,\epsilon}\left[\|x_0 - x_{0,\theta}(x_t, t)\|^2\right]$$
 
 ### Recovery Formula
 
-```math
-\epsilon = \frac{x_t - \sqrt{\bar{\alpha}_t}x_{0,\theta}}{\sqrt{1-\bar{\alpha}_t}}
-
-```
+$$\epsilon = \frac{x_t - \sqrt{\bar{\alpha}_t}x_{0,\theta}}{\sqrt{1-\bar{\alpha}_t}}$$
 
 | ✅ Pros | ❌ Cons |
 |---------|---------|
@@ -103,25 +82,16 @@ x_{0,\theta}(x_t, t) \approx x_0
 
 ### Definition
 
-```math
-v_t = \sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0
-
-```
+$$v_t = \sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0$$
 
 ### Loss Function
 
-```math
-\mathcal{L}_v = \mathbb{E}_{t,x_0,\epsilon}\left[\|v_t - v_\theta(x_t, t)\|^2\right]
-
-```
+$$\mathcal{L}_v = \mathbb{E}_{t,x_0,\epsilon}\left[\|v_t - v_\theta(x_t, t)\|^2\right]$$
 
 ### Recovery Formulas
 
-```math
-x_0 = \sqrt{\bar{\alpha}_t}x_t - \sqrt{1-\bar{\alpha}_t}v_\theta
-\epsilon = \sqrt{1-\bar{\alpha}_t}x_t + \sqrt{\bar{\alpha}_t}v_\theta
-
-```
+$$x_0 = \sqrt{\bar{\alpha}_t}x_t - \sqrt{1-\bar{\alpha}_t}v_\theta
+\epsilon = \sqrt{1-\bar{\alpha}_t}x_t + \sqrt{\bar{\alpha}_t}v_\theta$$
 
 | ✅ Pros | ❌ Cons |
 |---------|---------|

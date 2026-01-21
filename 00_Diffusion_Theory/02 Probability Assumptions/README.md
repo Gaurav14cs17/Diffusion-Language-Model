@@ -28,42 +28,27 @@ The forward process forms a **Markov chain**: each step depends only on the prev
 
 ### Formal Definition
 
-```math
-q(x_t \mid x_0, x_1, ..., x_{t-1}) = q(x_t \mid x_{t-1})
-
-```
+$$q(x_t \mid x_0, x_1, ..., x_{t-1}) = q(x_t \mid x_{t-1})$$
 
 ### Why This Helps
 
 **Joint distribution factorizes nicely:**
 
-```math
-q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})
-
-```
+$$q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})$$
 
 ### Proof of Factorization
 
 1. Start with chain rule:
 
-```math
-q(x_{0:T}) = q(x_0) q(x_1 \mid x_0) q(x_2 \mid x_0, x_1) \cdots
-
-```
+$$q(x_{0:T}) = q(x_0) q(x_1 \mid x_0) q(x_2 \mid x_0, x_1) \cdots$$
 
 2. Apply Markov property:
 
-```math
-q(x_2 \mid x_0, x_1) = q(x_2 \mid x_1)
-
-```
+$$q(x_2 \mid x_0, x_1) = q(x_2 \mid x_1)$$
 
 3. Result:
 
-```math
-\boxed{q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})}
-
-```
+$$\boxed{q(x_{0:T}) = q(x_0) \prod_{t=1}^{T} q(x_t \mid x_{t-1})}$$
 
 ---
 
@@ -73,10 +58,7 @@ q(x_2 \mid x_0, x_1) = q(x_2 \mid x_1)
 
 Each transition is a **Gaussian perturbation**:
 
-```math
-q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
-
-```
+$$q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)$$
 
 ### Why Gaussian?
 
@@ -89,10 +71,7 @@ q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{\alpha_t} x_{t-1}, \beta_t I)
 
 ### Equivalent Forms
 
-```math
-x_t = \sqrt{\alpha_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t, \quad \epsilon_t \sim \mathcal{N}(0, I)
-
-```
+$$x_t = \sqrt{\alpha_t} \cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t, \quad \epsilon_t \sim \mathcal{N}(0, I)$$
 
 ### Proof of Equivalence
 
@@ -112,10 +91,7 @@ Let $x_{t-1}$ be fixed, $\epsilon_t \sim \mathcal{N}(0, I)$:
 
 We require:
 
-```math
-\alpha_t + \beta_t = 1 \quad \text{for all } t
-
-```
+$$\alpha_t + \beta_t = 1 \quad \text{for all } t$$
 
 ### Why This Constraint?
 
@@ -127,11 +103,8 @@ We require:
 
 **Inductive step**: If $\text{Var}[x_{t-1}] = I$, then:
 
-```math
-\text{Var}[x_t] = \alpha_t \cdot \text{Var}[x_{t-1}] + \beta_t \cdot I
-= \alpha_t \cdot I + \beta_t \cdot I = (\alpha_t + \beta_t) I = I
-
-```
+$$\text{Var}[x_t] = \alpha_t \cdot \text{Var}[x_{t-1}] + \beta_t \cdot I
+= \alpha_t \cdot I + \beta_t \cdot I = (\alpha_t + \beta_t) I = I$$
 
 **Conclusion**: Variance stays constant at $I$ for all $t$! ✓
 
@@ -158,28 +131,19 @@ Find $q(x_t \mid x_0)$ without computing intermediate steps.
 
 ### Recursive Expansion
 
-```math
-x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \epsilon_t
-x_{t-1} = \sqrt{\alpha_{t-1}} x_{t-2} + \sqrt{\beta_{t-1}} \epsilon_{t-1}
-
-```
+$$x_t = \sqrt{\alpha_t} x_{t-1} + \sqrt{\beta_t} \epsilon_t
+x_{t-1} = \sqrt{\alpha_{t-1}} x_{t-2} + \sqrt{\beta_{t-1}} \epsilon_{t-1}$$
 
 ### Substituting
 
-```math
-x_t = \sqrt{\alpha_t}(\sqrt{\alpha_{t-1}} x_{t-2} + \sqrt{\beta_{t-1}} \epsilon_{t-1}) + \sqrt{\beta_t} \epsilon_t
-= \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{\alpha_t \beta_{t-1}} \epsilon_{t-1} + \sqrt{\beta_t} \epsilon_t
-
-```
+$$x_t = \sqrt{\alpha_t}(\sqrt{\alpha_{t-1}} x_{t-2} + \sqrt{\beta_{t-1}} \epsilon_{t-1}) + \sqrt{\beta_t} \epsilon_t
+= \sqrt{\alpha_t \alpha_{t-1}} x_{t-2} + \sqrt{\alpha_t \beta_{t-1}} \epsilon_{t-1} + \sqrt{\beta_t} \epsilon_t$$
 
 ### After Full Recursion
 
 Define $\bar{\alpha}_t = \prod_{s=1}^{t} \alpha_s$:
 
-```math
-\boxed{x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon}
-
-```
+$$\boxed{x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1-\bar{\alpha}_t} \epsilon}$$
 
 where $\epsilon \sim \mathcal{N}(0, I)$.
 
@@ -193,27 +157,18 @@ Compute $q(x_{t-1} \mid x_t, x_0)$ — needed for training!
 
 ### Using Bayes' Rule
 
-```math
-q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}, x_0) q(x_{t-1} \mid x_0)}{q(x_t \mid x_0)}
-
-```
+$$q(x_{t-1} \mid x_t, x_0) = \frac{q(x_t \mid x_{t-1}, x_0) q(x_{t-1} \mid x_0)}{q(x_t \mid x_0)}$$
 
 ### All Terms are Gaussian!
 
 Since Gaussian × Gaussian = Gaussian:
 
-```math
-q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)
-
-```
+$$q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)$$
 
 ### Closed-Form Parameters
 
-```math
-\tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
-\tilde{\beta}_t = \frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}
-
-```
+$$\tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
+\tilde{\beta}_t = \frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}$$
 
 ---
 

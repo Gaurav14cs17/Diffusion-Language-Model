@@ -28,10 +28,7 @@ Given $x_t$ (noisy), generate $x_{t-1}$ (less noisy).
 
 ### The Problem
 
-```math
-p(x_{t-1} \mid x_t) = \frac{p(x_t \mid x_{t-1}) p(x_{t-1})}{p(x_t)}
-
-```
+$$p(x_{t-1} \mid x_t) = \frac{p(x_t \mid x_{t-1}) p(x_{t-1})}{p(x_t)}$$
 
 We need $p(x_{t-1})$ — the marginal distribution of data at step $t-1$!
 
@@ -63,10 +60,7 @@ For small $\beta_t$, the reverse process is **also Gaussian**! (See Feller, 1949
 
 ### Parameterization
 
-```math
-p_\theta(x_{t-1} \mid x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
-
-```
+$$p_\theta(x_{t-1} \mid x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))$$
 
 ### Variance Choices
 
@@ -88,17 +82,11 @@ The mean $\mu_\theta(x_t, t)$ is what the network must predict!
 
 If we knew $x_0$, the optimal reverse step would be:
 
-```math
-q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)
-
-```
+$$q(x_{t-1} \mid x_t, x_0) = \mathcal{N}(\tilde{\mu}_t, \tilde{\beta}_t I)$$
 
 where:
 
-```math
-\tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
-
-```
+$$\tilde{\mu}_t = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t$$
 
 ### The Problem
 
@@ -108,10 +96,7 @@ We don't know $x_0$ during generation!
 
 **Predict** $x_0$ from $x_t$:
 
-```math
-\hat{x}_0 = f_\theta(x_t, t)
-
-```
+$$\hat{x}_0 = f_\theta(x_t, t)$$
 
 Then substitute into $\tilde{\mu}_t$!
 
@@ -121,37 +106,25 @@ Then substitute into $\tilde{\mu}_t$!
 
 ### Option A: Predict $x_0$ Directly
 
-```math
-\mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} \hat{x}_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
-
-```
+$$\mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} \hat{x}_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t$$
 
 ### Option B: Predict $\epsilon$ (Most Common!)
 
 Since $x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}}$:
 
-```math
-\boxed{\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x_t, t)\right)}
-
-```
+$$\boxed{\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta(x_t, t)\right)}$$
 
 ### Proof of Equivalence
 
 Start with $\mu_\theta$ in terms of $x_0$:
 
-```math
-\mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t
-
-```
+$$\mu_\theta = \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0 + \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t$$
 
 Substitute $x_0 = \frac{x_t - \sqrt{1-\bar{\alpha}_t}\epsilon}{\sqrt{\bar{\alpha}_t}}$:
 
 After algebraic simplification (tedious but straightforward):
 
-```math
-\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon\right) \quad \checkmark
-
-```
+$$\mu_\theta = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon\right) \quad \checkmark$$
 
 ### Option C: Predict $v$ (Velocity)
 
@@ -216,10 +189,7 @@ noise    denoise   denoise            denoise   clean!
 
 ### True Posterior Variance
 
-```math
-\tilde{\beta}_t = \frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}
-
-```
+$$\tilde{\beta}_t = \frac{(1-\bar{\alpha}_{t-1})\beta_t}{1-\bar{\alpha}_t}$$
 
 ### Proof
 
@@ -227,26 +197,17 @@ From completing the square in the posterior derivation:
 
 Precision (inverse variance):
 
-```math
-\tilde{\beta}_t^{-1} = \frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}
-= \frac{\alpha_t(1-\bar{\alpha}_{t-1}) + \beta_t}{\beta_t(1-\bar{\alpha}_{t-1})}
-
-```
+$$\tilde{\beta}_t^{-1} = \frac{\alpha_t}{\beta_t} + \frac{1}{1-\bar{\alpha}_{t-1}}
+= \frac{\alpha_t(1-\bar{\alpha}_{t-1}) + \beta_t}{\beta_t(1-\bar{\alpha}_{t-1})}$$
 
 Using $\alpha_t + \beta_t = 1$:
 
-```math
-= \frac{\alpha_t - \alpha_t\bar{\alpha}_{t-1} + 1 - \alpha_t}{\beta_t(1-\bar{\alpha}_{t-1})}
-= \frac{1 - \bar{\alpha}_t}{\beta_t(1-\bar{\alpha}_{t-1})}
-
-```
+$$= \frac{\alpha_t - \alpha_t\bar{\alpha}_{t-1} + 1 - \alpha_t}{\beta_t(1-\bar{\alpha}_{t-1})}
+= \frac{1 - \bar{\alpha}_t}{\beta_t(1-\bar{\alpha}_{t-1})}$$
 
 Therefore:
 
-```math
-\tilde{\beta}_t = \frac{\beta_t(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} \quad \checkmark
-
-```
+$$\tilde{\beta}_t = \frac{\beta_t(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} \quad \checkmark$$
 
 ### Two Common Choices
 
