@@ -3,185 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌊 Diffusion Models</title>
+  <title>🌊 Diffusion Language Models | Gaurav Goswami</title>
+  <meta name="description" content="Text-to-Image & Beyond - Diffusion Language Models by Gaurav Goswami">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root { --primary: #74b9ff; --secondary: #0984e3; --bg: #0a0a0f; --surface: #12121a; --gray: #8b949e; --text: #fff; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0a0a0f;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      overflow-x: hidden;
-    }
-    
-    .bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      background: 
-        radial-gradient(ellipse at 20% 20%, #06d6a020 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, #118ab220 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, #06d6a010 0%, transparent 70%);
-      animation: pulse 8s ease-in-out infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.05); }
-    }
-    
-    .container {
-      max-width: 600px;
-      text-align: center;
-    }
-    
-    .emoji {
-      font-size: 5rem;
-      margin-bottom: 1.5rem;
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #06d6a0, #118ab2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-    }
-    
-    .desc {
-      font-size: 1.2rem;
-      color: #a0a0b0;
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
-    }
-    
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    
-    .btn {
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #06d6a0, #118ab2);
-      color: white;
-      box-shadow: 0 4px 20px #06d6a040;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px #06d6a060;
-    }
-    
-    .btn-secondary {
-      background: rgba(255,255,255,0.1);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-3px);
-    }
-    
-    .note {
-      margin-top: 3rem;
-      padding: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .note p {
-      color: #8b949e;
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-    
-    .note a {
-      color: #06d6a0;
-      text-decoration: none;
-    }
-    
-    .note a:hover {
-      text-decoration: underline;
-    }
-    
-    .author {
-      margin-top: 3rem;
-      color: #6b7280;
-      font-size: 0.9rem;
-    }
-    
-    .author a {
-      color: #06d6a0;
-      text-decoration: none;
-    }
-    
-    @media (max-width: 600px) {
-      h1 { font-size: 1.8rem; }
-      .emoji { font-size: 4rem; }
-      .buttons { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(ellipse at 20% 20%, rgba(116, 185, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(9, 132, 227, 0.15) 0%, transparent 50%); animation: pulse 8s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+    nav { position: fixed; top: 0; width: 100%; padding: 1rem 2rem; background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(10px); z-index: 100; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .logo { font-weight: 800; font-size: 1.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: var(--gray); text-decoration: none; font-weight: 500; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem 4rem; text-align: center; }
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(116, 185, 255, 0.2); border: 1px solid rgba(116, 185, 255, 0.3); border-radius: 50px; font-size: 0.85rem; color: var(--primary); margin-bottom: 2rem; }
+    .emoji { font-size: 5rem; margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; }
+    .gradient { background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { font-size: 1.3rem; color: var(--gray); margin-bottom: 2rem; max-width: 600px; }
+    .stats { display: flex; gap: 3rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center; }
+    .stat-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-label { font-size: 0.9rem; color: var(--gray); }
+    .buttons { display: flex; gap: 1rem; margin: 2rem 0; flex-wrap: wrap; justify-content: center; }
+    .btn { padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; box-shadow: 0 4px 20px rgba(116, 185, 255, 0.4); }
+    .btn-primary:hover { transform: translateY(-3px); }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.2); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+    .modules { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 3rem; }
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .module-card { background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; text-decoration: none; color: inherit; }
+    .module-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+    .module-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .module-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .module-card p { font-size: 0.9rem; color: var(--gray); }
+    footer { text-align: center; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    .social-links { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; }
+    .social-link { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--gray); text-decoration: none; transition: all 0.3s; }
+    .social-link:hover { background: var(--primary); color: white; }
+    .footer-text { color: var(--gray); font-size: 0.9rem; }
+    .footer-text a { color: var(--primary); text-decoration: none; }
+    @media (max-width: 768px) { h1 { font-size: 2rem; } .emoji { font-size: 4rem; } .nav-links { display: none; } }
   </style>
 </head>
 <body>
   <div class="bg"></div>
-  
-  <div class="container">
+  <nav>
+    <a href="#" class="logo">🌊 DLM</a>
+    <ul class="nav-links">
+      <li><a href="#modules">Papers</a></li>
+      <li><a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model" target="_blank">GitHub</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <div class="badge"><i class="fas fa-circle"></i> Cutting Edge</div>
     <div class="emoji">🌊</div>
-    <h1>🌊 Diffusion Models</h1>
-    <p class="desc">Text-to-Image & Beyond<br>By Gaurav Goswami</p>
-    
+    <h1>Diffusion <span class="gradient">Language Models</span></h1>
+    <p class="subtitle">Language generation models that apply diffusion-style denoising to text - iteratively refining noisy sequences into coherent text.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-value">10</div><div class="stat-label">Theory Topics</div></div>
+      <div class="stat"><div class="stat-value">6+</div><div class="stat-label">Papers</div></div>
+      <div class="stat"><div class="stat-value">Deep</div><div class="stat-label">Math</div></div>
+    </div>
     <div class="buttons">
-      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model" class="btn btn-primary">
-        📖 View Documentation
-      </a>
-      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/stargazers" class="btn btn-secondary">
-        ⭐ Star on GitHub
-      </a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model" class="btn btn-primary"><i class="fab fa-github"></i> View on GitHub</a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/stargazers" class="btn btn-outline"><i class="fas fa-star"></i> Star Repository</a>
     </div>
-    
-    <div class="note">
-      <p>
-        📝 <strong>Note:</strong> For the best viewing experience with math equations, 
-        diagrams, and formatted tables, please view the documentation directly on 
-        <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model">GitHub</a>.
-      </p>
+  </section>
+  <section class="modules" id="modules">
+    <h2 class="section-title">📖 <span class="gradient">Topics</span></h2>
+    <div class="module-grid">
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/tree/main/00_Diffusion_Theory" class="module-card"><div class="module-icon">📐</div><h3>Diffusion Theory</h3><p>Data space, probability, forward/reverse process, sampling</p></a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/tree/main/01_Simple_and_Effective_Masked_Diffusion_Language_Models" class="module-card"><div class="module-icon">🎭</div><h3>Masked Diffusion LMs</h3><p>Simple and effective masked diffusion for language</p></a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/tree/main/02_Block_Diffusion_Interpolating_Between_AR_and_Diffusion" class="module-card"><div class="module-icon">🧱</div><h3>Block Diffusion</h3><p>Interpolating between AR and diffusion models</p></a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/tree/main/03_Dream_7B_Diffusion_Large_Language_Models" class="module-card"><div class="module-icon">💭</div><h3>Dream 7B</h3><p>Large-scale diffusion language models</p></a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/tree/main/04_LLaDA_MoE_Sparse_MoE_Diffusion_Language_Model" class="module-card"><div class="module-icon">🔀</div><h3>LLaDA MoE</h3><p>Sparse mixture of experts diffusion LM</p></a>
+      <a href="https://github.com/Gaurav14cs17/Diffusion-Language-Model/tree/main/05_WeDLM_Reconciling_Diffusion_with_Causal_Attention" class="module-card"><div class="module-icon">🔗</div><h3>WeDLM</h3><p>Reconciling diffusion with causal attention</p></a>
     </div>
-    
-    <p class="author">
-      Made with ❤️ by <a href="https://github.com/Gaurav14cs17">Gaurav Goswami</a>
-    </p>
-  </div>
+  </section>
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/Gaurav14cs17" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/gaurav14cs17" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:gourav14cs17@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p class="footer-text">© 2026 <a href="https://github.com/Gaurav14cs17">Gaurav Goswami</a> | Lead Deep Learning Engineer @ Samsung R&D</p>
+  </footer>
 </body>
 </html>
